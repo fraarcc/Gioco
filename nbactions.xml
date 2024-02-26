@@ -14,8 +14,7 @@
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>uniba.it.gioco.Gioco</exec.mainClass>
-                <exec.executable>java</exec.executable>
-                <exec.workingdir>C:\Users\39379\Desktop\Gioco</exec.workingdir>
+                <exec.executable>java</exec.executable>              
             </properties>
         </action>
         <action>
@@ -33,8 +32,7 @@
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>uniba.it.gioco.Gioco</exec.mainClass>
                 <exec.executable>java</exec.executable>
-                <jpda.listen>true</jpda.listen>
-                <exec.workingdir>C:\Users\39379\Desktop\Gioco</exec.workingdir>
+                <jpda.listen>true</jpda.listen>               
             </properties>
         </action>
         <action>
@@ -51,8 +49,7 @@
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
                 <exec.mainClass>uniba.it.gioco.Gioco</exec.mainClass>
                 <exec.executable>java</exec.executable>
-                <exec.appArgs></exec.appArgs>
-                <exec.workingdir>C:\Users\39379\Desktop\Gioco</exec.workingdir>
+                <exec.appArgs></exec.appArgs>                
             </properties>
         </action>
     </actions>
