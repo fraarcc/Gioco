@@ -4,24 +4,42 @@
  */
 package uniba.it.gioco.gui;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Nikita
  */
 public class JFrameMain extends javax.swing.JFrame {
+    private JPanel cardsPanel;
+    private CardLayout cardLayout;
 
     /**
      * Creates new form JFrameMain
      */
     public JFrameMain() {
         initComponents();
+        initCards();
+    }
+    
+    public void initCards(){
+        cardLayout = new CardLayout();
+        cardsPanel = new JPanel(cardLayout);
+        
+        cardsPanel.add(new JPanelMenu(this), "mainMenu");
+        cardsPanel.add(new JPanelNuovoGioco(this), "newGame");
+        
+        getContentPane().add(cardsPanel, BorderLayout.CENTER);
+
+        pack();
+        setLocationRelativeTo(null);    
+    }
+    
+     // Metodo per spostarsi alla "card" specificata
+    public void showCard(String cardName) {
+        cardLayout.show(cardsPanel, cardName);
     }
 
     /**
@@ -33,113 +51,16 @@ public class JFrameMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jNome = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jCaricaPartita = new javax.swing.JButton();
-        jEsci = new javax.swing.JButton();
-        jNuovaPartita = new javax.swing.JButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ospedale");
-        setPreferredSize(new java.awt.Dimension(860, 600));
-        setSize(new java.awt.Dimension(800, 600));
-
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
-
-        jNome.setBackground(new java.awt.Color(255, 255, 255));
-        jNome.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 43)); // NOI18N
-        jNome.setForeground(new java.awt.Color(255, 255, 255));
-        jNome.setText("OSPEDALE");
-        jNome.setMaximumSize(new java.awt.Dimension(180, 50));
-        jNome.setMinimumSize(new java.awt.Dimension(180, 50));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(326, Short.MAX_VALUE)
-                .addComponent(jNome, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(320, 320, 320))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(jNome, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-        );
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
-
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-
-        jCaricaPartita.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jCaricaPartita.setText("Carica Partita");
-
-        jEsci.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jEsci.setText("Esci");
-        jEsci.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEsciActionPerformed(evt);
-            }
-        });
-
-        jNuovaPartita.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jNuovaPartita.setText("Nuova Partita");
-        jNuovaPartita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNuovaPartitaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(268, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jCaricaPartita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jEsci, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jNuovaPartita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-                .addGap(270, 270, 270))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jNuovaPartita)
-                .addGap(50, 50, 50)
-                .addComponent(jCaricaPartita)
-                .addGap(50, 50, 50)
-                .addComponent(jEsci)
-                .addContainerGap(168, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jEsciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEsciActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEsciActionPerformed
-
-    private void jNuovaPartitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNuovaPartitaActionPerformed
-        // TODO add your handling code here:
-        JFrameNuovaPartita jNuovaPartita = new JFrameNuovaPartita();
-        jNuovaPartita.setLocationRelativeTo(null);
-        jNuovaPartita.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jNuovaPartitaActionPerformed
-    
-    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws ClassNotFoundException, UnsupportedLookAndFeelException, IllegalAccessException {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -161,29 +82,16 @@ public class JFrameMain extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JFrameMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
         //</editor-fold>
-        UIManager.setLookAndFeel(new FlatLightLaf());
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               JFrameMain jMain = new JFrameMain();
-               jMain.setVisible(true);
-               jMain.setLocationRelativeTo(null);
-               jMain.setResizable(false);
+                new JFrameMain().setVisible(true);
             }
         });
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jCaricaPartita;
-    private javax.swing.JButton jEsci;
-    private javax.swing.JLabel jNome;
-    private javax.swing.JButton jNuovaPartita;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
