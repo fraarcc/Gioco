@@ -3,18 +3,52 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uniba.it.gioco.tipi;
+import java.io.Serializable;
 
+
+import java.util.Set;
 /**
  *
- * @author Nikita
+ * @author fraarcc
  */
-public class Oggetto {
+public class Oggetto implements Serializable{
     private final int id;
+    private String nome;
     private String descrizione;
-
-    public Oggetto(int id, String descrizione) {
+    private Set<String> alias;
+    
+     public Locazione locazione = Locazione.NOLOCAZIONE;
+            
+            public enum Locazione {
+                
+                INVENTARIO, NOLOCAZIONE, OGGCONTAINER, STANZA
+            }   
+         
+    public Oggetto(int id){
         this.id = id;
-        this.descrizione = descrizione;
+    }
+    public Oggetto(int id, String nome, String descrizione) {
+        this.id = id;
+        this.nome = nome;
+        this.descrizione = descrizione;    
+    }
+    
+    
+    
+    public void setNome(String nome){
+        this.nome = nome;
+        
+    }
+            
+    public String getNome(){
+        return nome;
+    }
+    
+    public Locazione getLocazione(){
+      return locazione;
+    }
+    public void setLocazione(Locazione locazione){
+        this.locazione = locazione;
     }
 
     @Override
