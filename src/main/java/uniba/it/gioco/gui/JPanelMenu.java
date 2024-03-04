@@ -49,7 +49,7 @@ public class JPanelMenu extends javax.swing.JPanel {
             }
         });
 
-        caricaPartita1.setText("Nuova Partita");
+        caricaPartita1.setText("Carica Partita");
         caricaPartita1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 caricaPartita1ActionPerformed(evt);
