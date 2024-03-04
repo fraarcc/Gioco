@@ -34,6 +34,11 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         nicknameLabel = new javax.swing.JLabel();
 
         conferma.setText("Conferma");
+        conferma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confermaActionPerformed(evt);
+            }
+        });
 
         indietro.setText("Torna indietro");
         indietro.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +83,12 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         // TODO add your handling code here:
         jframeMain.showCard("mainMenu");
     }//GEN-LAST:event_indietroActionPerformed
+
+    private void confermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaActionPerformed
+    
+        // TODO add your handling code here:
+        jframeMain.showCard("inGame");
+    }//GEN-LAST:event_confermaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
