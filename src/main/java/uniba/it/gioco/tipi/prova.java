@@ -2,6 +2,7 @@ package uniba.it.gioco.tipi;
 
 import java.util.HashSet;
 import java.util.Set;
+import uniba.it.gioco.database.InitDatabase;
 
 
 
@@ -37,7 +38,7 @@ public class prova {
        
       //System.out.println(s1.toString());
       
-      
-       
+      InitDatabase.creaConnessione();
+     
     }
 }

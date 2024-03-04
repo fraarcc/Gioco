@@ -30,7 +30,8 @@ public class JFrameMain extends javax.swing.JFrame {
         
         cardsPanel.add(new JPanelMenu(this), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this), "newGame");
-        
+        cardsPanel.add(new JPanelPartita(this), "inGame");
+       
         getContentPane().add(cardsPanel, BorderLayout.CENTER);
 
         pack();
@@ -50,6 +51,13 @@ public class JFrameMain extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -93,5 +101,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
