@@ -39,6 +39,14 @@ public class prova {
       //System.out.println(s1.toString());
       
       InitDatabase.creaConnessione();
+      
      
+      Oggetto chiaviBagno = new Oggetto(1,"Chiavi del bagno", "descrizione chiavi del bagno");
+      Set<Oggetto> oggettiAtrio = new HashSet<>();
+      
+      oggettiAtrio.add(chiaviBagno);
+      Stanza atrio = new Stanza("Atrio","Descrizione Atrio",null,oggettiAtrio,null);
+      
+       System.out.println(atrio.toString());     
     }
 }
