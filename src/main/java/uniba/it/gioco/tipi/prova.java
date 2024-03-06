@@ -1,8 +1,13 @@
 package uniba.it.gioco.tipi;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import uniba.it.gioco.database.InitDatabase;
+import uniba.it.gioco.storia.Init;
+
 
 
 
@@ -39,14 +44,28 @@ public class prova {
       //System.out.println(s1.toString());
       
       InitDatabase.creaConnessione();
+     
+      Init init = new Init();
+      try{
+      List<Oggetto> oggetti = init.inizializzaOggetti();
+      
+          System.out.println(oggetti.toString());
+      
+      } catch (IOException e) {
+            e.printStackTrace();
+        }
+      
+      try{
+          List<Stanza> stanze = init.inizializzaStanze();
+          System.out.println(stanze.toString());
+      } catch (IOException ex){
+          ex.printStackTrace();
+      }
       
      
-      Oggetto chiaviBagno = new Oggetto(1,"Chiavi del bagno", "descrizione chiavi del bagno");
-      Set<Oggetto> oggettiAtrio = new HashSet<>();
-      
-      oggettiAtrio.add(chiaviBagno);
-      Stanza atrio = new Stanza("Atrio","Descrizione Atrio",null,oggettiAtrio,null);
-      
-       System.out.println(atrio.toString());     
     }
+            
 }
+        
+    
+  
