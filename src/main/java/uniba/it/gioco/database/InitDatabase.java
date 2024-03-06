@@ -18,15 +18,10 @@ public class InitDatabase {
     
     private static final String CONNESSIONE_STR = "jdbc:h2:./res/database/Game_db";
     private static final String CREAZIONE_DB_UTENTI = "CREATE TABLE IF NOT EXISTS "
-            + "UTENTI(ID_UTENTE INT PRIMARY KEY,"
-            + "NICKNAME VARCHAR(255),"
-            + "ID_PARTITA INT,"
-            + "FOREIGN KEY (ID_PARTITA) REFERENCES PARTITA(ID_PARTITA));";
-    private static final String CREAZIONE_DB_PARTITA = "CREATE TABLE IF NOT EXISTS "
-            + "PARTITA(ID_PARTITA INT PRIMARY KEY,"
-            + "STATO BOOLEAN,"
-            + "DATA DATE);";
-          
+            + "UTENTI(id INT AUTO_INCREMENT PRIMARY KEY,"
+            + "nickname VARCHAR(255) UNIQUE,"
+            + " file_blob BLOB);";
+           
     
             
     private static Connection connessione;
@@ -43,7 +38,7 @@ public class InitDatabase {
                     CONNESSIONE_STR, dbProps);
       
             Statement createStm = connessione.createStatement();
-            createStm.executeUpdate(CREAZIONE_DB_PARTITA);
+            
             createStm.executeUpdate(CREAZIONE_DB_UTENTI);
          
             

@@ -4,9 +4,10 @@
  */
 package uniba.it.gioco.tipi;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,14 +19,15 @@ public class Stanza {
     private String descrizione;
     private Set<Oggetto> oggettiNecessari;
     private Set<Oggetto> oggettiPresentiStanza;
-    private HashMap<String, Stanza> collegamenti;
-
-    public Stanza(String nome, String descrizione, Set<Oggetto> oggettiNecessari, Set<Oggetto> oggettiPresentiStanza, HashMap<String, Stanza> collegamenti) {
+    private List<Stanza> connessioneStanze;
+    
+    public Stanza(){
+        connessioneStanze = new ArrayList<>();
+    }
+    
+    public Stanza(String nome){
         this.nome = nome;
-        this.descrizione = descrizione;
-        this.oggettiNecessari = new HashSet<>();
-        this.oggettiPresentiStanza = oggettiPresentiStanza;
-        this.collegamenti = new HashMap<>();
+        connessioneStanze = new ArrayList<>();
     }
 
     public String getNome() {
@@ -36,47 +38,35 @@ public class Stanza {
         return descrizione;
     }
     
+    public void aggiungiConnessione(List<Stanza> stanze){
+        connessioneStanze.add((Stanza) stanze);
+    }
     
-
-    public Set<Oggetto> getOggettiNecessari() {
-        return oggettiNecessari;
+    public List<Stanza> getConnessioneStanze(){
+        return connessioneStanze;
     }
-
-    public Set<Oggetto> getOggettiPresentiStanza() {
-        return oggettiPresentiStanza;
-    }
-
-    public HashMap<String, Stanza> getCollegamenti() {
-        return collegamenti;
-    }
-
+    
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Stanza: ").append(nome).append("\n");
-        sb.append("Descrizione: ").append(descrizione).append("\n");
-        
-        sb.append("Oggetti presenti:\n");
-        for (Oggetto oggetto : oggettiPresentiStanza) {
-            sb.append("- ").append(oggetto.getNome()).append("\n");
-        }
-        
-        sb.append("Oggetti necessari:\n");
-        for (Oggetto oggetto : oggettiNecessari) {
-            sb.append("- ").append(oggetto.getNome()).append("\n");
-        }
-        sb.append("Collegamenti:\n");
-        for (Map.Entry<String, Stanza> entry : collegamenti.entrySet()) {
-            sb.append("- ").append(entry.getKey()).append(": ").append(entry.getValue().getNome()).append("\n");
-        }
-        
-        return sb.toString();
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Stanza{name=").append(nome);
+    if (descrizione != null) {
+        sb.append(", descrizione=").append(descrizione);
     }
-    
-    
-    
-    
-  
-
-        
+    if (oggettiNecessari != null && !oggettiNecessari.isEmpty()) {
+        sb.append(", oggettiNecessari=").append(oggettiNecessari);
+    }
+    if (oggettiPresentiStanza != null && !oggettiPresentiStanza.isEmpty()) {
+        sb.append(", oggettiPresentiStanza=").append(oggettiPresentiStanza);
+    }
+    if (connessioneStanze != null && !connessioneStanze.isEmpty()) {
+        sb.append(", connessioneStanze=");
+        for (Stanza stanza : connessioneStanze) {
+            sb.append(stanza.getNome()).append(", ");
+        }
+        sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
+    }
+    sb.append("}");
+    return sb.toString();
+}
 }

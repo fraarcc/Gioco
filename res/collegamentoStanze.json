@@ -1,0 +1,26 @@
+[
+    {
+      "nome": "Stanza 1",
+      "descrizione": "Questa è la stanza 1",
+      "connessioneStanze": [
+        "Stanza 2",
+        "Stanza 3"
+      ]
+    },
+    {
+      "nome": "Stanza 2",
+      "descrizione": "Questa è la stanza 2",
+      "connessioneStanze": [
+        "Stanza 1",
+        "Stanza 3"
+      ]
+    },
+    {
+      "nome": "Stanza 3",
+      "descrizione": "Questa è la stanza 3",
+      "connessioneStanze": [
+        "Stanza 1",
+        "Stanza 2"
+      ]
+    }
+  ]

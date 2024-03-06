@@ -12,18 +12,13 @@ import java.util.Set;
  * @author fraarcc
  */
 public class Oggetto implements Serializable{
-    private final int id;
+    private int id;
     private String nome;
     private String descrizione;
-    private Set<String> alias;
     
-     public Locazione locazione = Locazione.NOLOCAZIONE;
-            
-            public enum Locazione {
-                
-                INVENTARIO, NOLOCAZIONE, OGGCONTAINER, STANZA
-            }   
-         
+    public Oggetto(){
+        
+    }
     public Oggetto(int id){
         this.id = id;
     }
@@ -32,31 +27,31 @@ public class Oggetto implements Serializable{
         this.nome = nome;
         this.descrizione = descrizione;    
     }
-    
-    
-    
-    public void setNome(String nome){
-        this.nome = nome;
-        
-    }
-            
-    public String getNome(){
-        return nome;
-    }
-    
-    public Locazione getLocazione(){
-      return locazione;
-    }
-    public void setLocazione(Locazione locazione){
-        this.locazione = locazione;
+
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public String toString() {
-        return "Oggetto{" + "id=" + id + ", descrizione=" + descrizione + '}';
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
     
     
     
-    
+    @Override
+    public String toString() {
+        return "Oggetto{" + "id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + '}';
+    }
 }
