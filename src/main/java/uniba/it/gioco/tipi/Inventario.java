@@ -12,48 +12,33 @@ import java.util.HashSet;
  *
  * @author Nikita
  */
-public class Inventario implements Serializable {
     
-     private Set<Oggetto> oggetti;
-    
-   public Inventario(){
-       oggetti = new HashSet<>();
-   }
-    public Inventario(Set<Oggetto> oggetti) {
-        this.oggetti = oggetti;
+public class Inventario {
+    private Set<Oggetto> oggetti;
+
+    public Inventario() {
+        this.oggetti = new HashSet<>();
     }
-    
-    public void rimuovi(Oggetto oggetto){
-        if(this.oggetti.contains(oggetto )){
-            this.oggetti.remove(oggetto );
-            
-        }
+
+    public void aggiungiOggetto(Oggetto oggetto) {
+        oggetti.add(oggetto);
     }
-    public boolean stato(){
-        return (getOggetti().size() > 0);
+
+    public void rimuoviOggetto(Oggetto oggetto) {
+        oggetti.remove(oggetto);
     }
-    
-    public void aggiungi(Oggetto oggetto){
-        this.oggetti.add(oggetto);
+
+    public boolean contieneOggetto(Oggetto oggetto) {
+        return oggetti.contains(oggetto);
     }
+
     
-    public Set<Oggetto> getOggetti(){
-        return oggetti;
+
+    @Override
+    public String toString() {
+        return "Inventario{" +
+                "oggetti=" + oggetti +
+                '}';
     }
-    
-    
-     @Override
-    public String toString(){
-        String messaggio = new String();
-        if(!oggetti.isEmpty()){
-            messaggio = "Oggetti presenti nel tuo inventario";
-            for(Oggetto x : oggetti )
-                messaggio = messaggio + ("\n -" + x.getNome());
-            }else{
-                    messaggio = "Non vi è alcun oggetto nel tuo inventario";
-                 }
-         return messaggio;
-        }
-        
-    }
+}
     

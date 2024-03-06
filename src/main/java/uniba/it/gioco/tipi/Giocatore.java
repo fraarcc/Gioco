@@ -12,13 +12,43 @@ public class Giocatore {
     private int idUtente;
     private String nickname;
     private Stanza stanzaCorrente;
-    private Inventario zaino;
+    private Inventario inventario;
 
     public Giocatore(int idUtente,String nickname, Stanza stanzaCorrente, Inventario zaino) {
         this.idUtente = idUtente;
         this.nickname = nickname;
         this.stanzaCorrente = stanzaCorrente;
-        this.zaino = zaino;
+        this.inventario = new Inventario();
+    }
+
+    public int getIdUtente() {
+        return idUtente;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public Stanza getStanzaCorrente() {
+        return stanzaCorrente;
+    }
+
+    public Inventario getInventario() {
+        return inventario;
+    }
+    
+    public void setStanzaCorrente(Stanza stanzaCorrente){
+        this.stanzaCorrente = stanzaCorrente;
+    }
+    
+    @Override
+    public String toString() {
+        return "Giocatore{" +
+                "id=" + idUtente +
+                ", nome='" + nickname + '\'' +
+                ", stanzaAttuale=" + stanzaCorrente +
+                ", inventario=" + inventario +
+                '}';
     }
 
    

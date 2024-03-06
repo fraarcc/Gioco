@@ -41,9 +41,9 @@ public class Init {
         }
     }
     
-    public List<Oggetto> inizializzaOggetti() throws IOException{
-        return loadJSON(".\\res\\Oggetti.json", new TypeReference<List<Oggetto>>() {});
-    }
+  //  public List<Oggetto> inizializzaOggetti() throws IOException{
+    //    return loadJSON(".\\res\\Oggetti.json", new TypeReference<List<Oggetto>>() {});
+    //}
     
     public List<Stanza> inizializzaStanze() throws IOException{
        return loadJSON(".\\res\\collegamentoStanze.json",new TypeReference<List<Stanza>>() {});
