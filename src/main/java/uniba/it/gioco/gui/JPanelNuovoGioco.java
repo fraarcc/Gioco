@@ -4,12 +4,15 @@
  */
 package uniba.it.gioco.gui;
 
+import uniba.it.gioco.GameModel;
+
 /**
  *
  * @author Nikita
  */
 public class JPanelNuovoGioco extends javax.swing.JPanel {
     private JFrameMain jframeMain;
+    private GameModel gameModel;
 
     /**
      * Creates new form JPanelNuovoGioco
@@ -30,7 +33,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
 
         conferma = new javax.swing.JButton();
         indietro = new javax.swing.JButton();
-        nickname = new javax.swing.JTextField();
+        jNickname = new javax.swing.JTextField();
         nicknameLabel = new javax.swing.JLabel();
 
         conferma.setText("Conferma");
@@ -47,6 +50,12 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
             }
         });
 
+        jNickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNicknameActionPerformed(evt);
+            }
+        });
+
         nicknameLabel.setText("Inserire il nickname");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -56,7 +65,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nickname)
+                    .addComponent(jNickname)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(99, 99, 99)
@@ -70,7 +79,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 .addGap(128, 128, 128)
                 .addComponent(nicknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nickname, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -87,14 +96,23 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     private void confermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaActionPerformed
     
         // TODO add your handling code here:
-        jframeMain.showCard("inGame");
+        String nickname = jNickname.getText();
+        gameModel = new GameModel(jframeMain);
+        gameModel.confermaNickname(nickname);
+        
+       
     }//GEN-LAST:event_confermaActionPerformed
+
+    private void jNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNicknameActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jNicknameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton conferma;
     private javax.swing.JButton indietro;
-    private javax.swing.JTextField nickname;
+    private javax.swing.JTextField jNickname;
     private javax.swing.JLabel nicknameLabel;
     // End of variables declaration//GEN-END:variables
 }
