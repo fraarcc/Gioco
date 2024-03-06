@@ -19,7 +19,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="nickname" max="32767" attributes="0"/>
+                  <Component id="jNickname" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="indietro" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
@@ -37,7 +37,7 @@
               <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
               <Component id="nicknameLabel" min="-2" pref="29" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nickname" min="-2" pref="51" max="-2" attributes="0"/>
+              <Component id="jNickname" min="-2" pref="51" max="-2" attributes="0"/>
               <EmptySpace pref="192" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="indietro" alignment="3" min="-2" pref="72" max="-2" attributes="0"/>
@@ -65,7 +65,10 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="indietroActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="nickname">
+    <Component class="javax.swing.JTextField" name="jNickname">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jNicknameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nicknameLabel">
       <Properties>
