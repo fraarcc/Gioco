@@ -32,10 +32,8 @@ public class prova {
        insiemeogg.add(o1);
        insiemeogg.add(o2);
        insiemeogg.add(o3);
-       Inventario inv = new Inventario(insiemeogg);
-       System.out.println(inv.toString());
-       inv.rimuovi(o3);
-       System.out.println(inv.toString());
+  
+     
        
        
        
@@ -44,23 +42,22 @@ public class prova {
       //System.out.println(s1.toString());
       
       InitDatabase.creaConnessione();
-     
-      Init init = new Init();
-      try{
-      List<Oggetto> oggetti = init.inizializzaOggetti();
-      
-          System.out.println(oggetti.toString());
-      
-      } catch (IOException e) {
-            e.printStackTrace();
-        }
+     Init init = new Init();
+      Inventario invUser = new Inventario();
       
       try{
           List<Stanza> stanze = init.inizializzaStanze();
           System.out.println(stanze.toString());
+          Giocatore user = new Giocatore(1,"user",stanze.get(0),invUser);
+          System.out.println(user.toString());
+          user.setStanzaCorrente(stanze.get(1));
+          System.out.println(user.toString());
       } catch (IOException ex){
           ex.printStackTrace();
       }
+      
+    
+      
       
      
     }

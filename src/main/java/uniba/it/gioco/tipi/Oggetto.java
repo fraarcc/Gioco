@@ -4,7 +4,7 @@
  */
 package uniba.it.gioco.tipi;
 import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Set;
 /**

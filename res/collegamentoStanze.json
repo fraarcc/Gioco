@@ -1,26 +1,47 @@
 [
-    {
-      "nome": "Stanza 1",
-      "descrizione": "Questa è la stanza 1",
-      "connessioneStanze": [
-        "Stanza 2",
-        "Stanza 3"
-      ]
-    },
-    {
-      "nome": "Stanza 2",
-      "descrizione": "Questa è la stanza 2",
-      "connessioneStanze": [
-        "Stanza 1",
-        "Stanza 3"
-      ]
-    },
-    {
-      "nome": "Stanza 3",
-      "descrizione": "Questa è la stanza 3",
-      "connessioneStanze": [
-        "Stanza 1",
-        "Stanza 2"
-      ]
-    }
-  ]
+  {
+    "nome": "Stanza 1",
+    "descrizione": "Questa è la stanza 1",
+    "connessioneStanze": [
+      "Stanza 2",
+      "Stanza 3"
+    ],
+    "oggettiPresentiStanza": [
+      {
+        "id": 1,
+        "nome": "Oggetto 1",
+        "descrizione": "Descrizione dell'oggetto 1"
+      }
+    ]
+  },
+  {
+    "nome": "Stanza 2",
+    "descrizione": "Questa è la stanza 2",
+    "connessioneStanze": [
+      "Stanza 1",
+      "Stanza 3"
+    ],
+    "oggettiPresentiStanza": [
+      {
+        "id": 2,
+        "nome": "Oggetto 2",
+        "descrizione": "Descrizione dell'oggetto 2"
+      }
+    ]
+  },
+  {
+    "nome": "Stanza 3",
+    "descrizione": "Questa è la stanza 3",
+    "connessioneStanze": [
+      "Stanza 1",
+      "Stanza 2"
+    ],
+    "oggettiPresentiStanza": [
+      {
+        "id": 3,
+        "nome": "Oggetto 3",
+        "descrizione": "Descrizione dell'oggetto 3"
+      }
+    ]
+  }
+]

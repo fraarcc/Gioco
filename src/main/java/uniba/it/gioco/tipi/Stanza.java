@@ -5,7 +5,7 @@
 package uniba.it.gioco.tipi;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +29,8 @@ public class Stanza {
         this.nome = nome;
         connessioneStanze = new ArrayList<>();
     }
-
+     
+    
     public String getNome() {
         return nome;
     }
@@ -44,6 +45,10 @@ public class Stanza {
     
     public List<Stanza> getConnessioneStanze(){
         return connessioneStanze;
+    }
+    
+    public Set<Oggetto> getOggettiPresentiStanza(){
+        return oggettiPresentiStanza;
     }
     
     @Override
