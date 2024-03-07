@@ -20,6 +20,10 @@ public class Giocatore {
         this.stanzaCorrente = stanzaCorrente;
         this.inventario = new Inventario();
     }
+    
+    public Giocatore(){
+        
+    }
 
     public int getIdUtente() {
         return idUtente;

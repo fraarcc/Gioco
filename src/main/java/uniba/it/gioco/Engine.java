@@ -4,6 +4,8 @@
 package uniba.it.gioco;
 
 import uniba.it.gioco.gui.JFrameMain;
+import uniba.it.gioco.storia.Init;
+import uniba.it.gioco.tipi.Giocatore;
 
 /**
  *
@@ -13,7 +15,8 @@ public class Engine {
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
-            JFrameMain jFrameMain = new JFrameMain();
+            GameModel gameModel = new GameModel();
+            JFrameMain jFrameMain = new JFrameMain(gameModel);
             jFrameMain.setVisible(true);
         });
     }

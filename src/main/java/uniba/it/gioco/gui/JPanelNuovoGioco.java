@@ -4,7 +4,9 @@
  */
 package uniba.it.gioco.gui;
 
+import java.awt.CardLayout;
 import uniba.it.gioco.GameModel;
+import uniba.it.gioco.tipi.Giocatore;
 
 /**
  *
@@ -17,8 +19,9 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     /**
      * Creates new form JPanelNuovoGioco
      */
-    public JPanelNuovoGioco(JFrameMain jframeMain) {
+    public JPanelNuovoGioco(JFrameMain jframeMain,GameModel gameModel) {
         this.jframeMain = jframeMain;
+        this.gameModel = gameModel;
         initComponents();
     }
 
@@ -94,13 +97,23 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     }//GEN-LAST:event_indietroActionPerformed
 
     private void confermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaActionPerformed
-    
-        // TODO add your handling code here:
-        String nickname = jNickname.getText();
-        gameModel = new GameModel(jframeMain);
-        gameModel.confermaNickname(nickname);
-        
-       
+       // Ottieni il nickname inserito dall'utente
+    String nickname = jNickname.getText();
+    System.out.println("Nickname inserito: " + nickname);
+
+    // Inizializza il gioco con il nickname nel GameModel esistente
+    GameModel newGameModel = gameModel.inizializzaGioco(nickname);
+    if (newGameModel != null) {
+        // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
+        gameModel = newGameModel;
+        // Aggiorna le istanze delle card con il nuovo GameModel
+        jframeMain.updateCards(gameModel);
+        // Mostra la card "inGame"
+        jframeMain.showCard("inGame");
+    } else {
+        // Gestione dell'errore
+        System.err.println("Impossibile inizializzare il gioco");
+    }
     }//GEN-LAST:event_confermaActionPerformed
 
     private void jNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNicknameActionPerformed

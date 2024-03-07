@@ -7,6 +7,7 @@ package uniba.it.gioco.gui;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import uniba.it.gioco.GameModel;
 
 /**
  *
@@ -15,33 +16,41 @@ import javax.swing.JPanel;
 public class JFrameMain extends javax.swing.JFrame {
     private JPanel cardsPanel;
     private CardLayout cardLayout;
+    private GameModel gameModel;
 
     /**
      * Creates new form JFrameMain
      */
-    public JFrameMain() {
+    public JFrameMain(GameModel gameModel) {
+        this.gameModel = gameModel;
         initComponents();
-        initCards();
-    }
-    
-    public void initCards(){
         cardLayout = new CardLayout();
         cardsPanel = new JPanel(cardLayout);
-        
-        cardsPanel.add(new JPanelMenu(this), "mainMenu");
-        cardsPanel.add(new JPanelNuovoGioco(this), "newGame");
-        cardsPanel.add(new JPanelPartita(this), "inGame");
-       
         getContentPane().add(cardsPanel, BorderLayout.CENTER);
+        //Creazione cards
+        cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
+        cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
+        cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
 
         pack();
-        setLocationRelativeTo(null);    
+        setLocationRelativeTo(null);
     }
+    
+    
     
      // Metodo per spostarsi alla "card" specificata
     public void showCard(String cardName) {
         cardLayout.show(cardsPanel, cardName);
     }
+    
+    public void updateCards(GameModel gameModel) {
+    cardsPanel.removeAll(); // Rimuove tutte le card dal pannello
+    cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
+    cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
+    cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+    revalidate(); // Rendi valida la nuova disposizione delle card nel pannello
+    repaint(); // Ridisegna il pannello
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
