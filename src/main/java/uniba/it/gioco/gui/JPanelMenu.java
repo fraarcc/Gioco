@@ -6,6 +6,7 @@ package uniba.it.gioco.gui;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import uniba.it.gioco.GameModel;
 
 /**
  *
@@ -13,11 +14,12 @@ import javax.swing.JOptionPane;
  */
 public class JPanelMenu extends javax.swing.JPanel {
     private JFrameMain jframeMain;
-    
+    private GameModel gameModel;
     
     
 
-    public JPanelMenu(JFrameMain jframeMain){
+    public JPanelMenu(JFrameMain jframeMain,GameModel gameModel){
+        this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
     }

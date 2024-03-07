@@ -4,13 +4,8 @@
  */
 package uniba.it.gioco;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import uniba.it.gioco.gui.JFrameMain;
 import uniba.it.gioco.storia.Init;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
@@ -20,35 +15,43 @@ import uniba.it.gioco.tipi.Stanza;
  * @author Nikita
  */
 public class GameModel {
-
-    private JFrameMain mainPanel;
     private Init init;
-    private Giocatore initGiocatore;
+    private Giocatore giocatore;
 
-    public GameModel(JFrameMain mainPanel) {
+    public GameModel() {
         this.init = new Init();
-        this.mainPanel = mainPanel;
-
+        this.giocatore = new Giocatore();
     }
 
-    public void confermaNickname(String nickname) {
+    public GameModel inizializzaGioco(String nickname) {
         try {
-            inizializzaGioco(nickname);
-            mainPanel.showCard("inGame");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void inizializzaGioco(String nickname) throws IOException {
-        try {
+            this.init = new Init(); // Inizializza un nuovo oggetto Init
             List<Stanza> stanze = init.inizializzaStanze();
             Stanza stanzaIniziale = stanze.get(0);
-            Giocatore giocatore = init.inizializzaGiocatore(0, nickname, stanzaIniziale);
-            System.out.println(giocatore.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+            this.giocatore = init.inizializzaGiocatore(0, nickname, stanzaIniziale);
+            if (this.giocatore == null) {
+                throw new IllegalStateException("Impossibile inizializzare il giocatore");
+            }
+            System.out.println("Giocatore inizializzato con successo: " + this.giocatore.toString());
+            return this; // Restituisci l'istanza corrente di GameModel
+        } catch (IOException | IndexOutOfBoundsException | IllegalStateException e) {
+            e.printStackTrace(); // Stampa lo stack trace dell'eccezione
+            return null; // Oppure gestisci l'errore restituendo null
         }
+    }
+    
+    public Giocatore getGiocatore(){
+        return giocatore;
+    }
+
+    public void setGiocatore(Giocatore giocatore) {
+        this.giocatore = giocatore;
+    }
+    
+   
+   
+    
+    public String getNomeGiocatore(){
+        return giocatore != null ? giocatore.getNickname() : null;
     }
 }

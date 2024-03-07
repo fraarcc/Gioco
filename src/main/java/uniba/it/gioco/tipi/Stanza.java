@@ -17,7 +17,7 @@ import java.util.Set;
 public class Stanza {
     private String nome;
     private String descrizione;
-    private Set<Oggetto> oggettiNecessari;
+    private Set<Oggetto> oggettiNecessari; //Oggetti necessari per aprire la stanza se e null e aperta
     private Set<Oggetto> oggettiPresentiStanza;
     private List<Stanza> connessioneStanze;
     
@@ -49,6 +49,10 @@ public class Stanza {
     
     public Set<Oggetto> getOggettiPresentiStanza(){
         return oggettiPresentiStanza;
+    }
+    
+    public boolean getStatoStanza(Stanza stanza){
+        return stanza.oggettiNecessari == null;
     }
     
     @Override

@@ -4,7 +4,10 @@
  */
 package uniba.it.gioco.gui;
 
+import javax.swing.SwingUtilities;
+import uniba.it.gioco.GameModel;
 import uniba.it.gioco.storia.StampaStoria;
+import uniba.it.gioco.tipi.Giocatore;
 
 /**
  *
@@ -12,15 +15,30 @@ import uniba.it.gioco.storia.StampaStoria;
  */
 public class JPanelPartita extends javax.swing.JPanel {
 private JFrameMain jframeMain;
+private GameModel gameModel;
     /**
      * Creates new form JPanelPartita
      */
-    public JPanelPartita(JFrameMain jframeMain) {
+    public JPanelPartita(JFrameMain jframeMain,GameModel gameModel) {
         this.jframeMain = jframeMain;
+        this.gameModel = gameModel;
         initComponents();
-        Thread storyThread = new Thread(new StampaStoria(areaTesto));
-        storyThread.start();
         
+        
+        
+        // Ottieni il giocatore
+        Giocatore giocatore = gameModel.getGiocatore();
+        if (giocatore != null) {
+            String nickname = giocatore.getNickname();
+            // Aggiorna l'interfaccia utente con il nome del giocatore
+            SwingUtilities.invokeLater(() -> {
+                areaTesto.setText("Il nome del giocatore è: " + nickname);
+            });
+        } else {
+            System.out.println("Giocatore non inizializzato");
+        }
+        repaint();
+       
     }
 
     /**
@@ -46,6 +64,12 @@ private JFrameMain jframeMain;
         jButton2.setText("jButton2");
 
         jButton3.setText("jButton3");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,6 +103,10 @@ private JFrameMain jframeMain;
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
