@@ -15,6 +15,7 @@ import uniba.it.gioco.tipi.Stanza;
  * @author Nikita
  */
 public class GameModel {
+
     private Init init;
     private Giocatore giocatore;
 
@@ -25,7 +26,6 @@ public class GameModel {
 
     public GameModel inizializzaGioco(String nickname) {
         try {
-            this.init = new Init(); // Inizializza un nuovo oggetto Init
             List<Stanza> stanze = init.inizializzaStanze();
             Stanza stanzaIniziale = stanze.get(0);
             this.giocatore = init.inizializzaGiocatore(0, nickname, stanzaIniziale);
@@ -39,19 +39,16 @@ public class GameModel {
             return null; // Oppure gestisci l'errore restituendo null
         }
     }
-    
-    public Giocatore getGiocatore(){
+
+    public Giocatore getGiocatore() {
         return giocatore;
     }
 
     public void setGiocatore(Giocatore giocatore) {
         this.giocatore = giocatore;
     }
-    
-   
-   
-    
-    public String getNomeGiocatore(){
+
+    public String getNomeGiocatore() {
         return giocatore != null ? giocatore.getNickname() : null;
     }
 }
