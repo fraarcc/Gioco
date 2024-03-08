@@ -14,6 +14,7 @@ import uniba.it.gioco.GameModel;
  * @author Nikita
  */
 public class JFrameMain extends javax.swing.JFrame {
+
     private JPanel cardsPanel;
     private CardLayout cardLayout;
     private GameModel gameModel;
@@ -31,26 +32,24 @@ public class JFrameMain extends javax.swing.JFrame {
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
         cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
-
         pack();
         setLocationRelativeTo(null);
+        setResizable(false);
     }
-    
-    
-    
-     // Metodo per spostarsi alla "card" specificata
+
+    // Metodo per spostarsi alla "card" specificata
     public void showCard(String cardName) {
         cardLayout.show(cardsPanel, cardName);
     }
-    
+
     public void updateCards(GameModel gameModel) {
-    cardsPanel.removeAll(); // Rimuove tutte le card dal pannello
-    cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
-    cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
-    cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
-    revalidate(); // Rendi valida la nuova disposizione delle card nel pannello
-    repaint(); // Ridisegna il pannello
-}
+        cardsPanel.removeAll(); // Rimuove tutte le card dal pannello
+        cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
+        cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
+        cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        revalidate(); // Rendi valida la nuova disposizione delle card nel pannello
+        repaint(); // Ridisegna il pannello
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +72,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

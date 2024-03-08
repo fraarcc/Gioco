@@ -4,8 +4,7 @@
 package uniba.it.gioco;
 
 import uniba.it.gioco.gui.JFrameMain;
-import uniba.it.gioco.storia.Init;
-import uniba.it.gioco.tipi.Giocatore;
+
 
 /**
  *

@@ -1,128 +1,17 @@
-Introduzione:
+# Stanza 1
+Questa è la stanza iniziale. Sei appena entrato nel castello.
 
-Ti trovi davanti all'ingresso principale
-_entra
+# Stanza 2
+Hai attraversato il corridoio e sei ora nella sala del trono. È buia e silenziosa.
 
+# Stanza 3
+Hai trovato la cucina del castello. Il profumo di cibo ti riempie le narici.
 
-Vieni accolto da due guardie giurate. <indovinello da definire per entrare>
+# Stanza 4
+La biblioteca è piena di scaffali alti e pieni di libri polverosi.
 
-
-
-Atrio:
-
-Sei ora nell'atrio dell'ospedale. E' un grande ambiente, con un bar nel mezzo e un barista dietro al banco. In fondo alla stanza una grande finestra aperta.
-
-1._parla col barista
-	Buonasera, come posso esserle utile?
-	_chi è Carmela?
-	Carmela è la signora che lavora nella farmacia dell'ospedale.
-	_chiavi del bagno
-	Ecco a lei le chiavi! (aggiungi chiavi nell'inventario)
-2._buttati dalla finestra
-	1. Se hai il cuscino nell'inventario: 
-	A quanto pare qualche imbecille non ha ancora capito che accendere la modalità aereo non significa essere in grado di volare... dopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza la tua vista si offusca e inizi rapidamente a perdere conoscenza. Dopo pochi attimi ti ritrovi in una stanza completamente bianca e un signore vestito di bianco con capelli e barba bianca allunga una mano verso di te... con tuo grande dispiacere egli non è l'Altissimo e tantomeno il dottor House, ma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. Dopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano ancora più ferma, a fregarti 50 euro dalla tasca. Realizzi di essere nella sala operatoria. Il cuscino che avevi appena rubato senza un apparente scopo dall'ambulatorio è riuscito ad attutire l'impatto tra il tuo sedere e l'asfalto e adesso sei vivo per miracolo eucaristico. <parte finale, da decidere se inserire un'ultima prova per prendere il composto>
-
-	2.Se non hai il cuscino nell'inventario:
-	Bravo il cretino, ti sei buttato senza nulla che possa aver attutito il colpo. Hai presente la fine che fa.............
-
-
-
-
-
-Farmacia:
-
-Arrivi di fronte al bancone della farmacia dell'ospedale. C'è una signora in camice e dietro di lei una porta blindada con la scritta "deposito"
-_parla con signora
-	Salve, cosa posso fare per lei?
-	_<chiedi composti per ringer acetato uno alla volta e aggiungili all'inventario>
-	1.Se non hai il camice:
-	Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale
-	2.Se hai il camice
-	Ecco a lei!
-
-
-
-
-Corridoio:
-
-Ti trovi nel corridoio principale. Lungo la parete ci sono numerose vetrate che si affacciano sull'esterno. Sono presenti molte panche e dietro di te due ascensori. 
-
-
-
-
-Bagno 1:
-
-
-Sei entrato nel bagno. Ci sono le porte... i lavandini... il pavimento... beh, è un bagno! In effetti ci sarebbe una vecchia porta sulla parete opposta all'ingresso. E' chiusa con un lucchetto ma non è completamente serrata. Magari lì dentro c'è qualcosa che può tornarti utile per il tuo obiettivo. (Se il tuo obiettivo è fare i bisogni, sei già nel posto giusto e quella porta non ti servirà)
-
-<indovinello per aprire la porta>
-
-
-Se il lucchetto è già stato aperto:
-
-Sei nel bagno. Sulla parete opposta c'è la porta dello sgabuzzino
-_apri porta
-
-
-
-Sgabuzzino:
-
-Finalmente sei riuscito ad aprire il lucchetto. Siccome questo è un gioco noioso e non c'è nessun drago, arciere di fuoco o senatore DC, il massimo che puoi trovare dietro una porta chiusa a chiave è uno sgabuzzino. La vista è ammaliante: ci sono un paio di scope (vecchie), detersivi vari, un camice da medico, dei cartoni di peroni e alcune boccette vuote.
-_prendi fiala/_prendi camice/_esci
-_indossa camice
-_tasca
-	Biglietto/mezzo biglietto con gli ingredienti del ringer
-
-
-Se il lucchetto è stato già aperto:
-
-Ti trovi nello sgabuzzino più incredibile di cui la sanità italiana dispone. Ci sono un paio di scope, detersivi vari, un camice, da medico, dei cartoni di peroni e alcune boccette vuote.
-
-<Da modificare in base agli oggetti già presi>
-
-
-
-Laboratorio:
-
-Sei nel laboratorio di analisi dell'ospedale. Non c'è nessuno dentro ma hai visto una donna venire verso di te. All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive. La donna che sembrava venire verso di te ora è davvero davanti a te. E' un medico come te (bisogna crederci sempre), ma a differenza sua versa i contributi INPS e ha un vero contratto. 
-
-Se indossi il camice:
-
-Dottoressa antipatica: Ciao, scusami ma sono un po' di fretta... ti dispiacerebbe andare a prendere da Carmela i composti per preparare il ringer acetato?
-_Chi è Carmela?
-	Come chi è Carmela... tutti conoscono Carmela nell'ospedale. Oltre ad averti infastidito con questa inutile richiesta, la signora ha anche provveduto a chiamare la sicurezza. Ti sbattono fuori dall'ospedale (giustamente aggiungerei) e ti ritrovi con in mano delle speranze irrealizzabili e la chiave del bagno che ti sei dimenticato di restituire al barista. Dovrai ricominciare tutto da capo.
-
-_Va bene
-	La donna ci ha creduto. Però, per quanto non sia per niente tua competenza e interesse, sei costretto a dover veramente prendere questi composti. Non hai molto tempo: se ci metti troppo potrebbe insospettirsi. Corri.
-
-
-Se non indossi il camice o se rientri dopo che il timer è scaduto:
-
-Dottoressa antipatica: Scusami, potrei sapere il tuo nome?
-_<nome>
-
-Dottoressa: non conosco nessun <nome> che lavora qui.
-
-Dopo un intenso dialogo, la gentile signorina, che si è ben guardata dal dimostrare la sua educazione dandoti del tu, decide di chiamare la sicurezza e di buttarti via dall'ospedale, senza sentire le tue inutili scuse sul fatto che questo sia il tuo primo giorno. 
-
-
-
-Se hai già interagito con la donna: 
-
-Sei nel laboratorio di analisi. All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive.
-<preparazione del ringer acetato>
-
-
-Se finisci la preparazione prima dello scadere del tempo: 
-
-Dottoressa antipatica: Grazie mille! Non ti ho mai visto qui e all'inizio temevo che non fossi veramente un medico!
-
-(Hahah, perspicace ma non abbastanza, dopo tutto si è sempre laureata all'Università di Bari)
-
-
-
-Spogliatoio: 
-
+# Stanza 5
+Sei nel cortile del castello. Un vento freddo soffia tra le mura di pietra.
 
 
 

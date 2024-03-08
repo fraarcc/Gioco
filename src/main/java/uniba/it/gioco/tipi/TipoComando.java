@@ -4,15 +4,14 @@
  */
 package uniba.it.gioco.tipi;
 
-import java.io.Serializable;
-
 /**
  *
- * @author 39379
+ * @author Nikita
  */
-public enum TipoComando implements Serializable {
-    
-    NORD, SUD, EST, OVEST, INVENTARIO, ESCI, APRI, CERCA, CAMMINA, PARLA, INDOSSA, GUARDA, ACCENDI, LEGGI, SALVA, CARICA, LANCIATI, HELP
-    
-    
-}
+
+        public enum TipoComando {
+        SIMPLE,
+        PARAMETERIZED
+    }
+
+

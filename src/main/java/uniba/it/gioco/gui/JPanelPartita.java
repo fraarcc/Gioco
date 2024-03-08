@@ -4,8 +4,14 @@
  */
 package uniba.it.gioco.gui;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
+import uniba.it.gioco.parser.Parser;
+import uniba.it.gioco.storia.Input;
 import uniba.it.gioco.storia.StampaStoria;
 import uniba.it.gioco.tipi.Giocatore;
 
@@ -14,31 +20,37 @@ import uniba.it.gioco.tipi.Giocatore;
  * @author 39379
  */
 public class JPanelPartita extends javax.swing.JPanel {
-private JFrameMain jframeMain;
-private GameModel gameModel;
+
+    private JFrameMain jframeMain;
+    private GameModel gameModel;
+    private Input inputThread;
+
     /**
      * Creates new form JPanelPartita
      */
-    public JPanelPartita(JFrameMain jframeMain,GameModel gameModel) {
+    public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
-        
-        
-        
+
         // Ottieni il giocatore
         Giocatore giocatore = gameModel.getGiocatore();
         if (giocatore != null) {
             String nickname = giocatore.getNickname();
             // Aggiorna l'interfaccia utente con il nome del giocatore
             SwingUtilities.invokeLater(() -> {
-                areaTesto.setText("Il nome del giocatore è: " + nickname);
+                areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
             });
         } else {
             System.out.println("Giocatore non inizializzato");
         }
-        repaint();
-       
+
+        StampaStoria storiaThread = new StampaStoria(areaTesto, giocatore);
+        storiaThread.start();
+
+        inputThread = new Input(inputTesto);
+        inputThread.start();
+
     }
 
     /**
@@ -52,22 +64,32 @@ private GameModel gameModel;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         areaTesto = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        invioButton = new javax.swing.JButton();
+        cancellaButton = new javax.swing.JButton();
+        inputTesto = new javax.swing.JTextField();
 
         areaTesto.setEditable(false);
         areaTesto.setColumns(20);
         areaTesto.setRows(5);
         jScrollPane1.setViewportView(areaTesto);
 
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton3");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        invioButton.setText("Conferma");
+        invioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                invioButtonActionPerformed(evt);
+            }
+        });
+
+        cancellaButton.setText("Cancella");
+        cancellaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancellaButtonActionPerformed(evt);
+            }
+        });
+
+        inputTesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTestoActionPerformed(evt);
             }
         });
 
@@ -79,13 +101,13 @@ private GameModel gameModel;
                 .addContainerGap(344, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(cancellaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(invioButton)
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputTesto, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24))))
         );
@@ -95,25 +117,42 @@ private GameModel gameModel;
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(inputTesto, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(invioButton)
+                    .addComponent(cancellaButton))
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inputTestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTestoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        inputThread.inviaComando(inputTesto.getText().trim());
+        inputTesto.setText("");
+    }//GEN-LAST:event_inputTestoActionPerformed
 
+    private void cancellaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaButtonActionPerformed
+        // TODO add your handling code here:
+        inputTesto.setText("");
+    }//GEN-LAST:event_cancellaButtonActionPerformed
+
+    private void invioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioButtonActionPerformed
+        inputThread.inviaComando(inputTesto.getText().trim());
+        inputTesto.setText("");
+    }//GEN-LAST:event_invioButtonActionPerformed
+
+    
+
+    public void chiudiInputThread() {
+        inputThread.interrupt();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea areaTesto;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cancellaButton;
+    private javax.swing.JTextField inputTesto;
+    private javax.swing.JButton invioButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

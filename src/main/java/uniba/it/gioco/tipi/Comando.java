@@ -4,11 +4,9 @@
  */
 package uniba.it.gioco.tipi;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+
+import java.util.List;
+
 
 
 
@@ -16,60 +14,28 @@ import java.util.Set;
  *
  * @author 39379
  */
-public class Comando implements Serializable {
-    
-  private final TipoComando tipo;
-  
-  private final String nome;
+public class Comando {
+        private String name;
+        private List<String> aliases;
+        private TipoComando type;
 
-  private Set<String> alias;
-            
-    //Costruttori
-    public Comando(TipoComando tipo, String nome) 
-    {
-        this.tipo = tipo;
-        this.nome = nome;
-    }
-    
+        public String getName() {
+            return name;
+        }
 
-    public Comando(TipoComando tipo, String nome, Set<String> alias) 
-    {
-        this.tipo = tipo;
-        this.nome = nome;
-        this.alias = alias;
-    }
-    //  
-    
-    
-    public String getNome() 
-    {
-        return nome;
+        public List<String> getAliases() {
+            return aliases;
+        }
+
+        public TipoComando getType() {
+            return type;
+        }
+
+        public boolean isValid(List<String> tokens) {
+            if (tokens.size() < 2 && type == TipoComando.PARAMETERIZED) {
+                return false;
+            }
+            return tokens.size() == 1 || type == TipoComando.PARAMETERIZED;
+        }
     }
 
-    
-    public Set<String> getAlias()
-    {
-        return alias;
-    }
-    
-
-    public void setAlias(Set<String> alias)
-    {
-        this.alias = alias;
-    }
-
-    
-    public void setAlias(String[] alias)
-    {
-        this.alias = new HashSet<>(Arrays.asList(alias));
-    }
-
-    
-    public TipoComando getTipo()
-    {
-        return tipo;
-    }       
-        
-    
-
-   }

@@ -10,47 +10,76 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import uniba.it.gioco.tipi.Giocatore;
+import uniba.it.gioco.tipi.Stanza;
 
 /**
  *
  * @author Nikita
  */
 public class StampaStoria  extends Thread {
-    private JTextArea textArea;
+    private JTextArea storiaTextArea;
+    private Giocatore giocatoreCorrente;
+    private Map<String,String> storiaMap;
     
+    public StampaStoria(JTextArea storiaTextArea,Giocatore giocatoreCorrente){
+        this.storiaTextArea = storiaTextArea;
+        this.giocatoreCorrente = giocatoreCorrente;
+        this.storiaMap = new HashMap<>();
+        caricaStoriaDaFile();
+    }
     
-    public StampaStoria(JTextArea textArea){
-        this.textArea = textArea;
+    public void caricaStoriaDaFile(){
+        try(BufferedReader br = new BufferedReader(new FileReader("storia.txt"))){
+            String linea;
+            String chiaveStanza = null;
+            StringBuilder descrizioneStanza = new StringBuilder();
+            
+            while((linea = br.readLine()) != null){
+                if(linea.startsWith("#")){
+                    if(chiaveStanza != null){
+                        storiaMap.put(chiaveStanza,descrizioneStanza.toString());                      
+                    }
+                    chiaveStanza = linea.substring(1).trim();
+                    descrizioneStanza = new StringBuilder();
+                }
+            }
+            if(chiaveStanza != null){
+                storiaMap.put(chiaveStanza, descrizioneStanza.toString());
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
+}
+    private String getDescrizioneStanzaCorrente(){
+        Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
+        if(stanzaCorrente != null){
+            StringBuilder descrizione = new StringBuilder();
+            descrizione.append("Stanza: ").append(stanzaCorrente.getNome()).append("\n");
+            descrizione.append("Descrizione: ").append(stanzaCorrente.getDescrizione()).append("\n");
+            //descrizione.append("Oggetti presenti stanza: ").append(stanzaCorrente.getOggettiPresentiStanza()).append("/n");
+            return descrizione.toString();
+        }
+        return "Descrizione stanza non disponibile";
     }
     
     @Override
     public void run(){
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader("storia.txt"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(StampaStoria.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String line;
-        
-        try {
-            while ((line = reader.readLine()) != null) {
-                try {
-                    aggiornaTextArea(line);
-                    
-                    // Aggiungi un ritardo per simulare la lettura della storia
-                    Thread.sleep(1000); // Puoi regolare il ritardo a tuo piacimento
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(StampaStoria.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }   } catch (IOException ex) {
-            Logger.getLogger(StampaStoria.class.getName()).log(Level.SEVERE, null, ex);
+        while(true){
+            String descrizioneStanzaCorrente = getDescrizioneStanzaCorrente();
+           storiaTextArea.setText(descrizioneStanzaCorrente);
+           
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(StampaStoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-     private void aggiornaTextArea(String text) {
-        SwingUtilities.invokeLater(() -> textArea.append(text + "\n"));
-    }     
+    
 }

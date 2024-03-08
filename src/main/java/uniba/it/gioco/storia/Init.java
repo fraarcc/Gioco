@@ -8,51 +8,69 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
+import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Inventario;
-import uniba.it.gioco.tipi.Oggetto;
 import uniba.it.gioco.tipi.Stanza;
 
-
-
-/**
- *
- * @author Nikita
- */
-
 public class Init {
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
+    private final Set<String> stopWords;
+    private final Map<String, Comando> commands;
 
     public Init() {
         this.objectMapper = new ObjectMapper();
+        this.stopWords = loadStopWords(".\\res\\stopwords.txt");
+        this.commands = loadCommandsFromJson(".\\res\\comandi.json");
     }
 
-    // Metodo per caricare un singolo oggetto JSON
-    public <T> T loadJSON(String filePath, Class<T> type) throws IOException {
-        return objectMapper.readValue(new File(filePath), type);
-    }
-
-    // Metodo per caricare una lista di oggetti JSON
-    public <T> List<T> loadJSON(String resOggettijson, TypeReference<List<T>> typeReference) {
-        try {
-            return objectMapper.readValue(new File(resOggettijson), typeReference);
+    private Set<String> loadStopWords(String filePath) {
+        Set<String> stopWords = new HashSet<>();
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextLine()) {
+                stopWords.add(scanner.nextLine().trim().toLowerCase());
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-            return null; // o gestire l'eccezione in modo appropriato
+            System.err.println("Errore durante il caricamento delle stop words: " + e.getMessage());
         }
+        return Collections.unmodifiableSet(stopWords);
     }
-    
-  //  public List<Oggetto> inizializzaOggetti() throws IOException{
-    //    return loadJSON(".\\res\\Oggetti.json", new TypeReference<List<Oggetto>>() {});
-    //}
-    
-    public List<Stanza> inizializzaStanze() throws IOException{
-       return loadJSON(".\\res\\collegamentoStanze.json",new TypeReference<List<Stanza>>() {});
+
+    private Map<String, Comando> loadCommandsFromJson(String jsonFilePath) {
+        Map<String, Comando> commands = new HashMap<>();
+        try {
+            List<Comando> commandList = objectMapper.readValue(new File(jsonFilePath), new TypeReference<List<Comando>>() {});
+            for (Comando command : commandList) {
+                commands.put(command.getName(), command);
+                for (String alias : command.getAliases()) {
+                    commands.put(alias, command);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante il caricamento dei comandi da JSON: " + e.getMessage());
+        }
+        return Collections.unmodifiableMap(commands);
     }
-    
-    public Giocatore inizializzaGiocatore(int idUtente,String nickname,Stanza stanzaIniziale){
-        //Aggiungere controllo nickname da database per adesso senza controlli
-        return new Giocatore(idUtente,nickname,stanzaIniziale,new Inventario()); 
+
+    public Set<String> getStopWords() {
+        return stopWords;
+    }
+
+    public Map<String, Comando> getCommands() {
+        return commands;
+    }
+
+    public List<Stanza> inizializzaStanze() throws IOException {
+        return loadJSON(".\\res\\collegamentoStanze.json", new TypeReference<List<Stanza>>() {});
+    }
+
+    public Giocatore inizializzaGiocatore(int idUtente, String nickname, Stanza stanzaIniziale) {
+        // Aggiungere controllo nickname da database per adesso senza controlli
+        return new Giocatore(idUtente, nickname, stanzaIniziale, new Inventario());
+    }
+
+    private <T> List<T> loadJSON(String filePath, TypeReference<List<T>> typeReference) throws IOException {
+        return objectMapper.readValue(new File(filePath), typeReference);
     }
 }
