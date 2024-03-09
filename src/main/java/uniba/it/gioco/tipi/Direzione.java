@@ -8,19 +8,6 @@ package uniba.it.gioco.tipi;
  *
  * @author Nikita
  */
-
-        public enum TipoComando {
-        NORD,
-        SUD,
-        EST,
-        OVEST,
-        APRI,
-        PARLA,
-        INDOSSA,
-        RICHIEDI,
-        RACCOGLI,
-        LEGGI,
-        LANCIATI
-    }
-
-
+public enum Direzione {
+    SUD, EST, OVEST, NORD;
+}

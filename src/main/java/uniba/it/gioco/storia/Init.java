@@ -62,8 +62,10 @@ public class Init {
     }
 
     public List<Stanza> inizializzaStanze() throws IOException {
-        return loadJSON(".\\res\\collegamentoStanze.json", new TypeReference<List<Stanza>>() {});
+        String filePath = ".\\res\\collegamentoStanze.json";
+        return loadJSON(filePath, new TypeReference<List<Stanza>>() {});
     }
+
 
     public Giocatore inizializzaGiocatore(int idUtente, String nickname, Stanza stanzaIniziale) {
         // Aggiungere controllo nickname da database per adesso senza controlli
@@ -73,4 +75,19 @@ public class Init {
     private <T> List<T> loadJSON(String filePath, TypeReference<List<T>> typeReference) throws IOException {
         return objectMapper.readValue(new File(filePath), typeReference);
     }
+    
+     public Stanza loadStanzaFromJson(String stanzaNome) throws IOException {
+        String filePath = ".\\res\\collegamentoStanze.json";
+        List<Stanza> stanze = loadJSON(filePath, new TypeReference<List<Stanza>>() {});
+        for (Stanza stanza : stanze) {
+            if (stanza.getNome().equals(stanzaNome)) {
+                return stanza;
+            }
+        }
+        throw new IOException("Stanza non trovata nel file JSON: " + stanzaNome);
+    }
+    
+    public List<Comando> getCommandsAsList() {
+    return new ArrayList<>(commands.values());
+}
 }

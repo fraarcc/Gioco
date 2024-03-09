@@ -2,10 +2,10 @@
   {
     "nome": "Stanza 1",
     "descrizione": "Questa è la stanza 1",
-    "connessioneStanze": [
-      "Stanza 2",
-      "Stanza 3"
-    ],
+    "connessioneStanze": {
+      "EST": "Stanza 2",
+      "SUD": "Stanza 3"
+    },
     "oggettiPresentiStanza": [
       {
         "id": 1,
@@ -17,10 +17,10 @@
   {
     "nome": "Stanza 2",
     "descrizione": "Questa è la stanza 2",
-    "connessioneStanze": [
-      "Stanza 1",
-      "Stanza 3"
-    ],
+    "connessioneStanze": {
+      "OVEST": "Stanza 1",
+      "SUD": "Stanza 3"
+    },
     "oggettiPresentiStanza": [
       {
         "id": 2,
@@ -32,10 +32,10 @@
   {
     "nome": "Stanza 3",
     "descrizione": "Questa è la stanza 3",
-    "connessioneStanze": [
-      "Stanza 1",
-      "Stanza 2"
-    ],
+    "connessioneStanze": {
+      "OVEST": "Stanza 1",
+      "NORD": "Stanza 2"
+    },
     "oggettiPresentiStanza": [
       {
         "id": 3,
