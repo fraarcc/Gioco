@@ -39,28 +39,26 @@ public class Parser {
     }
 
     public static boolean isValidCommand(String input) {
-        List<String> tokens = parse(input);
-        if (tokens.isEmpty()) {
-            return false;
-        }
-
-        String commandName = tokens.get(0);
-        Comando command = commands.get(commandName);
-        if (command == null) {
-            return false;
-        }
-
-        return command.isValid(tokens);
+        return !getCommandType(input).equals("Invalid");
     }
 
-    public static String getCommandType(String input) {
-        List<String> tokens = parse(input);
-        if (tokens.isEmpty()) {
-            return "Invalid";
-        }
+   public static String getCommandType(String input) {
+    List<String> tokens = parse(input);
 
-        String commandName = tokens.get(0);
-        Comando command = commands.get(commandName);
-        return command != null ? command.getType().toString() : "Invalid";
+    // Controllo della lunghezza dei token
+    if (tokens.size() < 1 || tokens.size() > 3) {
+        return "Invalid";
     }
+
+    String token = tokens.get(0).toLowerCase(); // Converti il token in minuscolo
+
+    // Cerca il comando basato sugli alias
+    for (Comando command : commands.values()) {
+        if (command.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(token))) {
+            return command.getType().toString();
+        }
+    }
+
+    return "Invalid";
+}
 }

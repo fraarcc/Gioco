@@ -51,4 +51,12 @@ public class GameModel {
     public String getNomeGiocatore() {
         return giocatore != null ? giocatore.getNickname() : null;
     }
+    
+    public Init getInit(){
+        return init;
+    }
+    
+    public List<Stanza> getStanze() throws IOException{
+        return init.inizializzaStanze();
+    }
 }

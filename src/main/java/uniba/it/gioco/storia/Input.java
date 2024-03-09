@@ -7,21 +7,27 @@ package uniba.it.gioco.storia;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTextField;
 import uniba.it.gioco.parser.Parser;
+import uniba.it.gioco.tipi.Comando;
+import uniba.it.gioco.tipi.Giocatore;
 
 /**
  *
  * @author Nikita
  */
 public class Input extends Thread {
-
     private JTextField inputTestoCampo;
+    private Giocatore giocatoreCorrente;
+    private LogicaComandi logicaComandi;
+    private Init init;
 
-    public Input(JTextField inputTestoCampo) {
+    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init) {
         this.inputTestoCampo = inputTestoCampo;
+        this.giocatoreCorrente = giocatoreCorrente;
+        this.init = init;
+        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init);
+        
     }
 
     @Override
@@ -35,31 +41,17 @@ public class Input extends Thread {
     }
 
     public void inviaComando(String inputTesto) {
-        System.out.println(inputTesto);
+         
+        System.out.println("Input: " + inputTesto); // Stampa l'input ricevuto
         List<String> tokens = Parser.parse(inputTesto);
-        System.out.println(tokens);
-        if (!inputTesto.isEmpty()) {
-            if (Parser.isValidCommand(inputTesto)) {
-                String esaminaComando = Parser.getCommandType(inputTesto);
-                System.out.println(esaminaComando);
-                switch (esaminaComando) {
-                    case "SIMPLE":
-                        System.out.println("Simple");
-                        break;
+        System.out.println("Tokens: " + tokens); // Stampa i token estratti dall'input
 
-                    case "PARAMETERIZED":
-                        System.out.println("Parameterized");
-                        break;
-
-                    default:
-                        System.out.println("Non valido");
-                        break;
-                }
-
-                inputTestoCampo.setText("");
-            } else {
-                System.out.println("Comando non valido");
-            }
+        if (!inputTesto.isEmpty() && Parser.isValidCommand(inputTesto)) {
+            logicaComandi.gestioneComandi(inputTesto,giocatoreCorrente);
+            inputTestoCampo.setText("");
+        } else {
+            System.out.println("Comando non valido");
         }
     }
 }
+

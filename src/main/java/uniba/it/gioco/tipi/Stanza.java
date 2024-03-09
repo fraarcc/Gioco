@@ -6,8 +6,9 @@ package uniba.it.gioco.tipi;
 
 
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,20 +18,19 @@ import java.util.Set;
 public class Stanza {
     private String nome;
     private String descrizione;
-    private Set<Oggetto> oggettiNecessari; //Oggetti necessari per aprire la stanza se e null e aperta
+    private Set<Oggetto> oggettiNecessari;
     private Set<Oggetto> oggettiPresentiStanza;
-    private List<Stanza> connessioneStanze;
-    
-    public Stanza(){
-        connessioneStanze = new ArrayList<>();
+    private Map<Direzione, Stanza> connessioneStanze;
+
+    public Stanza() {
+        connessioneStanze = new HashMap<>();
     }
-    
-    public Stanza(String nome){
+
+    public Stanza(String nome) {
         this.nome = nome;
-        connessioneStanze = new ArrayList<>();
+        connessioneStanze = new HashMap<>();
     }
-     
-    
+
     public String getNome() {
         return nome;
     }
@@ -38,44 +38,56 @@ public class Stanza {
     public String getDescrizione() {
         return descrizione;
     }
-    
-    public void aggiungiConnessione(List<Stanza> stanze){
-        connessioneStanze.add((Stanza) stanze);
+
+    public Set<Oggetto> getOggettiNecessari() {
+        return oggettiNecessari;
     }
-    
-    public List<Stanza> getConnessioneStanze(){
-        return connessioneStanze;
-    }
-    
-    public Set<Oggetto> getOggettiPresentiStanza(){
+
+    public Set<Oggetto> getOggettiPresentiStanza() {
         return oggettiPresentiStanza;
     }
-    
-    public boolean getStatoStanza(Stanza stanza){
-        return stanza.oggettiNecessari == null;
+
+    public Map<Direzione, Stanza> getConnessioneStanze() {
+        return connessioneStanze;
     }
-    
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public void setOggettiNecessari(Set<Oggetto> oggettiNecessari) {
+        this.oggettiNecessari = oggettiNecessari;
+    }
+
+    public void setOggettiPresentiStanza(Set<Oggetto> oggettiPresentiStanza) {
+        this.oggettiPresentiStanza = oggettiPresentiStanza;
+    }
+
+    public void aggiungiConnessione(Direzione direzione, Stanza stanza) {
+        connessioneStanze.put(direzione, stanza);
+    }
+
     @Override
-public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("Stanza{name=").append(nome);
-    if (descrizione != null) {
-        sb.append(", descrizione=").append(descrizione);
-    }
-    if (oggettiNecessari != null && !oggettiNecessari.isEmpty()) {
-        sb.append(", oggettiNecessari=").append(oggettiNecessari);
-    }
-    if (oggettiPresentiStanza != null && !oggettiPresentiStanza.isEmpty()) {
-        sb.append(", oggettiPresentiStanza=").append(oggettiPresentiStanza);
-    }
-    if (connessioneStanze != null && !connessioneStanze.isEmpty()) {
-        sb.append(", connessioneStanze=");
-        for (Stanza stanza : connessioneStanze) {
-            sb.append(stanza.getNome()).append(", ");
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Stanza{name=").append(nome);
+        if (descrizione != null) {
+            sb.append(", descrizione=").append(descrizione);
         }
-        sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
+        if (oggettiNecessari != null && !oggettiNecessari.isEmpty()) {
+            sb.append(", oggettiNecessari=").append(oggettiNecessari);
+        }
+        if (oggettiPresentiStanza != null && !oggettiPresentiStanza.isEmpty()) {
+            sb.append(", oggettiPresentiStanza=").append(oggettiPresentiStanza);
+        }
+        if (!connessioneStanze.isEmpty()) {
+            sb.append(", connessioneStanze=");
+            for (Map.Entry<Direzione, Stanza> entry : connessioneStanze.entrySet()) {
+                sb.append(entry.getKey()).append(": ").append(entry.getValue().getNome()).append(", ");
+            }
+            sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
+        }
+        sb.append("}");
+        return sb.toString();
     }
-    sb.append("}");
-    return sb.toString();
-}
 }

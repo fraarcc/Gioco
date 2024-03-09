@@ -11,8 +11,10 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.parser.Parser;
+import uniba.it.gioco.storia.Init;
 import uniba.it.gioco.storia.Input;
 import uniba.it.gioco.storia.StampaStoria;
+import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;
 
 /**
@@ -20,10 +22,11 @@ import uniba.it.gioco.tipi.Giocatore;
  * @author 39379
  */
 public class JPanelPartita extends javax.swing.JPanel {
-
+   private Giocatore giocatore;
     private JFrameMain jframeMain;
     private GameModel gameModel;
     private Input inputThread;
+    private Init init;
 
     /**
      * Creates new form JPanelPartita
@@ -32,9 +35,9 @@ public class JPanelPartita extends javax.swing.JPanel {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
-
+        init = gameModel.getInit();
         // Ottieni il giocatore
-        Giocatore giocatore = gameModel.getGiocatore();
+        giocatore = gameModel.getGiocatore();
         if (giocatore != null) {
             String nickname = giocatore.getNickname();
             // Aggiorna l'interfaccia utente con il nome del giocatore
@@ -46,10 +49,14 @@ public class JPanelPartita extends javax.swing.JPanel {
         }
 
         StampaStoria storiaThread = new StampaStoria(areaTesto, giocatore);
-        storiaThread.start();
-
-        inputThread = new Input(inputTesto);
+       
+         storiaThread.start();
+       
+       
+   
+        inputThread = new Input(inputTesto, giocatore,init);
         inputThread.start();
+       
 
     }
 
