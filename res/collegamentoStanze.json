@@ -1,47 +1,169 @@
 [
   {
-    "nome": "Stanza 1",
-    "descrizione": "Questa è la stanza 1",
+    "nome": "Ingresso",
+    "descrizione": "Ti trovi all'interno dell'ingresso",
     "connessioneStanze": {
-      "EST": "Stanza 2",
-      "SUD": "Stanza 3"
+      "NORD": "atrio"
+    
+    },
+    "oggettiPresentiStanza": [ ]
+  },
+  {
+    "nome": "atrio",
+    "descrizione": "Ti trovi all'interno dell'atrio",
+    "connessioneStanze": {
+      "EST": "farmacia",
+      "OVEST": "corridoio",
+       "SUD" : "ingresso"
     },
     "oggettiPresentiStanza": [
       {
         "id": 1,
-        "nome": "Oggetto 1",
-        "descrizione": "Descrizione dell'oggetto 1"
+        "nome": "chiave del bagno",
+        "descrizione": "hai trovato la chiave del bagno inferiore"
       }
     ]
   },
   {
-    "nome": "Stanza 2",
-    "descrizione": "Questa è la stanza 2",
+    "nome": "farmacia",
+    "descrizione": "Ti trovi all'interno della farmacia",
     "connessioneStanze": {
-      "OVEST": "Stanza 1",
-      "SUD": "Stanza 3"
+      "EST": "atrio"
+   
     },
     "oggettiPresentiStanza": [
       {
         "id": 2,
-        "nome": "Oggetto 2",
-        "descrizione": "Descrizione dell'oggetto 2"
+        "nome": "sodio cloruro",
+        "descrizione": "hai trovato il sodio cloruro"
+      },{
+        "id": 3,
+        "nome": "potassio cloruro",
+        "descrizione": "hai trovato il potassio cloruro"
+      },{
+        "id": 4,
+        "nome": "calcio cloruro diidrato",
+        "descrizione": "hai trovato il calcio cloruro diidrato"
+      },{
+        "id": 5,
+        "nome": "sodio acetato triidrato",
+        "descrizione": "hai trovato il sodio acetato triidrato"
       }
     ]
   },
   {
-    "nome": "Stanza 3",
-    "descrizione": "Questa è la stanza 3",
+    "nome": "corridoio",
+    "descrizione": "ti trovi nel corriodio ed ad ovest c'è un ascensore",
     "connessioneStanze": {
-      "OVEST": "Stanza 1",
-      "NORD": "Stanza 2"
+      "EST": "atrio",
+      "OVEST": "sala d'attesa"
+   
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "bagno",
+    "descrizione": "Ti trovi all'interno del bagno al piano inferiore",
+    "connessioneStanze": {
+      "SUD": "corridoio",
+      "NORD": "sgabuzzino"
+   
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "sgabuzzino",
+    "descrizione": "Ti trovi all'interno dello sgabuzzino",
+    "connessioneStanze": {
+      "SUD": "bagno"
+      
+   
     },
     "oggettiPresentiStanza": [
       {
-        "id": 3,
-        "nome": "Oggetto 3",
-        "descrizione": "Descrizione dell'oggetto 3"
+        "id": 6,
+        "nome": "boccetta",
+        "descrizione": "hai trovato una boccettina"
+      },{
+        "id": 7,
+        "nome": "camice",
+        "descrizione": "hai trovato il camice"
+      },{
+        "id": 8,
+        "nome": "foglietto",
+        "descrizione": "hai trovato un foglietto"
+      },{
+        "id": 9,
+        "nome": "cacciavite",
+        "descrizione": "hai trovato un cacciavite"
       }
     ]
+  },
+  {
+    "nome": "sala d'attesa",
+    "descrizione": "ti trovi nella sala d'attesa al piano superiore",
+    "connessioneStanze": {
+      "SUD": "sala operatoria",
+      "EST": "laboratorio",
+      "NORD":"bagno superiore",
+      "OVEST": "corridoio"
+                   
+      
+   
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "bagno superiore",
+    "descrizione": "ti trovi nel bagno superiore, al primo piano",
+    "connessioneStanze": {
+      "SUD": "sala d'attesa",
+      "EST": "spogliatoio"
+      
+      
+   
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "spogliatoio",
+    "descrizione": "ti trovi nello spogliatoio, al primo piano",
+    "connessioneStanze": {
+      "OVEST": "bagno",
+      "SUD": "laboratorio"
+      
+      
+   
+    },
+    "oggettiPresentiStanza": [
+      {
+        "id": 10,
+        "nome": "cuscino",
+        "descrizione": "hai trovato il cuscino"
+      }
+    ]
+  },
+  {
+    "nome": "laboratorio",
+    "descrizione": "ti trovi nel laboratorio, al primo piano",
+    "connessioneStanze": {
+      "NORD": "spogliatoio",
+      "OVEST": "sala d'attesa"
+      
+      
+   
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "sala operatoria",
+    "descrizione": "ti trovi nella sala operatoria, al primo piano",
+    "connessioneStanze": {
+      "NORD": "sala d'attesa"
+      
+      
+   
+    },
+    "oggettiPresentiStanza": []
   }
 ]

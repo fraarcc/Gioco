@@ -20,7 +20,9 @@ package uniba.it.gioco.tipi;
         RICHIEDI,
         RACCOGLI,
         LEGGI,
-        LANCIATI
+        LANCIATI,
+        AIUTO,
+        ESCI
     }
 
 
