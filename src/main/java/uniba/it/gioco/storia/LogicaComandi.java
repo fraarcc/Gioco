@@ -4,7 +4,11 @@
  */
 package uniba.it.gioco.storia;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import javax.swing.JTextArea;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
@@ -20,11 +24,13 @@ public class LogicaComandi {
     private Parser parser;
     private Giocatore giocatore;
     private Init init;
+    private JTextArea outputTestoCampo;
 
-    public LogicaComandi(Giocatore giocatore, Init init) {
+    public LogicaComandi(Giocatore giocatore, Init init, JTextArea outputTestoCampo) {
         this.giocatore = giocatore;
         this.init = init;
         this.parser = new Parser();
+        this.outputTestoCampo = outputTestoCampo;
     }
 
     public void gestioneComandi(String inputTesto,Giocatore giocatore) {
@@ -45,6 +51,7 @@ public class LogicaComandi {
                 switch (comando.getType()) {
                     case NORD:
                         System.out.println("Comando NORD trovato");
+                        eseguiComandoNord(giocatore);
                         break;
                     case SUD:
                         System.out.println("Comando SUD trovato");
@@ -77,6 +84,13 @@ public class LogicaComandi {
                     case LANCIATI:
                         System.out.println("Comando LANCIATI trovato");
                         break;
+                    case AIUTO:
+                        System.out.println("Comando AIUTO trovato");
+                        eseguiComandoAiuto(outputTestoCampo);
+                        break;
+                    case ESCI:
+                        System.out.println("Comando ESCI trovato");
+                        break;
                     default:
                         System.out.println("Tipo di comando non gestito: " + comando.getType());
                         break;
@@ -100,5 +114,18 @@ public class LogicaComandi {
          Stanza stanzaNuova = giocatore.getStanzaCorrente();
         System.out.println(stanzaNuova.toString());
     }
-}
+    public void eseguiComandoNord(Giocatore giocatore){
+        giocatore.spostaGiocatore(init, Direzione.NORD);
+
+    }
+    
+    
+    
+    public void eseguiComandoAiuto(JTextArea outputTestoCampo){
+        
+        outputTestoCampo.setText("Comando aiuto rilevato");
+    }
+     
+}  
+
 

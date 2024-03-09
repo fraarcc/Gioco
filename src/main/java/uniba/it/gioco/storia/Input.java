@@ -7,6 +7,7 @@ package uniba.it.gioco.storia;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
@@ -21,12 +22,15 @@ public class Input extends Thread {
     private Giocatore giocatoreCorrente;
     private LogicaComandi logicaComandi;
     private Init init;
+    private JTextArea outputTestoCampo;
 
-    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init) {
+    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init, JTextArea outputTestoCampo) {
         this.inputTestoCampo = inputTestoCampo;
         this.giocatoreCorrente = giocatoreCorrente;
         this.init = init;
-        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init);
+        this.outputTestoCampo = outputTestoCampo; 
+        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo);
+       
         
     }
 
