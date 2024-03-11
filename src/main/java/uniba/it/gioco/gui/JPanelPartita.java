@@ -50,7 +50,7 @@ public class JPanelPartita extends javax.swing.JPanel {
 
         StampaStoria storiaThread = new StampaStoria(areaTesto, giocatore);
        
-         //storiaThread.start();
+         storiaThread.start();
          //storiaThread.interrupt();
        
        

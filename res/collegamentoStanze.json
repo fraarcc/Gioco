@@ -1,6 +1,6 @@
 [
   {
-    "nome": "Ingresso",
+    "nome": "ingresso",
     "descrizione": "Ti trovi all'interno dell'ingresso",
     "connessioneStanze": {
       "NORD": "atrio"

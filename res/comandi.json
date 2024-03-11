@@ -56,12 +56,12 @@
   },
   {
     "name": "aiuto",
-    "aliases": ["/aiuto", "/help"],
+    "aliases": ["aiuto", "help"],
     "type": "AIUTO"
   },
   {
     "name": "esci",
-    "aliases": ["/exit","/leave", "/esci"],
+    "aliases": ["exit","leave", "esci"],
     "type": "ESCI"
   }
 

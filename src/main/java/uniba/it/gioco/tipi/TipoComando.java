@@ -21,7 +21,7 @@ package uniba.it.gioco.tipi;
         RACCOGLI,
         LEGGI,
         LANCIATI,
-        AIUTO,
+        AIUTO ,
         ESCI
     }
 
