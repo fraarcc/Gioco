@@ -59,6 +59,7 @@ public class LogicaComandi {
                         break;
                     case EST:
                         System.out.println("Comando EST trovato");
+                        eseguiComandoEst(giocatore);
                         break;
                     case OVEST:
                         System.out.println("Comando OVEST trovato");
@@ -125,6 +126,14 @@ public class LogicaComandi {
         
         outputTestoCampo.setText("Comando aiuto rilevato");
     }
+    
+    public void eseguiComandoEst(Giocatore giocatore){
+        giocatore.spostaGiocatore(init, Direzione.EST);
+    }
+    public void eseguiComandoOvest(Giocatore giocatore){
+        giocatore.spostaGiocatore(init, Direzione.OVEST);
+    }
+    
      
 }  
 

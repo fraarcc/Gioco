@@ -1,8 +1,25 @@
-# Stanza 1
-Benvenuto nel castello misterioso. Il tuo viaggio inizia qui.
+# ingresso
 
-# Stanza 2
-Ti trovi ora nella stanza delle sfide. Preparati a superare i più grandi enigmi.
+Benvenuti nell'antro del benessere e del comfort, meglio conosciuto come l'ingresso di questo ospedale italiano,
+dove l'eleganza si fonde con il degrado in un intricato balletto di stile post-moderno.
+Il tappeto che accoglie i visitatori sembra aver visto epoche migliori, ma sfoggia con fierezza le macchie misteriose e i segreti medici,
+di chi lo ha attraversato prima di voi.
+Le pareti, impreziosite da sfumature di un bianco che sa di antico e di muffa, raccontano storie di febbri,
+ cure miracolose e chiacchiere dei dottori che sono passati di qua, probabilmente più per caso che per vocazione.
+I cestini dell'immondizia, fedeli custodi dei segreti della sala d'attesa, sono veri e propri scrigni di emozioni in decomposizione.
+Gli ascensori, autentici capolavori della tecnologia degli anni '80, promettono un'esperienza di viaggio unica nel suo genere.
+Chi avrebbe mai pensato che un suono cosi' simile a un gemito potesse accompagnare il vostro salire verso l'ignoto?
+L'accoglienza e' calda, o meglio, il termosifone accanto al bancone sembra pensare così.
+Il personale, in perfetta sintonia con l'atmosfera avvolgente, sorride con una grazia tutta sua, 
+sicuri che l'ironia sia il miglior antidoto contro l'ansia del paziente.
+Insomma, benvenuti nel tempio del "Forse funziona ancora", dove ogni passo e' un'avventura e ogni esame una scoperta. 
+L'ospedale italiano: dove la malattia incontra l'arte del vivere con stile, anche se un po' decadente.
+
+# atrio
+Benvenuti nell'atrio di questo ospedale, un luogo dove il degrado e l'insolito si fondono in una danza unica. 
+Nel cuore di questo scenario caotico si erge un bar, presidiato da un barista che sembra aver imparato l'arte di navigare,
+tra le stranezze con una maestria ineguagliabile. 
+I tavoli, con la loro patina vintage, ospitano storie sussurrate e sguardi intrappolati tra il passato e l'incerto.
 
 # Stanza 3
 Hai raggiunto la stanza del tesoro. Troverai ricchezze oltre ogni immaginazione.
