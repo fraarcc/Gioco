@@ -23,7 +23,8 @@ package uniba.it.gioco.tipi;
         LANCIATI,
         AIUTO ,
         ESCI,
-        OSSERVA
+        OSSERVA,
+        INVENTARIO
     }
 
 

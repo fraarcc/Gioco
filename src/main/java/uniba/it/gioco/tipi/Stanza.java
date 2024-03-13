@@ -7,8 +7,8 @@ package uniba.it.gioco.tipi;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -18,9 +18,10 @@ import java.util.Set;
 public class Stanza {
     private String nome;
     private String descrizione;
-    private Set<Oggetto> oggettiNecessari;
+    private Set<Oggetto> oggettiNecessari;//Bagno inferiore chiave del bagno, Lab da vedere, Ripostiglio chiave (da leggere) + oggetto con codice 
     private Set<Oggetto> oggettiPresentiStanza;
     private Map<Direzione, Stanza> connessioneStanze;
+    private Npc npc;
 
     public Stanza() {
         connessioneStanze = new HashMap<>();
@@ -66,6 +67,28 @@ public class Stanza {
     public void aggiungiConnessione(Direzione direzione, Stanza stanza) {
         connessioneStanze.put(direzione, stanza);
     }
+    
+    public void rimuoviOggettoDallaStanza(Oggetto oggettoDaRimuovere){
+        oggettiPresentiStanza.remove(oggettoDaRimuovere);
+    }
+
+    public void setNpc(Npc npc) {
+        this.npc = npc;
+    }
+
+    public Npc getNpc() {
+        return npc;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setConnessioneStanze(Map<Direzione, Stanza> connessioneStanze) {
+        this.connessioneStanze = connessioneStanze;
+    }
+    
+    
 
     @Override
     public String toString() {

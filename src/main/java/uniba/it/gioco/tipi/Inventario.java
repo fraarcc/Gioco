@@ -32,6 +32,11 @@ public class Inventario {
         return oggetti.contains(oggetto);
     }
 
+    public Set<Oggetto> getOggetti() {
+        return oggetti;
+    }
+
+    
     
 
     @Override
