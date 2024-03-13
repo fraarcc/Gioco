@@ -1,68 +1,73 @@
 [
-  {
-    "name": "nord",
-    "aliases": ["N", "north", "NORD"],
-    "type": "NORD"
-  },
-  {
-    "name": "sud",
-    "aliases": ["S", "south", "SUD"],
-    "type": "SUD"
-  },
-  {
-    "name": "est",
-    "aliases": ["E", "east", "EST"],
-    "type": "EST"
-  },
-  {
-    "name": "ovest",
-    "aliases": ["O", "west", "OVEST"],
-    "type": "OVEST"
-  },
-  {
-    "name": "apri",
-    "aliases": ["sblocca"],
-    "type": "APRI"
-  },
-  {
-    "name": "parla",
-    "aliases": ["interagisci", "dialoga"],
-    "type": "PARLA"
-  },
-  {
-    "name": "indossa",
-    "aliases": ["metti", "utilizza"],
-    "type": "INDOSSA"
-  },
-  {
-    "name": "richiedi",
-    "aliases": ["domanda", "chiedi"],
-    "type": "RICHIEDI"
-  },
-  {
-    "name": "raccogli",
-    "aliases": ["prendi", "afferra"],
-    "type": "RACCOGLI"
-  },
-  {
-    "name": "leggi",
-    "aliases": ["consulta", "analizza", "esamina"],
-    "type": "LEGGI"
-  },
-  {
-    "name": "lanciati",
-    "aliases": ["buttati", "gettati", "salta"],
-    "type": "LANCIATI"
-  },
-  {
-    "name": "aiuto",
-    "aliases": ["aiuto", "help"],
-    "type": "AIUTO"
-  },
-  {
-    "name": "esci",
-    "aliases": ["exit","leave", "esci"],
-    "type": "ESCI"
-  }
-
+    {
+        "name": "nord",
+        "aliases": ["N", "north", "NORD"],
+        "type": "NORD"
+    },
+    {
+        "name": "sud",
+        "aliases": ["S", "south", "SUD"],
+        "type": "SUD"
+    },
+    {
+        "name": "est",
+        "aliases": ["E", "east", "EST"],
+        "type": "EST"
+    },
+    {
+        "name": "ovest",
+        "aliases": ["O", "west", "OVEST"],
+        "type": "OVEST"
+    },
+    {
+        "name": "apri",
+        "aliases": ["sblocca"],
+        "type": "APRI"
+    },
+    {
+        "name": "parla",
+        "aliases": ["interagisci", "dialoga"],
+        "type": "PARLA"
+    },
+    {
+        "name": "indossa",
+        "aliases": ["metti", "utilizza"],
+        "type": "INDOSSA"
+    },
+    {
+        "name": "richiedi",
+        "aliases": ["domanda", "chiedi"],
+        "type": "RICHIEDI"
+    },
+    {
+        "name": "raccogli",
+        "aliases": ["prendi", "afferra"],
+        "type": "RACCOGLI"
+    },
+    {
+        "name": "leggi",
+        "aliases": ["consulta", "analizza", "esamina"],
+        "type": "LEGGI"
+    },
+    {
+        "name": "lanciati",
+        "aliases": ["buttati", "gettati", "salta"],
+        "type": "LANCIATI"
+    },
+    {
+        "name": "aiuto",
+        "aliases": ["aiuto", "help"],
+        "type": "AIUTO"
+    },
+    {
+        "name": "esci",
+        "aliases": ["exit", "leave", "esci"],
+        "type": "ESCI"
+    }
+    ,
+    {
+        "name": "osserva",
+        "aliases": ["osserva", "ispeziona"],
+        "type": "OSSERVA"
+    }
 ]

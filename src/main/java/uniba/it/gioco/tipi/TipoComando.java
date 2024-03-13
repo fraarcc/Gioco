@@ -22,7 +22,8 @@ package uniba.it.gioco.tipi;
         LEGGI,
         LANCIATI,
         AIUTO ,
-        ESCI
+        ESCI,
+        OSSERVA
     }
 
 
