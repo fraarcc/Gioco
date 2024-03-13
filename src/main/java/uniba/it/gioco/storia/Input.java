@@ -23,14 +23,16 @@ public class Input extends Thread {
     private LogicaComandi logicaComandi;
     private Init init;
     private JTextArea outputTestoCampo;
+    private Output output;
 
-    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init, JTextArea outputTestoCampo) {
+    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init, JTextArea outputTestoCampo,Output output) {
         this.inputTestoCampo = inputTestoCampo;
         this.giocatoreCorrente = giocatoreCorrente;
         this.init = init;
         this.outputTestoCampo = outputTestoCampo; 
-        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo);
-       
+        this.output = output;
+        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo,output);
+     
         
     }
 

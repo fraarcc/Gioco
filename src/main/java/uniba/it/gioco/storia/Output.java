@@ -19,16 +19,19 @@ import uniba.it.gioco.tipi.Stanza;
  *
  * @author Nikita
  */
-public class StampaStoria extends Thread {
+public class Output extends Thread {
+
     private JTextArea storiaTextArea;
     private Giocatore giocatoreCorrente;
     private Map<String, String> storiaMap;
+    private boolean stanzaCambiata;
 
-    public StampaStoria(JTextArea storiaTextArea, Giocatore giocatoreCorrente) {
+    public Output(JTextArea storiaTextArea, Giocatore giocatoreCorrente) {
         this.storiaTextArea = storiaTextArea;
         this.giocatoreCorrente = giocatoreCorrente;
         this.storiaMap = new HashMap<>();
         caricaStoriaDaFile();
+        stanzaCambiata = true;
     }
 
     public void caricaStoriaDaFile() {
@@ -56,18 +59,10 @@ public class StampaStoria extends Thread {
         }
     }
 
-    private String getDescrizioneStanzaCorrente() {
-        Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
-        if (stanzaCorrente != null) {
-            StringBuilder descrizione = new StringBuilder();
-
-            descrizione.append("Stanza: ").append(stanzaCorrente.getNome()).append("\n");
-            descrizione.append("Descrizione: ").append(stanzaCorrente.getDescrizione()).append("\n");
-            //descrizione.append("Oggetti presenti stanza: ").append(stanzaCorrente.getOggettiPresentiStanza()).append("/n");
-            return descrizione.toString();
-        }
-        return "Descrizione stanza non disponibile";
-    }
+    public void aggiornaStoria() {
+    String descrizioneCompleta = getDescrizioneCompletaStanzaCorrente();
+    SwingUtilities.invokeLater(() -> storiaTextArea.append(descrizioneCompleta));
+}
 
     private String getDescrizioneCompletaStanzaCorrente() {
         Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
@@ -89,17 +84,46 @@ public class StampaStoria extends Thread {
         return "Descrizione stanza non disponibile";
     }
 
-    @Override
+   @Override
     public void run() {
-        while (true) {
-            String descrizioneCompleta = getDescrizioneCompletaStanzaCorrente();
-            storiaTextArea.setText(descrizioneCompleta);
+        // Stampiamo la prima stanza
+       // aggiornaStoria();
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(StampaStoria.class.getName()).log(Level.SEVERE, null, ex);
+        // Attendiamo un cambio di stanza solo dopo aver stampato la prima stanza
+        synchronized (this) {
+            while (true) {
+                if (stanzaCambiata) {
+                    aggiornaStoria();
+                    stanzaCambiata = false;
+                    try {
+                        wait(); // Attendiamo fino a quando non avviene un cambio di stanza
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
+    }
+
+
+    public synchronized void aspettaCambioStanza() {
+        try {
+            wait(); // Il thread attende fino a quando non riceve una notifica
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+     public synchronized void cambioStanza() {
+        stanzaCambiata = true;
+        notify(); // Notifichiamo il thread di StampaStoria che la stanza è cambiata
+    }
+
+    public void stopThread() {
+        stanzaCambiata = false;
+    }
+    
+    public void erroreMsg(){
+        storiaTextArea.append("Non puoi andare in questa direzione");
     }
 }

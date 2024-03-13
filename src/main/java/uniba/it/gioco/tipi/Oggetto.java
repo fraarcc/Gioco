@@ -49,9 +49,13 @@ public class Oggetto implements Serializable{
     }
     
     
-    
-    @Override
-    public String toString() {
-        return "Oggetto{" + "id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + '}';
-    }
+     @Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Oggetto\n");
+    sb.append("  ID: ").append(id).append("\n");
+    sb.append("  Nome: ").append(nome).append("\n");
+    sb.append("  Descrizione: ").append(descrizione).append("\n");
+    return sb.toString();
+}
 }

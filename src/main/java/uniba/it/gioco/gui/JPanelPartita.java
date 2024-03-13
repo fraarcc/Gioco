@@ -13,7 +13,7 @@ import uniba.it.gioco.GameModel;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.storia.Init;
 import uniba.it.gioco.storia.Input;
-import uniba.it.gioco.storia.StampaStoria;
+import uniba.it.gioco.storia.Output;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;
 
@@ -22,7 +22,8 @@ import uniba.it.gioco.tipi.Giocatore;
  * @author 39379
  */
 public class JPanelPartita extends javax.swing.JPanel {
-   private Giocatore giocatore;
+
+    private Giocatore giocatore;
     private JFrameMain jframeMain;
     private GameModel gameModel;
     private Input inputThread;
@@ -44,20 +45,18 @@ public class JPanelPartita extends javax.swing.JPanel {
             SwingUtilities.invokeLater(() -> {
                 areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
             });
+
+            // Crea un'istanza di StampaStoria
+            Output output = new Output(areaTesto, giocatore);
+
+            // Aggiornamento della storia quando il giocatore si sposta in una nuova stanza
+            output.start();
+
+            inputThread = new Input(inputTesto, giocatore, init, areaTesto, output);
+            inputThread.start();
         } else {
             System.out.println("Giocatore non inizializzato");
         }
-
-        StampaStoria storiaThread = new StampaStoria(areaTesto, giocatore);
-       
-         storiaThread.start();
-         //storiaThread.interrupt();
-       
-       
-   
-        inputThread = new Input(inputTesto, giocatore,init, areaTesto);
-        inputThread.start();
-       
 
     }
 
@@ -149,8 +148,6 @@ public class JPanelPartita extends javax.swing.JPanel {
         inputThread.inviaComando(inputTesto.getText().trim());
         inputTesto.setText("");
     }//GEN-LAST:event_invioButtonActionPerformed
-
-    
 
     public void chiudiInputThread() {
         inputThread.interrupt();

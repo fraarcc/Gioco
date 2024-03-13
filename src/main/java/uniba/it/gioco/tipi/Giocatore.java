@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import uniba.it.gioco.storia.Init;
+import uniba.it.gioco.storia.Output;
 
 /**
  *
@@ -53,7 +54,7 @@ public class Giocatore {
         this.stanzaCorrente = stanzaCorrente;
     }
 
-    public void spostaGiocatore(Init init, Direzione direzione) {
+    public void spostaGiocatore(Init init, Direzione direzione, Output output) {
         Stanza stanzaAttuale = getStanzaCorrente();
         Map<Direzione, Stanza> connessioneStanze = stanzaAttuale.getConnessioneStanze();
 
@@ -65,16 +66,18 @@ public class Giocatore {
                 setStanzaCorrente(nuovaStanza);
                 System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
                 System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
+                output.cambioStanza();
 
                 // Aggiorna l'inventario del giocatore, ecc. se necessario
             } catch (IOException ex) {
                 Logger.getLogger(Giocatore.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            System.out.println("Non puoi andare in quella direzione.");
+            output.erroreMsg();
         }
     }
-
+    
+ 
 
    @Override
     public String toString() {
