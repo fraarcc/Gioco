@@ -77,6 +77,7 @@ public class JPanelPartita extends javax.swing.JPanel {
 
         areaTesto.setEditable(false);
         areaTesto.setColumns(20);
+        areaTesto.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         areaTesto.setRows(5);
         jScrollPane1.setViewportView(areaTesto);
 
@@ -105,7 +106,7 @@ public class JPanelPartita extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(344, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cancellaButton)
@@ -113,9 +114,9 @@ public class JPanelPartita extends javax.swing.JPanel {
                         .addComponent(invioButton)
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputTesto, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                            .addComponent(inputTesto))
                         .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(

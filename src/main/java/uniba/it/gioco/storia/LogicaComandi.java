@@ -15,6 +15,7 @@ import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
 import uniba.it.gioco.tipi.Giocatore;
+import uniba.it.gioco.tipi.Npc;
 import uniba.it.gioco.tipi.Oggetto;
 import uniba.it.gioco.tipi.Stanza;
 
@@ -39,18 +40,19 @@ public class LogicaComandi {
 
     public void gestioneComandi(String inputTesto,Giocatore giocatore) {
         List<Comando> comandi = init.getCommandsAsList();
-        comandi.toString();
-        System.out.println("Input: " + inputTesto);
+       // comandi.toString();
+      //  System.out.println("Input: " + inputTesto);
         String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
-        System.out.println("Tipo comando riconosciuto: " + tipoComando);
+      //  System.out.println("Tipo comando riconosciuto: " + tipoComando);
 
         boolean comandoTrovato = false; // Flag per indicare se un comando è stato trovato
 
         for (Comando comando : comandi) {
-
+           // System.out.println("Comando in esaminzazione: " + comando.getType());
+             //System.out.println("Type: " + comandi);
             if (comando.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(tipoComando))) {
-                System.out.println("Alias trovato: " + tipoComando);
-
+            //    System.out.println("Alias trovato: " + comando.getAliases());
+            //   System.out.println("Type: " + comando.getType());
                 // Confronta il tipo di comando con quelli definiti nella classe Comando
                 switch (comando.getType()) {
                     case NORD:
@@ -71,29 +73,45 @@ public class LogicaComandi {
                         break;
                     case APRI:
                         System.out.println("Comando APRI trovato");
+                        //Solo in sgabuzzino
                         break;
                     case PARLA:
                         System.out.println("Comando PARLA trovato");
                         break;
                     case INDOSSA:
                         System.out.println("Comando INDOSSA trovato");
+                        //Solo in sgabuzzino con camice
                         break;
                     case RICHIEDI:
                         System.out.println("Comando RICHIEDI trovato");
                         break;
                     case RACCOGLI:
                         System.out.println("Comando RACCOGLI trovato");
+                        if (controlloOggettiStanza(giocatore)) {
+                            List<String> oggettoDesiderato = gestioneComandiComplessi(inputTesto);
+                            if (!oggettoDesiderato.isEmpty()) {
+                                eseguiComandoRaccogli(giocatore, oggettoDesiderato);
+                            } else {
+                                outputTestoCampo.append("Specificare il nome dell'oggetto");
+                            }
+                        }
                         break;
                     case LEGGI:
                         System.out.println("Comando LEGGI trovato");
+                        //Solo per foglietto (sgabuzzino) dentro camice 
                         break;
                     case LANCIATI:
                         System.out.println("Comando LANCIATI trovato");
+                        //finsetra 
                         break;
                     case AIUTO:
                         System.out.println("Comando AIUTO trovato");
                         eseguiComandoAiuto(outputTestoCampo);
                         break;
+                    case INVENTARIO:
+                         System.out.println("Comando INV trovato");
+                         eseguiComandoInventario(giocatore);
+                         break;
                     case OSSERVA:
                         System.out.println("OSSERVA RILEVATO");
                         osservaStanza(giocatore);
@@ -118,12 +136,10 @@ public class LogicaComandi {
 
     public void eseguiComandoSud(Giocatore giocatore) {
         giocatore.spostaGiocatore(init, Direzione.SUD, output);
-
     }
 
     public void eseguiComandoNord(Giocatore giocatore) {
         giocatore.spostaGiocatore(init, Direzione.NORD, output);
-
     }
 
     public void eseguiComandoEst(Giocatore giocatore) {
@@ -134,15 +150,13 @@ public class LogicaComandi {
         giocatore.spostaGiocatore(init, Direzione.OVEST, output);
     }
 
-    public void eseguiComandoAiuto(JTextArea outputTestoCampo){
-        
+    public void eseguiComandoAiuto(JTextArea outputTestoCampo){      
         outputTestoCampo.append("Comando aiuto rilevato");
     }
     
     public void osservaStanza(Giocatore giocatore) {
         Stanza stanzaCorrente = giocatore.getStanzaCorrente();
         Set<Oggetto> oggettiStanza = stanzaCorrente.getOggettiPresentiStanza();
-
         if (!oggettiStanza.isEmpty()) {
             outputTestoCampo.append("Oggetti presenti nella stanza:\n");
             for (Oggetto oggetto : oggettiStanza) {
@@ -151,6 +165,62 @@ public class LogicaComandi {
         } else {
             outputTestoCampo.append("In questa stanza non sono presenti oggetti\n");
         }
+        Npc npcStanzaCorrente = stanzaCorrente.getNpc();
+        if(npcStanzaCorrente != null){
+            outputTestoCampo.append("Ci sono anche: " + npcStanzaCorrente.getNome());
+        }
+         
     }
-}
 
+    public boolean controlloOggettiStanza(Giocatore giocatore) {
+        if (!giocatore.getStanzaCorrente().getOggettiPresentiStanza().isEmpty()) {
+            return true;
+        } else {
+            outputTestoCampo.append("Non ci sono oggetti in questa stanza");
+            return false;
+        }
+    }
+    
+    public List<String> gestioneComandiComplessi(String input) {
+        List<String> tokensComando = Parser.parse(input);
+        tokensComando.remove(0);
+        return tokensComando;
+    }
+
+    public void eseguiComandoRaccogli(Giocatore giocatore, List<String> tokensOggettoDesiderato) {
+
+        System.out.println(tokensOggettoDesiderato);
+        Stanza stanzaCorrente = giocatore.getStanzaCorrente();
+        Set<Oggetto> oggettiStanza = stanzaCorrente.getOggettiPresentiStanza();
+        Oggetto oggettoDesiderato = null;
+        for (Oggetto oggetto : oggettiStanza) {
+            List<String> tokensNomeOggetto = Parser.parse(oggetto.getNome());
+            if (tokensNomeOggetto.equals(tokensOggettoDesiderato)) {
+                oggettoDesiderato = oggetto;
+                break;
+            }
+        }
+
+        if (oggettoDesiderato != null) {
+            giocatore.aggiungiOggettoInventario(oggettoDesiderato);
+            stanzaCorrente.rimuoviOggettoDallaStanza(oggettoDesiderato);
+            outputTestoCampo.append("Hai raccolto l'oggetto: " + oggettoDesiderato.getNome() + "\n");
+        } else {
+            outputTestoCampo.append("L'oggetto '" + tokensOggettoDesiderato + "' non è presente nella stanza\n");
+        }
+    }
+
+    public void eseguiComandoInventario(Giocatore giocatore) {
+        Set<Oggetto> inventario = giocatore.getInventario().getOggetti();
+        if (!inventario.isEmpty()) {
+            outputTestoCampo.append("Hai i seguenti oggetti nel tuo inventario \n");
+            for (Oggetto oggetto : inventario) {
+                outputTestoCampo.append(oggetto.getNome() + "\n" + oggetto.getDescrizione() + "\n\n");
+            }
+        } else {
+            outputTestoCampo.append("Non ci sono oggetti nel tuo inventario");
+        }
+
+    }
+
+}

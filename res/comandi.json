@@ -1,22 +1,22 @@
 [
     {
         "name": "nord",
-        "aliases": ["N", "north", "NORD"],
+        "aliases": ["n", "north", "nord"],
         "type": "NORD"
     },
     {
         "name": "sud",
-        "aliases": ["S", "south", "SUD"],
+        "aliases": ["s", "south", "sud"],
         "type": "SUD"
     },
     {
         "name": "est",
-        "aliases": ["E", "east", "EST"],
+        "aliases": ["e", "east", "est"],
         "type": "EST"
     },
     {
         "name": "ovest",
-        "aliases": ["O", "west", "OVEST"],
+        "aliases": ["o", "west", "ovest"],
         "type": "OVEST"
     },
     {
@@ -41,7 +41,7 @@
     },
     {
         "name": "raccogli",
-        "aliases": ["prendi", "afferra"],
+        "aliases": ["raccogli", "prendi", "afferra"],
         "type": "RACCOGLI"
     },
     {
@@ -69,5 +69,11 @@
         "name": "osserva",
         "aliases": ["osserva", "ispeziona"],
         "type": "OSSERVA"
+    }
+    ,
+    {
+        "name": "inventario",
+        "aliases": ["inventario"],
+        "type": "INVENTARIO"
     }
 ]

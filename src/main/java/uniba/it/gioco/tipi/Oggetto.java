@@ -19,9 +19,11 @@ public class Oggetto implements Serializable{
     public Oggetto(){
         
     }
+    
     public Oggetto(int id){
         this.id = id;
     }
+    
     public Oggetto(int id, String nome, String descrizione) {
         this.id = id;
         this.nome = nome;

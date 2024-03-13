@@ -4,9 +4,9 @@
     "descrizione": "Ti trovi all'interno dell'ingresso",
     "connessioneStanze": {
       "NORD": "atrio"
-    
     },
-    "oggettiPresentiStanza": [ ]
+    "oggettiPresentiStanza": [],
+    "npc": null
   },
   {
     "nome": "atrio",
@@ -14,7 +14,7 @@
     "connessioneStanze": {
       "EST": "farmacia",
       "OVEST": "corridoio",
-       "SUD" : "ingresso"
+      "SUD": "ingresso"
     },
     "oggettiPresentiStanza": [
       {
@@ -22,148 +22,17 @@
         "nome": "chiave del bagno",
         "descrizione": "hai trovato la chiave del bagno inferiore"
       }
-    ]
-  },
-  {
-    "nome": "farmacia",
-    "descrizione": "Ti trovi all'interno della farmacia",
-    "connessioneStanze": {
-      "EST": "atrio"
-   
-    },
-    "oggettiPresentiStanza": [
-      {
-        "id": 2,
-        "nome": "sodio cloruro",
-        "descrizione": "hai trovato il sodio cloruro"
-      },{
-        "id": 3,
-        "nome": "potassio cloruro",
-        "descrizione": "hai trovato il potassio cloruro"
-      },{
-        "id": 4,
-        "nome": "calcio cloruro diidrato",
-        "descrizione": "hai trovato il calcio cloruro diidrato"
-      },{
-        "id": 5,
-        "nome": "sodio acetato triidrato",
-        "descrizione": "hai trovato il sodio acetato triidrato"
+    ],
+    "npc": {
+      "nome": "Guardie",
+      "tipo": "GUARDIE",
+      "dialoghi": [
+        "Benvenuto nell'atrio. Sono la guardia del palazzo."
+      ],
+      "indovinello": {
+        "domanda": "Quale parola diventa più corta se gli togli una lettera?",
+        "risposta": "La parola 'corta'."
       }
-    ]
-  },
-  {
-    "nome": "corridoio",
-    "descrizione": "ti trovi nel corriodio ed ad ovest c'è un ascensore",
-    "connessioneStanze": {
-      "EST": "atrio",
-      "OVEST": "sala d'attesa"
-   
-    },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "bagno",
-    "descrizione": "Ti trovi all'interno del bagno al piano inferiore",
-    "connessioneStanze": {
-      "SUD": "corridoio",
-      "NORD": "sgabuzzino"
-   
-    },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "sgabuzzino",
-    "descrizione": "Ti trovi all'interno dello sgabuzzino",
-    "connessioneStanze": {
-      "SUD": "bagno"
-      
-   
-    },
-    "oggettiPresentiStanza": [
-      {
-        "id": 6,
-        "nome": "boccetta",
-        "descrizione": "hai trovato una boccettina"
-      },{
-        "id": 7,
-        "nome": "camice",
-        "descrizione": "hai trovato il camice"
-      },{
-        "id": 8,
-        "nome": "foglietto",
-        "descrizione": "hai trovato un foglietto"
-      },{
-        "id": 9,
-        "nome": "cacciavite",
-        "descrizione": "hai trovato un cacciavite"
-      }
-    ]
-  },
-  {
-    "nome": "sala d'attesa",
-    "descrizione": "ti trovi nella sala d'attesa al piano superiore",
-    "connessioneStanze": {
-      "SUD": "sala operatoria",
-      "EST": "laboratorio",
-      "NORD":"bagno superiore",
-      "OVEST": "corridoio"
-                   
-      
-   
-    },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "bagno superiore",
-    "descrizione": "ti trovi nel bagno superiore, al primo piano",
-    "connessioneStanze": {
-      "SUD": "sala d'attesa",
-      "EST": "spogliatoio"
-      
-      
-   
-    },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "spogliatoio",
-    "descrizione": "ti trovi nello spogliatoio, al primo piano",
-    "connessioneStanze": {
-      "OVEST": "bagno",
-      "SUD": "laboratorio"
-      
-      
-   
-    },
-    "oggettiPresentiStanza": [
-      {
-        "id": 10,
-        "nome": "cuscino",
-        "descrizione": "hai trovato il cuscino"
-      }
-    ]
-  },
-  {
-    "nome": "laboratorio",
-    "descrizione": "ti trovi nel laboratorio, al primo piano",
-    "connessioneStanze": {
-      "NORD": "spogliatoio",
-      "OVEST": "sala d'attesa"
-      
-      
-   
-    },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "sala operatoria",
-    "descrizione": "ti trovi nella sala operatoria, al primo piano",
-    "connessioneStanze": {
-      "NORD": "sala d'attesa"
-      
-      
-   
-    },
-    "oggettiPresentiStanza": []
+    }
   }
 ]

@@ -5,7 +5,6 @@
 package uniba.it.gioco.tipi;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,6 +51,10 @@ public class Giocatore {
 
     public void setStanzaCorrente(Stanza stanzaCorrente) {
         this.stanzaCorrente = stanzaCorrente;
+    }
+    
+    public void aggiungiOggettoInventario(Oggetto oggettoDaInserire){
+       inventario.aggiungiOggetto(oggettoDaInserire);
     }
 
     public void spostaGiocatore(Init init, Direzione direzione, Output output) {
