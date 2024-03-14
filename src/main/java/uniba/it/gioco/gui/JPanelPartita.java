@@ -79,7 +79,7 @@ public class JPanelPartita extends javax.swing.JPanel {
 
         areaTesto.setEditable(false);
         areaTesto.setColumns(20);
-        areaTesto.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        areaTesto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         areaTesto.setRows(5);
         jScrollPane1.setViewportView(areaTesto);
 

@@ -6,6 +6,9 @@ package uniba.it.gioco.gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import uniba.it.gioco.GameModel;
 
@@ -31,7 +34,11 @@ public class JFrameMain extends javax.swing.JFrame {
         //Creazione cards
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
-        cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        try {
+            cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -46,7 +53,11 @@ public class JFrameMain extends javax.swing.JFrame {
         cardsPanel.removeAll(); // Rimuove tutte le card dal pannello
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
-        cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        try {
+            cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
         revalidate(); // Rendi valida la nuova disposizione delle card nel pannello
         repaint(); // Ridisegna il pannello
     }

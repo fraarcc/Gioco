@@ -101,7 +101,7 @@ public class LogicaComandi {
                         break;
                     case LEGGI:
                         System.out.println("Comando LEGGI trovato");
-                        //Solo per foglietto (sgabuzzino) dentro camice 
+                        //Solo per foglietto (sgabuzzino) dentro camice e ticket
                         break;
                     case LANCIATI:
                         System.out.println("Comando LANCIATI trovato");
@@ -164,14 +164,15 @@ public class LogicaComandi {
         if (!oggettiStanza.isEmpty()) {
             outputTestoCampo.append("Oggetti presenti nella stanza:\n");
             for (Oggetto oggetto : oggettiStanza) {
-                outputTestoCampo.append("- " + oggetto.toString() + "\n");
+                outputTestoCampo.append("- " + oggetto.getNome() + "\n" + oggetto.getDescrizione() + "\n");
+                
             }
         } else {
             outputTestoCampo.append("In questa stanza non sono presenti oggetti\n");
         }
         Npc npcStanzaCorrente = stanzaCorrente.getNpc();
         if(npcStanzaCorrente != null){
-            outputTestoCampo.append("Ci sono anche: " + npcStanzaCorrente.getNome());
+            outputTestoCampo.append("Tuttavia nella stanza noti: " + npcStanzaCorrente.getNome() + "\n");
         }
          
     }
@@ -219,7 +220,7 @@ public class LogicaComandi {
         if (!inventario.isEmpty()) {
             outputTestoCampo.append("Hai i seguenti oggetti nel tuo inventario \n");
             for (Oggetto oggetto : inventario) {
-                outputTestoCampo.append(oggetto.getNome() + "\n" + oggetto.getDescrizione() + "\n\n");
+                outputTestoCampo.append(oggetto.getNome() + "\n\n");
             }
         } else {
             outputTestoCampo.append("Non ci sono oggetti nel tuo inventario");

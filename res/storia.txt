@@ -1,31 +1,61 @@
 # ingresso
 
-Benvenuti nell'antro del benessere e del comfort, meglio conosciuto come l'ingresso di questo ospedale italiano,
-dove l'eleganza si fonde con il degrado in un intricato balletto di stile post-moderno.
-Il tappeto che accoglie i visitatori sembra aver visto epoche migliori, ma sfoggia con fierezza le macchie misteriose e i segreti medici,
-di chi lo ha attraversato prima di voi.
-Le pareti, impreziosite da sfumature di un bianco che sa di antico e di muffa, raccontano storie di febbri,
- cure miracolose e chiacchiere dei dottori che sono passati di qua, probabilmente più per caso che per vocazione.
-I cestini dell'immondizia, fedeli custodi dei segreti della sala d'attesa, sono veri e propri scrigni di emozioni in decomposizione.
-Gli ascensori, autentici capolavori della tecnologia degli anni '80, promettono un'esperienza di viaggio unica nel suo genere.
-Chi avrebbe mai pensato che un suono cosi' simile a un gemito potesse accompagnare il vostro salire verso l'ignoto?
-L'accoglienza e' calda, o meglio, il termosifone accanto al bancone sembra pensare così.
-Il personale, in perfetta sintonia con l'atmosfera avvolgente, sorride con una grazia tutta sua, 
-sicuri che l'ironia sia il miglior antidoto contro l'ansia del paziente.
-Insomma, benvenuti nel tempio del "Forse funziona ancora", dove ogni passo e' un'avventura e ogni esame una scoperta. 
-L'ospedale italiano: dove la malattia incontra l'arte del vivere con stile, anche se un po' decadente.
+Hai appena parcheggiato il tuo bolide nel parcheggio antistante l'ospedale San Duziano di Ciufello sull'Arno (LU). 
+Sei ammaliato alla vista delle enormi vetrate all'ingresso, ma non c'e' tempo di distrarsi: 
+- hai bisogno dell'ingrediente finale per la tua pozione magica. 
+Decidi di entrare. L'obiettivo e' non farsi scoprire come maniaco, tanto meno come evasore fiscale quale sei.
+
+Sei davanti alle vetrate d'ingresso.
 
 # atrio
-Benvenuti nell'atrio di questo ospedale, un luogo dove il degrado e l'insolito si fondono in una danza unica. 
-Nel cuore di questo scenario caotico si erge un bar, presidiato da un barista che sembra aver imparato l'arte di navigare,
-tra le stranezze con una maestria ineguagliabile. 
-I tavoli, con la loro patina vintage, ospitano storie sussurrate e sguardi intrappolati tra il passato e l'incerto.
+Sei ora nell'atrio dell'ospedale. E' un grande ambiente, con un bar nel mezzo e un barista dietro al banco. 
+In fondo alla stanza una grande finestra aperta.
 
-# Stanza 3
-Hai raggiunto la stanza del tesoro. Troverai ricchezze oltre ogni immaginazione.
+# farmacia
+Arrivi di fronte al bancone della farmacia dell'ospedale. 
+Ci sono degli scaffali e in fondo una porta blindada con la scritta "deposito".
 
+# corridoio
+Ti trovi nel corridoio principale. Lungo la parete ci sono numerose vetrate che si affacciano sull'esterno. 
+Sono presenti molte panche e alla tua sinistra due ascensori.
 
+# bagno 
+Sei entrato nel bagno. Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno!
 
+# sgabuzzino
+Finalmente sei riuscito ad aprire il lucchetto. 
+Siccome questo e' un gioco noioso e non c'e' nessun drago, arciere di fuoco o senatore DC, 
+il massimo che puoi trovare dietro una porta chiusa a chiave e' uno sgabuzzino. 
+La vista e' ammaliante: ci sono un paio di scope (vecchie), detersivi vari, dei cartoni di peroni e altri oggetti.
+
+# sala d'attesa
+Si aprono le porte dell'ascensore e sei nella sala d'attesa del reparto di chirurgia:
+E' pieno di gente che si farebbe fatica a definire mentalmente stabile.
+Stanno parlando tra di loro ma non riesci a sentire bene i discorsi.
+
+# bagno superiore
+E' un bagno incredibilmente simile a quello del piano di giù (strano), ma senza l'armadietto;
+In ogni caso, dovresti aver capito che non sei qui dentro per leggere la gazzetta.
+
+# laboratorio
+Sei nel laboratorio di analisi dell'ospedale. 
+All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive.
+
+# spogliatoio
+Sei nello spogliatoio dedicato ai medici e agli infermieri.
+Il tuo solito vizietto ti ha portato a non bussare per assicurarti che non ci fosse nessuno dentro.
+Eviterei la prossima volta, data la tua delicata situazione penale e fiscale.
+
+# sala operatoria
+
+A quanto pare qualche imbecille non ha ancora capito che accendere la modalità aereo non significa essere in grado di volare... 
+dopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza la tua vista si offusca e inizi rapidamente a perdere conoscenza.
+Dopo pochi attimi ti ritrovi in una stanza completamente bianca e un signore vestito di bianco con capelli e barba bianca allunga una mano verso di te...
+con tuo grande dispiacere egli non e' l'Altissimo e tantomeno il dottor House, ma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. 
+Dopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano ancora più ferma, a fregarti 50 euro dalla tasca. 
+Realizzi di essere nella sala operatoria. 
+Il cuscino che avevi appena rubato senza un apparente scopo dall'ambulatorio è riuscito ad attutire l'impatto tra il tuo sedere e l'asfalto,
+adesso sei vivo per miracolo eucaristico.
 	
 
 	

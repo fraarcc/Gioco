@@ -16,6 +16,7 @@ public class Stanza {
 
     private String nome;
     private String descrizione;
+    private boolean aperto = true;
     private Oggetto oggettoNecessario; //Bagno inferiore chiave del bagno, Lab da vedere, Ripostiglio chiave (da leggere) + oggetto con codice 
     private Set<Oggetto> oggettiPresentiStanza;
     private Map<Direzione, Stanza> connessioneStanze;
@@ -30,6 +31,15 @@ public class Stanza {
         connessioneStanze = new HashMap<>();
     }
 
+    public boolean isAperto() {
+        return aperto;
+    }
+
+    public void setAperto(boolean aperto) {
+        this.aperto = aperto;
+    }
+
+    
     public String getNome() {
         return nome;
     }
@@ -87,29 +97,30 @@ public class Stanza {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Stanza{nome=").append(nome);
-        if (descrizione != null) {
-            sb.append(", descrizione=").append(descrizione);
-        }
-        if (oggettoNecessario != null) {
-            sb.append(", oggettoNecessario=").append(oggettoNecessario);
-        }
-        if (oggettiPresentiStanza != null && !oggettiPresentiStanza.isEmpty()) {
-            sb.append(", oggettiPresentiStanza=").append(oggettiPresentiStanza);
-        }
-        if (!connessioneStanze.isEmpty()) {
-            sb.append(", connessioneStanze=");
-            for (Map.Entry<Direzione, Stanza> entry : connessioneStanze.entrySet()) {
-                sb.append(entry.getKey()).append(": ").append(entry.getValue().getNome()).append(", ");
-            }
-            sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
-        }
-        if (npc != null) {
-            sb.append(", npc=").append(npc);
-        }
-        sb.append("}");
-        return sb.toString();
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Stanza{nome=").append(nome);
+    if (descrizione != null) {
+        sb.append(", descrizione=").append(descrizione);
     }
+    sb.append(", aperto=").append(aperto);
+    if (oggettoNecessario != null) {
+        sb.append(", oggettoNecessario=").append(oggettoNecessario);
+    }
+    if (oggettiPresentiStanza != null && !oggettiPresentiStanza.isEmpty()) {
+        sb.append(", oggettiPresentiStanza=").append(oggettiPresentiStanza);
+    }
+    if (!connessioneStanze.isEmpty()) {
+        sb.append(", connessioneStanze=");
+        for (Map.Entry<Direzione, Stanza> entry : connessioneStanze.entrySet()) {
+            sb.append(entry.getKey()).append(": ").append(entry.getValue().getNome()).append(", ");
+        }
+        sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
+    }
+    if (npc != null) {
+        sb.append(", npc=").append(npc);
+    }
+    sb.append("}");
+    return sb.toString();
+}
 }
