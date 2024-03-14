@@ -33,25 +33,22 @@ public class JPanelPartita extends javax.swing.JPanel {
     /**
      * Creates new form JPanelPartita
      */
-    public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) throws IOException {
-        this.jframeMain = jframeMain;
-        this.gameModel = gameModel;
-        initComponents();
+    public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) {
+    this.jframeMain = jframeMain;
+    this.gameModel = gameModel;
+    initComponents();
+
+    try {
         init = gameModel.getInit();
         stanze = gameModel.getStanze();
-        // Ottieni il giocatore
         giocatore = gameModel.getGiocatore();
         if (giocatore != null) {
             String nickname = giocatore.getNickname();
-            // Aggiorna l'interfaccia utente con il nome del giocatore
             SwingUtilities.invokeLater(() -> {
                 areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
             });
 
-            // Crea un'istanza di StampaStoria
             Output output = new Output(areaTesto, giocatore);
-
-            // Aggiornamento della storia quando il giocatore si sposta in una nuova stanza
             output.start();
 
             inputThread = new Input(inputTesto, giocatore, init, areaTesto, output ,stanze);
@@ -59,8 +56,10 @@ public class JPanelPartita extends javax.swing.JPanel {
         } else {
             System.out.println("Giocatore non inizializzato");
         }
-
+    } catch (IOException e) {
+        e.printStackTrace(); // Gestisci l'eccezione qui
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.

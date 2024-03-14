@@ -56,7 +56,16 @@ public class GameModel {
         return init;
     }
     
-    public List<Stanza> getStanze() throws IOException{
-        return stanze;
+   public List<Stanza> getStanze() throws IOException {
+    if (stanze == null) {
+        try {
+            stanze = init.inizializzaStanze();
+        } catch (IOException e) {
+            // Se si verifica un'eccezione durante l'inizializzazione delle stanze, propagala
+            throw new IOException("Errore durante l'inizializzazione delle stanze: " + e.getMessage());
+        }
     }
+    return stanze;
 }
+}
+
