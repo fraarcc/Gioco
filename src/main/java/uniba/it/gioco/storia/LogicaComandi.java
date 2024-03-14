@@ -29,13 +29,16 @@ public class LogicaComandi {
     private Giocatore giocatore;
     private Init init;
     private JTextArea outputTestoCampo;
+    private List<Stanza> stanze;
+    
 
-    public LogicaComandi(Giocatore giocatore, Init init, JTextArea outputTestoCampo, Output output) {
+    public LogicaComandi(Giocatore giocatore, Init init, JTextArea outputTestoCampo, Output output, List<Stanza> stanze) {
         this.giocatore = giocatore;
         this.init = init;
         this.parser = new Parser();
         this.outputTestoCampo = outputTestoCampo;
         this.output = output;
+        this.stanze = stanze;
     }
 
     public void gestioneComandi(String inputTesto,Giocatore giocatore) {
@@ -135,19 +138,19 @@ public class LogicaComandi {
     }
 
     public void eseguiComandoSud(Giocatore giocatore) {
-        giocatore.spostaGiocatore(init, Direzione.SUD, output);
+        giocatore.spostaGiocatore(init, Direzione.SUD, output,stanze);
     }
 
     public void eseguiComandoNord(Giocatore giocatore) {
-        giocatore.spostaGiocatore(init, Direzione.NORD, output);
+      giocatore.spostaGiocatore(init, Direzione.NORD, output,stanze);
     }
 
     public void eseguiComandoEst(Giocatore giocatore) {
-        giocatore.spostaGiocatore(init, Direzione.EST, output);
+     giocatore.spostaGiocatore(init, Direzione.EST, output,stanze);
     }
 
     public void eseguiComandoOvest(Giocatore giocatore) {
-        giocatore.spostaGiocatore(init, Direzione.OVEST, output);
+        giocatore.spostaGiocatore(init, Direzione.OVEST, output,stanze);
     }
 
     public void eseguiComandoAiuto(JTextArea outputTestoCampo){      

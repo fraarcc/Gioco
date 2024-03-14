@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;
+import uniba.it.gioco.tipi.Stanza;
 
 /**
  *
@@ -24,14 +25,16 @@ public class Input extends Thread {
     private Init init;
     private JTextArea outputTestoCampo;
     private Output output;
-
-    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init, JTextArea outputTestoCampo,Output output) {
+    private List<Stanza> stanze;
+    
+    public Input(JTextField inputTestoCampo, Giocatore giocatoreCorrente,Init init, JTextArea outputTestoCampo,Output output,List<Stanza> stanze) {
         this.inputTestoCampo = inputTestoCampo;
         this.giocatoreCorrente = giocatoreCorrente;
         this.init = init;
         this.outputTestoCampo = outputTestoCampo; 
         this.output = output;
-        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo,output);
+        this.stanze = stanze;
+        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo,output,stanze);
      
         
     }

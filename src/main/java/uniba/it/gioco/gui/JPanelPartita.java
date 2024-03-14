@@ -16,13 +16,14 @@ import uniba.it.gioco.storia.Input;
 import uniba.it.gioco.storia.Output;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;
+import uniba.it.gioco.tipi.Stanza;
 
 /**
  *
  * @author 39379
  */
 public class JPanelPartita extends javax.swing.JPanel {
-
+    private List<Stanza> stanze;
     private Giocatore giocatore;
     private JFrameMain jframeMain;
     private GameModel gameModel;
@@ -32,11 +33,12 @@ public class JPanelPartita extends javax.swing.JPanel {
     /**
      * Creates new form JPanelPartita
      */
-    public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) {
+    public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) throws IOException {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
         init = gameModel.getInit();
+        stanze = gameModel.getStanze();
         // Ottieni il giocatore
         giocatore = gameModel.getGiocatore();
         if (giocatore != null) {
@@ -52,7 +54,7 @@ public class JPanelPartita extends javax.swing.JPanel {
             // Aggiornamento della storia quando il giocatore si sposta in una nuova stanza
             output.start();
 
-            inputThread = new Input(inputTesto, giocatore, init, areaTesto, output);
+            inputThread = new Input(inputTesto, giocatore, init, areaTesto, output ,stanze);
             inputThread.start();
         } else {
             System.out.println("Giocatore non inizializzato");
