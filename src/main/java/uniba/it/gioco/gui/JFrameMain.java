@@ -6,6 +6,7 @@ package uniba.it.gioco.gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.io.IOException;
 import javax.swing.JPanel;
 import uniba.it.gioco.GameModel;
 
@@ -22,7 +23,7 @@ public class JFrameMain extends javax.swing.JFrame {
     /**
      * Creates new form JFrameMain
      */
-    public JFrameMain(GameModel gameModel) {
+    public JFrameMain(GameModel gameModel) throws IOException {
         this.gameModel = gameModel;
         initComponents();
         cardLayout = new CardLayout();
@@ -42,7 +43,7 @@ public class JFrameMain extends javax.swing.JFrame {
         cardLayout.show(cardsPanel, cardName);
     }
 
-    public void updateCards(GameModel gameModel) {
+    public void updateCards(GameModel gameModel) throws IOException {
         cardsPanel.removeAll(); // Rimuove tutte le card dal pannello
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");

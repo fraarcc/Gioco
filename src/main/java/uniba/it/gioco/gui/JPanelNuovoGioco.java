@@ -5,6 +5,9 @@
 package uniba.it.gioco.gui;
 
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.tipi.Giocatore;
 
@@ -104,12 +107,16 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     // Inizializza il gioco con il nickname nel GameModel esistente
     GameModel newGameModel = gameModel.inizializzaGioco(nickname);
     if (newGameModel != null) {
-        // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
-        gameModel = newGameModel;
-        // Aggiorna le istanze delle card con il nuovo GameModel
-        jframeMain.updateCards(gameModel);
-        // Mostra la card "inGame"
-        jframeMain.showCard("inGame");
+        try {
+            // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
+            gameModel = newGameModel;
+            // Aggiorna le istanze delle card con il nuovo GameModel
+            jframeMain.updateCards(gameModel);
+            // Mostra la card "inGame"
+            jframeMain.showCard("inGame");
+        } catch (IOException ex) {
+            Logger.getLogger(JPanelNuovoGioco.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } else {
         // Gestione dell'errore
         System.err.println("Impossibile inizializzare il gioco");
