@@ -5,6 +5,7 @@
 package uniba.it.gioco.tipi;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,28 +58,34 @@ public class Giocatore {
        inventario.aggiungiOggetto(oggettoDaInserire);
     }
 
-    public void spostaGiocatore(Init init, Direzione direzione, Output output) {
-        Stanza stanzaAttuale = getStanzaCorrente();
-        Map<Direzione, Stanza> connessioneStanze = stanzaAttuale.getConnessioneStanze();
+    public void spostaGiocatore(Init init, Direzione direzione, Output output, List<Stanza> stanze) {
+    Stanza stanzaAttuale = getStanzaCorrente();
+    Map<Direzione, Stanza> connessioneStanze = stanzaAttuale.getConnessioneStanze();
 
-        // Verifica se esiste una connessione nella direzione specificata
-        if (connessioneStanze.containsKey(direzione)) {
-            try {
-                Stanza nuovaStanza = connessioneStanze.get(direzione);
-                nuovaStanza = init.loadStanzaFromJson(nuovaStanza.getNome());
-                setStanzaCorrente(nuovaStanza);
-                System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
-                System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
-                output.cambioStanza();
-
-                // Aggiorna l'inventario del giocatore, ecc. se necessario
-            } catch (IOException ex) {
-                Logger.getLogger(Giocatore.class.getName()).log(Level.SEVERE, null, ex);
+    // Verifica se esiste una connessione nella direzione specificata
+    if (connessioneStanze.containsKey(direzione)) {
+        Stanza nuovaStanza = connessioneStanze.get(direzione);
+        
+        // Cerca la nuova stanza nella lista delle stanze
+        for (Stanza s : stanze) {
+            if (s.getNome().equals(nuovaStanza.getNome())) {
+                nuovaStanza = s;
+                break;
             }
-        } else {
-            output.erroreMsg();
         }
+
+        // Imposta la nuova stanza corrente
+        setStanzaCorrente(nuovaStanza);
+
+        System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
+        System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
+        output.cambioStanza();
+
+        // Aggiorna l'inventario del giocatore, ecc. se necessario
+    } else {
+        output.erroreMsg();
     }
+}
     
  
 

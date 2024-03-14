@@ -15,7 +15,7 @@ import uniba.it.gioco.tipi.Stanza;
  * @author Nikita
  */
 public class GameModel {
-
+    private List<Stanza> stanze;
     private Init init;
     private Giocatore giocatore;
 
@@ -26,7 +26,7 @@ public class GameModel {
 
     public GameModel inizializzaGioco(String nickname) {
         try {
-            List<Stanza> stanze = init.inizializzaStanze();
+            stanze = init.inizializzaStanze();
             Stanza stanzaIniziale = stanze.get(0);
             this.giocatore = init.inizializzaGiocatore(0, nickname, stanzaIniziale);
             if (this.giocatore == null) {
@@ -57,6 +57,6 @@ public class GameModel {
     }
     
     public List<Stanza> getStanze() throws IOException{
-        return init.inizializzaStanze();
+        return stanze;
     }
 }

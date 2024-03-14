@@ -4,11 +4,8 @@
  */
 package uniba.it.gioco.tipi;
 
-
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -16,9 +13,10 @@ import java.util.Set;
  * @author Nikita
  */
 public class Stanza {
+
     private String nome;
     private String descrizione;
-    private Set<Oggetto> oggettiNecessari;//Bagno inferiore chiave del bagno, Lab da vedere, Ripostiglio chiave (da leggere) + oggetto con codice 
+    private Oggetto oggettoNecessario; //Bagno inferiore chiave del bagno, Lab da vedere, Ripostiglio chiave (da leggere) + oggetto con codice 
     private Set<Oggetto> oggettiPresentiStanza;
     private Map<Direzione, Stanza> connessioneStanze;
     private Npc npc;
@@ -40,10 +38,6 @@ public class Stanza {
         return descrizione;
     }
 
-    public Set<Oggetto> getOggettiNecessari() {
-        return oggettiNecessari;
-    }
-
     public Set<Oggetto> getOggettiPresentiStanza() {
         return oggettiPresentiStanza;
     }
@@ -56,8 +50,12 @@ public class Stanza {
         this.descrizione = descrizione;
     }
 
-    public void setOggettiNecessari(Set<Oggetto> oggettiNecessari) {
-        this.oggettiNecessari = oggettiNecessari;
+    public Oggetto getOggettoNecessario() {
+        return oggettoNecessario;
+    }
+
+    public void setOggettoNecessario(Oggetto oggettoNecessario) {
+        this.oggettoNecessario = oggettoNecessario;
     }
 
     public void setOggettiPresentiStanza(Set<Oggetto> oggettiPresentiStanza) {
@@ -67,8 +65,8 @@ public class Stanza {
     public void aggiungiConnessione(Direzione direzione, Stanza stanza) {
         connessioneStanze.put(direzione, stanza);
     }
-    
-    public void rimuoviOggettoDallaStanza(Oggetto oggettoDaRimuovere){
+
+    public void rimuoviOggettoDallaStanza(Oggetto oggettoDaRimuovere) {
         oggettiPresentiStanza.remove(oggettoDaRimuovere);
     }
 
@@ -87,18 +85,16 @@ public class Stanza {
     public void setConnessioneStanze(Map<Direzione, Stanza> connessioneStanze) {
         this.connessioneStanze = connessioneStanze;
     }
-    
-    
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Stanza{name=").append(nome);
+        sb.append("Stanza{nome=").append(nome);
         if (descrizione != null) {
             sb.append(", descrizione=").append(descrizione);
         }
-        if (oggettiNecessari != null && !oggettiNecessari.isEmpty()) {
-            sb.append(", oggettiNecessari=").append(oggettiNecessari);
+        if (oggettoNecessario != null) {
+            sb.append(", oggettoNecessario=").append(oggettoNecessario);
         }
         if (oggettiPresentiStanza != null && !oggettiPresentiStanza.isEmpty()) {
             sb.append(", oggettiPresentiStanza=").append(oggettiPresentiStanza);
@@ -109,6 +105,9 @@ public class Stanza {
                 sb.append(entry.getKey()).append(": ").append(entry.getValue().getNome()).append(", ");
             }
             sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
+        }
+        if (npc != null) {
+            sb.append(", npc=").append(npc);
         }
         sb.append("}");
         return sb.toString();
