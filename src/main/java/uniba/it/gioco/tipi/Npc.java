@@ -74,6 +74,12 @@ public class Npc {
     public Set<Oggetto> getOggettiNpc() {
         return oggettiNpc;
     }
+
+    @Override
+    public String toString() {
+        return "Npc{" + "nome=" + nome + ", tipo=" + tipo + ", oggettiNpc=" + oggettiNpc + ", dialoghi=" + dialoghi + ", indovinello=" + indovinello + '}';
+    }
+    
     
     
 }
