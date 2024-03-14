@@ -121,6 +121,7 @@ public class LogicaComandi {
                         break;
                     case ESCI:
                         System.out.println("Comando ESCI trovato");
+                        System.exit(0);
                         break;
                     default:
                         System.out.println("Tipo di comando non gestito: " + comando.getType());

@@ -1,12 +1,23 @@
 [
   {
     "nome": "ingresso",
-    "descrizione": "Ti trovi all'interno dell'ingresso",
+    "descrizione": "Ti trovi all'interno dell'ingresso dell'ospedale",
     "connessioneStanze": {
       "NORD": "atrio"
     },
     "oggettiPresentiStanza": [],
-    "npc": null
+    "npc": 
+      {
+        "nome": "guardie",
+        "tipo": "GUARDIE",
+        "oggettiNpc": [],
+        "dialoghi": [
+          "dialogo guardia 1",
+          "dialogo guardia 2"
+        ],
+        "indovinello": null
+      }
+    
   },
   {
     "nome": "atrio",
@@ -16,23 +27,189 @@
       "OVEST": "corridoio",
       "SUD": "ingresso"
     },
-    "oggettiPresentiStanza": [
-      {
-        "id": 1,
-        "nome": "chiave del bagno",
-        "descrizione": "hai trovato la chiave del bagno inferiore"
-      }
-    ],
+    "oggettiPresentiStanza": [],
     "npc": {
-      "nome": "Guardie",
-      "tipo": "GUARDIE",
+      "nome": "barista",
+      "tipo": "BARISTA",
+      "oggettiNpc":[
+        {
+          "id": 1,
+          "nome": "chiave del bagno",
+          "descrizione": "hai trovato la chiave del bagno inferiore"
+        }
+    ]
+      ,
       "dialoghi": [
-        "Benvenuto nell'atrio. Sono la guardia del palazzo."
+        "Benvenuto nell'atrio. Sono il barista dell'ospedale."
       ],
       "indovinello": {
-        "domanda": "Quale parola diventa più corta se gli togli una lettera?",
+        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
         "risposta": "La parola 'corta'."
       }
     }
+  },
+  {
+    "nome": "farmacia",
+    "descrizione": "Ti trovi all'interno della farmacia",
+    "connessioneStanze": {
+      "EST": "atrio"
+    },
+    "oggettiPresentiStanza": [],
+    "npc": {
+      "nome": "farmacista",
+      "tipo": "FARMACISTA",
+      "oggettiNpc": [
+        {
+          "id": 2,
+          "nome": "sodio cloruro",
+          "descrizione": "hai trovato il sodio cloruro"
+        },
+        {
+          "id": 3,
+          "nome": "potassio cloruro",
+          "descrizione": "hai trovato il potassio cloruro"
+        },
+        {
+          "id": 4,
+          "nome": "calcio cloruro diidrato",
+          "descrizione": "hai trovato il calcio cloruro diidrato"
+        },
+        {
+          "id": 5,
+          "nome": "sodio acetato triidrato",
+          "descrizione": "hai trovato il sodio acetato triidrato"
+        }
+      ],
+      "dialoghi": [
+        "Benvenuto nella farmacia."
+      ],
+      "indovinello": {
+        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
+        "risposta": "La parola 'corta'."
+      }
+    }
+  },
+  {
+    "nome": "corridoio",
+    "descrizione": "Ti trovi nel corridoio dell'ospedale",
+    "connessioneStanze": {
+      "EST": "atrio",
+      "OVEST": "sala d'attesa"
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "bagno",
+    "descrizione": "Ti trovi nel bagno dell'ospedale",
+    "connessioneStanze": {
+      "SUD": "corridoio",
+      "NORD": "sgabuzzino"
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "sgabuzzino",
+    "descrizione": "Ti trovi nello sgabuzzino dell'ospedale",
+    "connessioneStanze": {
+      "SUD": "bagno"
+    },
+    "oggettiPresentiStanza": [
+      {
+        "id": 6,
+        "nome": "boccetta",
+        "descrizione": "hai trovato una boccettina"
+      },
+      {
+        "id": 7,
+        "nome": "camice",
+        "descrizione": "hai trovato il camice"
+      },
+      {
+        "id": 8,
+        "nome": "foglietto",
+        "descrizione": "hai trovato un foglietto"
+      },
+      {
+        "id": 9,
+        "nome": "cacciavite",
+        "descrizione": "hai trovato un cacciavite"
+      }
+    ]
+  },
+  {
+    "nome": "sala d'attesa",
+    "descrizione": "Ti trovi all'interno della della sala d'attesa al piano superiore",
+    "connessioneStanze": {
+      "SUD": "sala operatoria",
+      "EST": "laboratorio",
+      "NORD": "bagno superiore",
+      "OVEST": "corridoio"
+    },
+    "oggettiPresentiStanza": [],
+    "npc": {
+      "nome": "uomo misterioso",
+      "tipo": "UOMO_MISTERIOSO",
+      "oggettiNpc": [],
+      "dialoghi": [
+        "Benvenuto nella sala d'attesa."
+      ],
+      "indovinello": {
+        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
+        "risposta": "La parola 'corta'."
+      }
+    }
+  },
+  {
+    "nome": "bagno superiore",
+    "descrizione": "Ti trovi nel bagno al piano superiore",
+    "connessioneStanze": {
+      "SUD": "sala d'attesa",
+      "EST": "spogliatoio"
+    },
+    "oggettiPresentiStanza": []
+  },
+  {
+    "nome": "spogliatoio",
+    "descrizione": "Ti trovi nello spogliatoio",
+    "connessioneStanze": {
+      "OVEST": "bagno",
+      "SUD": "laboratorio"
+    },
+    "oggettiPresentiStanza": [
+      {
+        "id": 10,
+        "nome": "cuscino",
+        "descrizione": "hai trovato il cuscino"
+      }
+    ]
+  },
+  {
+    "nome": "laboratorio",
+    "descrizione": "Ti trovi all'interno del laboratorio",
+    "connessioneStanze": {
+      "NORD": "spogliatoio",
+      "OVEST": "sala d'attesa"
+    },
+    "oggettiPresentiStanza": [],
+    "npc": {
+      "nome": "dottoressa",
+      "tipo": "DOTTORESSA",
+      "oggettiNpc": [],
+      "dialoghi": [
+        "Benvenuto sono la dottoressa dell'ospedale."
+      ],
+      "indovinello": {
+        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
+        "risposta": "La parola 'corta'."
+      }
+    }
+  },
+  {
+    "nome": "sala operatoria",
+    "descrizione": "Ti trovi nella sala operatoria",
+    "connessioneStanze": {
+      "NORD": "sala d'attesa"
+    },
+    "oggettiPresentiStanza": []
   }
 ]
