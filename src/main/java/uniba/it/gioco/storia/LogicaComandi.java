@@ -76,14 +76,14 @@ public class LogicaComandi {
                         break;
                     case APRI:
                         System.out.println("Comando APRI trovato");
-                        //Solo in sgabuzzino
+                        //Solo in bagno se sta armadietto prendi scotch 
                         break;
                     case PARLA:
                         System.out.println("Comando PARLA trovato");
                         break;
                     case INDOSSA:
                         System.out.println("Comando INDOSSA trovato");
-                        //Solo in sgabuzzino con camice
+                        //usabile solo se si ha camice nell'inventario(camice indossato non visibile all'utente)
                         break;
                     case RICHIEDI:
                         System.out.println("Comando RICHIEDI trovato");
