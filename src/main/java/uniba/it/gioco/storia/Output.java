@@ -124,6 +124,6 @@ public class Output extends Thread {
     }
     
     public void erroreMsg(){
-        storiaTextArea.append("Non puoi andare in questa direzione");
+        storiaTextArea.append("Non puoi andare in questa direzione" + "\n");
     }
 }
