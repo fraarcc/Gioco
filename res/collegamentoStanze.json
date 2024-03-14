@@ -5,17 +5,29 @@
     "connessioneStanze": {
       "NORD": "atrio"
     },
-    "oggettiPresentiStanza": [],
+    "oggettiPresentiStanza": [
+            {
+                    "id": 1,
+                    "nome": "ticket",
+                    "descrizione": " Non c'è molto da osservare qui, tranne qualche mozzicone di sigaretta per terra e un ticket con il nome dell'ospedale."
+            }
+        ],
     "npc": 
       {
         "nome": "guardie",
         "tipo": "GUARDIE",
         "oggettiNpc": [],
         "dialoghi": [
-          "dialogo guardia 1",
-          "dialogo guardia 2"
+                
+          "-Guardie: Buongiorno, è qui per una visita?",
+          "-Guardie: Mi dispiace, non posso farla entrare.",
+          "-Guardie: La guardia ti fa entrare, dimostrando da subito l'efficienza del sistema di sicurezza dell'ospedale."
+                
         ],
-        "indovinello": null
+        "indovinello": {
+                "domanda": "-Guardie: Mi dice il codice della prenotazione per favore?",
+                "risposta": "A3258"
+        }
       }
     
   },
@@ -33,26 +45,27 @@
       "tipo": "BARISTA",
       "oggettiNpc":[
         {
-          "id": 1,
-          "nome": "chiave del bagno",
+          "id": 2,
+          "nome": "-chiave del bagno",
           "descrizione": "hai trovato la chiave del bagno inferiore"
         }
     ]
       ,
       "dialoghi": [
-        "Benvenuto nell'atrio. Sono il barista dell'ospedale."
+        "-Barista: Buonasera, come posso esserle utile?",
+        "-Barista: Ecco a lei le chiavi!",
+        "-Barista: Carmela è la signora che lavora nella farmacia dell'ospedale."
+
+
       ],
-      "indovinello": {
-        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
-        "risposta": "La parola 'corta'."
-      }
+      "indovinello": null
     }
   },
   {
     "nome": "farmacia",
     "descrizione": "Ti trovi all'interno della farmacia",
     "connessioneStanze": {
-      "EST": "atrio"
+      "OVEST": "atrio"
     },
     "oggettiPresentiStanza": [],
     "npc": {
@@ -60,28 +73,31 @@
       "tipo": "FARMACISTA",
       "oggettiNpc": [
         {
-          "id": 2,
-          "nome": "sodio cloruro",
+          "id": 3,
+          "nome": "-sodio cloruro",
           "descrizione": "hai trovato il sodio cloruro"
         },
         {
-          "id": 3,
-          "nome": "potassio cloruro",
+          "id": 4,
+          "nome": "-potassio cloruro",
           "descrizione": "hai trovato il potassio cloruro"
         },
         {
-          "id": 4,
-          "nome": "calcio cloruro diidrato",
+          "id": 5,
+          "nome": "-calcio cloruro diidrato",
           "descrizione": "hai trovato il calcio cloruro diidrato"
         },
         {
-          "id": 5,
-          "nome": "sodio acetato triidrato",
+          "id": 6,
+          "nome": "-sodio acetato triidrato",
           "descrizione": "hai trovato il sodio acetato triidrato"
         }
       ],
       "dialoghi": [
-        "Benvenuto nella farmacia."
+                "-Farmacista: 'Salve, cosa posso fare per lei?'",
+                "-Farmacista: 'Ecco a lei!'",
+                "Farmacista: 'Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale.'",
+                "...Sembra che vestito in quel modo non hai l'aria di essere un medico o un infermiere"
       ],
       "indovinello": {
         "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
@@ -94,44 +110,63 @@
     "descrizione": "Ti trovi nel corridoio dell'ospedale",
     "connessioneStanze": {
       "EST": "atrio",
-      "OVEST": "sala d'attesa"
+      "NORD": "bagno",
+      "OVEST":"sala d'attesa"
     },
     "oggettiPresentiStanza": []
   },
   {
     "nome": "bagno",
     "descrizione": "Ti trovi nel bagno dell'ospedale",
+    "aperto": false,
+    "oggettoNecessario": {
+                    "id": 2,
+                   "nome": "-chiave del bagno",
+                    "descrizione": "hai trovato la chiave del bagno inferiore"
+            },
     "connessioneStanze": {
       "SUD": "corridoio",
       "NORD": "sgabuzzino"
     },
-    "oggettiPresentiStanza": []
+    "oggettiPresentiStanza": [
+            {
+                    "id": 7,
+                    "nome": "armadietto",
+                    "descrizione": "hai intravisto un'armadietto"
+            },
+            {
+                    "id": 8,
+                    "nome": "scotch",
+                    "descrizione": "Aprendo un'anta dell'armadietto vedi un rotolo di nastro adesivo trasparente."
+            }
+        ]
   },
   {
     "nome": "sgabuzzino",
     "descrizione": "Ti trovi nello sgabuzzino dell'ospedale",
+     "aperto": true,
     "connessioneStanze": {
       "SUD": "bagno"
     },
     "oggettiPresentiStanza": [
       {
-        "id": 6,
-        "nome": "boccetta",
-        "descrizione": "hai trovato una boccettina"
+        "id": 9,
+        "nome": "-boccetta",
+        "descrizione": "hai trovato una boccetta"
       },
       {
-        "id": 7,
-        "nome": "camice",
+        "id": 10,
+        "nome": "-camice",
         "descrizione": "hai trovato il camice"
       },
       {
-        "id": 8,
-        "nome": "foglietto",
+        "id": 11,
+        "nome": "-foglietto",
         "descrizione": "hai trovato un foglietto"
       },
       {
-        "id": 9,
-        "nome": "cacciavite",
+        "id": 12,
+        "nome": "-cacciavite",
         "descrizione": "hai trovato un cacciavite"
       }
     ]
@@ -166,7 +201,12 @@
       "SUD": "sala d'attesa",
       "EST": "spogliatoio"
     },
-    "oggettiPresentiStanza": []
+    "oggettiPresentiStanza": [
+         {
+                    "id": 13,
+                    "nome": "seconda meta' foglietto",
+                    "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
+            }]
   },
   {
     "nome": "spogliatoio",
@@ -177,9 +217,9 @@
     },
     "oggettiPresentiStanza": [
       {
-        "id": 10,
-        "nome": "cuscino",
-        "descrizione": "hai trovato il cuscino"
+        "id": 14,
+        "nome": "-cuscino",
+        "descrizione": "Appoggiato su una branda c'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti."
       }
     ]
   },
