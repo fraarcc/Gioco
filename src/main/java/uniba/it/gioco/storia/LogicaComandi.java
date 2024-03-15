@@ -4,13 +4,13 @@
  */
 package uniba.it.gioco.storia;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashSet;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
@@ -18,6 +18,7 @@ import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Npc;
 import uniba.it.gioco.tipi.Oggetto;
 import uniba.it.gioco.tipi.Stanza;
+import uniba.it.gioco.tipi.TipoNpc;
 
 /**
  *
@@ -29,22 +30,25 @@ public class LogicaComandi {
     private Giocatore giocatore;
     private Init init;
     private JTextArea outputTestoCampo;
+    private JTextField inputTestoCampo;
     private List<Stanza> stanze;
-    
+    private boolean dialogo = false;
 
-    public LogicaComandi(Giocatore giocatore, Init init, JTextArea outputTestoCampo, Output output, List<Stanza> stanze) {
+    public LogicaComandi(Giocatore giocatore, Init init, JTextArea outputTestoCampo,JTextField inputTestoCampo ,Output output, List<Stanza> stanze) {
         this.giocatore = giocatore;
         this.init = init;
         this.parser = new Parser();
         this.outputTestoCampo = outputTestoCampo;
+        this.inputTestoCampo = inputTestoCampo;
         this.output = output;
         this.stanze = stanze;
     }
 
-    public void gestioneComandi(String inputTesto,Giocatore giocatore) {
+    public void gestioneComandi(String inputTesto,Giocatore giocatore,JTextField inputTestoCampo) {
         List<Comando> comandi = init.getCommandsAsList();
        // comandi.toString();
       //  System.out.println("Input: " + inputTesto);
+        if(dialogo == false){
         String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
       //  System.out.println("Tipo comando riconosciuto: " + tipoComando);
 
@@ -80,6 +84,10 @@ public class LogicaComandi {
                         break;
                     case PARLA:
                         System.out.println("Comando PARLA trovato");
+                        if(giocatore.getStanzaCorrente().haNpc()){
+                            List<String> esaminaNpcTokens = gestioneComandiComplessi(inputTesto);
+                            eseguiComandoParlaNpc(giocatore,esaminaNpcTokens,inputTesto);
+                        } else outputTestoCampo.append("Non puoi parlare con nessuno in questa stanza \n");
                         break;
                     case INDOSSA:
                         System.out.println("Comando INDOSSA trovato");
@@ -101,6 +109,10 @@ public class LogicaComandi {
                         break;
                     case LEGGI:
                         System.out.println("Comando LEGGI trovato");
+                        if(controlloInventario(giocatore)){
+                            List<String> esaminaOggettoToken = gestioneComandiComplessi(inputTesto);
+                        eseguiComandoLeggi(giocatore,esaminaOggettoToken);
+                        } else outputTestoCampo.append("Non puoi usare questo comando, continua ad esplorare \n");
                         //Solo per foglietto (sgabuzzino) dentro camice e ticket
                         break;
                     case LANCIATI:
@@ -136,6 +148,11 @@ public class LogicaComandi {
         if (!comandoTrovato) {
             System.out.println("Comando non valido"); // Stampato solo se nessun comando è stato trovato
         }
+        }
+    }
+    
+    public boolean getDialogo(){
+        return dialogo;
     }
 
     public void eseguiComandoSud(Giocatore giocatore) {
@@ -226,5 +243,152 @@ public class LogicaComandi {
         }
 
     }
+    
+    public void eseguiComandoParlaNpc(Giocatore giocatore, List<String> tokens,String inputTesto) {
+        if (tokens.size() != 1) {
+            // La lista dei token deve contenere un solo elemento
+            outputTestoCampo.append("Inserire un nome corretto per parlare. \n");
+            return;
+        }
+        
+        
 
+        String nomeNpc = tokens.get(0).toLowerCase();
+
+        // Verifica se l'NPC è nella stessa stanza del giocatore
+        Npc npcStanza = giocatore.getStanzaCorrente().getNpc();
+        if (!npcStanza.getNome().equalsIgnoreCase(nomeNpc)) {
+            outputTestoCampo.append("Non puoi parlare con " + nomeNpc + " in questa stanza. \n");
+            return;
+        }
+
+        switch (nomeNpc) {
+            case "farmacista":
+                if (npcStanza.getTipo() == TipoNpc.FARMACISTA) {
+                    // Logica per l'interazione con un farmacista
+                    System.out.println("Stai parlando con un farmacista.");
+                }
+                break;
+            case "barista":
+                if (npcStanza.getTipo() == TipoNpc.BARISTA) {
+                    // Logica per l'interazione con un barista
+                    System.out.println("Stai parlando con un barista.");
+                }
+                break;
+            case "guardie":
+                if (npcStanza.getTipo() == TipoNpc.GUARDIE) {
+                    if (npcStanza.isVisitato() == false) {
+                        gestioneGuardie(giocatore, npcStanza, inputTesto);
+                        System.out.println("Stai parlando con le guardie.");
+                    } else {
+                        outputTestoCampo.append("Non puoi piu' parlare con le guardie. \n");
+                    }
+                }
+                break;
+            case "uomo":
+                if (npcStanza.getTipo() == TipoNpc.UOMO_MISTERIOSO) {
+                    // Logica per l'interazione con un uomo misterioso
+                    System.out.println("Stai parlando con un uomo misterioso.");
+                }
+                break;
+            case "dottoressa":
+                if (npcStanza.getTipo() == TipoNpc.DOTTORESSA) {
+                    // Logica per l'interazione con una dottoressa
+                    System.out.println("Stai parlando con una dottoressa.");
+                }
+                break;
+            default:
+                // Token non corrisponde a nessun tipo di NPC conosciuto
+                outputTestoCampo.append("Non puoi parlare con " + nomeNpc + ". \n");
+                break;
+        }
+    }
+
+    // Metodo per gestire il dialogo con le guardie
+    public void gestioneGuardie(Giocatore giocatore, Npc guardie, String inputTesto) {
+        dialogo = true;
+        if (guardie.getTipo() == TipoNpc.GUARDIE) {
+            List<String> dialoghiGuardie = guardie.getDialoghi();
+            outputTestoCampo.append(dialoghiGuardie.get(0) + "\n");
+
+            // Gestione dell'input dell'utente
+            inputTestoCampo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String inputUtente = inputTestoCampo.getText().trim();
+                    inputTestoCampo.setText(""); 
+                    // Esegui la logica del dialogo con le guardie in base all'input dell'utente
+                    if (init.controlloDialogo(inputUtente, "si")) {
+                        outputTestoCampo.append(guardie.getIndovinello().getDomanda() + "\n");
+                        // Rimuovi l'ascoltatore precedente per evitare di aggiungere duplicati
+                        inputTestoCampo.removeActionListener(this);
+
+                        // Aggiungi un nuovo ascoltatore per ascoltare la risposta successiva dell'utente
+                        inputTestoCampo.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String inputRisposta = inputTestoCampo.getText().trim();
+                                inputTestoCampo.setText(""); 
+
+                                // Esegui la logica della risposta dell'utente
+                                if (guardie.getIndovinello().controllaRisposta(inputRisposta)) {
+                                    outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
+                                    stanze.get(1).setAperto(true);
+                                    stanze.get(0).getNpc().setVisitato(true);
+                                    dialogo = false;
+                                    // Continua con la gestione del dialogo o altre azioni
+                                } else {
+                                    outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
+                                    dialogo = false;
+                                    // Puoi gestire ulteriori tentativi o terminare il dialogo
+                                }
+
+                                // Rimuovi questo ascoltatore dopo aver gestito la risposta
+                                inputTestoCampo.removeActionListener(this);
+                            }
+                        });
+                     
+                    } else {
+                        dialogo = false;
+                        outputTestoCampo.append("La risposta e' sbagliata, continua ad esprolarare \n");
+                        inputTestoCampo.removeActionListener(this);
+                        
+                    }
+                    // Altrimenti, gestisci ulteriori input dell'utente o altro qui
+                }
+            });
+        }
+    }
+    
+    public void eseguiComandoLeggi(Giocatore giocatore, List<String> tokens) {
+        if (tokens.size() != 1) {
+            // La lista dei token deve contenere un solo elemento
+            outputTestoCampo.append("Non puoi osservare questo oggetto. \n");
+            return;
+        }
+
+        Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        for (Oggetto oggetto : inventarioGiocatore) {
+            if (oggetto.getNome().equalsIgnoreCase(tokens.get(0))) {
+                {
+                    outputTestoCampo.append("Il ticket riporta su un lato la scritta: A3258.\n"
+                            + "La scritta sembra appena stampata. Dev'essere un biglietto utilizzato da qualcuno pochi minuti fa.\n");
+                    return;
+                }
+            }
+            outputTestoCampo.append("L'oggetto specificato non e' esistente\n");
+        }
+    }
+
+    
+    public boolean controlloInventario(Giocatore giocatore) {
+        Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        for (Oggetto oggetto : inventarioGiocatore) {
+            if (oggetto.getId() == 1 || oggetto.getId() == 10 || oggetto.getId() == 12) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 }

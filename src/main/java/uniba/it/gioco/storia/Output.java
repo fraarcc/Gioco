@@ -123,7 +123,11 @@ public class Output extends Thread {
         stanzaCambiata = false;
     }
     
-    public void erroreMsg(){
+    public void direzioneErrataMsg(){
         storiaTextArea.append("Non puoi andare in questa direzione" + "\n");
+    }
+    
+    public void stanzaChiusaMsg(){
+        storiaTextArea.append("La stanza e' chiusa " + "\n");
     }
 }

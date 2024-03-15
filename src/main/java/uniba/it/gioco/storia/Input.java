@@ -34,7 +34,7 @@ public class Input extends Thread {
         this.outputTestoCampo = outputTestoCampo; 
         this.output = output;
         this.stanze = stanze;
-        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo,output,stanze);
+        this.logicaComandi = new LogicaComandi(giocatoreCorrente,init, outputTestoCampo,inputTestoCampo,output,stanze);
      
         
     }
@@ -44,23 +44,25 @@ public class Input extends Thread {
         inputTestoCampo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inviaComando(inputTestoCampo.getText().trim());
+                inviaComando(inputTestoCampo.getText().trim(),inputTestoCampo);
             }
         });
     }
 
-    public void inviaComando(String inputTesto) {
-         
+    public void inviaComando(String inputTesto,JTextField inputTestoCampo) {
+
         System.out.println("Input: " + inputTesto); // Stampa l'input ricevuto
         List<String> tokens = Parser.parse(inputTesto);
         System.out.println("Tokens: " + tokens); // Stampa i token estratti dall'input
 
         if (!inputTesto.isEmpty() && Parser.isValidCommand(inputTesto)) {
-            logicaComandi.gestioneComandi(inputTesto,giocatoreCorrente);
+            logicaComandi.gestioneComandi(inputTesto, giocatoreCorrente,inputTestoCampo);
             inputTestoCampo.setText("");
+        } else if (logicaComandi.getDialogo() == true) {
+            logicaComandi.gestioneComandi(inputTesto, giocatoreCorrente,inputTestoCampo);
         } else {
             System.out.println("Comando non valido");
         }
+
     }
 }
-

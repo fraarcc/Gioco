@@ -137,7 +137,7 @@ public class JPanelPartita extends javax.swing.JPanel {
 
     private void inputTestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTestoActionPerformed
         // TODO add your handling code here:
-        inputThread.inviaComando(inputTesto.getText().trim());
+        inputThread.inviaComando(inputTesto.getText().trim(),inputTesto);
         inputTesto.setText("");
     }//GEN-LAST:event_inputTestoActionPerformed
 
@@ -147,7 +147,7 @@ public class JPanelPartita extends javax.swing.JPanel {
     }//GEN-LAST:event_cancellaButtonActionPerformed
 
     private void invioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioButtonActionPerformed
-        inputThread.inviaComando(inputTesto.getText().trim());
+        inputThread.inviaComando(inputTesto.getText().trim(),inputTesto);
         inputTesto.setText("");
     }//GEN-LAST:event_invioButtonActionPerformed
 

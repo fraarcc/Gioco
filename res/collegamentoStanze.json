@@ -21,7 +21,7 @@
                 
           "-Guardie: Buongiorno, è qui per una visita?",
           "-Guardie: Mi dispiace, non posso farla entrare.",
-          "-Guardie: La guardia ti fa entrare, dimostrando da subito l'efficienza del sistema di sicurezza dell'ospedale."
+          "La guardia ti fa entrare, dimostrando da subito l'efficienza del sistema di sicurezza dell'ospedale."
                 
         ],
         "indovinello": {
@@ -34,6 +34,7 @@
   {
     "nome": "atrio",
     "descrizione": "Ti trovi all'interno dell'atrio",
+        "aperto" : false,
     "connessioneStanze": {
       "EST": "farmacia",
       "OVEST": "corridoio",
@@ -133,12 +134,8 @@
                     "id": 7,
                     "nome": "armadietto",
                     "descrizione": "hai intravisto un'armadietto"
-            },
-            {
-                    "id": 8,
-                    "nome": "scotch",
-                    "descrizione": "Aprendo un'anta dell'armadietto vedi un rotolo di nastro adesivo trasparente."
             }
+        
         ]
   },
   {
@@ -150,23 +147,23 @@
     },
     "oggettiPresentiStanza": [
       {
-        "id": 9,
-        "nome": "-boccetta",
+        "id": 8,
+        "nome": "boccetta",
         "descrizione": "hai trovato una boccetta"
       },
       {
-        "id": 10,
-        "nome": "-camice",
+        "id": 9,
+        "nome": "camice",
         "descrizione": "hai trovato il camice"
       },
       {
-        "id": 11,
-        "nome": "-foglietto",
+        "id": 10,
+        "nome": "foglietto",
         "descrizione": "hai trovato un foglietto"
       },
       {
-        "id": 12,
-        "nome": "-cacciavite",
+        "id": 11,
+        "nome": "cacciavite",
         "descrizione": "hai trovato un cacciavite"
       }
     ]
@@ -203,7 +200,7 @@
     },
     "oggettiPresentiStanza": [
          {
-                    "id": 13,
+                    "id": 12,
                     "nome": "seconda meta' foglietto",
                     "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
             }]
@@ -217,7 +214,7 @@
     },
     "oggettiPresentiStanza": [
       {
-        "id": 14,
+        "id": 13,
         "nome": "-cuscino",
         "descrizione": "Appoggiato su una branda c'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti."
       }
