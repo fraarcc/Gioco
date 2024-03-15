@@ -36,7 +36,7 @@
     },
     {
         "name": "richiedi",
-        "aliases": ["domanda", "chiedi"],
+        "aliases": ["richiedi","domanda", "chiedi"],
         "type": "RICHIEDI"
     },
     {

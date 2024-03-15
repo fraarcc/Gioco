@@ -95,6 +95,10 @@ public class LogicaComandi {
                         break;
                     case RICHIEDI:
                         System.out.println("Comando RICHIEDI trovato");
+                         if(giocatore.getStanzaCorrente().haNpc()){
+                             List<String> oggettoTokens = gestioneComandiComplessi(inputTesto);
+                            eseguiComandoRichiedi(giocatore,oggettoTokens);
+                        }
                         break;
                     case RACCOGLI:
                         System.out.println("Comando RACCOGLI trovato");
@@ -367,16 +371,40 @@ public class LogicaComandi {
             return;
         }
 
+        String oggettoDaLeggere = tokens.get(0).toLowerCase();
+
+        // Verifica se l'oggetto da leggere è presente nell'inventario del giocatore
         Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        boolean oggettoTrovato = false;
         for (Oggetto oggetto : inventarioGiocatore) {
-            if (oggetto.getNome().equalsIgnoreCase(tokens.get(0))) {
-                {
-                    outputTestoCampo.append("Il ticket riporta su un lato la scritta: A3258.\n"
-                            + "La scritta sembra appena stampata. Dev'essere un biglietto utilizzato da qualcuno pochi minuti fa.\n");
-                    return;
+            if (oggetto.getNome().equalsIgnoreCase(oggettoDaLeggere)) {
+                // Se l'oggetto è nell'inventario, verifica quale oggetto è e mostra il testo appropriato
+                switch (oggettoDaLeggere) {
+                    case "ticket":
+                        outputTestoCampo.append("Il ticket riporta su un lato la scritta: A3258.\n"
+                                + "La scritta sembra appena stampata. Dev'essere un biglietto utilizzato da qualcuno pochi minuti fa.\n");
+                        oggettoTrovato = true;
+                        break;
+                    case "foglietto":  //Da testare
+                        outputTestoCampo.append("Leggi queste righe scritte una sotto l'altra: sodio cl, potass, calcio cl, sodio ace.\n");                             
+                        oggettoTrovato = true;
+                        break;
+                    case "seconda meta' foglietto": // Da testare
+                        outputTestoCampo.append("Leggi le seguenti parole scritte in colonna: oruro, io cloruro, oruro diidrato, tato triidrato\n");              
+                        oggettoTrovato = true;
+                        break;
+                    default:
+                        // Se l'oggetto da leggere non corrisponde a nessuna delle opzioni previste, mostra un messaggio di errore
+                        outputTestoCampo.append("Non puoi leggere questo oggetto. \n");
+                        return;
                 }
+                break; // Esci dal ciclo una volta trovato l'oggetto
             }
-            outputTestoCampo.append("L'oggetto specificato non e' esistente\n");
+        }
+
+        // Se l'oggetto da leggere non è stato trovato nell'inventario, mostra un messaggio di errore
+        if (!oggettoTrovato) {
+            outputTestoCampo.append("L'oggetto specificato non è presente nell'inventario. \n");
         }
     }
 
@@ -391,4 +419,51 @@ public class LogicaComandi {
         return false;
 
     }
+    
+    public void eseguiComandoRichiedi(Giocatore giocatore, List<String> tokensOggetto) {
+    // Verifica se il giocatore si trova nell'atrio
+    if (!giocatore.getStanzaCorrente().getNome().equalsIgnoreCase("atrio")) {
+        outputTestoCampo.append("Devi essere nell'atrio per poter richiedere le chiavi del bagno. \n");
+        return;
+    }
+
+    // Ottieni l'NPC barista dalla stanza
+    Npc barista = giocatore.getStanzaCorrente().getNpc();
+    // Ottieni l'inventario dell'NPC barista
+    Set<Oggetto> inventarioNpc = barista.getOggettiNpc();
+
+    // Verifica se le chiavi del bagno sono presenti nell'inventario dell'NPC
+    boolean chiaviPresenti = false;
+    Oggetto chiaviBagno = null; // Salva un riferimento alle chiavi del bagno se trovate
+    for (Oggetto oggetto : inventarioNpc) {
+        if (oggetto.getId() == 2) {
+            chiaviPresenti = true;
+            chiaviBagno = oggetto; // Salva un riferimento alle chiavi del bagno
+            break;
+        }
+    }
+
+    // Verifica se tra i token è presente "chiavi bagno"
+    boolean tokenChiaviPresenti = false;
+    for (String token : tokensOggetto) {
+        if (token.equalsIgnoreCase("chiavi") || token.equalsIgnoreCase("bagno")) {
+            tokenChiaviPresenti = true;
+            break;
+        }
+    }
+
+    if (chiaviPresenti && tokenChiaviPresenti) {
+        // Rimuovi le chiavi dall'inventario dell'NPC
+        inventarioNpc.remove(chiaviBagno);
+        // Aggiungi le chiavi all'inventario del giocatore
+        giocatore.aggiungiOggettoInventario(chiaviBagno);
+        
+        // Esegui la logica per consegnare le chiavi del bagno
+        outputTestoCampo.append("Ecco le chiavi del bagno. \n");
+    } else {
+        // Se le chiavi del bagno non sono presenti nell'inventario dell'NPC o non sono specificate nei token, mostra un messaggio di errore
+        outputTestoCampo.append("Le chiavi del bagno non sono disponibili. \n");
+    }
+}
+    
 }
