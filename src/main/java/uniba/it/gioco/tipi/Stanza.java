@@ -95,6 +95,10 @@ public class Stanza {
     public void setConnessioneStanze(Map<Direzione, Stanza> connessioneStanze) {
         this.connessioneStanze = connessioneStanze;
     }
+    
+    public boolean haNpc() {
+    return npc != null;
+    }
 
    @Override
 public String toString() {

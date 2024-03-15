@@ -26,7 +26,7 @@
     },
     {
         "name": "parla",
-        "aliases": ["interagisci", "dialoga"],
+        "aliases": ["parla","interagisci", "dialoga"],
         "type": "PARLA"
     },
     {
@@ -46,7 +46,7 @@
     },
     {
         "name": "leggi",
-        "aliases": ["consulta", "analizza", "esamina"],
+        "aliases": ["leggi", "analizza", "esamina"],
         "type": "LEGGI"
     },
     {

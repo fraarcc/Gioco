@@ -15,6 +15,7 @@ import java.util.Set;
 public class Npc {
     private String nome;
     private TipoNpc tipo;
+    private boolean visitato = false;
     private Set<Oggetto> oggettiNpc;
     private List<String> dialoghi;
     private Indovinello indovinello;
@@ -34,6 +35,14 @@ public class Npc {
             this.indovinello = null;
         }
     }
+
+    public boolean isVisitato() {
+        return visitato;
+    }
+
+    public void setVisitato(boolean visitato) {
+        this.visitato = visitato;
+    } 
 
     public void setNome(String nome) {
         this.nome = nome;

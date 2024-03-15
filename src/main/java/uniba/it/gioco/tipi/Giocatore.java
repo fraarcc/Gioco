@@ -59,33 +59,38 @@ public class Giocatore {
     }
 
     public void spostaGiocatore(Init init, Direzione direzione, Output output, List<Stanza> stanze) {
-    Stanza stanzaAttuale = getStanzaCorrente();
-    Map<Direzione, Stanza> connessioneStanze = stanzaAttuale.getConnessioneStanze();
+        Stanza stanzaAttuale = getStanzaCorrente();
+        Map<Direzione, Stanza> connessioneStanze = stanzaAttuale.getConnessioneStanze();
 
-    // Verifica se esiste una connessione nella direzione specificata
-    if (connessioneStanze.containsKey(direzione)) {
-        Stanza nuovaStanza = connessioneStanze.get(direzione);
-        
-        // Cerca la nuova stanza nella lista delle stanze
-        for (Stanza s : stanze) {
-            if (s.getNome().equals(nuovaStanza.getNome())) {
-                nuovaStanza = s;
-                break;
+        // Verifica se esiste una connessione nella direzione specificata
+        if (connessioneStanze.containsKey(direzione)) {
+            Stanza nuovaStanza = connessioneStanze.get(direzione);
+
+            // Cerca la nuova stanza nella lista delle stanze
+            for (Stanza s : stanze) {
+                if (s.getNome().equals(nuovaStanza.getNome())) {
+                    nuovaStanza = s;
+                    break;
+                }
             }
+
+            if (nuovaStanza.isAperto()) {
+                // Imposta la nuova stanza corrente
+                setStanzaCorrente(nuovaStanza);
+                System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
+                System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
+            output.cambioStanza();
+            } else {
+                output.stanzaChiusaMsg();
+            }
+
+
+
+            // Aggiorna l'inventario del giocatore, ecc. se necessario
+        } else {
+            output.direzioneErrataMsg();
         }
-
-        // Imposta la nuova stanza corrente
-        setStanzaCorrente(nuovaStanza);
-
-        System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
-        System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
-        output.cambioStanza();
-
-        // Aggiorna l'inventario del giocatore, ecc. se necessario
-    } else {
-        output.erroreMsg();
     }
-}
     
  
 
