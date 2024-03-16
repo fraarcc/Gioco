@@ -31,7 +31,7 @@
     },
     {
         "name": "indossa",
-        "aliases": ["metti", "utilizza"],
+        "aliases": ["indossa","metti", "utilizza"],
         "type": "INDOSSA"
     },
     {

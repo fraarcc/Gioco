@@ -53,11 +53,7 @@
     ]
       ,
       "dialoghi": [
-        "-Barista: Buonasera, come posso esserle utile?",
-        "-Barista: Ecco a lei le chiavi!",
-        "-Barista: Carmela è la signora che lavora nella farmacia dell'ospedale."
-
-
+        "-Barista: Buonasera, come posso esserle utile?"
       ],
       "indovinello": null
     }
@@ -75,35 +71,32 @@
       "oggettiNpc": [
         {
           "id": 3,
-          "nome": "-sodio cloruro",
+          "nome": "sodio cloruro",
           "descrizione": "hai trovato il sodio cloruro"
         },
         {
           "id": 4,
-          "nome": "-potassio cloruro",
+          "nome": "potassio cloruro",
           "descrizione": "hai trovato il potassio cloruro"
         },
         {
           "id": 5,
-          "nome": "-calcio cloruro diidrato",
+          "nome": "calcio cloruro diidrato",
           "descrizione": "hai trovato il calcio cloruro diidrato"
         },
         {
           "id": 6,
-          "nome": "-sodio acetato triidrato",
+          "nome": "sodio acetato triidrato",
           "descrizione": "hai trovato il sodio acetato triidrato"
         }
       ],
       "dialoghi": [
-                "-Farmacista: 'Salve, cosa posso fare per lei?'",
-                "-Farmacista: 'Ecco a lei!'",
+                "Farmacista: 'Salve, cosa posso fare per lei?'",
+                "Farmacista: 'Ecco a lei!'",
                 "Farmacista: 'Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale.'",
                 "...Sembra che vestito in quel modo non hai l'aria di essere un medico o un infermiere"
       ],
-      "indovinello": {
-        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
-        "risposta": "La parola 'corta'."
-      }
+      "indovinello": null
     }
   },
   {
@@ -120,11 +113,6 @@
     "nome": "bagno",
     "descrizione": "Ti trovi nel bagno dell'ospedale",
     "aperto": false,
-    "oggettoNecessario": {
-                    "id": 2,
-                   "nome": "-chiave del bagno",
-                    "descrizione": "hai trovato la chiave del bagno inferiore"
-            },
     "connessioneStanze": {
       "SUD": "corridoio",
       "NORD": "sgabuzzino"
@@ -185,10 +173,7 @@
       "dialoghi": [
         "Benvenuto nella sala d'attesa."
       ],
-      "indovinello": {
-        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
-        "risposta": "La parola 'corta'."
-      }
+      "indovinello": null
     }
   },
   {
@@ -215,7 +200,7 @@
     "oggettiPresentiStanza": [
       {
         "id": 13,
-        "nome": "-cuscino",
+        "nome": "cuscino",
         "descrizione": "Appoggiato su una branda c'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti."
       }
     ]
@@ -235,10 +220,7 @@
       "dialoghi": [
         "Benvenuto sono la dottoressa dell'ospedale."
       ],
-      "indovinello": {
-        "domanda": "Quale parola diventa piu' corta se gli togli una lettera?",
-        "risposta": "La parola 'corta'."
-      }
+      "indovinello": null
     }
   },
   {

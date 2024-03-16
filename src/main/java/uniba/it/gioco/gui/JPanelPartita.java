@@ -4,6 +4,7 @@
  */
 package uniba.it.gioco.gui;
 
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,7 +52,7 @@ public class JPanelPartita extends javax.swing.JPanel {
             Output output = new Output(areaTesto, giocatore);
             output.start();
 
-            inputThread = new Input(inputTesto, giocatore, init, areaTesto, output ,stanze);
+            inputThread = new Input(inputTesto, giocatore, init, areaTesto, invioButton, output ,stanze);
             inputThread.start();
         } else {
             System.out.println("Giocatore non inizializzato");
@@ -153,6 +154,10 @@ public class JPanelPartita extends javax.swing.JPanel {
 
     public void chiudiInputThread() {
         inputThread.interrupt();
+    }
+    
+    public void aggiungiActionListenerInvio(ActionListener listener) {
+        invioButton.addActionListener(listener);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
