@@ -91,9 +91,9 @@
         }
       ],
       "dialoghi": [
-                "Farmacista: 'Salve, cosa posso fare per lei?'",
-                "Farmacista: 'Ecco a lei!'",
-                "Farmacista: 'Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale.'",
+                "Farmacista: Salve, cosa posso fare per lei?",
+                "Farmacista: Ecco a lei!",
+                "Farmacista: Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale.",
                 "...Sembra che vestito in quel modo non hai l'aria di essere un medico o un infermiere"
       ],
       "indovinello": null

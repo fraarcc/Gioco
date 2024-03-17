@@ -46,7 +46,7 @@ public class Parser {
     List<String> tokens = parse(input);
 
     // Controllo della lunghezza dei token
-    if (tokens.size() < 1 || tokens.size() > 3) {
+    if (tokens.size() < 1 || tokens.size() > 4) {
         return "Invalid";
     }
 
