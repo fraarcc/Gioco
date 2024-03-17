@@ -4,6 +4,8 @@
  */
 package uniba.it.gioco.storia;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,12 +25,14 @@ public class Output extends Thread {
 
     private JTextArea storiaTextArea;
     private Giocatore giocatoreCorrente;
+    private JLabel containerImmagini;
     private Map<String, String> storiaMap;
     private boolean stanzaCambiata;
 
-    public Output(JTextArea storiaTextArea, Giocatore giocatoreCorrente) {
+    public Output(JTextArea storiaTextArea, Giocatore giocatoreCorrente, JLabel containerImmagini) {
         this.storiaTextArea = storiaTextArea;
         this.giocatoreCorrente = giocatoreCorrente;
+        this.containerImmagini = containerImmagini;
         this.storiaMap = new HashMap<>();
         caricaStoriaDaFile();
         stanzaCambiata = true;
@@ -62,6 +66,7 @@ public class Output extends Thread {
     public void aggiornaStoria() {
     String descrizioneCompleta = getDescrizioneCompletaStanzaCorrente();
     SwingUtilities.invokeLater(() -> storiaTextArea.append(descrizioneCompleta));
+   impostaImmagineStanzaCorrente();
 }
 
     private String getDescrizioneCompletaStanzaCorrente() {
@@ -82,6 +87,13 @@ public class Output extends Thread {
             return descrizioneCompleta.toString();
         }
         return "Descrizione stanza non disponibile";
+    }
+    private void impostaImmagineStanzaCorrente() {
+        Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
+        if (stanzaCorrente != null) {
+        String imagePath = "./res/" + stanzaCorrente.getNome() + ".png";
+        containerImmagini.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
+        }
     }
 
    @Override
@@ -118,7 +130,7 @@ public class Output extends Thread {
         stanzaCambiata = true;
         notify(); // Notifichiamo il thread di StampaStoria che la stanza è cambiata
     }
-
+     
     public void stopThread() {
         stanzaCambiata = false;
     }

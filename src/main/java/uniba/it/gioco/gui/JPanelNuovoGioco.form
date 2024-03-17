@@ -21,13 +21,13 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jNickname" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="indietro" min="-2" pref="140" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Component id="conferma" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="indietro" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="conferma" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
                   <Component id="nicknameLabel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="210" max="32767" attributes="0"/>
+              <EmptySpace pref="270" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -51,6 +51,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="conferma">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SimSun" size="18" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Conferma"/>
       </Properties>
       <Events>
@@ -59,6 +62,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="indietro">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SimSun" size="18" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Torna indietro"/>
       </Properties>
       <Events>
@@ -72,6 +78,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nicknameLabel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SimSun" size="18" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Inserire il nickname"/>
       </Properties>
     </Component>

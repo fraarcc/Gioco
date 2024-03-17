@@ -4,8 +4,10 @@
  */
 package uniba.it.gioco.gui;
 
+import static java.awt.Color.black;
 import java.io.IOException;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.storia.Init;
@@ -34,7 +36,8 @@ public class JPanelPartita extends javax.swing.JPanel {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
-
+        setBackground(black);
+        
         try {
             init = gameModel.getInit();
             stanze = gameModel.getStanze();
@@ -45,7 +48,7 @@ public class JPanelPartita extends javax.swing.JPanel {
                     areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
                 });
 
-                Output output = new Output(areaTesto, giocatore);
+                Output output = new Output(areaTesto, giocatore, containerImmagini);
                 output.start();
 
                 inputThread = new Input(inputTesto, giocatore, init, areaTesto, invioButton, output, stanze);
@@ -57,6 +60,7 @@ public class JPanelPartita extends javax.swing.JPanel {
             e.printStackTrace(); // Gestisci l'eccezione qui
         }
     }
+         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,13 +76,17 @@ public class JPanelPartita extends javax.swing.JPanel {
         invioButton = new javax.swing.JButton();
         cancellaButton = new javax.swing.JButton();
         inputTesto = new javax.swing.JTextField();
+        containerImmagini = new javax.swing.JLabel();
 
-        areaTesto.setEditable(false);
+        setForeground(new java.awt.Color(0, 0, 0));
+
         areaTesto.setColumns(20);
-        areaTesto.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        areaTesto.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        areaTesto.setForeground(new java.awt.Color(70, 71, 66));
         areaTesto.setRows(5);
         jScrollPane1.setViewportView(areaTesto);
 
+        invioButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         invioButton.setText("Conferma");
         invioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +94,7 @@ public class JPanelPartita extends javax.swing.JPanel {
             }
         });
 
+        cancellaButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         cancellaButton.setText("Cancella");
         cancellaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,31 +113,35 @@ public class JPanelPartita extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(containerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancellaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(invioButton)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
-                            .addComponent(inputTesto))
-                        .addGap(24, 24, 24))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                        .addComponent(invioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTesto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(inputTesto, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(inputTesto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(containerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(invioButton)
-                    .addComponent(cancellaButton))
-                .addGap(21, 21, 21))
+                    .addComponent(invioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,6 +166,7 @@ public class JPanelPartita extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea areaTesto;
     private javax.swing.JButton cancellaButton;
+    private javax.swing.JLabel containerImmagini;
     private javax.swing.JTextField inputTesto;
     private javax.swing.JButton invioButton;
     private javax.swing.JScrollPane jScrollPane1;

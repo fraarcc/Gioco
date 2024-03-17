@@ -42,6 +42,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         jNickname = new javax.swing.JTextField();
         nicknameLabel = new javax.swing.JLabel();
 
+        conferma.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         conferma.setText("Conferma");
         conferma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +50,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
             }
         });
 
+        indietro.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         indietro.setText("Torna indietro");
         indietro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +64,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
             }
         });
 
+        nicknameLabel.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         nicknameLabel.setText("Inserire il nickname");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -73,11 +76,11 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jNickname)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(conferma, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(indietro)
+                        .addGap(42, 42, 42)
+                        .addComponent(conferma, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(nicknameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
