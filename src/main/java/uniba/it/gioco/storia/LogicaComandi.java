@@ -81,6 +81,7 @@ public class LogicaComandi {
                             if (giocatore.getStanzaCorrente().haNpc()) {
                                 List<String> esaminaNpcTokens = gestioneComandiComplessi(inputTesto);
                                 eseguiComandoParlaNpc(giocatore, esaminaNpcTokens, inputTesto);
+                                dialogo = false;
                             } else {
                                 outputTestoCampo.append("Non puoi parlare con nessuno in questa stanza \n");
                             }
@@ -99,14 +100,17 @@ public class LogicaComandi {
                         case RICHIEDI:
                             System.out.println("Comando RICHIEDI trovato");
                             if (giocatore.getStanzaCorrente().haNpc()) {
-                                 System.out.println("asdasdasdasd");
+                                System.out.println("asdasdasdasd");
                                 if (giocatore.getStanzaCorrente().getNome().equals("atrio")) {
                                     List<String> oggettoTokens = gestioneComandiComplessi(inputTesto);
                                     eseguiComandoRichiediChiavi(giocatore, oggettoTokens);
                                 }
-                               if (giocatore.getStanzaCorrente().getNome().equals("farmacia")) {
-                                     System.out.println("asdasdasdasd");
+                                if (giocatore.getStanzaCorrente().getNome().equals("farmacia")) {
                                     List<String> oggettiTokens = gestioneComandiComplessi(inputTesto);
+                                    System.out.println("Lista degli oggettiTokens:");
+                                    for (String token : oggettiTokens) {
+                                        System.out.println(token);
+                                    }
                                     eseguiComandoRichiediProdottoChimici(giocatore, oggettiTokens);
                                 }
                             }
@@ -304,6 +308,7 @@ public class LogicaComandi {
             case "dottoressa":
                 if (npcStanza.getTipo() == TipoNpc.DOTTORESSA) {
                     // Logica per l'interazione con una dottoressa
+                    outputTestoCampo.append("Dottoressa: Salve, cosa posso fare per lei? \n");
                     System.out.println("Stai parlando con una dottoressa.");
                 }
                 break;
@@ -326,31 +331,23 @@ public class LogicaComandi {
                 public void actionPerformed(ActionEvent e) {
                     String inputUtente = inputTestoCampo.getText().trim();
                     inputTestoCampo.setText("");
-                    // Esegui la logica del dialogo con le guardie in base all'input dell'utente
                     if (init.controlloDialogo(inputUtente, "si")) {
                         outputTestoCampo.append(guardie.getIndovinello().getDomanda() + "\n");
-                        // Rimuovi l'ascoltatore precedente per evitare di aggiungere duplicati
                         inputTestoCampo.removeActionListener(this);
-                        // Aggiungi un nuovo ascoltatore per ascoltare la risposta successiva dell'utente
                         inputTestoCampo.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 String inputRisposta = inputTestoCampo.getText().trim();
                                 inputTestoCampo.setText("");
-
-                                // Esegui la logica della risposta dell'utente
                                 if (guardie.getIndovinello().controllaRisposta(inputRisposta)) {
                                     outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
                                     stanze.get(1).setAperto(true);
                                     stanze.get(0).getNpc().setVisitato(true);
                                     dialogo = false;
-                                    // Continua con la gestione del dialogo o altre azioni
                                 } else {
                                     outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
                                     dialogo = false;
-                                    // Puoi gestire ulteriori tentativi o terminare il dialogo
                                 }
-                                // Rimuovi questo ascoltatore dopo aver gestito la risposta
                                 inputTestoCampo.removeActionListener(this);
                             }
                         });
@@ -359,7 +356,7 @@ public class LogicaComandi {
                         outputTestoCampo.append("La risposta e' sbagliata, continua ad esplorare \n");
                         inputTestoCampo.removeActionListener(this);
                     }
-                    // Altrimenti, gestisci ulteriori input dell'utente o altro qui
+
                 }
             });
 
@@ -367,13 +364,9 @@ public class LogicaComandi {
             bottoneInvio.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Ottieni l'input dell'utente dal campo di testo
                     String inputUtente = inputTestoCampo.getText().trim();
-                    // Esegui la stessa logica di gestione dell'input dell'utente
-                    // come nel ActionListener del campo di testo
                     if (init.controlloDialogo(inputUtente, "si")) {
                         outputTestoCampo.append(guardie.getIndovinello().getDomanda() + "\n");
-                        // Rimuovi l'ascoltatore precedente per evitare duplicati
                         inputTestoCampo.removeActionListener(this);
                         // Aggiungi un nuovo ascoltatore per gestire la risposta successiva dell'utente
                         inputTestoCampo.addActionListener(new ActionListener() {
@@ -381,27 +374,21 @@ public class LogicaComandi {
                             public void actionPerformed(ActionEvent e) {
                                 String inputRisposta = inputTestoCampo.getText().trim();
                                 inputTestoCampo.setText("");
-
-                                // Esegui la logica della risposta dell'utente
                                 if (guardie.getIndovinello().controllaRisposta(inputRisposta)) {
                                     outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
                                     stanze.get(1).setAperto(true);
                                     stanze.get(0).getNpc().setVisitato(true);
                                     dialogo = false;
-                                    // Continua con la gestione del dialogo o altre azioni
                                 } else {
                                     outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
                                     dialogo = false;
-                                    // Puoi gestire ulteriori tentativi o terminare il dialogo
                                 }
-                                // Rimuovi questo ascoltatore dopo aver gestito la risposta
                                 inputTestoCampo.removeActionListener(this);
                             }
                         });
                     } else {
                         dialogo = false;
                         outputTestoCampo.append("La risposta e' sbagliata, continua ad esplorare \n");
-                        // Rimuovi questo ascoltatore dopo aver gestito la risposta
                         bottoneInvio.removeActionListener(this);
                     }
                 }
@@ -546,7 +533,7 @@ public class LogicaComandi {
         List<String> dialoghiFarmacista = farmacista.getDialoghi();
         boolean camiceIndossato = giocatore.getInventario().getOggetti().stream()
                 .anyMatch(oggetto -> oggetto.getId() == 14);
-         System.out.print(camiceIndossato);
+
         if (camiceIndossato) {
             // Se il camice è indossato
             if (oggettiTokens.size() <= 3) {
@@ -578,54 +565,54 @@ public class LogicaComandi {
                     }
                     if (potassioCloruro) {
                         Oggetto potassioCloruroOggetto = null;
-                        for(Oggetto oggetto : inventarioFarmacista){
-                            if(oggetto.getId() == 4){
+                        for (Oggetto oggetto : inventarioFarmacista) {
+                            if (oggetto.getId() == 4) {
                                 potassioCloruroOggetto = oggetto;
                                 break;
                             }
                         }
-                        if(potassioCloruroOggetto != null){
+                        if (potassioCloruroOggetto != null) {
                             inventarioFarmacista.remove(potassioCloruroOggetto);
                             giocatore.aggiungiOggettoInventario(potassioCloruroOggetto);
                             outputTestoCampo.append(dialoghiFarmacista.get(1));
-                        } else{
+                        } else {
                             outputTestoCampo.append("Farmacista: Non ho il potassio cloruro disponibile al momento.\n");
                         }
+                    }
 
-                        if (calcioCloruroDiidrato) {
-                            Oggetto calcioCloruroDiidratoOggetto = null;
-                            for (Oggetto oggetto : inventarioFarmacista) {
-                                if (oggetto.getId() == 5) {
-                                    calcioCloruroDiidratoOggetto = oggetto;
-                                    break;
-                                }
-                            }
-                            if (calcioCloruroDiidratoOggetto != null) {
-                                inventarioFarmacista.remove(calcioCloruroDiidratoOggetto);
-                                giocatore.aggiungiOggettoInventario(calcioCloruroDiidratoOggetto);
-                                outputTestoCampo.append(dialoghiFarmacista.get(1));
-                            } else {
-                                outputTestoCampo.append("Farmacista: Non ho il calcio cloruro diidrato disponibile al momento.\n");
+                    if (calcioCloruroDiidrato) {
+                        Oggetto calcioCloruroDiidratoOggetto = null;
+                        for (Oggetto oggetto : inventarioFarmacista) {
+                            if (oggetto.getId() == 5) {
+                                calcioCloruroDiidratoOggetto = oggetto;
+                                break;
                             }
                         }
-                        if (sodioAcetatoTriidrato) {
-                              Oggetto sodioAcetatoTriidratoOggetto = null;
-                            for (Oggetto oggetto : inventarioFarmacista) {
-                                if (oggetto.getId() == 6) {
-                                    sodioAcetatoTriidratoOggetto = oggetto;
-                                    break;
-                                }
-                            }
-                            if (sodioAcetatoTriidratoOggetto != null) {
-                                inventarioFarmacista.remove(sodioAcetatoTriidratoOggetto);
-                                giocatore.aggiungiOggettoInventario(sodioAcetatoTriidratoOggetto);
-                                outputTestoCampo.append(dialoghiFarmacista.get(1));
-                            } else {
-                                outputTestoCampo.append("Farmacista: Non ho il sodio acetato triidrato disponibile al momento.\n");
-                            }
-                        }   
+                        if (calcioCloruroDiidratoOggetto != null) {
+                            inventarioFarmacista.remove(calcioCloruroDiidratoOggetto);
+                            giocatore.aggiungiOggettoInventario(calcioCloruroDiidratoOggetto);
+                            outputTestoCampo.append(dialoghiFarmacista.get(1));
+                        } else {
+                            outputTestoCampo.append("Farmacista: Non ho il calcio cloruro diidrato disponibile al momento.\n");
+                        }
                     }
-                    // Aggiungi qui la logica per gli altri prodotti chimici richiesti
+
+                    if (sodioAcetatoTriidrato) {
+                        Oggetto sodioAcetatoTriidratoOggetto = null;
+                        for (Oggetto oggetto : inventarioFarmacista) {
+                            if (oggetto.getId() == 6) {
+                                sodioAcetatoTriidratoOggetto = oggetto;
+                                break;
+                            }
+                        }
+                        if (sodioAcetatoTriidratoOggetto != null) {
+                            inventarioFarmacista.remove(sodioAcetatoTriidratoOggetto);
+                            giocatore.aggiungiOggettoInventario(sodioAcetatoTriidratoOggetto);
+                            outputTestoCampo.append(dialoghiFarmacista.get(1));
+                        } else {
+                            outputTestoCampo.append("Farmacista: Non ho il sodio acetato triidrato disponibile al momento.\n");
+                        }
+                    }
                 } else {
                     outputTestoCampo.append("Farmacista: Devi specificare i prodotti chimici correttamente.\n");
                 }

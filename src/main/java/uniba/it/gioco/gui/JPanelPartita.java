@@ -4,18 +4,13 @@
  */
 package uniba.it.gioco.gui;
 
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
-import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.storia.Init;
 import uniba.it.gioco.storia.Input;
 import uniba.it.gioco.storia.Output;
-import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
 
@@ -24,6 +19,7 @@ import uniba.it.gioco.tipi.Stanza;
  * @author 39379
  */
 public class JPanelPartita extends javax.swing.JPanel {
+
     private List<Stanza> stanze;
     private Giocatore giocatore;
     private JFrameMain jframeMain;
@@ -35,32 +31,32 @@ public class JPanelPartita extends javax.swing.JPanel {
      * Creates new form JPanelPartita
      */
     public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) {
-    this.jframeMain = jframeMain;
-    this.gameModel = gameModel;
-    initComponents();
+        this.jframeMain = jframeMain;
+        this.gameModel = gameModel;
+        initComponents();
 
-    try {
-        init = gameModel.getInit();
-        stanze = gameModel.getStanze();
-        giocatore = gameModel.getGiocatore();
-        if (giocatore != null) {
-            String nickname = giocatore.getNickname();
-            SwingUtilities.invokeLater(() -> {
-                areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
-            });
+        try {
+            init = gameModel.getInit();
+            stanze = gameModel.getStanze();
+            giocatore = gameModel.getGiocatore();
+            if (giocatore != null) {
+                String nickname = giocatore.getNickname();
+                SwingUtilities.invokeLater(() -> {
+                    areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
+                });
 
-            Output output = new Output(areaTesto, giocatore);
-            output.start();
+                Output output = new Output(areaTesto, giocatore);
+                output.start();
 
-            inputThread = new Input(inputTesto, giocatore, init, areaTesto, invioButton, output ,stanze);
-            inputThread.start();
-        } else {
-            System.out.println("Giocatore non inizializzato");
+                inputThread = new Input(inputTesto, giocatore, init, areaTesto, invioButton, output, stanze);
+                inputThread.start();
+            } else {
+                System.out.println("Giocatore non inizializzato");
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Gestisci l'eccezione qui
         }
-    } catch (IOException e) {
-        e.printStackTrace(); // Gestisci l'eccezione qui
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,7 +134,7 @@ public class JPanelPartita extends javax.swing.JPanel {
 
     private void inputTestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTestoActionPerformed
         // TODO add your handling code here:
-        inputThread.inviaComando(inputTesto.getText().trim(),inputTesto);
+        inputThread.inviaComando(inputTesto.getText().trim(), inputTesto); // Passa inputTesto invece di inputTestoCampo
         inputTesto.setText("");
     }//GEN-LAST:event_inputTestoActionPerformed
 
@@ -148,17 +144,11 @@ public class JPanelPartita extends javax.swing.JPanel {
     }//GEN-LAST:event_cancellaButtonActionPerformed
 
     private void invioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioButtonActionPerformed
-        inputThread.inviaComando(inputTesto.getText().trim(),inputTesto);
+
         inputTesto.setText("");
     }//GEN-LAST:event_invioButtonActionPerformed
 
-    public void chiudiInputThread() {
-        inputThread.interrupt();
-    }
-    
-    public void aggiungiActionListenerInvio(ActionListener listener) {
-        invioButton.addActionListener(listener);
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea areaTesto;
