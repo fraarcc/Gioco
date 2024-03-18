@@ -39,7 +39,7 @@ public class Parser {
     }
 
     public static boolean isValidCommand(String input) {
-        return !getCommandType(input).equals("Invalid");
+        return commands.values().stream().anyMatch(command -> command.isValid(input));
     }
 
    public static String getCommandType(String input) {
@@ -58,9 +58,17 @@ public class Parser {
             return command.getType().toString();
         }
     }
-
     return "Invalid";
 }
+   
+   public static boolean controlloTokenVuoti(List<String> tokens) {
+        for (String token : tokens) {
+            if (token == null || token.trim().isEmpty()) {
+                return true; // Se trova un elemento null o vuoto, restituisce true
+            }
+        }
+        return false; // Se non trova elementi null o vuoti, restituisce false
+    }
    
 }
    
