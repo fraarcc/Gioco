@@ -15,7 +15,6 @@ public class Oggetto implements Serializable{
     private int id;
     private String nome;
     private String descrizione;
-    //private Oggetto ogg
     public Oggetto(){
         
     }

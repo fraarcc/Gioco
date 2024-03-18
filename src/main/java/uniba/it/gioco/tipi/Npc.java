@@ -84,6 +84,8 @@ public class Npc {
         return oggettiNpc;
     }
 
+    
+    
     @Override
     public String toString() {
         return "Npc{" + "nome=" + nome + ", tipo=" + tipo + ", oggettiNpc=" + oggettiNpc + ", dialoghi=" + dialoghi + ", indovinello=" + indovinello + '}';

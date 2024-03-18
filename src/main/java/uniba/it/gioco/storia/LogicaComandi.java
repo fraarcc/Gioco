@@ -25,6 +25,7 @@ import uniba.it.gioco.tipi.TipoNpc;
  * @author Nikita
  */
 public class LogicaComandi {
+
     private Output output;
     private Parser parser;
     private Giocatore giocatore;
@@ -46,130 +47,132 @@ public class LogicaComandi {
         this.stanze = stanze;
     }
 
-    public void gestioneComandi(String inputTesto, Giocatore giocatore, JTextField inputTestoCampo) {
+ public void gestioneComandi(String inputTesto) {
         List<Comando> comandi = init.getCommandsAsList();
-        if (dialogo == false) {
+        if (!dialogo) {
             String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
             boolean comandoTrovato = false; // Flag per indicare se un comando è stato trovato
             for (Comando comando : comandi) {
                 if (comando.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(tipoComando))) {
-                    // Confronta il tipo di comando con quelli definiti nella classe Comando
-                    switch (comando.getType()) {
-                        case NORD:
-                            System.out.println("Comando NORD trovato");
-                            eseguiComandoNord(giocatore);
-                            break;
-                        case SUD:
-                            System.out.println("Comando SUD trovato");
-                            eseguiComandoSud(giocatore);
-                            break;
-                        case EST:
-                            System.out.println("Comando EST trovato");
-                            eseguiComandoEst(giocatore);
-                            break;
-                        case OVEST:
-                            System.out.println("Comando OVEST trovato");
-                            eseguiComandoOvest(giocatore);
-                            break;
-                        case APRI:
-                            System.out.println("Comando APRI trovato");
-                            //Solo in bagno se sta armadietto prendi scotch
-                            break;
-                        case PARLA:
-                            System.out.println("Comando PARLA trovato");
-                            if (giocatore.getStanzaCorrente().haNpc()) {
-                                List<String> esaminaNpcTokens = gestioneComandiComplessi(inputTesto);
-                                eseguiComandoParlaNpc(giocatore, esaminaNpcTokens, inputTesto);
-                                dialogo = false;
-                            } else {
-                                outputTestoCampo.append("Non puoi parlare con nessuno in questa stanza \n");
-                            }
-                            break;
-                        case INDOSSA:
-                            //usabile solo se si ha camice nell'inventario (camice indossato non visibile all'utente)
-                            System.out.println("Comando INDOSSA trovato");
-                            if (controlloCamice(giocatore)) {
-                                List<String> tokens = gestioneComandiComplessi(inputTesto);
-                                eseguiComandoIndossa(giocatore, tokens);
-                            } else {
-                                outputTestoCampo.append("Nel tuo inventario non ci sono oggetti da indossare\n");
-                            }
-
-                            break;
-                        case RICHIEDI:
-                            System.out.println("Comando RICHIEDI trovato");
-                            if (giocatore.getStanzaCorrente().haNpc()) {
-                                System.out.println("asdasdasdasd");
-                                if (giocatore.getStanzaCorrente().getNome().equals("atrio")) {
-                                    List<String> oggettoTokens = gestioneComandiComplessi(inputTesto);
-                                    eseguiComandoRichiediChiavi(giocatore, oggettoTokens);
-                                }
-                                if (giocatore.getStanzaCorrente().getNome().equals("farmacia")) {
-                                    List<String> oggettiTokens = gestioneComandiComplessi(inputTesto);
-                                    System.out.println("Lista degli oggettiTokens:");
-                                    for (String token : oggettiTokens) {
-                                        System.out.println(token);
-                                    }
-                                    eseguiComandoRichiediProdottoChimici(giocatore, oggettiTokens);
-                                }
-                            }
-                            break;
-                        case RACCOGLI:
-                            System.out.println("Comando RACCOGLI trovato");
-                            if (controlloOggettiStanza(giocatore)) {
-                                List<String> oggettoDesiderato = gestioneComandiComplessi(inputTesto);
-                                if (!oggettoDesiderato.isEmpty()) {
-                                    eseguiComandoRaccogli(giocatore, oggettoDesiderato);
-                                } else {
-                                    outputTestoCampo.append("Specificare il nome dell'oggetto");
-                                }
-                            }
-                            break;
-                        case LEGGI:
-                            System.out.println("Comando LEGGI trovato");
-                            if (controlloInventario(giocatore)) {
-                                List<String> esaminaOggettoToken = gestioneComandiComplessi(inputTesto);
-                                eseguiComandoLeggi(giocatore, esaminaOggettoToken);
-                            } else {
-                                outputTestoCampo.append("Non puoi usare questo comando, continua ad esplorare \n");
-                            }
-                            //Solo per foglietto (sgabuzzino) dentro camice e ticket
-                            break;
-                        case LANCIATI:
-                            System.out.println("Comando LANCIATI trovato");
-                            //finsetra 
-                            break;
-                        case AIUTO:
-                            System.out.println("Comando AIUTO trovato");
-                            eseguiComandoAiuto(outputTestoCampo);
-                            break;
-                        case INVENTARIO:
-                            System.out.println("Comando INV trovato");
-                            eseguiComandoInventario(giocatore);
-                            break;
-                        case OSSERVA:
-                            System.out.println("OSSERVA RILEVATO");
-                            osservaStanza(giocatore);
-                            break;
-                        case ESCI:
-                            System.out.println("Comando ESCI trovato");
-                            System.exit(0);
-                            break;
-                        default:
-                            System.out.println("Tipo di comando non gestito: " + comando.getType());
-                            break;
-                    }
-
-                    comandoTrovato = true; // Imposta il flag a true se un comando è stato trovato
-                    break; // Esci dal ciclo una volta trovato un comando
+                    eseguiComando(comando,inputTesto);
+                    comandoTrovato = true;
+                    break;
                 }
-            }
+            }        
+        } 
+    }
 
-            if (!comandoTrovato) {
-                outputTestoCampo.append("Comando non valido\n");
-            }
+
+    private void eseguiComando(Comando comando, String inputTesto) {
+        switch (comando.getType()) {
+            case NORD:
+                System.out.println("Comando NORD trovato");
+                eseguiComandoNord(giocatore);
+                break;
+            case SUD:
+                System.out.println("Comando SUD trovato");
+                eseguiComandoSud(giocatore);
+                break;
+            case EST:
+                System.out.println("Comando EST trovato");
+                eseguiComandoEst(giocatore);
+                break;
+            case OVEST:
+                System.out.println("Comando OVEST trovato");
+                eseguiComandoOvest(giocatore);
+                break;
+            case APRI:
+                System.out.println("Comando APRI trovato");
+                //Solo in bagno se sta armadietto prendi scotch
+                break;
+            case PARLA:
+                System.out.println("Comando PARLA trovato");
+                if (giocatore.getStanzaCorrente().haNpc()) {
+                    List<String> esaminaNpcTokens = gestioneComandiComplessi(inputTesto);
+                    eseguiComandoParlaNpc(giocatore, esaminaNpcTokens, inputTesto);
+                                   
+                } else {
+                    outputTestoCampo.append("Non puoi parlare con nessuno in questa stanza \n");
+                }
+                break;
+            case INDOSSA:
+                //usabile solo se si ha camice nell'inventario (camice indossato non visibile all'utente)
+                System.out.println("Comando INDOSSA trovato");
+                if (controlloCamice(giocatore)) {
+                    List<String> tokens = gestioneComandiComplessi(inputTesto);
+                    eseguiComandoIndossa(giocatore, tokens);
+                } else {
+                    outputTestoCampo.append("Nel tuo inventario non ci sono oggetti da indossare\n");
+                }
+                break;
+            case RICHIEDI:
+                System.out.println("Comando RICHIEDI trovato");
+                if (giocatore.getStanzaCorrente().haNpc()) {
+                    System.out.println("asdasdasdasd");
+                    if (giocatore.getStanzaCorrente().getNome().equals("atrio")) {
+                        List<String> oggettoTokens = gestioneComandiComplessi(inputTesto);
+                        eseguiComandoRichiediChiavi(giocatore, oggettoTokens);
+                    }
+                    if (giocatore.getStanzaCorrente().getNome().equals("farmacia")) {
+                        List<String> oggettiTokens = gestioneComandiComplessi(inputTesto);
+                        System.out.println("Lista degli oggettiTokens:");
+                        for (String token : oggettiTokens) {
+                            System.out.println(token);
+                        }
+                        eseguiComandoRichiediProdottoChimici(giocatore, oggettiTokens);
+                    }
+                }
+                break;
+            case RACCOGLI:
+                System.out.println("Comando RACCOGLI trovato");
+                if (controlloOggettiStanza(giocatore)) {
+                    List<String> oggettoDesiderato = gestioneComandiComplessi(inputTesto);
+                    if (!oggettoDesiderato.isEmpty()) {
+                        eseguiComandoRaccogli(giocatore, oggettoDesiderato);
+                    } else {
+                        outputTestoCampo.append("Specificare il nome dell'oggetto");
+                    }
+                }
+                break;
+            case LEGGI:
+                System.out.println("Comando LEGGI trovato");
+                if (controlloInventario(giocatore)) {
+                    List<String> esaminaOggettoToken = gestioneComandiComplessi(inputTesto);
+                    eseguiComandoLeggi(giocatore, esaminaOggettoToken);
+                } else {
+                    outputTestoCampo.append("Non puoi usare questo comando, continua ad esplorare \n");
+                }
+                //Solo per foglietto (sgabuzzino) dentro camice e ticket
+                break;
+            case LANCIATI:
+                System.out.println("Comando LANCIATI trovato");
+                //finestra
+                break;
+            case AIUTO:
+                System.out.println("Comando AIUTO trovato");
+                eseguiComandoAiuto(outputTestoCampo);
+                break;
+            case INVENTARIO:
+                System.out.println("Comando INV trovato");
+                eseguiComandoInventario(giocatore);
+                break;
+            case OSSERVA:
+                System.out.println("OSSERVA RILEVATO");
+                osservaStanza(giocatore);
+                break;
+            case ESCI:
+                System.out.println("Comando ESCI trovato");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Tipo di comando non gestito: " + comando.getType());
+                break;
         }
     }
+
+    
+
+
 
     public boolean getDialogo() {
         return dialogo;
@@ -290,9 +293,10 @@ public class LogicaComandi {
                 break;
             case "guardie":
                 if (npcStanza.getTipo() == TipoNpc.GUARDIE) {
-                    if (npcStanza.isVisitato() == false) {
+                    if (!npcStanza.isVisitato()) {
                         gestioneGuardie(giocatore, npcStanza, inputTesto);
                         System.out.println("Stai parlando con le guardie.");
+                        
                     } else {
                         outputTestoCampo.append("Non puoi piu' parlare con le guardie. \n");
                     }
@@ -342,16 +346,16 @@ public class LogicaComandi {
                                     outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
                                     stanze.get(1).setAperto(true);
                                     stanze.get(0).getNpc().setVisitato(true);
-                                    dialogo = false;
+                                    dialogo = false;   
                                 } else {
                                     outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
-                                    dialogo = false;
+                                    dialogo = false;   
                                 }
                                 inputTestoCampo.removeActionListener(this);
                             }
                         });
                     } else {
-                        dialogo = false;
+                        dialogo = false;   
                         outputTestoCampo.append("La risposta e' sbagliata, continua ad esplorare \n");
                         inputTestoCampo.removeActionListener(this);
                     }
@@ -377,10 +381,10 @@ public class LogicaComandi {
                                     outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
                                     stanze.get(1).setAperto(true);
                                     stanze.get(0).getNpc().setVisitato(true);
-                                    dialogo = false;
+                                    dialogo = false;   
                                 } else {
                                     outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
-                                    dialogo = false;
+                                    dialogo = false;   
                                 }
                                 inputTestoCampo.removeActionListener(this);
                             }
