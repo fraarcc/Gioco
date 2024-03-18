@@ -25,7 +25,6 @@ import uniba.it.gioco.tipi.TipoNpc;
  * @author Nikita
  */
 public class LogicaComandi {
-
     private Output output;
     private Parser parser;
     private Giocatore giocatore;
