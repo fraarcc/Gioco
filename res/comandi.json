@@ -75,5 +75,10 @@
         "name": "inventario",
         "aliases": ["inventario"],
         "type": "INVENTARIO"
+    },
+    {
+        "name": "salva",
+        "aliases": ["salva", "save"],
+        "type": "SALVA"
     }
 ]

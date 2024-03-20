@@ -24,7 +24,8 @@ package uniba.it.gioco.tipi;
         AIUTO ,
         ESCI,
         OSSERVA,
-        INVENTARIO
+        INVENTARIO,
+        SALVA
     }
 
 

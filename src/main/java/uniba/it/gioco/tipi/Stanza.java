@@ -4,6 +4,7 @@
  */
 package uniba.it.gioco.tipi;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @author Nikita
  */
-public class Stanza {
+public class Stanza implements Serializable{
 
     private String nome;
     private String descrizione;

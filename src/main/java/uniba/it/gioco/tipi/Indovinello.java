@@ -4,11 +4,13 @@
  */
 package uniba.it.gioco.tipi;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Nikita
  */
-public class Indovinello {
+public class Indovinello implements Serializable {
     private String domanda;
     private String risposta;
     

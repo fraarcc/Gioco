@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+
 import java.util.*;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Giocatore;

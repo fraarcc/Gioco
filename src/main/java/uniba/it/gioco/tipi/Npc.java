@@ -4,6 +4,7 @@
  */
 package uniba.it.gioco.tipi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @author Nikita
  */
-public class Npc {
+public class Npc implements Serializable {
     private String nome;
     private TipoNpc tipo;
     private boolean visitato = false;
