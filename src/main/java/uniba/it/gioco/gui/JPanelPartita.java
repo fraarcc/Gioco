@@ -4,6 +4,9 @@
  */
 package uniba.it.gioco.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.SwingUtilities;
@@ -42,21 +45,21 @@ public class JPanelPartita extends javax.swing.JPanel {
             if (giocatore != null) {
                 String nickname = giocatore.getNickname();
                 SwingUtilities.invokeLater(() -> {
-                    areaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
+                    jAreaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
                 });
 
-                Output output = new Output(areaTesto, giocatore, containerImmagini);
+                Output output = new Output(jAreaTesto, giocatore, jContainerImmagini);
                 output.start();
 
-                inputThread = new Input(inputTesto, giocatore, init, areaTesto, invioButton, output, stanze);
-                inputThread.start();
+                inputThread = new Input(jInputTestoArea, jInvioButtone,giocatore, init, jAreaTesto,  output, stanze);
+                //inputThread.start();
             } else {
                 System.out.println("Giocatore non inizializzato");
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Gestisci l'eccezione qui
+            e.printStackTrace(); 
         }
-        inputTesto.requestFocus();
+        jInputTestoArea.requestFocus();
     }
          
 
@@ -70,39 +73,45 @@ public class JPanelPartita extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        areaTesto = new javax.swing.JTextArea();
-        invioButton = new javax.swing.JButton();
-        cancellaButton = new javax.swing.JButton();
-        inputTesto = new javax.swing.JTextField();
-        containerImmagini = new javax.swing.JLabel();
+        jAreaTesto = new javax.swing.JTextArea();
+        jInvioButtone = new javax.swing.JButton();
+        jCancellaButton = new javax.swing.JButton();
+        jInputTestoArea = new javax.swing.JTextField();
+        jContainerImmagini = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(0, 0, 0));
 
-        areaTesto.setColumns(20);
-        areaTesto.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        areaTesto.setForeground(new java.awt.Color(204, 204, 204));
-        areaTesto.setRows(5);
-        jScrollPane1.setViewportView(areaTesto);
+        jAreaTesto.setEditable(false);
+        jAreaTesto.setColumns(20);
+        jAreaTesto.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jAreaTesto.setForeground(new java.awt.Color(204, 204, 204));
+        jAreaTesto.setRows(5);
+        jScrollPane1.setViewportView(jAreaTesto);
 
-        invioButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        invioButton.setText("Conferma");
-        invioButton.addActionListener(new java.awt.event.ActionListener() {
+        jInvioButtone.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jInvioButtone.setText("Conferma");
+        jInvioButtone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                invioButtonActionPerformed(evt);
+                jInvioButtoneActionPerformed(evt);
             }
         });
 
-        cancellaButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        cancellaButton.setText("Cancella");
-        cancellaButton.addActionListener(new java.awt.event.ActionListener() {
+        jCancellaButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jCancellaButton.setText("Cancella");
+        jCancellaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancellaButtonActionPerformed(evt);
+                jCancellaButtonActionPerformed(evt);
             }
         });
 
-        inputTesto.addActionListener(new java.awt.event.ActionListener() {
+        jInputTestoArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputTestoActionPerformed(evt);
+                jInputTestoAreaActionPerformed(evt);
+            }
+        });
+        jInputTestoArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jInputTestoAreaKeyPressed(evt);
             }
         });
 
@@ -112,16 +121,16 @@ public class JPanelPartita extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(containerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jContainerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 287, Short.MAX_VALUE)
+                        .addComponent(jCancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(invioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inputTesto, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
+                        .addComponent(jInvioButtone, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jInputTestoArea))
                 .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
@@ -132,40 +141,61 @@ public class JPanelPartita extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(inputTesto, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(containerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jInputTestoArea, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jContainerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(invioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jInvioButtone, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputTestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTestoActionPerformed
+    private void jInputTestoAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInputTestoAreaActionPerformed
         // TODO add your handling code here:
-        inputThread.inviaComando(inputTesto.getText().trim(), inputTesto); // Passa inputTesto invece di inputTestoCampo
-        inputTesto.setText("");
-    }//GEN-LAST:event_inputTestoActionPerformed
+       
+    }//GEN-LAST:event_jInputTestoAreaActionPerformed
 
-    private void cancellaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaButtonActionPerformed
+    private void jCancellaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancellaButtonActionPerformed
         // TODO add your handling code here:
-        inputTesto.setText("");
-    }//GEN-LAST:event_cancellaButtonActionPerformed
+        jInputTestoArea.setText("");
+    }//GEN-LAST:event_jCancellaButtonActionPerformed
 
-    private void invioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioButtonActionPerformed
+    private void jInvioButtoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvioButtoneActionPerformed
+        String input = jInputTestoArea.getText();
+        if (input != null && input.length() > 0) {
+            inputThread.inviaComando(input, jInputTestoArea);
+            jInputTestoArea.setText("");
+        } else {
+            jAreaTesto.append("Inserisci qualcosa \n");
+            jInputTestoArea.setText("");
+            jInputTestoArea.requestFocus();
+        }
+    }//GEN-LAST:event_jInvioButtoneActionPerformed
 
-        inputTesto.setText("");
-    }//GEN-LAST:event_invioButtonActionPerformed
+    private void jInputTestoAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInputTestoAreaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String input = jInputTestoArea.getText();
+            if (input != null && input.length() > 0) {
+                inputThread.inviaComando(input, jInputTestoArea);
+                jInputTestoArea.setText("");
+            } else {
+                jAreaTesto.append("Inserisci qualcosa \n");
+                jInputTestoArea.setText("");
+                jInputTestoArea.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_jInputTestoAreaKeyPressed
 
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextArea areaTesto;
-    private javax.swing.JButton cancellaButton;
-    private javax.swing.JLabel containerImmagini;
-    private javax.swing.JTextField inputTesto;
-    private javax.swing.JButton invioButton;
+    public javax.swing.JTextArea jAreaTesto;
+    private javax.swing.JButton jCancellaButton;
+    private javax.swing.JLabel jContainerImmagini;
+    private javax.swing.JTextField jInputTestoArea;
+    private javax.swing.JButton jInvioButtone;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

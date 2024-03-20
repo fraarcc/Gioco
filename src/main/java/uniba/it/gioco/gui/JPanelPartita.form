@@ -23,17 +23,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="containerImmagini" min="-2" pref="420" max="-2" attributes="0"/>
+              <Component id="jContainerImmagini" min="-2" pref="420" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="cancellaButton" min="-2" pref="110" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="287" max="32767" attributes="0"/>
+                      <Component id="jCancellaButton" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="invioButton" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jInvioButtone" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="inputTesto" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" alignment="0" pref="373" max="32767" attributes="0"/>
+                  <Component id="jInputTestoArea" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
@@ -47,14 +47,14 @@
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="434" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="inputTesto" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="jInputTestoArea" min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="containerImmagini" min="-2" pref="500" max="-2" attributes="0"/>
+                  <Component id="jContainerImmagini" min="-2" pref="500" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="invioButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="cancellaButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jInvioButtone" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jCancellaButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
@@ -69,11 +69,12 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="areaTesto">
+        <Component class="javax.swing.JTextArea" name="jAreaTesto">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="SimSun" size="12" style="1"/>
+              <Font name="SimSun" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -86,7 +87,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="invioButton">
+    <Component class="javax.swing.JButton" name="jInvioButtone">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SimSun" size="12" style="1"/>
@@ -94,10 +95,10 @@
         <Property name="text" type="java.lang.String" value="Conferma"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invioButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jInvioButtoneActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="cancellaButton">
+    <Component class="javax.swing.JButton" name="jCancellaButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SimSun" size="12" style="1"/>
@@ -105,15 +106,16 @@
         <Property name="text" type="java.lang.String" value="Cancella"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancellaButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancellaButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputTesto">
+    <Component class="javax.swing.JTextField" name="jInputTestoArea">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputTestoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jInputTestoAreaActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jInputTestoAreaKeyPressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="containerImmagini">
+    <Component class="javax.swing.JLabel" name="jContainerImmagini">
     </Component>
   </SubComponents>
 </Form>

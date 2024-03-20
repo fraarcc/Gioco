@@ -91,19 +91,6 @@ public class Init {
     return new ArrayList<>(commands.values());
 }
     
-    public boolean controlloDialogo(String rispostaUtente, String rispostaCorretta) {
-        // Tokenizza la stringa di input
-        String[] tokens = rispostaUtente.toLowerCase().split("\\s+");
-
-        // Rimuovi le stop words e crea una lista di token senza stop words
-        List<String> cleanTokens = new ArrayList<>();
-        for (String token : tokens) {
-            if (!stopWords.contains(token)) {
-                cleanTokens.add(token);
-            }
-        }
-        // Controlla se c'è un solo token non stop word e se è uguale all'altra stringa
-        return cleanTokens.size() == 1 && cleanTokens.get(0).equals(rispostaCorretta.toLowerCase());
-    }
+   
 
 }

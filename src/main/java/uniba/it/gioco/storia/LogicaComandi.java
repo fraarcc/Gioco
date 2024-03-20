@@ -4,8 +4,7 @@
  */
 package uniba.it.gioco.storia;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
@@ -15,169 +14,148 @@ import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
 import uniba.it.gioco.tipi.Giocatore;
+import uniba.it.gioco.tipi.Inventario;
 import uniba.it.gioco.tipi.Npc;
 import uniba.it.gioco.tipi.Oggetto;
 import uniba.it.gioco.tipi.Stanza;
 import uniba.it.gioco.tipi.TipoNpc;
+
 
 /**
  *
  * @author Nikita
  */
 public class LogicaComandi {
-
+    private Input input;
     private Output output;
     private Parser parser;
     private Giocatore giocatore;
     private Init init;
-    private JTextArea outputTestoCampo;
-    private JTextField inputTestoCampo;
-    private JButton bottoneInvio;
+    private JTextArea jOutputTestoArea;
+    private JTextField jInputTestoArea;
+    private JButton jBottoneInvio;
     private List<Stanza> stanze;
-    private boolean dialogo = false;
+    private LogicaDialoghi logicaDialoghi;
 
-    public LogicaComandi(Giocatore giocatore, Init init, JTextArea outputTestoCampo, JTextField inputTestoCampo, JButton bottoneInvio, Output output, List<Stanza> stanze) {
+
+    public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,  Output output, List<Stanza> stanze,LogicaDialoghi logicaDialoghi,Input input) {
         this.giocatore = giocatore;
         this.init = init;
         this.parser = new Parser();
-        this.outputTestoCampo = outputTestoCampo;
-        this.inputTestoCampo = inputTestoCampo;
-        this.bottoneInvio = bottoneInvio;
+        this.jOutputTestoArea = jOutputTestoArea;
+        this.jInputTestoArea = jInputTestoArea;
+        this.jBottoneInvio = jBottoneInvio;
         this.output = output;
         this.stanze = stanze;
+        this.logicaDialoghi = logicaDialoghi;
+        this.input = input;
     }
 
- public void gestioneComandi(String inputTesto) {
+    public void gestioneComandi(String inputTesto) {
         List<Comando> comandi = init.getCommandsAsList();
-        if (!dialogo) {
+      
             String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
             boolean comandoTrovato = false; // Flag per indicare se un comando è stato trovato
             for (Comando comando : comandi) {
                 if (comando.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(tipoComando))) {
-                    eseguiComando(comando,inputTesto);
+                    eseguiComando(comando, inputTesto);
                     comandoTrovato = true;
                     break;
                 }
-            }        
-        } 
+            }
+             if (!comandoTrovato) {
+            jOutputTestoArea.append("Comando non valido. Digita 'aiuto' per vedere la lista dei comandi disponibili.\n");
+            System.out.println("asdasdas" + inputTesto);
+        }
+        
     }
-
 
     private void eseguiComando(Comando comando, String inputTesto) {
         switch (comando.getType()) {
             case NORD:
-                System.out.println("Comando NORD trovato");
                 eseguiComandoNord(giocatore);
                 break;
             case SUD:
-                System.out.println("Comando SUD trovato");
                 eseguiComandoSud(giocatore);
                 break;
             case EST:
-                System.out.println("Comando EST trovato");
                 eseguiComandoEst(giocatore);
                 break;
             case OVEST:
-                System.out.println("Comando OVEST trovato");
                 eseguiComandoOvest(giocatore);
                 break;
             case APRI:
-                System.out.println("Comando APRI trovato");
                 //Solo in bagno se sta armadietto prendi scotch
                 break;
             case PARLA:
-                System.out.println("Comando PARLA trovato");
                 if (giocatore.getStanzaCorrente().haNpc()) {
                     List<String> esaminaNpcTokens = gestioneComandiComplessi(inputTesto);
                     eseguiComandoParlaNpc(giocatore, esaminaNpcTokens, inputTesto);
-                                   
+
                 } else {
-                    outputTestoCampo.append("Non puoi parlare con nessuno in questa stanza \n");
+                    jOutputTestoArea.append("Non puoi parlare con nessuno in questa stanza \n");
                 }
                 break;
             case INDOSSA:
-                //usabile solo se si ha camice nell'inventario (camice indossato non visibile all'utente)
-                System.out.println("Comando INDOSSA trovato");
                 if (controlloCamice(giocatore)) {
                     List<String> tokens = gestioneComandiComplessi(inputTesto);
                     eseguiComandoIndossa(giocatore, tokens);
                 } else {
-                    outputTestoCampo.append("Nel tuo inventario non ci sono oggetti da indossare\n");
+                    jOutputTestoArea.append("Nel tuo inventario non ci sono oggetti da indossare\n");
                 }
                 break;
             case RICHIEDI:
-                System.out.println("Comando RICHIEDI trovato");
                 if (giocatore.getStanzaCorrente().haNpc()) {
-                    System.out.println("asdasdasdasd");
                     if (giocatore.getStanzaCorrente().getNome().equals("atrio")) {
                         List<String> oggettoTokens = gestioneComandiComplessi(inputTesto);
                         eseguiComandoRichiediChiavi(giocatore, oggettoTokens);
                     }
                     if (giocatore.getStanzaCorrente().getNome().equals("farmacia")) {
                         List<String> oggettiTokens = gestioneComandiComplessi(inputTesto);
-                        System.out.println("Lista degli oggettiTokens:");
-                        for (String token : oggettiTokens) {
-                            System.out.println(token);
-                        }
                         eseguiComandoRichiediProdottoChimici(giocatore, oggettiTokens);
                     }
                 }
                 break;
             case RACCOGLI:
-                System.out.println("Comando RACCOGLI trovato");
                 if (controlloOggettiStanza(giocatore)) {
                     List<String> oggettoDesiderato = gestioneComandiComplessi(inputTesto);
                     if (!oggettoDesiderato.isEmpty()) {
                         eseguiComandoRaccogli(giocatore, oggettoDesiderato);
                     } else {
-                        outputTestoCampo.append("Specificare il nome dell'oggetto");
+                        jOutputTestoArea.append("Specificare il nome dell'oggetto\n");
                     }
                 }
                 break;
             case LEGGI:
-                System.out.println("Comando LEGGI trovato");
                 if (controlloInventario(giocatore)) {
                     List<String> esaminaOggettoToken = gestioneComandiComplessi(inputTesto);
                     eseguiComandoLeggi(giocatore, esaminaOggettoToken);
                 } else {
-                    outputTestoCampo.append("Non puoi usare questo comando, continua ad esplorare \n");
+                    jOutputTestoArea.append("Non puoi usare questo comando, continua ad esplorare \n");
                 }
                 //Solo per foglietto (sgabuzzino) dentro camice e ticket
                 break;
             case LANCIATI:
-                System.out.println("Comando LANCIATI trovato");
                 //finestra
                 break;
             case AIUTO:
-                System.out.println("Comando AIUTO trovato");
-                eseguiComandoAiuto(outputTestoCampo);
+                eseguiComandoAiuto(jOutputTestoArea);
                 break;
             case INVENTARIO:
-                System.out.println("Comando INV trovato");
                 eseguiComandoInventario(giocatore);
                 break;
             case OSSERVA:
-                System.out.println("OSSERVA RILEVATO");
                 osservaStanza(giocatore);
                 break;
             case ESCI:
-                System.out.println("Comando ESCI trovato");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Tipo di comando non gestito: " + comando.getType());
+                System.out.println("Tipo di comando non gestito: " + comando.getType() + "\n");
                 break;
         }
     }
-
-    
-
-
-
-    public boolean getDialogo() {
-        return dialogo;
-    }
-
+ 
     public void eseguiComandoSud(Giocatore giocatore) {
         giocatore.spostaGiocatore(init, Direzione.SUD, output, stanze);
     }
@@ -201,25 +179,44 @@ public class LogicaComandi {
     public void osservaStanza(Giocatore giocatore) {
         Stanza stanzaCorrente = giocatore.getStanzaCorrente();
         Set<Oggetto> oggettiStanza = stanzaCorrente.getOggettiPresentiStanza();
+
         if (!oggettiStanza.isEmpty()) {
-            outputTestoCampo.append("Oggetti presenti nella stanza:\n");
+            jOutputTestoArea.append("Oggetti presenti nella stanza:\n");
             for (Oggetto oggetto : oggettiStanza) {
-                outputTestoCampo.append("- " + oggetto.getNome() + "\n" + oggetto.getDescrizione() + "\n");
+                jOutputTestoArea.append("  Nome: " + oggetto.getNome() + "\n");
+                stampaDescrizione(oggetto, 40);
             }
         } else {
-            outputTestoCampo.append("In questa stanza non sono presenti oggetti\n");
+            jOutputTestoArea.append("In questa stanza non sono presenti oggetti.\n\n");
         }
+
         Npc npcStanzaCorrente = stanzaCorrente.getNpc();
         if (npcStanzaCorrente != null) {
-            outputTestoCampo.append("Tuttavia nella stanza noti: " + npcStanzaCorrente.getNome() + "\n");
+            jOutputTestoArea.append("Noti anche: " + npcStanzaCorrente.getNome() + "\n\n");
         }
+    }
+
+    public void stampaDescrizione(Oggetto oggetto, int lunghezzaMassimaPerRiga) {
+        String descrizione = oggetto.getDescrizione();
+        StringBuilder descrizioneFormattata = new StringBuilder("  Descrizione:\n  ");
+
+        int count = 0;
+        for (char c : descrizione.toCharArray()) {
+            if (count >= lunghezzaMassimaPerRiga && c != ' ') {
+                descrizioneFormattata.append("\n  ");
+                count = 0;
+            }
+            descrizioneFormattata.append(c);
+            count++;
+        }
+        jOutputTestoArea.append(descrizioneFormattata.toString() + "\n\n");
     }
 
     public boolean controlloOggettiStanza(Giocatore giocatore) {
         if (!giocatore.getStanzaCorrente().getOggettiPresentiStanza().isEmpty()) {
             return true;
         } else {
-            outputTestoCampo.append("Non ci sono oggetti in questa stanza");
+            jOutputTestoArea.append("Non ci sono oggetti in questa stanza \n");
             return false;
         }
     }
@@ -245,199 +242,107 @@ public class LogicaComandi {
         if (oggettoDesiderato != null) {
             giocatore.aggiungiOggettoInventario(oggettoDesiderato);
             stanzaCorrente.rimuoviOggettoDallaStanza(oggettoDesiderato);
-            outputTestoCampo.append("Hai raccolto l'oggetto: " + oggettoDesiderato.getNome() + "\n");
+            jOutputTestoArea.append("Hai raccolto l'oggetto: " + oggettoDesiderato.getNome() + "\n");
         } else {
-            outputTestoCampo.append("L'oggetto '" + tokensOggettoDesiderato + "' non è presente nella stanza\n");
+            jOutputTestoArea.append("L'oggetto '" + tokensOggettoDesiderato + "' non è presente nella stanza\n");
         }
     }
 
     public void eseguiComandoInventario(Giocatore giocatore) {
-        Set<Oggetto> inventario = giocatore.getInventario().getOggetti();
-        if (!inventario.isEmpty()) {
-            outputTestoCampo.append("Hai i seguenti oggetti nel tuo inventario \n");
-            for (Oggetto oggetto : inventario) {
-                outputTestoCampo.append(oggetto.getNome() + "\n\n");
-            }
-        } else {
-            outputTestoCampo.append("Non ci sono oggetti nel tuo inventario");
-        }
+        Inventario inventario = giocatore.getInventario();
+        jOutputTestoArea.append(inventario.toString());
     }
 
     public void eseguiComandoParlaNpc(Giocatore giocatore, List<String> tokens, String inputTesto) {
         if (tokens.size() != 1) {
             // La lista dei token deve contenere un solo elemento
-            outputTestoCampo.append("Inserire un nome corretto per parlare. \n");
+            jOutputTestoArea.append("Inserire un nome corretto per parlare. \n");
             return;
         }
         String nomeNpc = tokens.get(0).toLowerCase();
         // Verifica se l'NPC è nella stessa stanza del giocatore
         Npc npcStanza = giocatore.getStanzaCorrente().getNpc();
         if (!npcStanza.getNome().equalsIgnoreCase(nomeNpc)) {
-            outputTestoCampo.append("Non puoi parlare con " + nomeNpc + " in questa stanza. \n");
+            jOutputTestoArea.append("Non puoi parlare con " + nomeNpc + " in questa stanza. \n");
             return;
         }
+        
         switch (nomeNpc) {
             case "farmacista":
                 if (npcStanza.getTipo() == TipoNpc.FARMACISTA) {
-                    // Logica per l'interazione con un farmacista
-                    System.out.println("Stai parlando con un farmacista.");
+                    List<String> dialoghiFarmacista = npcStanza.getDialoghi();
+                    jOutputTestoArea.append(dialoghiFarmacista.get(0));
                 }
                 break;
             case "barista":
                 if (npcStanza.getTipo() == TipoNpc.BARISTA) {
-                    // Logica per l'interazione con un barista
                     List<String> dialoghiBarista = npcStanza.getDialoghi();
-                    outputTestoCampo.append(dialoghiBarista.get(0) + "\n");
-                    System.out.println("Stai parlando con un barista.");
+                    jOutputTestoArea.append(dialoghiBarista.get(0) + "\n");
                 }
                 break;
             case "guardie":
                 if (npcStanza.getTipo() == TipoNpc.GUARDIE) {
                     if (!npcStanza.isVisitato()) {
-                        gestioneGuardie(giocatore, npcStanza, inputTesto);
-                        System.out.println("Stai parlando con le guardie.");
-                        
+                        logicaDialoghi.gestioneGuardie(npcStanza, jInputTestoArea, jOutputTestoArea);
+                        System.out.println("Output jInputTestoArea:" + jInputTestoArea.getText());
+
                     } else {
-                        outputTestoCampo.append("Non puoi piu' parlare con le guardie. \n");
+                        jOutputTestoArea.append("Non puoi più parlare con le guardie. \n");
                     }
                 }
                 break;
             case "uomo":
-                if (npcStanza.getTipo() == TipoNpc.UOMO_MISTERIOSO) {
-                    // Logica per l'interazione con un uomo misterioso
-                    System.out.println("Stai parlando con un uomo misterioso.");
-                }
+                // Logica per l'interazione con un uomo misterioso
+                // Rimossa per brevità
                 break;
             case "dottoressa":
                 if (npcStanza.getTipo() == TipoNpc.DOTTORESSA) {
                     // Logica per l'interazione con una dottoressa
-                    outputTestoCampo.append("Dottoressa: Salve, cosa posso fare per lei? \n");
-                    System.out.println("Stai parlando con una dottoressa.");
+                    jOutputTestoArea.append("-Dottoressa: Salve, cosa posso fare per lei? \n");
+
                 }
                 break;
             default:
-                // Token non corrisponde a nessun tipo di NPC conosciuto
-                outputTestoCampo.append("Non puoi parlare con " + nomeNpc + ". \n");
+                jOutputTestoArea.append("Non puoi parlare con " + nomeNpc + ". \n");
                 break;
         }
+
     }
 
-    // Metodo per gestire il dialogo con le guardie
-    public void gestioneGuardie(Giocatore giocatore, Npc guardie, String inputTesto) {
-        dialogo = true;
-        if (guardie.getTipo() == TipoNpc.GUARDIE) {
-            List<String> dialoghiGuardie = guardie.getDialoghi();
-            outputTestoCampo.append(dialoghiGuardie.get(0) + "\n");
-            // Gestione dell'input dell'utente
-            inputTestoCampo.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String inputUtente = inputTestoCampo.getText().trim();
-                    inputTestoCampo.setText("");
-                    if (init.controlloDialogo(inputUtente, "si")) {
-                        outputTestoCampo.append(guardie.getIndovinello().getDomanda() + "\n");
-                        inputTestoCampo.removeActionListener(this);
-                        inputTestoCampo.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                String inputRisposta = inputTestoCampo.getText().trim();
-                                inputTestoCampo.setText("");
-                                if (guardie.getIndovinello().controllaRisposta(inputRisposta)) {
-                                    outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
-                                    stanze.get(1).setAperto(true);
-                                    stanze.get(0).getNpc().setVisitato(true);
-                                    dialogo = false;   
-                                } else {
-                                    outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
-                                    dialogo = false;   
-                                }
-                                inputTestoCampo.removeActionListener(this);
-                            }
-                        });
-                    } else {
-                        dialogo = false;   
-                        outputTestoCampo.append("La risposta e' sbagliata, continua ad esplorare \n");
-                        inputTestoCampo.removeActionListener(this);
-                    }
-
-                }
-            });
-
-            // Action listener per il bottone "invioButton"
-            bottoneInvio.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String inputUtente = inputTestoCampo.getText().trim();
-                    if (init.controlloDialogo(inputUtente, "si")) {
-                        outputTestoCampo.append(guardie.getIndovinello().getDomanda() + "\n");
-                        inputTestoCampo.removeActionListener(this);
-                        // Aggiungi un nuovo ascoltatore per gestire la risposta successiva dell'utente
-                        inputTestoCampo.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                String inputRisposta = inputTestoCampo.getText().trim();
-                                inputTestoCampo.setText("");
-                                if (guardie.getIndovinello().controllaRisposta(inputRisposta)) {
-                                    outputTestoCampo.append(dialoghiGuardie.get(2) + "\n");
-                                    stanze.get(1).setAperto(true);
-                                    stanze.get(0).getNpc().setVisitato(true);
-                                    dialogo = false;   
-                                } else {
-                                    outputTestoCampo.append(dialoghiGuardie.get(1) + "\n");
-                                    dialogo = false;   
-                                }
-                                inputTestoCampo.removeActionListener(this);
-                            }
-                        });
-                    } else {
-                        dialogo = false;
-                        outputTestoCampo.append("La risposta e' sbagliata, continua ad esplorare \n");
-                        bottoneInvio.removeActionListener(this);
-                    }
-                }
-            });
-        }
-    }
 
     public void eseguiComandoLeggi(Giocatore giocatore, List<String> tokens) {
         if (tokens.size() != 1) {
-            // La lista dei token deve contenere un solo elemento
-            outputTestoCampo.append("Non puoi osservare questo oggetto. \n");
+            jOutputTestoArea.append("Non puoi osservare questo oggetto. \n");
             return;
         }
         String oggettoDaLeggere = tokens.get(0).toLowerCase();
-        // Verifica se l'oggetto da leggere è presente nell'inventario del giocatore
         Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
         boolean oggettoTrovato = false;
         for (Oggetto oggetto : inventarioGiocatore) {
             if (oggetto.getNome().equalsIgnoreCase(oggettoDaLeggere)) {
-                // Se l'oggetto è nell'inventario, verifica quale oggetto è e mostra il testo appropriato
                 switch (oggettoDaLeggere) {
                     case "ticket":
-                        outputTestoCampo.append("Il ticket riporta su un lato la scritta: A3258.\n"
+                        jOutputTestoArea.append("Il ticket riporta su un lato la scritta: A3258.\n"
                                 + "La scritta sembra appena stampata. Dev'essere un biglietto utilizzato da qualcuno pochi minuti fa.\n");
                         oggettoTrovato = true;
                         break;
-                    case "foglietto":  //Da testare
-                        outputTestoCampo.append("Leggi queste righe scritte una sotto l'altra: sodio cl, potass, calcio cl, sodio ace.\n");
+                    case "foglietto": // Da testare
+                        jOutputTestoArea.append("Leggi queste righe scritte una sotto l'altra: sodio cl, potass, calcio cl, sodio ace.\n");
                         oggettoTrovato = true;
                         break;
                     case "seconda meta' foglietto": // Da testare
-                        outputTestoCampo.append("Leggi le seguenti parole scritte in colonna: oruro, io cloruro, oruro diidrato, tato triidrato\n");
+                        jOutputTestoArea.append("Leggi le seguenti parole scritte in colonna: oruro, io cloruro, oruro diidrato, tato triidrato\n");
                         oggettoTrovato = true;
                         break;
                     default:
-                        // Se l'oggetto da leggere non corrisponde a nessuna delle opzioni previste, mostra un messaggio di errore
-                        outputTestoCampo.append("Non puoi leggere questo oggetto. \n");
+                        jOutputTestoArea.append("Non puoi leggere questo oggetto. \n");
                         return;
                 }
-                break; // Esci dal ciclo una volta trovato l'oggetto
+                break; 
             }
         }
-
-        // Se l'oggetto da leggere non è stato trovato nell'inventario, mostra un messaggio di errore
         if (!oggettoTrovato) {
-            outputTestoCampo.append("L'oggetto specificato non è presente nell'inventario. \n");
+            jOutputTestoArea.append("L'oggetto specificato non è presente nell'inventario. \n");
         }
     }
 
@@ -465,10 +370,10 @@ public class LogicaComandi {
     public void eseguiComandoRichiediChiavi(Giocatore giocatore, List<String> tokensOggetto) {
         // Verifica se il giocatore si trova nell'atrio
         if (!giocatore.getStanzaCorrente().getNome().equalsIgnoreCase("atrio")) {
-            outputTestoCampo.append("Devi essere nell'atrio per poter richiedere le chiavi del bagno. \n");
+            jOutputTestoArea.append("Devi essere nell'atrio per poter richiedere le chiavi del bagno. \n");
             return;
         }
-
+        System.out.println("Chiavi");
         // Ottieni l'NPC barista dalla stanza
         Npc barista = giocatore.getStanzaCorrente().getNpc();
         // Ottieni l'inventario dell'NPC barista
@@ -501,11 +406,11 @@ public class LogicaComandi {
             giocatore.aggiungiOggettoInventario(chiaviBagno);
 
             // Esegui la logica per consegnare le chiavi del bagno
-            outputTestoCampo.append("Ecco le chiavi del bagno. \n");
+            jOutputTestoArea.append("Ecco le chiavi del bagno. \n");
             stanze.get(4).setAperto(true);
         } else {
             // Se le chiavi del bagno non sono presenti nell'inventario dell'NPC o non sono specificate nei token, mostra un messaggio di errore
-            outputTestoCampo.append("Le chiavi del bagno non sono disponibili. \n");
+            jOutputTestoArea.append("Le chiavi del bagno non sono disponibili. \n");
         }
     }
 
@@ -523,10 +428,10 @@ public class LogicaComandi {
 
             Oggetto camiceIndossato = new Oggetto(14, "Camice Indossato", "Un camice bianco da laboratorio, indossato.");
             giocatore.aggiungiOggettoInventario(camiceIndossato);
-            outputTestoCampo.append("Hai indossato il camice. \n");
+            jOutputTestoArea.append("Hai indossato il camice. \n");
         } else {
             // Se la condizione non è soddisfatta, mostra un messaggio di errore
-            outputTestoCampo.append("Non puoi indossare questo oggetto. \n");
+            jOutputTestoArea.append("Non puoi indossare questo oggetto. \n");
         }
     }
 
@@ -561,9 +466,9 @@ public class LogicaComandi {
                             inventarioFarmacista.remove(sodioCloruroOggetto);
                             // Aggiungi l'oggetto "sodioCloruro" all'inventario del giocatore
                             giocatore.aggiungiOggettoInventario(sodioCloruroOggetto);
-                            outputTestoCampo.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
                         } else {
-                            outputTestoCampo.append("Farmacista: Non ho il sodio cloruro disponibile al momento.\n");
+                            jOutputTestoArea.append("Farmacista: Non ho il sodio cloruro disponibile al momento.\n");
                         }
                     }
                     if (potassioCloruro) {
@@ -577,9 +482,9 @@ public class LogicaComandi {
                         if (potassioCloruroOggetto != null) {
                             inventarioFarmacista.remove(potassioCloruroOggetto);
                             giocatore.aggiungiOggettoInventario(potassioCloruroOggetto);
-                            outputTestoCampo.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
                         } else {
-                            outputTestoCampo.append("Farmacista: Non ho il potassio cloruro disponibile al momento.\n");
+                            jOutputTestoArea.append("Farmacista: Non ho il potassio cloruro disponibile al momento.\n");
                         }
                     }
 
@@ -594,9 +499,9 @@ public class LogicaComandi {
                         if (calcioCloruroDiidratoOggetto != null) {
                             inventarioFarmacista.remove(calcioCloruroDiidratoOggetto);
                             giocatore.aggiungiOggettoInventario(calcioCloruroDiidratoOggetto);
-                            outputTestoCampo.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
                         } else {
-                            outputTestoCampo.append("Farmacista: Non ho il calcio cloruro diidrato disponibile al momento.\n");
+                            jOutputTestoArea.append("Farmacista: Non ho il calcio cloruro diidrato disponibile al momento.\n");
                         }
                     }
 
@@ -611,21 +516,21 @@ public class LogicaComandi {
                         if (sodioAcetatoTriidratoOggetto != null) {
                             inventarioFarmacista.remove(sodioAcetatoTriidratoOggetto);
                             giocatore.aggiungiOggettoInventario(sodioAcetatoTriidratoOggetto);
-                            outputTestoCampo.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
                         } else {
-                            outputTestoCampo.append("Farmacista: Non ho il sodio acetato triidrato disponibile al momento.\n");
+                            jOutputTestoArea.append("Farmacista: Non ho il sodio acetato triidrato disponibile al momento.\n");
                         }
                     }
                 } else {
-                    outputTestoCampo.append("Farmacista: Devi specificare i prodotti chimici correttamente.\n");
+                    jOutputTestoArea.append("Farmacista: Devi specificare i prodotti chimici correttamente.\n");
                 }
             } else {
-                outputTestoCampo.append("Farmacista: Non ho questi prodotti.\n");
+                jOutputTestoArea.append("Farmacista: Non ho questi prodotti.\n");
             }
         } else {
             // Se il camice non viene indossato, mostra i dialoghi del farmacista
-            outputTestoCampo.append(dialoghiFarmacista.get(2) + "\n");
-            outputTestoCampo.append(dialoghiFarmacista.get(3) + "\n");
+            jOutputTestoArea.append(dialoghiFarmacista.get(2) + "\n");
+            jOutputTestoArea.append(dialoghiFarmacista.get(3) + "\n");
         }
     }
 
