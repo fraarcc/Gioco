@@ -80,7 +80,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                         .addGap(42, 42, 42)
                         .addComponent(conferma, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(nicknameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

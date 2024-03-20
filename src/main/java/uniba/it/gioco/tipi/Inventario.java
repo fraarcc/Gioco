@@ -36,14 +36,31 @@ public class Inventario {
         return oggetti;
     }
 
-    
-    
-
     @Override
     public String toString() {
-        return "Inventario{" +
-                "oggetti=" + oggetti +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Inventario:\n");
+
+        if (oggetti.isEmpty()) {
+            stringBuilder.append("Nessun oggetto nell'inventario.\n");
+        } else {
+            for (Oggetto oggetto : oggetti) {
+                stringBuilder.append("- ");
+                stringBuilder.append(oggetto.getNome());
+                stringBuilder.append(":\n");
+
+                String descrizione = oggetto.getDescrizione();
+                int lunghezzaMassimaPerRiga = 50; 
+                int index = 0;
+                while (index < descrizione.length()) {
+                    stringBuilder.append("   "); 
+                    stringBuilder.append(descrizione.substring(index, Math.min(index + lunghezzaMassimaPerRiga, descrizione.length())));
+                    stringBuilder.append("\n");
+                    index += lunghezzaMassimaPerRiga;
+                }
+            }
+        }
+
+        return stringBuilder.toString();
     }
 }
-    

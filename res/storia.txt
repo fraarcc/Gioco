@@ -1,9 +1,13 @@
 # ingresso
 
-Hai appena parcheggiato il tuo bolide nel parcheggio antistante l'ospedale San Duziano di Ciufello sull'Arno (LU). 
-Sei ammaliato alla vista delle enormi vetrate all'ingresso, ma non c'e' tempo di distrarsi: 
+Hai appena parcheggiato il tuo bolide nel parcheggio 
+antistante l'ospedale San Duziano di Ciufello sull'Arno (LU). 
+Sei ammaliato alla vista delle enormi vetrate all'ingresso, 
+ma non c'e' tempo di distrarsi: 
 - hai bisogno dell'ingrediente finale per la tua pozione magica. 
-Decidi di entrare. L'obiettivo e' non farsi scoprire come maniaco, tanto meno come evasore fiscale quale sei.
+Decidi di entrare. L'obiettivo e' non farsi scoprire
+ come maniaco, tanto meno come evasore fiscale quale sei.
+
 
 Sei davanti alle vetrate d'ingresso.
 
