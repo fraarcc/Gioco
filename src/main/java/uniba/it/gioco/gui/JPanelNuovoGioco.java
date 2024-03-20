@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import uniba.it.gioco.GameModel;
+import uniba.it.gioco.database.InitDatabase;
 import uniba.it.gioco.tipi.Giocatore;
 
 /**
@@ -105,6 +106,9 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     private void confermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaActionPerformed
        // Ottieni il nickname inserito dall'utente
     String nickname = jNickname.getText();
+    if(!InitDatabase.verificaGiocatore(nickname)){
+        
+   
     System.out.println("Nickname inserito: " + nickname);
 
     // Inizializza il gioco con il nickname nel GameModel esistente
@@ -124,6 +128,9 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         // Gestione dell'errore
         System.err.println("Impossibile inizializzare il gioco");
     }
+    }else{
+        System.out.println("nickname non disponibile!");
+    }
     }//GEN-LAST:event_confermaActionPerformed
 
     private void jNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNicknameActionPerformed
@@ -131,6 +138,8 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jNicknameActionPerformed
 
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton conferma;

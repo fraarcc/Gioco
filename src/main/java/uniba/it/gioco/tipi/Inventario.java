@@ -13,7 +13,7 @@ import java.util.HashSet;
  * @author Nikita
  */
     
-public class Inventario {
+public class Inventario implements Serializable {
     private Set<Oggetto> oggetti;
 
     public Inventario() {

@@ -33,6 +33,8 @@ public class JFrameMain extends javax.swing.JFrame {
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
         cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        cardsPanel.add(new JPanelMostraPartite(this, gameModel), "showGames");
+
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -48,6 +50,9 @@ public class JFrameMain extends javax.swing.JFrame {
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
         cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
+        cardsPanel.add(new JPanelMostraPartite(this, gameModel), "showGames");
+
+
         revalidate(); // Rendi valida la nuova disposizione delle card nel pannello
         repaint(); // Ridisegna il pannello
     }

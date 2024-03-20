@@ -10,6 +10,9 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import uniba.it.gioco.GameModel;
+import uniba.it.gioco.database.InitDatabase;
+import uniba.it.gioco.gui.JPanelNuovoGioco;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
@@ -36,6 +39,8 @@ public class LogicaComandi {
     private JButton jBottoneInvio;
     private List<Stanza> stanze;
     private LogicaDialoghi logicaDialoghi;
+    private GameModel gameModel;
+   
 
 
     public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,  Output output, List<Stanza> stanze,LogicaDialoghi logicaDialoghi,Input input) {
@@ -49,6 +54,7 @@ public class LogicaComandi {
         this.stanze = stanze;
         this.logicaDialoghi = logicaDialoghi;
         this.input = input;
+      
     }
 
     public void gestioneComandi(String inputTesto) {
@@ -149,6 +155,9 @@ public class LogicaComandi {
                 break;
             case ESCI:
                 System.exit(0);
+                break;
+            case SALVA:
+                eseguiComandoSalva();
                 break;
             default:
                 System.out.println("Tipo di comando non gestito: " + comando.getType() + "\n");
@@ -532,6 +541,13 @@ public class LogicaComandi {
             jOutputTestoArea.append(dialoghiFarmacista.get(2) + "\n");
             jOutputTestoArea.append(dialoghiFarmacista.get(3) + "\n");
         }
+    }
+    
+    public void eseguiComandoSalva(){
+        gameModel = input.getGameModel();
+        
+        InitDatabase.salvaPartita(giocatore.getNickname(), gameModel);
+        jOutputTestoArea.append("Partita Salvata correttamente \n");
     }
 
 }

@@ -5,6 +5,7 @@
 package uniba.it.gioco.tipi;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ import uniba.it.gioco.storia.Output;
  *
  * @author Nikita
  */
-public class Giocatore {
+public class Giocatore implements Serializable {
 
     private int idUtente;
     private String nickname;

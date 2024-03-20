@@ -5,7 +5,9 @@
 package uniba.it.gioco;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
+import uniba.it.gioco.database.InitDatabase;
 import uniba.it.gioco.storia.Init;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
@@ -14,14 +16,19 @@ import uniba.it.gioco.tipi.Stanza;
  *
  * @author Nikita
  */
-public class GameModel {
+public class GameModel implements Serializable{
     private List<Stanza> stanze;
-    private Init init;
+    private transient Init init;
     private Giocatore giocatore;
+    private transient InitDatabase initDatabse;
+
 
     public GameModel() {
         this.init = new Init();
         this.giocatore = new Giocatore();
+        this.initDatabse = new InitDatabase();
+     
+       
     }
 
     public GameModel inizializzaGioco(String nickname) {
@@ -51,6 +58,12 @@ public class GameModel {
     public String getNomeGiocatore() {
         return giocatore != null ? giocatore.getNickname() : null;
     }
+
+    public void setInit(Init init) {
+        this.init = init;
+    }
+    
+ 
     
     public Init getInit(){
         return init;
@@ -67,5 +80,8 @@ public class GameModel {
     }
     return stanze;
 }
+   public GameModel getGameModel() {
+        return this;
+    }
 }
 

@@ -103,7 +103,7 @@ public class JPanelMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_esciActionPerformed
 
     private void caricaPartita1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caricaPartita1ActionPerformed
-        // TODO add your handling code here:
+        jframeMain.showCard("showGames");
     }//GEN-LAST:event_caricaPartita1ActionPerformed
 
 

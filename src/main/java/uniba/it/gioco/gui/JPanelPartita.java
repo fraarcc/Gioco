@@ -51,7 +51,7 @@ public class JPanelPartita extends javax.swing.JPanel {
                 Output output = new Output(jAreaTesto, giocatore, jContainerImmagini);
                 output.start();
 
-                inputThread = new Input(jInputTestoArea, jInvioButtone,giocatore, init, jAreaTesto,  output, stanze);
+                inputThread = new Input(jInputTestoArea, jInvioButtone,giocatore, init, jAreaTesto,  output, stanze, gameModel);
                 //inputThread.start();
             } else {
                 System.out.println("Giocatore non inizializzato");
