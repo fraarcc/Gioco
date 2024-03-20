@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
@@ -30,11 +31,14 @@ private JFrameMain jframeMain;
         this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
-        
-        
+        initGrafica();
         prelievoDati();
     }
-  
+   
+    private void initGrafica(){
+          DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+          leftRenderer.setHorizontalAlignment(DefaultTableCellRenderer.LEFT);
+    }
    
     
     private void prelievoDati(){
@@ -64,8 +68,7 @@ private JFrameMain jframeMain;
             String nickname = resultSet.getString("nickname");
             Timestamp timestamp = resultSet.getTimestamp("timestamp");
             if(id != 0 && !nickname.isEmpty() && timestamp != null){
-            modelloTabella.insertRow(0,new Object [] {id, nickname, timestamp});
-       
+            modelloTabella.insertRow(0,new Object [] {id, nickname, timestamp});     
             }
         }
                
@@ -85,8 +88,10 @@ private JFrameMain jframeMain;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePartite = new javax.swing.JTable();
         jButtonCarica = new javax.swing.JButton();
-        jButtonCancella = new javax.swing.JButton();
+        jButtonIndietro = new javax.swing.JButton();
+        jButtonCancella1 = new javax.swing.JButton();
 
+        jTablePartite.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         jTablePartite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -95,12 +100,19 @@ private JFrameMain jframeMain;
                 {null, null, null}
             },
             new String [] {
-                "ID", " Nickname", "Timestamp"
+                "ID Partita", " Nickname", "Data Creazione"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -113,17 +125,30 @@ private JFrameMain jframeMain;
             jTablePartite.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        jButtonCarica.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         jButtonCarica.setText("Carica");
+        jButtonCarica.setPreferredSize(new java.awt.Dimension(110, 32));
         jButtonCarica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCaricaActionPerformed(evt);
             }
         });
 
-        jButtonCancella.setText("Cancella");
-        jButtonCancella.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIndietro.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButtonIndietro.setText("Indietro");
+        jButtonIndietro.setPreferredSize(new java.awt.Dimension(110, 32));
+        jButtonIndietro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancellaActionPerformed(evt);
+                jButtonIndietroActionPerformed(evt);
+            }
+        });
+
+        jButtonCancella1.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jButtonCancella1.setText("Cancella");
+        jButtonCancella1.setPreferredSize(new java.awt.Dimension(110, 32));
+        jButtonCancella1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancella1ActionPerformed(evt);
             }
         });
 
@@ -131,34 +156,41 @@ private JFrameMain jframeMain;
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(202, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCancella)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCarica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(300, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(248, 248, 248))
+                        .addComponent(jButtonIndietro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCancella1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCarica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(97, 97, 97)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCarica)
-                    .addComponent(jButtonCancella))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(jButtonCarica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancella1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonIndietro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancellaActionPerformed
+    private void jButtonIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndietroActionPerformed
+    try {
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCancellaActionPerformed
+        jframeMain.updateCards(gameModel);
+        jframeMain.showCard("mainMenu");
+    } catch (IOException ex) {
+        Logger.getLogger(JPanelMostraPartite.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jButtonIndietroActionPerformed
 
     private void jButtonCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaricaActionPerformed
         // TODO add your handling code here:
@@ -182,13 +214,18 @@ private JFrameMain jframeMain;
       }  
     }//GEN-LAST:event_jButtonCaricaActionPerformed
 
+    private void jButtonCancella1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancella1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCancella1ActionPerformed
+
 
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancella;
+    private javax.swing.JButton jButtonCancella1;
     private javax.swing.JButton jButtonCarica;
+    private javax.swing.JButton jButtonIndietro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePartite;
     // End of variables declaration//GEN-END:variables

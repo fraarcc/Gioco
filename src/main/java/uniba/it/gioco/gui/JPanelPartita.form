@@ -26,10 +26,12 @@
               <Component id="jContainerImmagini" min="-2" pref="420" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="513" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="287" max="32767" attributes="0"/>
-                      <Component id="jCancellaButton" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jIndietroButton" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCancellaButton1" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jInvioButtone" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
@@ -54,7 +56,8 @@
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jInvioButtone" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jCancellaButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jCancellaButton1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jIndietroButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
@@ -98,15 +101,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jInvioButtoneActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jCancellaButton">
+    <Component class="javax.swing.JButton" name="jIndietroButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SimSun" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cancella"/>
+        <Property name="text" type="java.lang.String" value="Indietro"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancellaButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jIndietroButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jInputTestoArea">
@@ -116,6 +119,17 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jContainerImmagini">
+    </Component>
+    <Component class="javax.swing.JButton" name="jCancellaButton1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SimSun" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cancella"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCancellaButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

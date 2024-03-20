@@ -4,11 +4,18 @@
  */
 package uniba.it.gioco.gui;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.storia.Init;
@@ -37,7 +44,6 @@ public class JPanelPartita extends javax.swing.JPanel {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
-        
         try {
             init = gameModel.getInit();
             stanze = gameModel.getStanze();
@@ -61,7 +67,8 @@ public class JPanelPartita extends javax.swing.JPanel {
         }
         jInputTestoArea.requestFocus();
     }
-         
+    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,9 +82,10 @@ public class JPanelPartita extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jAreaTesto = new javax.swing.JTextArea();
         jInvioButtone = new javax.swing.JButton();
-        jCancellaButton = new javax.swing.JButton();
+        jIndietroButton = new javax.swing.JButton();
         jInputTestoArea = new javax.swing.JTextField();
         jContainerImmagini = new javax.swing.JLabel();
+        jCancellaButton1 = new javax.swing.JButton();
 
         setForeground(new java.awt.Color(0, 0, 0));
 
@@ -96,11 +104,11 @@ public class JPanelPartita extends javax.swing.JPanel {
             }
         });
 
-        jCancellaButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jCancellaButton.setText("Cancella");
-        jCancellaButton.addActionListener(new java.awt.event.ActionListener() {
+        jIndietroButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jIndietroButton.setText("Indietro");
+        jIndietroButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCancellaButtonActionPerformed(evt);
+                jIndietroButtonActionPerformed(evt);
             }
         });
 
@@ -115,6 +123,14 @@ public class JPanelPartita extends javax.swing.JPanel {
             }
         });
 
+        jCancellaButton1.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        jCancellaButton1.setText("Cancella");
+        jCancellaButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCancellaButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,10 +140,12 @@ public class JPanelPartita extends javax.swing.JPanel {
                 .addComponent(jContainerImmagini, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 287, Short.MAX_VALUE)
-                        .addComponent(jCancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jIndietroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCancellaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jInvioButtone, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jInputTestoArea))
@@ -146,7 +164,8 @@ public class JPanelPartita extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jInvioButtone, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCancellaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCancellaButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jIndietroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -156,10 +175,21 @@ public class JPanelPartita extends javax.swing.JPanel {
        
     }//GEN-LAST:event_jInputTestoAreaActionPerformed
 
-    private void jCancellaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancellaButtonActionPerformed
-        // TODO add your handling code here:
-        jInputTestoArea.setText("");
-    }//GEN-LAST:event_jCancellaButtonActionPerformed
+    private void jIndietroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIndietroButtonActionPerformed
+        JFrame confermaFrame = new JFrame();
+        int choice = JOptionPane.showConfirmDialog(confermaFrame, """
+                                                                  Sei sicuro di voler tornare indietro?
+                                                                  Ricordati di salvare""", "Attenzione", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                // TODO add your handling code here:
+                jframeMain.updateCards(gameModel);
+                jframeMain.showCard("mainMenu");
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelPartita.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jIndietroButtonActionPerformed
 
     private void jInvioButtoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvioButtoneActionPerformed
         String input = jInputTestoArea.getText();
@@ -188,12 +218,17 @@ public class JPanelPartita extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jInputTestoAreaKeyPressed
 
+    private void jCancellaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancellaButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCancellaButton1ActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea jAreaTesto;
-    private javax.swing.JButton jCancellaButton;
+    private javax.swing.JButton jCancellaButton1;
     private javax.swing.JLabel jContainerImmagini;
+    private javax.swing.JButton jIndietroButton;
     private javax.swing.JTextField jInputTestoArea;
     private javax.swing.JButton jInvioButtone;
     private javax.swing.JScrollPane jScrollPane1;

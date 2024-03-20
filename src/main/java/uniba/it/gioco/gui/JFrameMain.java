@@ -6,7 +6,10 @@ package uniba.it.gioco.gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import uniba.it.gioco.GameModel;
 
@@ -38,8 +41,29 @@ public class JFrameMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
+        gestioneUscita();
     }
 
+   public void gestioneUscita(){
+    // Aggiungi il WindowListener al frame principale
+    this.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            // Mostra una finestra di dialogo di conferma
+            int choice = JOptionPane.showConfirmDialog(JFrameMain.this, "Vuoi davvero chiudere l'applicazione?"
+                    + "\nI tuoi progressi potrebbero essere persi", "Conferma", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                // Chiudi l'applicazione
+                setDefaultCloseOperation(JFrameMain.EXIT_ON_CLOSE);
+            } else {
+                // Annulla la chiusura dell'applicazione
+                setDefaultCloseOperation(JFrameMain.DO_NOTHING_ON_CLOSE);
+            }
+        }
+    });
+}
+        
+    
     // Metodo per spostarsi alla "card" specificata
     public void showCard(String cardName) {
         cardLayout.show(cardsPanel, cardName);
