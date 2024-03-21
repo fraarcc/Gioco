@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -45,7 +41,7 @@ public class LogicaComandi {
     private List<Stanza> stanze;
     private LogicaDialoghi logicaDialoghi;
     private GameModel gameModel;
-    private JFrameMain jframeMain;
+
 
     public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,
             Output output, List<Stanza> stanze, LogicaDialoghi logicaDialoghi, Input input) {
@@ -93,7 +89,7 @@ public class LogicaComandi {
                 eseguiComandoOvest(giocatore);
                 break;
             case APRI:
-                if (giocatore.getStanzaCorrente().getNome().equals("bagno")) {
+                if (giocatore.getStanzaCorrente().getNome().equals("bagno") && !stanze.get(5).isAperto()) {
                     Thread thread = new Thread(() -> {
                         boolean risultato = eseguiComandoApri();
                         SwingUtilities.invokeLater(() -> {
@@ -106,6 +102,8 @@ public class LogicaComandi {
                         });
                     });
                     thread.start();
+                } else {
+                    jOutputTestoArea.append("Non puoi aprire nessuna stanza. \n");
                 }
 
                 break;
