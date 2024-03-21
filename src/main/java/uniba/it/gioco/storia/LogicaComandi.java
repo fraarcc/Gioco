@@ -4,15 +4,21 @@
  */
 package uniba.it.gioco.storia;
 
-
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
-import uniba.it.gioco.gui.JPanelNuovoGioco;
+import uniba.it.gioco.gui.JFrameLucchetto;
+import uniba.it.gioco.gui.JFrameMain;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
@@ -23,12 +29,12 @@ import uniba.it.gioco.tipi.Oggetto;
 import uniba.it.gioco.tipi.Stanza;
 import uniba.it.gioco.tipi.TipoNpc;
 
-
 /**
  *
  * @author Nikita
  */
 public class LogicaComandi {
+
     private Input input;
     private Output output;
     private Parser parser;
@@ -36,44 +42,40 @@ public class LogicaComandi {
     private Init init;
     private JTextArea jOutputTestoArea;
     private JTextField jInputTestoArea;
-    private JButton jBottoneInvio;
     private List<Stanza> stanze;
     private LogicaDialoghi logicaDialoghi;
     private GameModel gameModel;
-   
+    private JFrameMain jframeMain;
 
-
-    public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,  Output output, List<Stanza> stanze,LogicaDialoghi logicaDialoghi,Input input) {
+    public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,
+            Output output, List<Stanza> stanze, LogicaDialoghi logicaDialoghi, Input input) {
         this.giocatore = giocatore;
         this.init = init;
         this.parser = new Parser();
         this.jOutputTestoArea = jOutputTestoArea;
         this.jInputTestoArea = jInputTestoArea;
-        this.jBottoneInvio = jBottoneInvio;
         this.output = output;
         this.stanze = stanze;
         this.logicaDialoghi = logicaDialoghi;
         this.input = input;
-      
     }
 
     public void gestioneComandi(String inputTesto) {
         List<Comando> comandi = init.getCommandsAsList();
-      
-            String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
-            boolean comandoTrovato = false; // Flag per indicare se un comando è stato trovato
-            for (Comando comando : comandi) {
-                if (comando.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(tipoComando))) {
-                    eseguiComando(comando, inputTesto);
-                    comandoTrovato = true;
-                    break;
-                }
+
+        String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
+        boolean comandoTrovato = false; // Flag per indicare se un comando è stato trovato
+        for (Comando comando : comandi) {
+            if (comando.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(tipoComando))) {
+                eseguiComando(comando, inputTesto);
+                comandoTrovato = true;
+                break;
             }
-             if (!comandoTrovato) {
-            jOutputTestoArea.append("Comando non valido. Digita 'aiuto' per vedere la lista dei comandi disponibili.\n");
-            System.out.println("asdasdas" + inputTesto);
         }
-        
+        if (!comandoTrovato) {
+            jOutputTestoArea.append("Comando non valido. Digita 'aiuto' per vedere la lista dei comandi disponibili.\n");
+        }
+
     }
 
     private void eseguiComando(Comando comando, String inputTesto) {
@@ -91,7 +93,21 @@ public class LogicaComandi {
                 eseguiComandoOvest(giocatore);
                 break;
             case APRI:
-                //Solo in bagno se sta armadietto prendi scotch
+                if (giocatore.getStanzaCorrente().getNome().equals("bagno")) {
+                    Thread thread = new Thread(() -> {
+                        boolean risultato = eseguiComandoApri();
+                        SwingUtilities.invokeLater(() -> {
+                            if (risultato) {
+                                stanze.get(5).setAperto(true);
+                                jOutputTestoArea.append("Lo sgabuzzino è stato aperto!\nProva a proseguire.\n");
+                            } else {
+                                jOutputTestoArea.append("Non sei riuscito ad aprire il lucchetto, riprova.\n");
+                            }
+                        });
+                    });
+                    thread.start();
+                }
+
                 break;
             case PARLA:
                 if (giocatore.getStanzaCorrente().haNpc()) {
@@ -164,7 +180,7 @@ public class LogicaComandi {
                 break;
         }
     }
- 
+
     public void eseguiComandoSud(Giocatore giocatore) {
         giocatore.spostaGiocatore(init, Direzione.SUD, output, stanze);
     }
@@ -275,7 +291,7 @@ public class LogicaComandi {
             jOutputTestoArea.append("Non puoi parlare con " + nomeNpc + " in questa stanza. \n");
             return;
         }
-        
+
         switch (nomeNpc) {
             case "farmacista":
                 if (npcStanza.getTipo() == TipoNpc.FARMACISTA) {
@@ -318,7 +334,6 @@ public class LogicaComandi {
 
     }
 
-
     public void eseguiComandoLeggi(Giocatore giocatore, List<String> tokens) {
         if (tokens.size() != 1) {
             jOutputTestoArea.append("Non puoi osservare questo oggetto. \n");
@@ -347,7 +362,7 @@ public class LogicaComandi {
                         jOutputTestoArea.append("Non puoi leggere questo oggetto. \n");
                         return;
                 }
-                break; 
+                break;
             }
         }
         if (!oggettoTrovato) {
@@ -542,12 +557,44 @@ public class LogicaComandi {
             jOutputTestoArea.append(dialoghiFarmacista.get(3) + "\n");
         }
     }
-    
-    public void eseguiComandoSalva(){
+
+    public void eseguiComandoSalva() {
         gameModel = input.getGameModel();
-        
+
         InitDatabase.salvaPartita(giocatore.getNickname(), gameModel);
         jOutputTestoArea.append("Partita Salvata correttamente \n");
     }
 
+    public static CompletableFuture<Boolean> apriLucchetto() {
+        CompletableFuture<Boolean> risultato = new CompletableFuture<>();
+
+        // Avvia il frame del lucchetto in un thread separato
+        Thread thread = new Thread(() -> {
+            JFrameLucchetto frame = new JFrameLucchetto((statoGioco) -> {
+                risultato.complete(statoGioco);
+            });
+            frame.setVisible(true);
+        });
+        thread.start();
+
+        return risultato;
+    }
+
+    public boolean eseguiComandoApri() {
+        CompletableFuture<Boolean> risultato = apriLucchetto();
+        boolean stato;
+        try {
+            stato = risultato.get(); // Questo bloccherà il thread finché il risultato non sarà disponibile
+            if (stato) {
+                System.out.println("Il lucchetto è stato sbloccato!");
+            } else {
+                System.out.println("Il lucchetto non è stato sbloccato.");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            stato = false; // Gestione dell'errore
+        }
+
+        return stato;
+    }
 }
