@@ -8,12 +8,10 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import uniba.it.gioco.GameModel;
@@ -67,8 +65,10 @@ private JFrameMain jframeMain;
             int id = resultSet.getInt("id");
             String nickname = resultSet.getString("nickname");
             Timestamp timestamp = resultSet.getTimestamp("timestamp");
+            SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            String formattedDateTime = dataFormat.format(timestamp);
             if(id != 0 && !nickname.isEmpty() && timestamp != null){
-            modelloTabella.insertRow(0,new Object [] {id, nickname, timestamp});     
+            modelloTabella.insertRow(0,new Object [] {id, nickname, formattedDateTime});     
             }
         }
                

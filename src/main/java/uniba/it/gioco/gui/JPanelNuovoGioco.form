@@ -74,6 +74,7 @@
     <Component class="javax.swing.JTextField" name="jNickname">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jNicknameActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jNicknameKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nicknameLabel">

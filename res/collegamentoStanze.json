@@ -129,7 +129,7 @@
   {
     "nome": "sgabuzzino",
     "descrizione": "Ti trovi nello sgabuzzino dell'ospedale",
-     "aperto": true,
+     "aperto": false,
     "connessioneStanze": {
       "SUD": "bagno"
     },

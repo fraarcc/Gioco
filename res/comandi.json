@@ -21,7 +21,7 @@
     },
     {
         "name": "apri",
-        "aliases": ["sblocca"],
+        "aliases": ["apri","sblocca"],
         "type": "APRI"
     },
     {
