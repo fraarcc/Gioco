@@ -5,9 +5,11 @@
 package uniba.it.gioco.gui;
 
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
 import uniba.it.gioco.tipi.Giocatore;
@@ -64,6 +66,11 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 jNicknameActionPerformed(evt);
             }
         });
+        jNickname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jNicknameKeyPressed(evt);
+            }
+        });
 
         nicknameLabel.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         nicknameLabel.setText("Inserire il nickname");
@@ -104,33 +111,35 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     }//GEN-LAST:event_indietroActionPerformed
 
     private void confermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaActionPerformed
-       // Ottieni il nickname inserito dall'utente
-    String nickname = jNickname.getText();
-    if(!InitDatabase.verificaGiocatore(nickname)){
-        
-   
-    System.out.println("Nickname inserito: " + nickname);
-
-    // Inizializza il gioco con il nickname nel GameModel esistente
-    GameModel newGameModel = gameModel.inizializzaGioco(nickname);
-    if (newGameModel != null) {
-        try {
-            // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
-            gameModel = newGameModel;
-            // Aggiorna le istanze delle card con il nuovo GameModel
-            jframeMain.updateCards(gameModel);
-            // Mostra la card "inGame"
-            jframeMain.showCard("inGame");
-        } catch (IOException ex) {
-            Logger.getLogger(JPanelNuovoGioco.class.getName()).log(Level.SEVERE, null, ex);
+        // Ottieni il nickname inserito dall'utente
+        String nickname = jNickname.getText();
+        if(nickname.length() > 0 && nickname != null){
+        if (!InitDatabase.verificaGiocatore(nickname)) {
+            // Inizializza il gioco con il nickname nel GameModel esistente
+            GameModel newGameModel = gameModel.inizializzaGioco(nickname);
+            if (newGameModel != null) {
+                try {
+                    // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
+                    gameModel = newGameModel;
+                    // Aggiorna le istanze delle card con il nuovo GameModel
+                    jframeMain.updateCards(gameModel);
+                    // Mostra la card "inGame"
+                    jframeMain.showCard("inGame");
+                } catch (IOException ex) {
+                    Logger.getLogger(JPanelNuovoGioco.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(jframeMain, "Impossibile inizializzare il gioco!", "Avviso", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(jframeMain, "Questo nickname non e' disponibile", "Avviso", JOptionPane.WARNING_MESSAGE);
+            jNickname.setText("");
+            jNickname.requestFocus();
         }
-    } else {
-        // Gestione dell'errore
-        System.err.println("Impossibile inizializzare il gioco");
-    }
-    }else{
-        System.out.println("nickname non disponibile!");
-    }
+        } else{
+            JOptionPane.showMessageDialog(jframeMain, "Inserire un nickname", "Avviso", JOptionPane.WARNING_MESSAGE);
+        }
+               
     }//GEN-LAST:event_confermaActionPerformed
 
     private void jNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNicknameActionPerformed
@@ -138,6 +147,40 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jNicknameActionPerformed
 
+    private void jNicknameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNicknameKeyPressed
+        // TODO add your handling code here:    
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String nickname = jNickname.getText();
+            if(nickname.length() > 0 && nickname != null){
+            if (!InitDatabase.verificaGiocatore(nickname)) {
+                // Inizializza il gioco con il nickname nel GameModel esistente
+                GameModel newGameModel = gameModel.inizializzaGioco(nickname);
+                if (newGameModel != null) {
+                    try {
+                        // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
+                        gameModel = newGameModel;
+                        // Aggiorna le istanze delle card con il nuovo GameModel
+                        jframeMain.updateCards(gameModel);
+                        // Mostra la card "inGame"
+                        jframeMain.showCard("inGame");
+                    } catch (IOException ex) {
+                        Logger.getLogger(JPanelNuovoGioco.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(jframeMain, "Impossibile inizializzare il gioco!", "Avviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(jframeMain, "Questo nickname non e' disponibile", "Avviso", JOptionPane.WARNING_MESSAGE);
+                jNickname.setText("");
+                jNickname.requestFocus();
+            }
+        
+        } else {
+             JOptionPane.showMessageDialog(jframeMain, "Inserire un nickname", "Avviso", JOptionPane.WARNING_MESSAGE);
+        }
+                
+    }//GEN-LAST:event_jNicknameKeyPressed
+    }
 
     
 
