@@ -24,16 +24,12 @@ public class JFrameLucchetto extends javax.swing.JFrame {
     }
 
      private void init() {
-         
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrameLucchetto.DISPOSE_ON_CLOSE);
         ImageIcon imageIcon = new ImageIcon("res/lucchetto.png");
         jLabel1.setIcon(imageIcon);
         jLabel1.setVisible(true);
-         
-        
-     
     }
 
 
