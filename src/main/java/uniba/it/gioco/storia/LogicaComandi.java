@@ -4,6 +4,10 @@
  */
 package uniba.it.gioco.storia;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -159,7 +163,7 @@ public class LogicaComandi {
                 //finestra
                 break;
             case AIUTO:
-                eseguiComandoAiuto(jOutputTestoArea);
+                eseguiComandoAiuto();
                 break;
             case INVENTARIO:
                 eseguiComandoInventario(giocatore);
@@ -594,5 +598,22 @@ public class LogicaComandi {
         }
 
         return stato;
+    }
+     public void eseguiComandoAiuto(){
+           try {
+        String filePath = ".\\res\\aiuto.txt";
+        File file = new File(filePath);
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        StringBuilder aiutoFile = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            aiutoFile.append(line).append("\n");
+        }
+        reader.close();
+
+        jOutputTestoArea.append(aiutoFile.toString());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 }
