@@ -4,6 +4,7 @@
  */
 package uniba.it.gioco.gui;
 
+import com.formdev.flatlaf.util.StringUtils;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,21 +59,36 @@ private JFrameMain jframeMain;
      
            
     }
-    private void inserimentoTabella(ResultSet resultSet) throws SQLException{
+    
+  private void rimuoviRigheConValoriNull(DefaultTableModel modelloTabella) {
+    int rowCount = modelloTabella.getRowCount();
+    for (int i = rowCount - 1; i >= 0; i--) {
+        for (int j = 0; j < modelloTabella.getColumnCount(); j++) {
+            if (modelloTabella.getValueAt(i, j) == null) {
+                modelloTabella.removeRow(i);
+                break; 
+            }
+        }
+    }
+}
+    
+    private void inserimentoTabella(ResultSet resultSet) throws SQLException {
         DefaultTableModel modelloTabella = (DefaultTableModel) jTablePartite.getModel();
+        rimuoviRigheConValoriNull(modelloTabella);
         resultSet.beforeFirst();
-        while(resultSet.next()){
-            int id = resultSet.getInt("id");
+        while (resultSet.next()) {
+            Integer id = (Integer) resultSet.getObject("id");
             String nickname = resultSet.getString("nickname");
             Timestamp timestamp = resultSet.getTimestamp("timestamp");
             SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            String formattedDateTime = dataFormat.format(timestamp);
-            if(id != 0 && !nickname.isEmpty() && timestamp != null){
-            modelloTabella.insertRow(0,new Object [] {id, nickname, formattedDateTime});     
+            String formattedDateTime = timestamp != null ? dataFormat.format(timestamp) : "";
+            if (id != null && nickname != null && !nickname.isEmpty() && formattedDateTime != null) {
+                modelloTabella.addRow(new Object[]{id, nickname, formattedDateTime});
             }
+          
         }
-               
-        
+
+
     }
 
     /**
@@ -193,35 +209,53 @@ private JFrameMain jframeMain;
     }//GEN-LAST:event_jButtonIndietroActionPerformed
 
     private void jButtonCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaricaActionPerformed
-        // TODO add your handling code here:
-      int rigaSelezionata = jTablePartite.getSelectedRow();
-      if (rigaSelezionata != -1){
-          try {
-              int idPartita = (int) jTablePartite.getModel().getValueAt(rigaSelezionata, 0);
-              Object rigaDati = jTablePartite.getModel().getValueAt(rigaSelezionata, 0);
-              String nomeUtente = (String) jTablePartite.getModel().getValueAt(rigaSelezionata, 1);
-              System.out.println(nomeUtente);
-              Init init = gameModel.getInit();
-              gameModel = InitDatabase.caricaPartita(idPartita);
-              gameModel.setInit(init);
-              System.out.println(gameModel.getGiocatore().getNickname());
-              jframeMain.updateCards(gameModel);
-              jframeMain.showCard("inGame");
-          } catch (IOException ex) {
-              Logger.getLogger(JPanelMostraPartite.class.getName()).log(Level.SEVERE, null, ex);
-          }
-         
-      }  
+        int rigaSelezionata = jTablePartite.getSelectedRow();
+        if (rigaSelezionata != -1) {
+            try {
+                int idPartita = (int) jTablePartite.getModel().getValueAt(rigaSelezionata, 0);
+                String nomeUtente = (String) jTablePartite.getModel().getValueAt(rigaSelezionata, 1);
+                if (nomeUtente != null) {
+                    System.out.println(nomeUtente);
+                    Init init = gameModel.getInit();
+                    gameModel = InitDatabase.caricaPartita(idPartita);
+                    gameModel.setInit(init);
+                    System.out.println(gameModel.getGiocatore().getNickname());
+                    jframeMain.updateCards(gameModel);
+                    jframeMain.showCard("inGame");
+                } else {
+                    // Mostra un messaggio di errore se il nome utente è null
+                    JOptionPane.showMessageDialog(null, "Il nome utente non e' valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelMostraPartite.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(null, "Seleziona una riga valida", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButtonCaricaActionPerformed
 
     private void jButtonCancella1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancella1ActionPerformed
-        // TODO add your handling code here:
+
+        int rigaSelezionata = jTablePartite.getSelectedRow();
+        if (rigaSelezionata != -1) {
+            try {
+                int idPartita = (int) jTablePartite.getModel().getValueAt(rigaSelezionata, 0);
+                int choice = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler "
+                        + "cancellare la partia?", "Conferma", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    InitDatabase.eliminaPartita(idPartita);
+                    jframeMain.updateCards(gameModel);
+                    jframeMain.showCard("showGames");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelMostraPartite.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(null, "Seleziona una riga valida", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_jButtonCancella1ActionPerformed
-
-
-    
-    
-    
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancella1;
     private javax.swing.JButton jButtonCarica;
