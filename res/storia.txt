@@ -6,7 +6,7 @@ Sei ammaliato alla vista delle enormi vetrate all'ingresso,
 ma non c'e' tempo di distrarsi: 
 - hai bisogno dell'ingrediente finale per la tua pozione magica. 
 Decidi di entrare. L'obiettivo e' non farsi scoprire
- come maniaco, tanto meno come evasore fiscale quale sei.
+come maniaco, tanto meno come evasore fiscale quale sei.
 
 
 Sei davanti alle vetrate d'ingresso.
@@ -52,13 +52,13 @@ Eviterei la prossima volta, data la tua delicata situazione penale e fiscale.
 
 # sala operatoria
 
-A quanto pare qualche imbecille non ha ancora capito che accendere la modalità aereo non significa essere in grado di volare... 
+A quanto pare qualche imbecille non ha ancora capito che accendere la modalita' aereo non significa essere in grado di volare... 
 dopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza la tua vista si offusca e inizi rapidamente a perdere conoscenza.
 Dopo pochi attimi ti ritrovi in una stanza completamente bianca e un signore vestito di bianco con capelli e barba bianca allunga una mano verso di te...
 con tuo grande dispiacere egli non e' l'Altissimo e tantomeno il dottor House, ma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. 
-Dopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano ancora più ferma, a fregarti 50 euro dalla tasca. 
+Dopo un delicatissimo intervento e' riuscito a salvarti la vita e, con mano ancora più ferma, a fregarti 50 euro dalla tasca. 
 Realizzi di essere nella sala operatoria. 
-Il cuscino che avevi appena rubato senza un apparente scopo dall'ambulatorio è riuscito ad attutire l'impatto tra il tuo sedere e l'asfalto,
+Il cuscino che avevi appena rubato senza un apparente scopo dall'ambulatorio e' riuscito ad attutire l'impatto tra il tuo sedere e l'asfalto,
 adesso sei vivo per miracolo eucaristico.
 	
 

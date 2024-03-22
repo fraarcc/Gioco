@@ -1,0 +1,29 @@
+Ecco la lista dei comandi disponibili:
+
+-Nord:		Spostati verso nord nella tua avventura.
+-Sud: 		Spostati verso sud nella tua avventura.
+-Est: 		Spostati verso est nella tua avventura.
+-Ovest: 		Spostati verso ovest nella tua avventura.
+-Apri: 		Prova ad aprire qualcosa nella tua avventura.
+-Parla: 		Interagisci con un personaggio o un NPC 
+		avviando una conversazione.
+-Indossa: 	Indossa un oggetto che puoi equipaggiare
+-Richiedi: 	Fai una richiesta o una domanda a 
+		un personaggio o a un NPC.
+-Raccogli: 	Raccogli un oggetto o un elemento che trovi
+		nell'avventura.
+-Leggi: 		Leggi un oggetto o un documento 
+		che hai trovato durante l'avventura.
+-Lanciati: 	Lanciati in una certa direzione
+		o da una determinata parte
+-Osserva: 	Osserva un luogo o una scena 
+		per ottenere maggiori dettagli o informazioni.
+-Inventario: 	Visualizza l'inventario del personaggio
+
+Comandi per lo stato del gioco: 
+
+-Salva: 		Salva lo stato corrente del gioco, 
+		consentendo di riprenderlo successivamente
+-Esci: 		Esci dal gioco o termina la sessione.
+-Aiuto: 		Ottieni informazioni di aiuto o 
+		istruzioni sui comandi disponibili nel gioco.
