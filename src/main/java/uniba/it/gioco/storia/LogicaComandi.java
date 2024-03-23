@@ -280,8 +280,8 @@ public class LogicaComandi {
         jOutputTestoArea.append(inventario.toString());
     }
 
-    public void eseguiComandoParlaNpc(Giocatore giocatore, List<String> tokens, String inputTesto) {
-        if (tokens.size() != 1) {
+        public void eseguiComandoParlaNpc(Giocatore giocatore, List<String> tokens, String inputTesto) {
+        if (tokens.size() != 1 ) {
             // La lista dei token deve contenere un solo elemento
             jOutputTestoArea.append("Inserire un nome corretto per parlare. \n");
             return;
@@ -318,9 +318,17 @@ public class LogicaComandi {
                     }
                 }
                 break;
-            case "uomo":
-                // Logica per l'interazione con un uomo misterioso
-                // Rimossa per brevità
+            case "pazzo":
+                if(npcStanza.getTipo() == TipoNpc.PAZZO){
+               jOutputTestoArea.append("Attraverso il labirinto della mente, il sentiero è segnato da numeri senza tempo. \n"
+                       + "L'oscurità nasconde la chiave, ma il sussurro dei numeri rivela il cammino: 1, 2, 3. \n"
+                       + "Un enigma intricato, un mistero avvolto nel velo del tempo. \n"
+                       + "Solo chi sa decifrare il linguaggio nascosto delle cifre \n"
+                       + "potrà trovare la risposta e sbloccare il segreto celato nel cuore dell'ignoto. \n");
+                }else{
+                     jOutputTestoArea.append("Non puoi parlare con il pazzo \n");
+                }
+                
                 break;
             case "dottoressa":
                 if (npcStanza.getTipo() == TipoNpc.DOTTORESSA) {
@@ -335,6 +343,7 @@ public class LogicaComandi {
         }
 
     }
+
 
     public void eseguiComandoLeggi(Giocatore giocatore, List<String> tokens) {
         if (tokens.size() != 1) {

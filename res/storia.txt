@@ -1,15 +1,7 @@
-# ingresso
 
-Quando nella tua vita succede qualcosa che non è positivo e hai la forza di capovolgere la situazione, allora sei un vincente. 
-Questo è ciò che una volta disse Briatore, ed è esattamente quello che ti contraddistingue. 
-Un uomo che per una piccola proprietà non dichiarata si ritrova ad essere emarginato dalla società; 
-la tua passione e dedizione per la chimica ti ha portato ad una scoperta sconvolgente: 
-un farmaco in grado di guarirti dalla iella definitivamente; hai tutti gli ingredienti necessari, tranne uno
-e il modo migliore per procurarselo è prenderlo gentilmente in prestito dalla sala operatoria di un ospedale.
-Così sali sulla tua 1100 GPL dell'83 e raggiungi l'ospedale più vicino. 
-Ti aspetteranno sfide incredibili, inutili discussioni con i pazienti psichiatrici e avventure fuori dal normale!
 
 # ingresso
+
 
 
 
@@ -31,7 +23,8 @@ cinguettare(forse per l'ultima volta)
 
 Ti trovi all'interno dell'atrio dell'ospedale
 
-Qui vi e' un bar, con un barista disponibile per
+
+Qui vi è un bar, con un barista disponibile per
 prepararti un caffe' e darti informazioni.
 
 In questo ospedale non sarai solo,tra le numerose persone presenti qualcuno potrebbe
