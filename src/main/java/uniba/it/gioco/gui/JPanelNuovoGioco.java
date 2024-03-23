@@ -4,7 +4,7 @@
  */
 package uniba.it.gioco.gui;
 
-import java.awt.CardLayout;
+
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
-import uniba.it.gioco.tipi.Giocatore;
+
 
 /**
  *

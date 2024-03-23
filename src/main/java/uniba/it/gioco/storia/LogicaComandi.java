@@ -41,7 +41,6 @@ public class LogicaComandi {
 
     private Input input;
     private Output output;
-    private Parser parser;
     private Giocatore giocatore;
     private Init init;
     private JTextArea jOutputTestoArea;
@@ -54,7 +53,6 @@ public class LogicaComandi {
             Output output, List<Stanza> stanze, LogicaDialoghi logicaDialoghi, Input input) {
         this.giocatore = giocatore;
         this.init = init;
-        this.parser = new Parser();
         this.jOutputTestoArea = jOutputTestoArea;
         this.jInputTestoArea = jInputTestoArea;
         this.output = output;
@@ -66,7 +64,7 @@ public class LogicaComandi {
     public void gestioneComandi(String inputTesto) {
         List<Comando> comandi = init.getCommandsAsList();
 
-        String tipoComando = parser.getCommandType(inputTesto).toLowerCase();
+        String tipoComando = Parser.getCommandType(inputTesto).toLowerCase();
         boolean comandoTrovato = false; // Flag per indicare se un comando è stato trovato
         for (Comando comando : comandi) {
             if (comando.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(tipoComando))) {
@@ -203,10 +201,6 @@ public class LogicaComandi {
 
     public void eseguiComandoOvest(Giocatore giocatore) {
         giocatore.spostaGiocatore(init, Direzione.OVEST, output, stanze);
-    }
-
-    public void eseguiComandoAiuto(JTextArea outputTestoCampo) {
-        outputTestoCampo.append("Comando aiuto rilevato");
     }
 
     public void osservaStanza(Giocatore giocatore) {
@@ -654,7 +648,6 @@ public class LogicaComandi {
             e.printStackTrace();
         }
 
-
         StringBuilder formattedAdvice = new StringBuilder();
         int charsPerLine = 50;
         int charCount = 0;
@@ -672,7 +665,7 @@ public class LogicaComandi {
         jOutputTestoArea.append(formattedAdvice.toString() + "\n");
     }
 
-    //Utilizzo MyMemory Translation Memory per tradurre il cosiglio in italiano
+    //Utilizzo l'API MyMemory Translation Memory per tradurre il cosiglio in italiano
     private static String traduciInItaliano(String testo) {
         String testoTradotto = null;
         try {

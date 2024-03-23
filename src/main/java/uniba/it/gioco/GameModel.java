@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import uniba.it.gioco.database.InitDatabase;
-import uniba.it.gioco.gui.JFrameMain;
 import uniba.it.gioco.storia.Init;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
@@ -21,12 +20,10 @@ public class GameModel implements Serializable{
     private List<Stanza> stanze;
     private transient Init init;
     private Giocatore giocatore;
-    private transient InitDatabase initDatabse;
     
     public GameModel(){
         this.init = new Init();
-        this.giocatore = new Giocatore();
-        this.initDatabse = new InitDatabase();      
+        this.giocatore = new Giocatore(); 
     }
 
     
