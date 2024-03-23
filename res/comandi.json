@@ -80,5 +80,10 @@
         "name": "salva",
         "aliases": ["salva", "save"],
         "type": "SALVA"
+    },
+    {
+        "name": "suggerimento",
+        "aliases": ["suggerimento", "consiglio"],
+        "type": "SUGGERIMENTO"
     }
 ]
