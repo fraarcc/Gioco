@@ -8,6 +8,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -15,10 +19,10 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import org.json.JSONObject;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
 import uniba.it.gioco.gui.JFrameLucchetto;
-import uniba.it.gioco.gui.JFrameMain;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
@@ -45,7 +49,6 @@ public class LogicaComandi {
     private List<Stanza> stanze;
     private LogicaDialoghi logicaDialoghi;
     private GameModel gameModel;
-
 
     public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,
             Output output, List<Stanza> stanze, LogicaDialoghi logicaDialoghi, Input input) {
@@ -157,7 +160,6 @@ public class LogicaComandi {
                 } else {
                     jOutputTestoArea.append("Non puoi usare questo comando, continua ad esplorare \n");
                 }
-                //Solo per foglietto (sgabuzzino) dentro camice e ticket
                 break;
             case LANCIATI:
                 //finestra
@@ -176,6 +178,10 @@ public class LogicaComandi {
                 break;
             case SALVA:
                 eseguiComandoSalva();
+                break;
+            case SUGGERIMENTO:
+                jOutputTestoArea.append("Ecco il suggerimento che ti do:\n");
+                eseguiComandoSuggerimenti();
                 break;
             default:
                 System.out.println("Tipo di comando non gestito: " + comando.getType() + "\n");
@@ -599,21 +605,98 @@ public class LogicaComandi {
 
         return stato;
     }
-     public void eseguiComandoAiuto(){
-           try {
-        String filePath = ".\\res\\aiuto.txt";
-        File file = new File(filePath);
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        StringBuilder aiutoFile = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            aiutoFile.append(line).append("\n");
-        }
-        reader.close();
 
-        jOutputTestoArea.append(aiutoFile.toString());
-    } catch (IOException e) {
-        e.printStackTrace();
+    public void eseguiComandoAiuto() {
+        try {
+            String filePath = ".\\res\\aiuto.txt";
+            File file = new File(filePath);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            StringBuilder aiutoFile = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                aiutoFile.append(line).append("\n");
+            }
+            reader.close();
+
+            jOutputTestoArea.append(aiutoFile.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    //Utilizzo API AdviceSlipAPI il quale fornisce consigli casuali
+    public void eseguiComandoSuggerimenti() {
+        String consiglioInItaliano = null;
+        try {
+            // URL dell'API Advice Slip
+            URL url = new URL("https://api.adviceslip.com/advice");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // Legge la risposta
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // Analizza la risposta JSON
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            JSONObject slip = jsonResponse.getJSONObject("slip");
+            String consiglio = slip.getString("advice");
+
+            consiglioInItaliano = traduciInItaliano(consiglio);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        StringBuilder formattedAdvice = new StringBuilder();
+        int charsPerLine = 50;
+        int charCount = 0;
+        for (int i = 0; i < consiglioInItaliano.length(); i++) {
+            char c = consiglioInItaliano.charAt(i);
+            if (c == ' ' && charCount > charsPerLine) {
+                formattedAdvice.append('\n');
+                charCount = 0;
+            } else {
+                formattedAdvice.append(c);
+                charCount++;
+            }
+        }
+
+        jOutputTestoArea.append(formattedAdvice.toString() + "\n");
+    }
+
+    //Utilizzo MyMemory Translation Memory per tradurre il cosiglio in italiano
+    private static String traduciInItaliano(String testo) {
+        String testoTradotto = null;
+        try {
+            String urlEncodedText = URLEncoder.encode(testo, "UTF-8");
+            URL url = new URL("https://api.mymemory.translated.net/get?q=" + urlEncodedText + "&langpair=en|it");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // Analizza la risposta JSON per ottenere la traduzione
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            JSONObject responseData = jsonResponse.getJSONObject("responseData");
+            testoTradotto = responseData.getString("translatedText");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return testoTradotto;
     }
 }

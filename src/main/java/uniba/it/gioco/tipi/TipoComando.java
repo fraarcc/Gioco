@@ -25,7 +25,8 @@ package uniba.it.gioco.tipi;
         ESCI,
         OSSERVA,
         INVENTARIO,
-        SALVA
+        SALVA,
+        SUGGERIMENTO
     }
 
 
