@@ -12,6 +12,6 @@ public enum TipoNpc {
     FARMACISTA,
     BARISTA,
     GUARDIE,
-    UOMO_MISTERIOSO,
+    PAZZO,
     DOTTORESSA
 }

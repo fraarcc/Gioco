@@ -20,6 +20,8 @@ Ecco la lista dei comandi disponibili:
 		per ottenere maggiori dettagli o informazioni.
 -Inventario: 	Visualizza l'inventario del personaggio
 
+-Suggerimento:      Fornisce suggerimenti random sulla vita
+
 Comandi per lo stato del gioco: 
 
 -Salva: 		Salva lo stato corrente del gioco, 
