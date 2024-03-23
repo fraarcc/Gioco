@@ -5,15 +5,12 @@
 package uniba.it.gioco.storia;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
 
@@ -64,10 +61,10 @@ public class Output extends Thread {
     }
 
     public void aggiornaStoria() {
-    String descrizioneCompleta = getDescrizioneCompletaStanzaCorrente();
-    SwingUtilities.invokeLater(() -> storiaTextArea.append(descrizioneCompleta));
-   impostaImmagineStanzaCorrente();
-}
+        String descrizioneCompleta = getDescrizioneCompletaStanzaCorrente();
+        SwingUtilities.invokeLater(() -> storiaTextArea.append(descrizioneCompleta));
+        impostaImmagineStanzaCorrente();
+    }
 
     private String getDescrizioneCompletaStanzaCorrente() {
         Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
@@ -88,18 +85,19 @@ public class Output extends Thread {
         }
         return "Descrizione stanza non disponibile";
     }
+
     private void impostaImmagineStanzaCorrente() {
         Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
         if (stanzaCorrente != null) {
-        String imagePath = "./res/" + stanzaCorrente.getNome() + ".png";
-        containerImmagini.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
+            String imagePath = "./res/" + stanzaCorrente.getNome() + ".png";
+            containerImmagini.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
         }
     }
 
-   @Override
+    @Override
     public void run() {
         // Stampiamo la prima stanza
-       // aggiornaStoria();
+        // aggiornaStoria();
 
         // Attendiamo un cambio di stanza solo dopo aver stampato la prima stanza
         synchronized (this) {
@@ -117,7 +115,6 @@ public class Output extends Thread {
         }
     }
 
-
     public synchronized void aspettaCambioStanza() {
         try {
             wait(); // Il thread attende fino a quando non riceve una notifica
@@ -126,20 +123,20 @@ public class Output extends Thread {
         }
     }
 
-     public synchronized void cambioStanza() {
+    public synchronized void cambioStanza() {
         stanzaCambiata = true;
         notify(); // Notifichiamo il thread di StampaStoria che la stanza è cambiata
     }
-     
+
     public void stopThread() {
         stanzaCambiata = false;
     }
-    
-    public void direzioneErrataMsg(){
+
+    public void direzioneErrataMsg() {
         storiaTextArea.append("Non puoi andare in questa direzione" + "\n");
     }
-    
-    public void stanzaChiusaMsg(){
+
+    public void stanzaChiusaMsg() {
         storiaTextArea.append("La stanza e' chiusa " + "\n");
     }
 }
