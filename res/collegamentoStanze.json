@@ -1,7 +1,9 @@
 [
   {
     "nome": "ingresso",
-    "descrizione": "Ti trovi all'interno dell'ingresso dell'ospedale",
+    "descrizione": "Oltre all'imponenente struttura non c'è molto da osservare qui,\ntranne qualche mozzicone di sigaretta per terra e \nun ticket con il nome dell'ospedale.",
+        
+   
     "connessioneStanze": {
       "NORD": "atrio"
     },
@@ -9,7 +11,7 @@
             {
                     "id": 1,
                     "nome": "ticket",
-                    "descrizione": " Non c'è molto da osservare qui, tranne qualche mozzicone di sigaretta per terra e un ticket con il nome dell'ospedale."
+                    "descrizione": "Ticket con su scritto il nome dell'ospedale"
             }
         ],
     "npc": 
@@ -33,7 +35,7 @@
   },
   {
     "nome": "atrio",
-    "descrizione": "Ti trovi all'interno dell'atrio",
+    "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente,con un bar nel mezzo e un barista dietro al banco.\nIn fondo alla stanza una grande finestra aperta.",
         "aperto" : false,
     "connessioneStanze": {
       "EST": "farmacia",
@@ -60,7 +62,7 @@
   },
   {
     "nome": "farmacia",
-    "descrizione": "Ti trovi all'interno della farmacia",
+    "descrizione": "Ti soffermi un attimo a esaminare la farmacia,\nosservando le etichette sui flaconi e i dispositivi medici riposti sugli scaffalie.\nIn fondo una porta blindada con la scritta deposito.",
     "connessioneStanze": {
       "OVEST": "atrio"
     },
@@ -72,22 +74,22 @@
         {
           "id": 3,
           "nome": "sodio cloruro",
-          "descrizione": "hai trovato il sodio cloruro"
+          "descrizione": "Provetta con sodio cloruro"
         },
         {
           "id": 4,
           "nome": "potassio cloruro",
-          "descrizione": "hai trovato il potassio cloruro"
+          "descrizione": "Provetta con potassio cloruro"
         },
         {
           "id": 5,
           "nome": "calcio cloruro diidrato",
-          "descrizione": "hai trovato il calcio cloruro diidrato"
+          "descrizione": "Ptovetta con calcio cloruro diidrato"
         },
         {
           "id": 6,
           "nome": "sodio acetato triidrato",
-          "descrizione": "hai trovato il sodio acetato triidrato"
+          "descrizione": "Provetta con sodio acetato triidrato"
         }
       ],
       "dialoghi": [
@@ -101,7 +103,7 @@
   },
   {
     "nome": "corridoio",
-    "descrizione": "Ti trovi nel corridoio dell'ospedale",
+    "descrizione": "Lungo la parete ci sono numerose vetrate che si affacciano sull'esterno.\nSono presenti molte panche e alla tua sinistra due ascensori ",
     "connessioneStanze": {
       "EST": "atrio",
       "NORD": "bagno",
@@ -111,54 +113,42 @@
   },
   {
     "nome": "bagno",
-    "descrizione": "Ti trovi nel bagno dell'ospedale",
+    "descrizione": "Sei entrato nel bagno. Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno!",
     "aperto": false,
     "connessioneStanze": {
       "SUD": "corridoio",
       "NORD": "sgabuzzino"
     },
-    "oggettiPresentiStanza": [
-            {
-                    "id": 7,
-                    "nome": "armadietto",
-                    "descrizione": "hai intravisto un'armadietto"
-            }
-        
-        ]
+    "oggettiPresentiStanza": []
   },
   {
     "nome": "sgabuzzino",
-    "descrizione": "Ti trovi nello sgabuzzino dell'ospedale",
+    "descrizione": "La vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, dei cartoni di peroni e altri oggetti. ",
      "aperto": false,
     "connessioneStanze": {
       "SUD": "bagno"
     },
     "oggettiPresentiStanza": [
       {
-        "id": 8,
+        "id": 7,
         "nome": "boccetta",
-        "descrizione": "hai trovato una boccetta"
+        "descrizione": "Una boccetta per composti chimici"
+      },
+      {
+        "id": 8,
+        "nome": "camice",
+        "descrizione": "Camice da medico con DUE GROSSE TASCHE"
       },
       {
         "id": 9,
-        "nome": "camice",
-        "descrizione": "hai trovato il camice"
-      },
-      {
-        "id": 10,
         "nome": "foglietto",
-        "descrizione": "hai trovato un foglietto"
-      },
-      {
-        "id": 11,
-        "nome": "cacciavite",
-        "descrizione": "hai trovato un cacciavite"
+        "descrizione": "Un foglio strappato"
       }
     ]
   },
   {
     "nome": "sala d'attesa",
-    "descrizione": "Ti trovi all'interno della della sala d'attesa al piano superiore",
+    "descrizione": "Osservando attentamente la gente presente,\nnoti una figura particolarmente distinta,\nun uomo che parla in modo animato dicendo cose strane",
     "connessioneStanze": {
       "SUD": "sala operatoria",
       "EST": "laboratorio",
@@ -167,8 +157,8 @@
     },
     "oggettiPresentiStanza": [],
     "npc": {
-      "nome": "uomo misterioso",
-      "tipo": "UOMO_MISTERIOSO",
+      "nome": "pazzo",
+      "tipo": "PAZZO",
       "oggettiNpc": [],
       "dialoghi": [
         "Benvenuto nella sala d'attesa."
@@ -178,36 +168,36 @@
   },
   {
     "nome": "bagno superiore",
-    "descrizione": "Ti trovi nel bagno al piano superiore",
+    "descrizione": "Anche qui ci sono lavandini, le porte, i bagni e i cessi.\nIncastrato tra le fessure della parete c'e' un foglietto strappato,\nforse qualcuno deve averlo smarrito",
     "connessioneStanze": {
       "SUD": "sala d'attesa",
       "EST": "spogliatoio"
     },
     "oggettiPresentiStanza": [
          {
-                    "id": 12,
+                    "id": 10,
                     "nome": "seconda meta' foglietto",
                     "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
             }]
   },
   {
     "nome": "spogliatoio",
-    "descrizione": "Ti trovi nello spogliatoio",
+    "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda \nc'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti",
     "connessioneStanze": {
       "OVEST": "bagno",
       "SUD": "laboratorio"
     },
     "oggettiPresentiStanza": [
       {
-        "id": 13,
+        "id": 11,
         "nome": "cuscino",
-        "descrizione": "Appoggiato su una branda c'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti."
+        "descrizione": "Cuscino per branda"
       }
     ]
   },
   {
     "nome": "laboratorio",
-    "descrizione": "Ti trovi all'interno del laboratorio",
+    "descrizione": "All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive.",
     "connessioneStanze": {
       "NORD": "spogliatoio",
       "OVEST": "sala d'attesa"
@@ -225,7 +215,7 @@
   },
   {
     "nome": "sala operatoria",
-    "descrizione": "Ti trovi nella sala operatoria",
+    "descrizione": "",
     "connessioneStanze": {
       "NORD": "sala d'attesa"
     },
