@@ -2,6 +2,19 @@
 
 # ingresso
 
+Quando nella tua vita succede qualcosa che non e' positivo e hai la forza di capovolgere la situazione, 
+allora sei un vincente. 
+Questo e' ciò che una volta disse Briatore, ed e' esattamente quello che ti contraddistingue. 
+Un uomo che per una piccola proprietà non dichiarata si ritrova ad essere emarginato dalla società; 
+La tua passione e dedizione per la chimica ti ha portato ad una scoperta sconvolgente: 
+un farmaco in grado di guarirti dalla iella definitivamente; hai tutti gli ingredienti necessari, tranne uno, 
+e il modo migliore per procurarselo e' prenderlo gentilmente in prestito dalla sala operatoria di un ospedale.
+Qualora riuscirai ad accedere alla sala operatoria, ritieniti vincitore!
+
+Così sali sulla tua 1100 GPL dell'83 e raggiungi l'ospedale più vicino. 
+Ti aspetteranno sfide incredibili, inutili discussioni con i pazienti psichiatrici e 
+avventure fuori dal normale!
+
 
 
 
@@ -24,7 +37,7 @@ cinguettare(forse per l'ultima volta)
 Ti trovi all'interno dell'atrio dell'ospedale
 
 
-Qui vi è un bar, con un barista disponibile per
+Qui vi e' un bar, con un barista disponibile per
 prepararti un caffe' e darti informazioni.
 
 In questo ospedale non sarai solo,tra le numerose persone presenti qualcuno potrebbe
@@ -38,7 +51,7 @@ Ti trovi all'interno della farmacia dedicata all'ospedale
 
 
 
-Di fronte a te c'è una farmacista. 
+Di fronte a te c'e' una farmacista. 
 Qui puoi fare tutto ciò che faresti in una normale farmacia, tuttavia
 troverai prodotti particolari e specifici.
 
@@ -54,7 +67,7 @@ sempre che tu sappia come accedervi
 
 Ti trovi nel bagno inferiore dell'ospedale
 
-Di solito è pieno di oggetti dimenticati dalle persone, 
+Di solito e' pieno di oggetti dimenticati dalle persone, 
 magari tra questi potrbbe tornarti utile qualcosa
 
 
@@ -81,7 +94,7 @@ Stanno parlando tra di loro ma non riesci a sentire bene i discorsi.
 
 Ti trovi nel bagno al piano superiore
 
-E' un bagno incredibilmente simile a quello del piano di giù (strano)
+E' un bagno incredibilmente simile a quello del piano di giu' (strano)
 In ogni caso, dovresti aver capito che non sei qui dentro per leggere la gazzetta.
 
 # laboratorio
@@ -99,13 +112,19 @@ Eviterei la prossima volta, data la tua delicata situazione penale e fiscale.
 
 # sala operatoria
 
-A quanto pare qualche imbecille non ha ancora capito che accendere la modalita' aereo non significa essere in grado di volare... 
-dopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza la tua vista si offusca e inizi rapidamente a perdere conoscenza.
-Dopo pochi attimi ti ritrovi in una stanza completamente bianca e un signore vestito di bianco con capelli e barba bianca allunga una mano verso di te...
-con tuo grande dispiacere egli non e' l'Altissimo e tantomeno il dottor House, ma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. 
-Dopo un delicatissimo intervento e' riuscito a salvarti la vita e, con mano ancora più ferma, a fregarti 50 euro dalla tasca. 
+A quanto pare qualche imbecille non ha ancora capito che accendere la modalita' aereo,
+non significa essere in grado di volare... 
+dopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza, 
+la tua vista si offusca e inizi rapidamente a perdere conoscenza.
+Dopo pochi attimi ti ritrovi in una stanza completamente bianca e 
+un signore vestito di bianco con capelli e barba bianca allunga una mano verso di te...
+Con tuo grande dispiacere egli non e' l'Altissimo e tantomeno il dottor House, 
+ma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. 
+Dopo un delicatissimo intervento e' riuscito a salvarti la vita e, con mano ancora più ferma, 
+a fregarti 50 euro dalla tasca. 
 Realizzi di essere nella sala operatoria. 
-Il cuscino che avevi appena rubato senza un apparente scopo dall'ambulatorio e' riuscito ad attutire l'impatto tra il tuo sedere e l'asfalto,
+Il cuscino che avevi appena rubato senza un apparente scopo dall'ambulatorio,
+e' riuscito ad attutire l'impatto tra il tuo sedere e l'asfalto,
 adesso sei vivo per miracolo eucaristico.
 	
 
