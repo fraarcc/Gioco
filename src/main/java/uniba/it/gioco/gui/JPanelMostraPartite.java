@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package uniba.it.gioco.gui;
 
-import com.formdev.flatlaf.util.StringUtils;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,65 +8,54 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
-import uniba.it.gioco.storia.Init;
+import uniba.it.gioco.utils.Init;
 
 public class JPanelMostraPartite extends javax.swing.JPanel {
-private GameModel gameModel;
-private JFrameMain jframeMain;
+
+    private GameModel gameModel;
+    private JFrameMain jframeMain;
+
     /**
      * Creates new form JPanelMostraPartite
      */
-    public JPanelMostraPartite(JFrameMain jframeMain, GameModel gameModel) {  
+    public JPanelMostraPartite(JFrameMain jframeMain, GameModel gameModel) {
 
         this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
-        initGrafica();
         prelievoDati();
     }
-   
-    private void initGrafica(){
-          DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
-          leftRenderer.setHorizontalAlignment(DefaultTableCellRenderer.LEFT);
-    }
-   
-    
-    private void prelievoDati(){
-        try{
-            
-            
+
+    private void prelievoDati() {
+        try {
             ResultSet resultSet = InitDatabase.stampaPartiteDisponibiliResultSet();
-            if(!resultSet.next()){
-               
-            }else{
+            if (!resultSet.next()) {
+            } else {
                 String nickname = resultSet.getString("nickname");
                 inserimentoTabella(resultSet);
                 System.out.println(nickname);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Errore durante il recupero delle partite disponibili.", "Errore", JOptionPane.ERROR_MESSAGE);
         }
-     
-           
     }
-    
-  private void rimuoviRigheConValoriNull(DefaultTableModel modelloTabella) {
-    int rowCount = modelloTabella.getRowCount();
-    for (int i = rowCount - 1; i >= 0; i--) {
-        for (int j = 0; j < modelloTabella.getColumnCount(); j++) {
-            if (modelloTabella.getValueAt(i, j) == null) {
-                modelloTabella.removeRow(i);
-                break; 
+
+    private void rimuoviRigheConValoriNull(DefaultTableModel modelloTabella) {
+        int rowCount = modelloTabella.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            for (int j = 0; j < modelloTabella.getColumnCount(); j++) {
+                if (modelloTabella.getValueAt(i, j) == null) {
+                    modelloTabella.removeRow(i);
+                    break;
+                }
             }
         }
     }
-}
-    
+
     private void inserimentoTabella(ResultSet resultSet) throws SQLException {
         DefaultTableModel modelloTabella = (DefaultTableModel) jTablePartite.getModel();
         rimuoviRigheConValoriNull(modelloTabella);
@@ -85,10 +69,7 @@ private JFrameMain jframeMain;
             if (id != null && nickname != null && !nickname.isEmpty() && formattedDateTime != null) {
                 modelloTabella.addRow(new Object[]{id, nickname, formattedDateTime});
             }
-          
         }
-
-
     }
 
     /**
@@ -199,13 +180,13 @@ private JFrameMain jframeMain;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndietroActionPerformed
-    try {
-        // TODO add your handling code here:
-        jframeMain.updateCards(gameModel);
-        jframeMain.showCard("mainMenu");
-    } catch (IOException ex) {
-        Logger.getLogger(JPanelMostraPartite.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            // TODO add your handling code here:
+            jframeMain.updateCards(gameModel);
+            jframeMain.showCard("mainMenu");
+        } catch (IOException ex) {
+            Logger.getLogger(JPanelMostraPartite.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonIndietroActionPerformed
 
     private void jButtonCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaricaActionPerformed
@@ -255,7 +236,7 @@ private JFrameMain jframeMain;
         }
 
     }//GEN-LAST:event_jButtonCancella1ActionPerformed
-        
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancella1;
     private javax.swing.JButton jButtonCarica;

@@ -1,32 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import uniba.it.gioco.database.InitDatabase;
-import uniba.it.gioco.storia.Init;
+import uniba.it.gioco.utils.Init;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
 
-/**
- *
- * @author Nikita
- */
-public class GameModel implements Serializable{
+public class GameModel implements Serializable {
+
     private List<Stanza> stanze;
     private transient Init init;
     private Giocatore giocatore;
-    
-    public GameModel(){
+
+    public GameModel() {
         this.init = new Init();
-        this.giocatore = new Giocatore(); 
+        this.giocatore = new Giocatore();
     }
 
-    
     public GameModel inizializzaGioco(String nickname) {
         try {
             stanze = init.inizializzaStanze();
@@ -59,25 +50,23 @@ public class GameModel implements Serializable{
         this.init = init;
     }
 
- 
-    
-    public Init getInit(){
+    public Init getInit() {
         return init;
     }
-    
-   public List<Stanza> getStanze() throws IOException {
-    if (stanze == null) {
-        try {
-            stanze = init.inizializzaStanze();
-        } catch (IOException e) {
-            // Se si verifica un'eccezione durante l'inizializzazione delle stanze, propagala
-            throw new IOException("Errore durante l'inizializzazione delle stanze: " + e.getMessage());
+
+    public List<Stanza> getStanze() throws IOException {
+        if (stanze == null) {
+            try {
+                stanze = init.inizializzaStanze();
+            } catch (IOException e) {
+                // Se si verifica un'eccezione durante l'inizializzazione delle stanze, propagala
+                throw new IOException("Errore durante l'inizializzazione delle stanze: " + e.getMessage());
+            }
         }
+        return stanze;
     }
-    return stanze;
-}
-   public GameModel getGameModel() {
+
+    public GameModel getGameModel() {
         return this;
     }
 }
-

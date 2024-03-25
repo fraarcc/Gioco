@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco.tipi;
 
 import java.util.List;
 
-/**
- *
- * @author 39379
- */
 public class Comando {
 
     private String name;
@@ -35,7 +27,6 @@ public class Comando {
     public boolean isValid(String input) {
         return match(input);
     }
-
 
     public boolean match(String input) {
         String commandName = input.toLowerCase();

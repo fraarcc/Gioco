@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco.tipi;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import uniba.it.gioco.storia.Init;
-import uniba.it.gioco.storia.Output;
+import uniba.it.gioco.utils.Init;
+import uniba.it.gioco.utils.Output;
 
-/**
- *
- * @author Nikita
- */
 public class Giocatore implements Serializable {
 
     private int idUtente;
@@ -54,9 +43,9 @@ public class Giocatore implements Serializable {
     public void setStanzaCorrente(Stanza stanzaCorrente) {
         this.stanzaCorrente = stanzaCorrente;
     }
-    
-    public void aggiungiOggettoInventario(Oggetto oggettoDaInserire){
-       inventario.aggiungiOggetto(oggettoDaInserire);
+
+    public void aggiungiOggettoInventario(Oggetto oggettoDaInserire) {
+        inventario.aggiungiOggetto(oggettoDaInserire);
     }
 
     public void spostaGiocatore(Init init, Direzione direzione, Output output, List<Stanza> stanze) {
@@ -80,22 +69,18 @@ public class Giocatore implements Serializable {
                 setStanzaCorrente(nuovaStanza);
                 System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
                 System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
-            output.cambioStanza();
+                output.cambioStanza();
             } else {
                 output.stanzaChiusaMsg();
             }
-
-
 
             // Aggiorna l'inventario del giocatore, ecc. se necessario
         } else {
             output.direzioneErrataMsg();
         }
     }
-    
- 
 
-   @Override
+    @Override
     public String toString() {
         return "Giocatore{"
                 + "id=" + idUtente

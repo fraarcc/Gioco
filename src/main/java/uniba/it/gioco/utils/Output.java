@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package uniba.it.gioco.storia;
+package uniba.it.gioco.utils;
 
 import java.awt.Image;
 import javax.swing.*;
@@ -40,7 +40,6 @@ public class Output extends Thread {
             String linea;
             String chiaveStanza = null;
             StringBuilder descrizioneStanza = new StringBuilder();
-
             while ((linea = br.readLine()) != null) {
                 if (linea.startsWith("#")) {
                     if (chiaveStanza != null) {
@@ -70,17 +69,11 @@ public class Output extends Thread {
         Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
         if (stanzaCorrente != null) {
             StringBuilder descrizioneCompleta = new StringBuilder();
-
-            // Aggiungi la descrizione della stanza
-            descrizioneCompleta.append("Stanza: ").append(stanzaCorrente.getNome()).append("\n");
-            descrizioneCompleta.append("Descrizione: ").append(stanzaCorrente.getDescrizione()).append("\n\n");
-
-            // Aggiungi il dialogo corrispondente dalla mappa storiaMap
+            descrizioneCompleta.append("Ti trovi in: ").append(stanzaCorrente.getNome()).append("\n");
             String dialogo = storiaMap.get(stanzaCorrente.getNome());
             if (dialogo != null) {
                 descrizioneCompleta.append(dialogo);
             }
-
             return descrizioneCompleta.toString();
         }
         return "Descrizione stanza non disponibile";
@@ -96,17 +89,13 @@ public class Output extends Thread {
 
     @Override
     public void run() {
-        // Stampiamo la prima stanza
-        // aggiornaStoria();
-
-        // Attendiamo un cambio di stanza solo dopo aver stampato la prima stanza
         synchronized (this) {
             while (true) {
                 if (stanzaCambiata) {
                     aggiornaStoria();
                     stanzaCambiata = false;
                     try {
-                        wait(); // Attendiamo fino a quando non avviene un cambio di stanza
+                        wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -117,7 +106,7 @@ public class Output extends Thread {
 
     public synchronized void aspettaCambioStanza() {
         try {
-            wait(); // Il thread attende fino a quando non riceve una notifica
+            wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -125,7 +114,7 @@ public class Output extends Thread {
 
     public synchronized void cambioStanza() {
         stanzaCambiata = true;
-        notify(); // Notifichiamo il thread di StampaStoria che la stanza è cambiata
+        notify();
     }
 
     public void stopThread() {

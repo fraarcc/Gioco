@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco.tipi;
 
 import java.io.Serializable;
@@ -9,29 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- *
- * @author Nikita
- */
 public class Npc implements Serializable {
+
     private String nome;
     private TipoNpc tipo;
     private boolean visitato = false;
     private Set<Oggetto> oggettiNpc;
     private List<String> dialoghi;
     private Indovinello indovinello;
-    
-    public Npc(){
-        
+
+    public Npc() {
+
     }
-    
-    public Npc(String nome, TipoNpc tipo,Set<Oggetto> oggettiNpc){
+
+    public Npc(String nome, TipoNpc tipo, Set<Oggetto> oggettiNpc) {
         this.nome = nome;
         this.tipo = tipo;
         this.oggettiNpc = oggettiNpc;
         this.dialoghi = new ArrayList<>();
-        if (tipo == TipoNpc.GUARDIE){
-            this.indovinello = Indovinello.GUARDIA;            
+        if (tipo == TipoNpc.GUARDIE) {
+            this.indovinello = Indovinello.GUARDIA;
         } else {
             this.indovinello = null;
         }
@@ -43,7 +36,7 @@ public class Npc implements Serializable {
 
     public void setVisitato(boolean visitato) {
         this.visitato = visitato;
-    } 
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -64,20 +57,20 @@ public class Npc implements Serializable {
     public void setIndovinello(Indovinello indovinello) {
         this.indovinello = indovinello;
     }
-    
-    public String getNome(){
+
+    public String getNome() {
         return nome;
     }
-    
-    public TipoNpc getTipo(){
+
+    public TipoNpc getTipo() {
         return tipo;
     }
-    
-    public List<String> getDialoghi(){
+
+    public List<String> getDialoghi() {
         return dialoghi;
     }
-    
-    public Indovinello getIndovinello(){
+
+    public Indovinello getIndovinello() {
         return indovinello;
     }
 
@@ -85,13 +78,9 @@ public class Npc implements Serializable {
         return oggettiNpc;
     }
 
-    
-    
     @Override
     public String toString() {
         return "Npc{" + "nome=" + nome + ", tipo=" + tipo + ", oggettiNpc=" + oggettiNpc + ", dialoghi=" + dialoghi + ", indovinello=" + indovinello + '}';
     }
-    
-    
-    
+
 }

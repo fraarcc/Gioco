@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco.tipi;
 
 import java.util.Set;
 import java.io.Serializable;
 import java.util.HashSet;
 
-/**
- *
- * @author Nikita
- */
-    
 public class Inventario implements Serializable {
+
     private Set<Oggetto> oggetti;
 
     public Inventario() {
@@ -50,10 +42,10 @@ public class Inventario implements Serializable {
                 stringBuilder.append(":\n");
 
                 String descrizione = oggetto.getDescrizione();
-                int lunghezzaMassimaPerRiga = 50; 
+                int lunghezzaMassimaPerRiga = 50;
                 int index = 0;
                 while (index < descrizione.length()) {
-                    stringBuilder.append("   "); 
+                    stringBuilder.append("   ");
                     stringBuilder.append(descrizione.substring(index, Math.min(index + lunghezzaMassimaPerRiga, descrizione.length())));
                     stringBuilder.append("\n");
                     index += lunghezzaMassimaPerRiga;

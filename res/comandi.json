@@ -85,5 +85,10 @@
         "name": "suggerimento",
         "aliases": ["suggerimento", "consiglio"],
         "type": "SUGGERIMENTO"
+    },
+    {
+        "name": "crea",
+        "aliases": ["crea"],
+        "type": "CREA"
     }
 ]
