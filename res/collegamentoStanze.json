@@ -148,7 +148,6 @@
         "nome": "sala d'attesa",
         "descrizione": "Osservando attentamente la gente presente,\nnoti una figura particolarmente distinta,\nun uomo che parla in modo animato dicendo cose strane",
         "connessioneStanze": {
-            "SUD": "sala operatoria",
             "EST": "laboratorio",
             "NORD": "bagno superiore",
             "OVEST": "corridoio"
@@ -214,9 +213,17 @@
     {
         "nome": "sala operatoria",
         "descrizione": "",
-        "connessioneStanze": {
-            "NORD": "sala d'attesa"
-        },
+        "connessioneStanze": null,
         "oggettiPresentiStanza": []
+    },
+     {
+        "nome": "game over",
+        "descrizione": ""
+
+    }
+    ,
+     {
+        "nome": "win",
+        "descrizione": ""
     }
 ]

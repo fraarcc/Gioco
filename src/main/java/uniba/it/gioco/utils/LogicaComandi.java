@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco.utils;
 
 import java.io.BufferedReader;
@@ -12,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -34,10 +31,6 @@ import uniba.it.gioco.tipi.Oggetto;
 import uniba.it.gioco.tipi.Stanza;
 import uniba.it.gioco.tipi.TipoNpc;
 
-/**
- *
- * @author Nikita
- */
 public class LogicaComandi {
 
     private Input input;
@@ -160,7 +153,21 @@ public class LogicaComandi {
                 }
                 break;
             case LANCIATI:
-                //finestra
+                if (giocatore.getStanzaCorrente().getNome().equals("spogliatoio")) {
+                    if (controlloCuscino() && controlloComposto()) {
+                        win();
+                    }
+                    if (controlloCuscino()) {
+                        lose();
+                    }
+
+                    if (!controlloCuscino()) {
+                        death();
+                    }
+
+                } else {
+                    jOutputTestoArea.append("Non puoi buttarti da questa stanza \n");
+                }
                 break;
             case AIUTO:
                 eseguiComandoAiuto();
@@ -187,7 +194,8 @@ public class LogicaComandi {
                 composto.thenAccept((esito) -> {
                     // Esegui le operazioni desiderate utilizzando il valore booleano "esito"
                     if (esito) {
-                        System.out.println("Il composto è stato creato correttamente.");
+                        aggiuntaInInventarioComposto();
+                        jOutputTestoArea.append("Hai creato il composto \n");
                     } else {
                         System.out.println("Si è verificato un errore durante la creazione del composto.");
                     }
@@ -445,7 +453,6 @@ public class LogicaComandi {
     private void eseguiComandoIndossa(List<String> tokens) {
         // Verifica se la lista non è nulla, ha un solo elemento e se quel elemento è "camice"
         if (tokens != null && tokens.size() == 1 && tokens.get(0).equalsIgnoreCase("camice")) {
-            Set<Oggetto> inventario = giocatore.getInventario().getOggetti();
             //Elimino il camice dall inventario
             Oggetto camice = giocatore.getInventario().getOggetti()
                     .stream()
@@ -588,7 +595,7 @@ public class LogicaComandi {
         CompletableFuture<Boolean> risultato = apriLucchetto();
         boolean stato;
         try {
-            stato = risultato.get(); // Questo bloccherà il thread finché il risultato non sarà disponibile
+            stato = risultato.get();
             if (stato) {
                 System.out.println("Il lucchetto è stato sbloccato!");
             } else {
@@ -596,7 +603,7 @@ public class LogicaComandi {
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
-            stato = false; // Gestione dell'errore
+            stato = false;
         }
 
         return stato;
@@ -734,5 +741,48 @@ public class LogicaComandi {
         });
         thread.start();
         return esitoComposto;
+    }
+
+    private boolean controlloCuscino() {
+        Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        for (Oggetto oggetto : inventarioGiocatore) {
+            if (oggetto.getId() == 11) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean controlloComposto() {
+        Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        for (Oggetto oggetto : inventarioGiocatore) {
+            if (oggetto.getId() == 15) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void aggiuntaInInventarioComposto() {
+        List<Integer> oggettiDaRimuovere = Arrays.asList(3, 4, 5, 6);
+        giocatore.getInventario().getOggetti().removeIf(oggetto -> oggettiDaRimuovere.contains(oggetto.getId()));
+
+        Oggetto ringerAcetato = new Oggetto(15, "Ringer Acetato", "Il composto che cercavi tanto. \n");
+        giocatore.aggiungiOggettoInventario(ringerAcetato);
+    }
+    
+    private void lose() {
+        jOutputTestoArea.setText("");
+        giocatore.cambioStanzaDiretto(stanze, 11, output);
+    }
+    
+    private void death(){
+        jOutputTestoArea.setText("");
+        giocatore.cambioStanzaDiretto(stanze, 10, output);
+    }
+    
+    private void win(){
+        jOutputTestoArea.setText("");
+        giocatore.cambioStanzaDiretto(stanze, 12, output);
     }
 }

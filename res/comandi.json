@@ -51,7 +51,7 @@
     },
     {
         "name": "lanciati",
-        "aliases": ["buttati", "gettati", "salta"],
+        "aliases": ["lanciati", "buttati", "salta"],
         "type": "LANCIATI"
     },
     {
