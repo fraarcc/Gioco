@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package uniba.it.gioco.gui;
 
 import java.awt.BorderLayout;
@@ -13,57 +9,47 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import uniba.it.gioco.GameModel;
 
-/**
- *
- * @author Nikita
- */
 public class JFrameMain extends javax.swing.JFrame {
 
     private JPanel cardsPanel;
     private CardLayout cardLayout;
     private GameModel gameModel;
 
-    /**
-     * Creates new form JFrameMain
-     */
     public JFrameMain(GameModel gameModel) throws IOException {
         this.gameModel = gameModel;
         initComponents();
+        creazioneCards();
+        gestioneUscita();
+    }
+
+    private void creazioneCards() {
         cardLayout = new CardLayout();
         cardsPanel = new JPanel(cardLayout);
         getContentPane().add(cardsPanel, BorderLayout.CENTER);
-        //Creazione cards
         cardsPanel.add(new JPanelMenu(this, gameModel), "mainMenu");
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
         cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
         cardsPanel.add(new JPanelMostraPartite(this, gameModel), "showGames");
-
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
-        gestioneUscita();
     }
 
-   public void gestioneUscita(){
-    // Aggiungi il WindowListener al frame principale
-    this.addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosing(WindowEvent e) {
-            // Mostra una finestra di dialogo di conferma
-            int choice = JOptionPane.showConfirmDialog(JFrameMain.this, "Vuoi davvero chiudere l'applicazione?"
-                    + "\nI tuoi progressi potrebbero essere persi", "Conferma", JOptionPane.YES_NO_OPTION);
-            if (choice == JOptionPane.YES_OPTION) {
-                // Chiudi l'applicazione
-                setDefaultCloseOperation(JFrameMain.EXIT_ON_CLOSE);
-            } else {
-                // Annulla la chiusura dell'applicazione
-                setDefaultCloseOperation(JFrameMain.DO_NOTHING_ON_CLOSE);
+    public void gestioneUscita() {
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int choice = JOptionPane.showConfirmDialog(JFrameMain.this, "Vuoi davvero chiudere l'applicazione?"
+                        + "\nI tuoi progressi potrebbero essere persi", "Conferma", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    setDefaultCloseOperation(JFrameMain.EXIT_ON_CLOSE);
+                } else {
+                    setDefaultCloseOperation(JFrameMain.DO_NOTHING_ON_CLOSE);
+                }
             }
-        }
-    });
-}
-        
-    
+        });
+    }
+
     // Metodo per spostarsi alla "card" specificata
     public void showCard(String cardName) {
         cardLayout.show(cardsPanel, cardName);
@@ -75,8 +61,6 @@ public class JFrameMain extends javax.swing.JFrame {
         cardsPanel.add(new JPanelNuovoGioco(this, gameModel), "newGame");
         cardsPanel.add(new JPanelPartita(this, gameModel), "inGame");
         cardsPanel.add(new JPanelMostraPartite(this, gameModel), "showGames");
-       
-
         revalidate(); // Rendi valida la nuova disposizione delle card nel pannello
         repaint(); // Ridisegna il pannello
     }

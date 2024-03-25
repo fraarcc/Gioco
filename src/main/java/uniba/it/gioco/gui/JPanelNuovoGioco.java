@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package uniba.it.gioco.gui;
-
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -13,19 +8,12 @@ import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
 
-
-/**
- *
- * @author Nikita
- */
 public class JPanelNuovoGioco extends javax.swing.JPanel {
+
     private JFrameMain jframeMain;
     private GameModel gameModel;
 
-    /**
-     * Creates new form JPanelNuovoGioco
-     */
-    public JPanelNuovoGioco(JFrameMain jframeMain,GameModel gameModel) {
+    public JPanelNuovoGioco(JFrameMain jframeMain, GameModel gameModel) {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
@@ -113,45 +101,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     private void confermaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaActionPerformed
         // Ottieni il nickname inserito dall'utente
         String nickname = jNickname.getText();
-        if(nickname.length() > 0 && nickname != null){
-        if (!InitDatabase.verificaGiocatore(nickname)) {
-            // Inizializza il gioco con il nickname nel GameModel esistente
-            GameModel newGameModel = gameModel.inizializzaGioco(nickname);
-            if (newGameModel != null) {
-                try {
-                    // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
-                    gameModel = newGameModel;
-                    // Aggiorna le istanze delle card con il nuovo GameModel
-                    jframeMain.updateCards(gameModel);
-                    // Mostra la card "inGame"
-                    jframeMain.showCard("inGame");
-                } catch (IOException ex) {
-                    Logger.getLogger(JPanelNuovoGioco.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                JOptionPane.showMessageDialog(jframeMain, "Impossibile inizializzare il gioco!", "Avviso", JOptionPane.WARNING_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(jframeMain, "Questo nickname non e' disponibile", "Avviso", JOptionPane.WARNING_MESSAGE);
-            jNickname.setText("");
-            jNickname.requestFocus();
-        }
-        } else{
-            JOptionPane.showMessageDialog(jframeMain, "Inserire un nickname", "Avviso", JOptionPane.WARNING_MESSAGE);
-        }
-               
-    }//GEN-LAST:event_confermaActionPerformed
-
-    private void jNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNicknameActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jNicknameActionPerformed
-
-    private void jNicknameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNicknameKeyPressed
-        // TODO add your handling code here:    
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String nickname = jNickname.getText();
-            if(nickname.length() > 0 && nickname != null){
+        if (nickname.length() > 0 && nickname != null) {
             if (!InitDatabase.verificaGiocatore(nickname)) {
                 // Inizializza il gioco con il nickname nel GameModel esistente
                 GameModel newGameModel = gameModel.inizializzaGioco(nickname);
@@ -174,15 +124,52 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 jNickname.setText("");
                 jNickname.requestFocus();
             }
-        
         } else {
-             JOptionPane.showMessageDialog(jframeMain, "Inserire un nickname", "Avviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(jframeMain, "Inserire un nickname", "Avviso", JOptionPane.WARNING_MESSAGE);
         }
-                
+
+    }//GEN-LAST:event_confermaActionPerformed
+
+    private void jNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNicknameActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jNicknameActionPerformed
+
+    private void jNicknameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNicknameKeyPressed
+        // TODO add your handling code here:    
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String nickname = jNickname.getText();
+            if (nickname.length() > 0 && nickname != null) {
+                if (!InitDatabase.verificaGiocatore(nickname)) {
+                    // Inizializza il gioco con il nickname nel GameModel esistente
+                    GameModel newGameModel = gameModel.inizializzaGioco(nickname);
+                    if (newGameModel != null) {
+                        try {
+                            // Se la creazione del nuovo GameModel ha avuto successo, aggiorna il riferimento
+                            gameModel = newGameModel;
+                            // Aggiorna le istanze delle card con il nuovo GameModel
+                            jframeMain.updateCards(gameModel);
+                            // Mostra la card "inGame"
+                            jframeMain.showCard("inGame");
+                        } catch (IOException ex) {
+                            Logger.getLogger(JPanelNuovoGioco.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(jframeMain, "Impossibile inizializzare il gioco!", "Avviso", JOptionPane.WARNING_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(jframeMain, "Questo nickname non e' disponibile", "Avviso", JOptionPane.WARNING_MESSAGE);
+                    jNickname.setText("");
+                    jNickname.requestFocus();
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(jframeMain, "Inserire un nickname", "Avviso", JOptionPane.WARNING_MESSAGE);
+            }
+
     }//GEN-LAST:event_jNicknameKeyPressed
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton conferma;

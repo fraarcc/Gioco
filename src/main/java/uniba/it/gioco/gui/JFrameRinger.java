@@ -1,29 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package uniba.it.gioco.gui;
 
+import static java.awt.Color.white;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Consumer;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author 39379
- */
 public class JFrameRinger extends javax.swing.JFrame {
-    
-    private final ArrayList<Integer> sequenza = new ArrayList<>();
 
-    /**
-     * Creates new form JFrameRinger
-     */
-    public JFrameRinger() {
+    private boolean esito = false;
+    private final ArrayList<Integer> sequenza = new ArrayList<>();
+    private Consumer<Boolean> callback;
+
+    public JFrameRinger(Consumer<Boolean> callback) {
+        this.callback = callback;
         initComponents();
         init();
     }
-    private void init(){
+
+    private void init() {
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(JFrameLucchetto.DISPOSE_ON_CLOSE);
         ImageIcon imageIcon = new ImageIcon("res/beckerGrande.png");
         jLabelBecker0.setIcon(imageIcon);
         ImageIcon imageIcon2 = new ImageIcon("res/beckerGrande1.png");
@@ -44,102 +42,101 @@ public class JFrameRinger extends javax.swing.JFrame {
         jButton3.setIcon(imageIcon9);
         ImageIcon imageIcon10 = new ImageIcon("res/sodioAcetato.png");
         jButton4.setIcon(imageIcon10);
-
+        setBackground(white);
     }
-    private void mostraBecker1(){
-        
-        
-        
+
+    private void mostraBecker1() {
+
         jPanBecker0.setVisible(false);
         jPanBecker1.setVisible(true);
         jPanBecker2.setVisible(false);
         jPanBecker3.setVisible(false);
         jPanBecker4.setVisible(false);
         jPanBeckerExp.setVisible(false);
-        
+
         jLabel1.setText("Inserisci i composti nell'ordine corretto");
     }
-    
-    private void mostraBecker2(){
-        
+
+    private void mostraBecker2() {
+
         jPanBecker0.setVisible(false);
         jPanBecker1.setVisible(false);
         jPanBecker2.setVisible(true);
         jPanBecker3.setVisible(false);
         jPanBecker4.setVisible(false);
         jPanBeckerExp.setVisible(false);
-        
+
         jLabel1.setText("Inserisci i composti nell'ordine corretto");
     }
-    
-    private void mostraBecker3(){
-        
+
+    private void mostraBecker3() {
+
         jPanBecker0.setVisible(false);
         jPanBecker1.setVisible(false);
         jPanBecker2.setVisible(false);
         jPanBecker3.setVisible(true);
         jPanBecker4.setVisible(false);
         jPanBeckerExp.setVisible(false);
-        
+
         jLabel1.setText("Inserisci i composti nell'ordine corretto");
     }
-    
-    private void mostraBecker4(){
-        
+
+    private void mostraBecker4() {
+
         jPanBecker0.setVisible(false);
         jPanBecker1.setVisible(false);
         jPanBecker2.setVisible(false);
         jPanBecker3.setVisible(false);
         jPanBecker4.setVisible(true);
         jPanBeckerExp.setVisible(false);
-        
+
         jLabel1.setText("Hai ottenuto il ringer acetato! Sembravi quasi un vero medico.");
+
+        esito = true;
+        if (callback != null) {
+            callback.accept(esito);
+        }
+        dispose();
     }
-    
-    private void mostraBeckerExp(){
-        
+
+    private void mostraBeckerExp() {
+
         jPanBecker0.setVisible(false);
         jPanBecker1.setVisible(false);
         jPanBecker2.setVisible(false);
         jPanBecker3.setVisible(false);
         jPanBecker4.setVisible(false);
         jPanBeckerExp.setVisible(true);
-        
+
         jLabel1.setText("BOOM! Ritenta, senza uccidere nessuno, grazie.");
     }
-    
-    
-    private void setImmagine(){
-    
-        if (sequenza.equals(Arrays.asList(1))){
-        
+
+    private void setImmagine() {
+
+        if (sequenza.equals(Arrays.asList(1))) {
+
             mostraBecker1();
-        }
-        
-        else if (sequenza.equals(Arrays.asList(1, 2))){
-        
+        } else if (sequenza.equals(Arrays.asList(1, 2))) {
+
             mostraBecker2();
-        }
-        
-        else if (sequenza.equals(Arrays.asList(1, 2, 3))){
-        
+        } else if (sequenza.equals(Arrays.asList(1, 2, 3))) {
+
             mostraBecker3();
-        }
-        
-        else if (sequenza.equals(Arrays.asList(1, 2, 3, 4))){
-        
+        } else if (sequenza.equals(Arrays.asList(1, 2, 3, 4))) {
+
             mostraBecker4();
-            System.out.println(true);
-            
-        }
-        
-        else {
-        
+            esito = true;
+
+        } else {
+
             mostraBeckerExp();
             sequenza.clear();
         }
     }
-    
+
+    public boolean getEsito() {
+        return esito;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -322,66 +319,32 @@ public class JFrameRinger extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-           
+
         sequenza.add(1);
         setImmagine();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-           
+
         sequenza.add(3);
         setImmagine();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-           
+
         sequenza.add(4);
         setImmagine();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-           
+
         sequenza.add(2);
         setImmagine();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameRinger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameRinger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameRinger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameRinger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameRinger().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

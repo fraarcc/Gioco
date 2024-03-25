@@ -1,6 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 package uniba.it.gioco;
 
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -11,11 +8,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import uniba.it.gioco.gui.JFrameMain;
 
-
-/**
- *
- * @author 39379
- */
 public class Engine {
 
     public static void main(String[] args) {

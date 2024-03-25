@@ -1,29 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package uniba.it.gioco.gui;
-
 
 import java.util.function.Consumer;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-/**
- *
- * @author Nikita
- */
 public class JFrameLucchetto extends javax.swing.JFrame {
-   private boolean statoGioco;
+
+    private boolean statoGioco;
     private Consumer<Boolean> callback;
 
-   public JFrameLucchetto(Consumer<Boolean> callback) {
+    public JFrameLucchetto(Consumer<Boolean> callback) {
         this.callback = callback;
         initComponents();
         init();
     }
 
-     private void init() {
+    private void init() {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrameLucchetto.DISPOSE_ON_CLOSE);
@@ -32,8 +23,7 @@ public class JFrameLucchetto extends javax.swing.JFrame {
         jLabel1.setVisible(true);
     }
 
-
-   public boolean getStatoGioco() {
+    public boolean getStatoGioco() {
         return statoGioco;
     }
 
@@ -45,9 +35,6 @@ public class JFrameLucchetto extends javax.swing.JFrame {
     public boolean isStatoGioco() {
         return statoGioco;
     }
-    
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,7 +79,7 @@ public class JFrameLucchetto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSbloccaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSbloccaActionPerformed
-     statoGioco = sblocca();
+        statoGioco = sblocca();
         if (callback != null) {
             callback.accept(statoGioco);
         }

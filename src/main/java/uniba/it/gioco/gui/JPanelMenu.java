@@ -1,24 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package uniba.it.gioco.gui;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 
-/**
- *
- * @author Nikita
- */
 public class JPanelMenu extends javax.swing.JPanel {
+
     private JFrameMain jframeMain;
     private GameModel gameModel;
-    
-    
 
-    public JPanelMenu(JFrameMain jframeMain,GameModel gameModel){
+    public JPanelMenu(JFrameMain jframeMain, GameModel gameModel) {
         this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
@@ -98,8 +89,8 @@ public class JPanelMenu extends javax.swing.JPanel {
         exitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         int choice = JOptionPane.showConfirmDialog(exitFrame, "Sei sicuro di voler interrompere l'esecuzione?", "Conferma", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                }      
+            System.exit(0);
+        }
     }//GEN-LAST:event_esciActionPerformed
 
     private void caricaPartita1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caricaPartita1ActionPerformed

@@ -1,224 +1,222 @@
 [
-  {
-    "nome": "ingresso",
-    "descrizione": "Oltre all'imponenente struttura non c'è molto da osservare qui,\ntranne qualche mozzicone di sigaretta per terra e \nun ticket con il nome dell'ospedale.",
-        
-   
-    "connessioneStanze": {
-      "NORD": "atrio"
-    },
-    "oggettiPresentiStanza": [
+    {
+        "nome": "ingresso",
+        "descrizione": "Oltre all'imponenente struttura non c'è molto da osservare qui,\ntranne qualche mozzicone di sigaretta per terra e \nun ticket con il nome dell'ospedale.",
+
+        "connessioneStanze": {
+            "NORD": "atrio"
+        },
+        "oggettiPresentiStanza": [
             {
-                    "id": 1,
-                    "nome": "ticket",
-                    "descrizione": "Ticket con su scritto il nome dell'ospedale"
+                "id": 1,
+                "nome": "ticket",
+                "descrizione": "Ticket con su scritto il nome dell'ospedale"
             }
         ],
-    "npc": 
-      {
-        "nome": "guardie",
-        "tipo": "GUARDIE",
-        "oggettiNpc": [],
-        "dialoghi": [
-                
-          "-Guardie: Buongiorno, è qui per una visita?",
-          "-Guardie: Mi dispiace, non posso farla entrare.",
-          "La guardia ti fa entrare, dimostrando da subito l'efficienza del sistema di sicurezza dell'ospedale."
-                
-        ],
-        "indovinello": {
-                "domanda": "-Guardie: Mi dice il codice della prenotazione per favore?",
-                "risposta": "A3258"
-        }
-      }
-    
-  },
-  {
-    "nome": "atrio",
-    "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente,con un bar nel mezzo e un barista dietro al banco.\nIn fondo alla stanza una grande finestra aperta.",
-        "aperto" : false,
-    "connessioneStanze": {
-      "EST": "farmacia",
-      "OVEST": "corridoio",
-      "SUD": "ingresso"
+        "npc": 
+                {
+                    "nome": "guardie",
+                    "tipo": "GUARDIE",
+                    "oggettiNpc": [],
+                    "dialoghi": [
+
+                        "-Guardie: Buongiorno, è qui per una visita?",
+                        "-Guardie: Mi dispiace, non posso farla entrare.",
+                        "La guardia ti fa entrare, dimostrando da subito l'efficienza del sistema di sicurezza dell'ospedale."
+
+                    ],
+                    "indovinello": {
+                        "domanda": "-Guardie: Mi dice il codice della prenotazione per favore?",
+                        "risposta": "A3258"
+                    }
+                }
     },
-    "oggettiPresentiStanza": [],
-    "npc": {
-      "nome": "barista",
-      "tipo": "BARISTA",
-      "oggettiNpc":[
-        {
-          "id": 2,
-          "nome": "chiavi del bagno",
-          "descrizione": "hai trovato la chiave del bagno inferiore"
+    {
+        "nome": "atrio",
+        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente,con un bar nel mezzo e un barista dietro al banco.\nIn fondo alla stanza una grande finestra aperta.",
+        "aperto": false,
+        "connessioneStanze": {
+            "EST": "farmacia",
+            "OVEST": "corridoio",
+            "SUD": "ingresso"
+        },
+        "oggettiPresentiStanza": [],
+        "npc": {
+            "nome": "barista",
+            "tipo": "BARISTA",
+            "oggettiNpc": [
+                {
+                    "id": 2,
+                    "nome": "chiavi del bagno",
+                    "descrizione": "hai trovato la chiave del bagno inferiore"
+                }
+            ]
+            ,
+            "dialoghi": [
+                "-Barista: Buonasera, come posso esserle utile?"
+            ],
+            "indovinello": null
         }
-    ]
-      ,
-      "dialoghi": [
-        "-Barista: Buonasera, come posso esserle utile?"
-      ],
-      "indovinello": null
-    }
-  },
-  {
-    "nome": "farmacia",
-    "descrizione": "Ti soffermi un attimo a esaminare la farmacia,\nosservando le etichette sui flaconi e i dispositivi medici riposti sugli scaffalie.\nIn fondo una porta blindada con la scritta deposito.",
-    "connessioneStanze": {
-      "OVEST": "atrio"
     },
-    "oggettiPresentiStanza": [],
-    "npc": {
-      "nome": "farmacista",
-      "tipo": "FARMACISTA",
-      "oggettiNpc": [
-        {
-          "id": 3,
-          "nome": "sodio cloruro",
-          "descrizione": "Provetta con sodio cloruro"
+    {
+        "nome": "farmacia",
+        "descrizione": "Ti soffermi un attimo a esaminare la farmacia,\nosservando le etichette sui flaconi e i dispositivi medici riposti sugli scaffalie.\nIn fondo una porta blindada con la scritta deposito.",
+        "connessioneStanze": {
+            "OVEST": "atrio"
         },
-        {
-          "id": 4,
-          "nome": "potassio cloruro",
-          "descrizione": "Provetta con potassio cloruro"
-        },
-        {
-          "id": 5,
-          "nome": "calcio cloruro diidrato",
-          "descrizione": "Ptovetta con calcio cloruro diidrato"
-        },
-        {
-          "id": 6,
-          "nome": "sodio acetato triidrato",
-          "descrizione": "Provetta con sodio acetato triidrato"
-        }
-      ],
-      "dialoghi": [
+        "oggettiPresentiStanza": [],
+        "npc": {
+            "nome": "farmacista",
+            "tipo": "FARMACISTA",
+            "oggettiNpc": [
+                {
+                    "id": 3,
+                    "nome": "sodio cloruro",
+                    "descrizione": "Provetta con sodio cloruro"
+                },
+                {
+                    "id": 4,
+                    "nome": "potassio cloruro",
+                    "descrizione": "Provetta con potassio cloruro"
+                },
+                {
+                    "id": 5,
+                    "nome": "calcio cloruro diidrato",
+                    "descrizione": "Ptovetta con calcio cloruro diidrato"
+                },
+                {
+                    "id": 6,
+                    "nome": "sodio acetato triidrato",
+                    "descrizione": "Provetta con sodio acetato triidrato"
+                }
+            ],
+            "dialoghi": [
                 "Farmacista: Salve, cosa posso fare per lei?",
                 "Farmacista: Ecco a lei!",
                 "Farmacista: Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale.",
                 "...Sembra che vestito in quel modo non hai l'aria di essere un medico o un infermiere"
-      ],
-      "indovinello": null
-    }
-  },
-  {
-    "nome": "corridoio",
-    "descrizione": "Lungo la parete ci sono numerose vetrate che si affacciano sull'esterno.\nSono presenti molte panche e alla tua sinistra due ascensori ",
-    "connessioneStanze": {
-      "EST": "atrio",
-      "NORD": "bagno",
-      "OVEST":"sala d'attesa"
+            ],
+            "indovinello": null
+        }
     },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "bagno",
-    "descrizione": "Sei entrato nel bagno. Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno!",
-    "aperto": false,
-    "connessioneStanze": {
-      "SUD": "corridoio",
-      "NORD": "sgabuzzino"
+    {
+        "nome": "corridoio",
+        "descrizione": "Lungo la parete ci sono numerose vetrate che si affacciano sull'esterno.\nSono presenti molte panche e alla tua sinistra due ascensori ",
+        "connessioneStanze": {
+            "EST": "atrio",
+            "NORD": "bagno",
+            "OVEST": "sala d'attesa"
+        },
+        "oggettiPresentiStanza": []
     },
-    "oggettiPresentiStanza": []
-  },
-  {
-    "nome": "sgabuzzino",
-    "descrizione": "La vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, dei cartoni di peroni e altri oggetti. ",
-     "aperto": false,
-    "connessioneStanze": {
-      "SUD": "bagno"
+    {
+        "nome": "bagno",
+        "descrizione": "Sei entrato nel bagno. Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno!",
+        "aperto": false,
+        "connessioneStanze": {
+            "SUD": "corridoio",
+            "NORD": "sgabuzzino"
+        },
+        "oggettiPresentiStanza": []
     },
-    "oggettiPresentiStanza": [
-      {
-        "id": 7,
-        "nome": "boccetta",
-        "descrizione": "Una boccetta per composti chimici"
-      },
-      {
-        "id": 8,
-        "nome": "camice",
-        "descrizione": "Camice da medico con DUE GROSSE TASCHE"
-      },
-      {
-        "id": 9,
-        "nome": "foglietto",
-        "descrizione": "Un foglio strappato"
-      }
-    ]
-  },
-  {
-    "nome": "sala d'attesa",
-    "descrizione": "Osservando attentamente la gente presente,\nnoti una figura particolarmente distinta,\nun uomo che parla in modo animato dicendo cose strane",
-    "connessioneStanze": {
-      "SUD": "sala operatoria",
-      "EST": "laboratorio",
-      "NORD": "bagno superiore",
-      "OVEST": "corridoio"
+    {
+        "nome": "sgabuzzino",
+        "descrizione": "La vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, dei cartoni di peroni e altri oggetti. ",
+        "aperto": false,
+        "connessioneStanze": {
+            "SUD": "bagno"
+        },
+        "oggettiPresentiStanza": [
+            {
+                "id": 7,
+                "nome": "boccetta",
+                "descrizione": "Una boccetta per composti chimici"
+            },
+            {
+                "id": 8,
+                "nome": "camice",
+                "descrizione": "Camice da medico con DUE GROSSE TASCHE"
+            },
+            {
+                "id": 9,
+                "nome": "foglietto",
+                "descrizione": "Un foglio strappato"
+            }
+        ]
     },
-    "oggettiPresentiStanza": [],
-    "npc": {
-      "nome": "pazzo",
-      "tipo": "PAZZO",
-      "oggettiNpc": [],
-      "dialoghi": [
-        "Benvenuto nella sala d'attesa."
-      ],
-      "indovinello": null
-    }
-  },
-  {
-    "nome": "bagno superiore",
-    "descrizione": "Anche qui ci sono lavandini, le porte, i bagni e i cessi.\nIncastrato tra le fessure della parete c'e' un foglietto strappato,\nforse qualcuno deve averlo smarrito",
-    "connessioneStanze": {
-      "SUD": "sala d'attesa",
-      "EST": "spogliatoio"
+    {
+        "nome": "sala d'attesa",
+        "descrizione": "Osservando attentamente la gente presente,\nnoti una figura particolarmente distinta,\nun uomo che parla in modo animato dicendo cose strane",
+        "connessioneStanze": {
+            "SUD": "sala operatoria",
+            "EST": "laboratorio",
+            "NORD": "bagno superiore",
+            "OVEST": "corridoio"
+        },
+        "oggettiPresentiStanza": [],
+        "npc": {
+            "nome": "pazzo",
+            "tipo": "PAZZO",
+            "oggettiNpc": [],
+            "dialoghi": [
+                "Benvenuto nella sala d'attesa."
+            ],
+            "indovinello": null
+        }
     },
-    "oggettiPresentiStanza": [
-         {
-                    "id": 10,
-                    "nome": "seconda meta' foglietto",
-                    "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
+    {
+        "nome": "bagno superiore",
+        "descrizione": "Anche qui ci sono lavandini, le porte, i bagni e i cessi.\nIncastrato tra le fessure della parete c'e' un foglietto strappato,\nforse qualcuno deve averlo smarrito",
+        "connessioneStanze": {
+            "SUD": "sala d'attesa",
+            "EST": "spogliatoio"
+        },
+        "oggettiPresentiStanza": [
+            {
+                "id": 10,
+                "nome": "seconda meta' foglietto",
+                "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
             }]
-  },
-  {
-    "nome": "spogliatoio",
-    "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda \nc'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti",
-    "connessioneStanze": {
-      "OVEST": "bagno",
-      "SUD": "laboratorio"
     },
-    "oggettiPresentiStanza": [
-      {
-        "id": 11,
-        "nome": "cuscino",
-        "descrizione": "Cuscino per branda"
-      }
-    ]
-  },
-  {
-    "nome": "laboratorio",
-    "descrizione": "All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive.",
-    "connessioneStanze": {
-      "NORD": "spogliatoio",
-      "OVEST": "sala d'attesa"
+    {
+        "nome": "spogliatoio",
+        "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda \nc'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti",
+        "connessioneStanze": {
+            "OVEST": "bagno",
+            "SUD": "laboratorio"
+        },
+        "oggettiPresentiStanza": [
+            {
+                "id": 11,
+                "nome": "cuscino",
+                "descrizione": "Cuscino per branda"
+            }
+        ]
     },
-    "oggettiPresentiStanza": [],
-    "npc": {
-      "nome": "dottoressa",
-      "tipo": "DOTTORESSA",
-      "oggettiNpc": [],
-      "dialoghi": [
-        "Benvenuto sono la dottoressa dell'ospedale."
-      ],
-      "indovinello": null
+    {
+        "nome": "laboratorio",
+        "descrizione": "All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive.",
+        "connessioneStanze": {
+            "NORD": "spogliatoio",
+            "OVEST": "sala d'attesa"
+        },
+        "oggettiPresentiStanza": [],
+        "npc": {
+            "nome": "dottoressa",
+            "tipo": "DOTTORESSA",
+            "oggettiNpc": [],
+            "dialoghi": [
+                "Benvenuto sono la dottoressa dell'ospedale."
+            ],
+            "indovinello": null
+        }
+    },
+    {
+        "nome": "sala operatoria",
+        "descrizione": "",
+        "connessioneStanze": {
+            "NORD": "sala d'attesa"
+        },
+        "oggettiPresentiStanza": []
     }
-  },
-  {
-    "nome": "sala operatoria",
-    "descrizione": "",
-    "connessioneStanze": {
-      "NORD": "sala d'attesa"
-    },
-    "oggettiPresentiStanza": []
-  }
 ]

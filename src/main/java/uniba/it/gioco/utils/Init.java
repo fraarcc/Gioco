@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package uniba.it.gioco.storia;
+package uniba.it.gioco.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
 import java.util.*;
 import uniba.it.gioco.tipi.Comando;
@@ -17,6 +12,7 @@ import uniba.it.gioco.tipi.Inventario;
 import uniba.it.gioco.tipi.Stanza;
 
 public class Init {
+
     private final ObjectMapper objectMapper;
     private final Set<String> stopWords;
     private final Map<String, Comando> commands;
@@ -42,7 +38,8 @@ public class Init {
     private Map<String, Comando> loadCommandsFromJson(String jsonFilePath) {
         Map<String, Comando> commands = new HashMap<>();
         try {
-            List<Comando> commandList = objectMapper.readValue(new File(jsonFilePath), new TypeReference<List<Comando>>() {});
+            List<Comando> commandList = objectMapper.readValue(new File(jsonFilePath), new TypeReference<List<Comando>>() {
+            });
             for (Comando command : commandList) {
                 commands.put(command.getName(), command);
                 for (String alias : command.getAliases()) {
@@ -65,9 +62,9 @@ public class Init {
 
     public List<Stanza> inizializzaStanze() throws IOException {
         String filePath = ".\\res\\collegamentoStanze.json";
-        return loadJSON(filePath, new TypeReference<List<Stanza>>() {});
+        return loadJSON(filePath, new TypeReference<List<Stanza>>() {
+        });
     }
-
 
     public Giocatore inizializzaGiocatore(int idUtente, String nickname, Stanza stanzaIniziale) {
         // Aggiungere controllo nickname da database per adesso senza controlli
@@ -77,10 +74,11 @@ public class Init {
     private <T> List<T> loadJSON(String filePath, TypeReference<List<T>> typeReference) throws IOException {
         return objectMapper.readValue(new File(filePath), typeReference);
     }
-    
-     public Stanza loadStanzaFromJson(String stanzaNome) throws IOException {
+
+    public Stanza loadStanzaFromJson(String stanzaNome) throws IOException {
         String filePath = ".\\res\\collegamentoStanze.json";
-        List<Stanza> stanze = loadJSON(filePath, new TypeReference<List<Stanza>>() {});
+        List<Stanza> stanze = loadJSON(filePath, new TypeReference<List<Stanza>>() {
+        });
         for (Stanza stanza : stanze) {
             if (stanza.getNome().equals(stanzaNome)) {
                 return stanza;
@@ -88,11 +86,9 @@ public class Init {
         }
         throw new IOException("Stanza non trovata nel file JSON: " + stanzaNome);
     }
-    
+
     public List<Comando> getCommandsAsList() {
-    return new ArrayList<>(commands.values());
-}
-    
-   
+        return new ArrayList<>(commands.values());
+    }
 
 }

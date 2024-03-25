@@ -1,15 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package uniba.it.gioco.gui;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,57 +9,51 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import uniba.it.gioco.GameModel;
-import uniba.it.gioco.storia.Init;
-import uniba.it.gioco.storia.Input;
-import uniba.it.gioco.storia.Output;
+import uniba.it.gioco.utils.Init;
+import uniba.it.gioco.utils.Input;
+import uniba.it.gioco.utils.Output;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
 
-/**
- *
- * @author 39379
- */
 public class JPanelPartita extends javax.swing.JPanel {
 
     private List<Stanza> stanze;
     private Giocatore giocatore;
     private JFrameMain jframeMain;
     private GameModel gameModel;
-    private Input inputThread;
+    private Input gestoreInput;
     private Init init;
 
-    /**
-     * Creates new form JPanelPartita
-     */
     public JPanelPartita(JFrameMain jframeMain, GameModel gameModel) {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
+        initInfoInGame();
+    }
+
+    private void initInfoInGame() {
         try {
             init = gameModel.getInit();
             stanze = gameModel.getStanze();
             giocatore = gameModel.getGiocatore();
+            Output gestoreOutput = new Output(jAreaTesto, giocatore, jContainerImmagini);
+            gestoreOutput.start();
+            gestoreInput = new Input(jInputTestoArea, jInvioButtone, giocatore,
+                    init, jAreaTesto, gestoreOutput, stanze, gameModel);
+
             if (giocatore != null) {
                 String nickname = giocatore.getNickname();
                 SwingUtilities.invokeLater(() -> {
                     jAreaTesto.setText("Il nome del giocatore è: " + nickname + "\n\n\n");
                 });
-
-                Output output = new Output(jAreaTesto, giocatore, jContainerImmagini);
-                output.start();
-
-                inputThread = new Input(jInputTestoArea, jInvioButtone,giocatore, init, jAreaTesto,  output, stanze, gameModel);
-                //inputThread.start();
             } else {
                 System.out.println("Giocatore non inizializzato");
             }
         } catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
         jInputTestoArea.requestFocus();
     }
-    
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,8 +156,7 @@ public class JPanelPartita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jInputTestoAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInputTestoAreaActionPerformed
-        // TODO add your handling code here:
-       
+        // TODO add your handling code here:      
     }//GEN-LAST:event_jInputTestoAreaActionPerformed
 
     private void jIndietroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIndietroButtonActionPerformed
@@ -194,7 +178,7 @@ public class JPanelPartita extends javax.swing.JPanel {
     private void jInvioButtoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvioButtoneActionPerformed
         String input = jInputTestoArea.getText();
         if (input != null && input.length() > 0) {
-            inputThread.inviaComando(input, jInputTestoArea);
+            gestoreInput.inviaComando(input, jInputTestoArea);
             jInputTestoArea.setText("");
         } else {
             jAreaTesto.append("Inserisci qualcosa \n");
@@ -208,7 +192,7 @@ public class JPanelPartita extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String input = jInputTestoArea.getText();
             if (input != null && input.length() > 0) {
-                inputThread.inviaComando(input, jInputTestoArea);
+                gestoreInput.inviaComando(input, jInputTestoArea);
                 jInputTestoArea.setText("");
             } else {
                 jAreaTesto.append("Inserisci qualcosa \n");
@@ -222,7 +206,6 @@ public class JPanelPartita extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCancellaButton1ActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea jAreaTesto;
