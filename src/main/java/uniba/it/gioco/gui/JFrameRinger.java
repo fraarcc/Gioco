@@ -42,7 +42,7 @@ public class JFrameRinger extends javax.swing.JFrame {
         jButton3.setIcon(imageIcon9);
         ImageIcon imageIcon10 = new ImageIcon("res/sodioAcetato.png");
         jButton4.setIcon(imageIcon10);
-        setBackground(white);
+
     }
 
     private void mostraBecker1() {
@@ -168,6 +168,8 @@ public class JFrameRinger extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanBecker0.setRequestFocusEnabled(false);
+
         jLabelBecker0.setText("jLabel1");
 
         javax.swing.GroupLayout jPanBecker0Layout = new javax.swing.GroupLayout(jPanBecker0);
@@ -280,6 +282,7 @@ public class JFrameRinger extends javax.swing.JFrame {
         getContentPane().add(jPanBeckerExp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 370, 370));
 
         jButton1.setText("jButton1");
+        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
