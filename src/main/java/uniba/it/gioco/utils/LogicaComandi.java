@@ -326,7 +326,9 @@ public class LogicaComandi {
                             + "L'oscurità nasconde la chiave, ma il sussurro dei numeri rivela il cammino: 1, 2, 3. \n"
                             + "Un enigma intricato, un mistero avvolto nel velo del tempo. \n"
                             + "Solo chi sa decifrare il linguaggio nascosto delle cifre \n"
-                            + "potrà trovare la risposta e sbloccare il segreto celato nel cuore dell'ignoto. \n");
+                            + "potrà trovare la risposta e sbloccare il segreto celato nel cuore dell'ignoto. \n"
+                            + "Senti giovane, hai visto mia moglie? \nSono due anni che sta nella sala operatoria ma non esce. \nAveva sentito uno che per andarsene dall'ospedale era uscito dalla finestra "
+                            + "e ha deciso di prendere un po' d'aria pure lei.  \n");
                 } else {
                     jOutputTestoArea.append("Non puoi parlare con il pazzo \n");
                 }

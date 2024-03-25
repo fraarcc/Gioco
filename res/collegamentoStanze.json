@@ -33,7 +33,7 @@
     },
     {
         "nome": "atrio",
-        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente,con un bar nel mezzo e un barista dietro al banco.\nIn fondo alla stanza una grande finestra aperta.",
+        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si appoggiano dei clienti.",
         "aperto": false,
         "connessioneStanze": {
             "EST": "farmacia",
@@ -179,7 +179,7 @@
     },
     {
         "nome": "spogliatoio",
-        "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda \nc'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti",
+        "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda \nc'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti e sulla parete c'è una grande finestra aperta.",
         "connessioneStanze": {
             "OVEST": "bagno",
             "SUD": "laboratorio"
@@ -212,18 +212,18 @@
     },
     {
         "nome": "sala operatoria",
-        "descrizione": "",
+        "descrizione": "Hai perso! \nStrano, ti sei buttato senza nulla che possa aver attutito \nil colpo senza il minimo senso logico. Puoi comunque consolarti \nper essere stato il primo uomo ad essere entrato sano\n in un ospedale ed uscirne completamente morto. (Di solito si fa il contrario, \nvorrei ricordarti). Saremo lieti di farti ricominciare tutta la partita da capo.",
         "connessioneStanze": null,
         "oggettiPresentiStanza": []
     },
      {
         "nome": "game over",
-        "descrizione": ""
+        "descrizione": "E' arrivato il momento di farti i miei complimenti...\nsei hai finalmente trovato un modo per entrare\nnella sala operatoria. Sfortunatamente non sei riuscito\nad ottenere il tuo farmaco e date le tue condizioni e\nla struttura del gioco, non sarai in grado di uscire da\nlì. E' stato un piacere farti giocare inutilmente.\nSe proprio ci tieni, inizia una nuova partita.\nTra parentesi, hai perso."
 
     }
     ,
      {
         "nome": "win",
-        "descrizione": ""
+        "descrizione": "A quanto pare qualche imbecille non ha ancora capito che accendere \nla modalità aereo non significa essere in grado di volare... \ndopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza \nla tua vista si offusca e inizi rapidamente a perdere conoscenza. \nDopo pochi attimi ti ritrovi in una stanza completamente bianca \ne un signore vestito di bianco con capelli e barba bianca allunga \nuna mano verso di te... con tuo grande dispiacere egli non è l'Altissimo e tantomen\no il dottor House, \nma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. Dopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano ancora più ferma, \na fregarti 50 euro dalla tasca. Realizzi di essere nella sala operatoria. \nIl cuscino che avevi appena rubato senza un apparente scopo dallo spogliatoio è riuscito \nad attutire l'impatto tra il tuo sedere e l'asfalto e adesso sei vivo per miracolo eucaristico.\nSiamo commossi e quasi ci dispiace abbandonarti dopo quanto abbiamo passato insieme. \nE' ora che tu vada, sei diventato un ometto. Hai vinto."
     }
 ]
