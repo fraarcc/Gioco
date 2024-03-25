@@ -79,6 +79,11 @@ public class Giocatore implements Serializable {
             output.direzioneErrataMsg();
         }
     }
+    
+    public void cambioStanzaDiretto(List<Stanza> stanze,int posStanza,Output output){
+        setStanzaCorrente(stanze.get(posStanza));
+        output.cambioStanza();
+    }
 
     @Override
     public String toString() {

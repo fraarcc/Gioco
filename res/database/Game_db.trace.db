@@ -1,4 +1,4 @@
-2024-03-25 12:34:14 jdbc[6]: null
+2024-03-25 16:17:40 jdbc[6]: null
 org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-200]
 	at org.h2.message.DbException.get(DbException.java:205)
 	at org.h2.message.DbException.get(DbException.java:181)
@@ -11,9 +11,9 @@ org.h2.message.DbException: The connection was not closed by the application and
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
 	at uniba.it.gioco.database.InitDatabase.creaConnessione(InitDatabase.java:35)
 	at uniba.it.gioco.database.InitDatabase.salvaPartita(InitDatabase.java:53)
-	at uniba.it.gioco.utils.LogicaComandi.eseguiComandoSalva(LogicaComandi.java:568)
-	at uniba.it.gioco.utils.LogicaComandi.eseguiComando(LogicaComandi.java:178)
-	at uniba.it.gioco.utils.LogicaComandi.gestioneComandi(LogicaComandi.java:71)
+	at uniba.it.gioco.utils.LogicaComandi.eseguiComandoSalva(LogicaComandi.java:575)
+	at uniba.it.gioco.utils.LogicaComandi.eseguiComando(LogicaComandi.java:185)
+	at uniba.it.gioco.utils.LogicaComandi.gestioneComandi(LogicaComandi.java:64)
 	at uniba.it.gioco.utils.Input.inviaComando(Input.java:34)
 	at uniba.it.gioco.gui.JPanelPartita.jInputTestoAreaKeyPressed(JPanelPartita.java:195)
 	at uniba.it.gioco.gui.JPanelPartita$4.keyPressed(JPanelPartita.java:107)
@@ -54,7 +54,7 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 50 more
-2024-03-25 12:34:14 jdbc[6]: null
+2024-03-25 16:17:40 jdbc[6]: null
 org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-200]
 	at org.h2.message.DbException.get(DbException.java:205)
 	at org.h2.message.DbException.get(DbException.java:181)
@@ -67,9 +67,9 @@ org.h2.message.DbException: The connection was not closed by the application and
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:190)
 	at uniba.it.gioco.database.InitDatabase.creaConnessione(InitDatabase.java:35)
 	at uniba.it.gioco.database.InitDatabase.salvaPartita(InitDatabase.java:53)
-	at uniba.it.gioco.utils.LogicaComandi.eseguiComandoSalva(LogicaComandi.java:568)
-	at uniba.it.gioco.utils.LogicaComandi.eseguiComando(LogicaComandi.java:178)
-	at uniba.it.gioco.utils.LogicaComandi.gestioneComandi(LogicaComandi.java:71)
+	at uniba.it.gioco.utils.LogicaComandi.eseguiComandoSalva(LogicaComandi.java:575)
+	at uniba.it.gioco.utils.LogicaComandi.eseguiComando(LogicaComandi.java:185)
+	at uniba.it.gioco.utils.LogicaComandi.gestioneComandi(LogicaComandi.java:64)
 	at uniba.it.gioco.utils.Input.inviaComando(Input.java:34)
 	at uniba.it.gioco.gui.JPanelPartita.jInputTestoAreaKeyPressed(JPanelPartita.java:195)
 	at uniba.it.gioco.gui.JPanelPartita$4.keyPressed(JPanelPartita.java:107)
