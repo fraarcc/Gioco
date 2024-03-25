@@ -21,6 +21,7 @@ import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
 import uniba.it.gioco.gui.JFrameLucchetto;
 import uniba.it.gioco.gui.JFrameRinger;
+import uniba.it.gioco.gui.JPanelPartita;
 import uniba.it.gioco.parser.Parser;
 import uniba.it.gioco.tipi.Comando;
 import uniba.it.gioco.tipi.Direzione;
@@ -33,6 +34,7 @@ import uniba.it.gioco.tipi.TipoNpc;
 
 public class LogicaComandi {
 
+    private JPanelPartita jPanelParita;
     private Input input;
     private Output output;
     private Giocatore giocatore;
@@ -43,8 +45,9 @@ public class LogicaComandi {
     private LogicaDialoghi logicaDialoghi;
     private GameModel gameModel;
 
-    public LogicaComandi(Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,
+    public LogicaComandi(JPanelPartita jPanelParita, Giocatore giocatore, Init init, JTextArea jOutputTestoArea, JTextField jInputTestoArea,
             Output output, List<Stanza> stanze, LogicaDialoghi logicaDialoghi, Input input) {
+        this.jPanelParita = jPanelParita;
         this.giocatore = giocatore;
         this.init = init;
         this.jOutputTestoArea = jOutputTestoArea;
@@ -154,19 +157,15 @@ public class LogicaComandi {
                 break;
             case LANCIATI:
                 if (giocatore.getStanzaCorrente().getNome().equals("spogliatoio")) {
-                    if (controlloCuscino() && controlloComposto()) {
+                    if (controlloCuscino() && controlloCompostoFinale()) {
                         win();
-                    }
-                    if (controlloCuscino()) {
+                    } else if (controlloCuscino() && !controlloCompostoFinale()) {
                         lose();
-                    }
-
-                    if (!controlloCuscino()) {
+                    } else if(!controlloCuscino()) {
                         death();
                     }
-
                 } else {
-                    jOutputTestoArea.append("Non puoi buttarti da questa stanza \n");
+                    jOutputTestoArea.append("Non puoi buttarti da questa stanza.\n");
                 }
                 break;
             case AIUTO:
@@ -189,19 +188,24 @@ public class LogicaComandi {
                 eseguiComandoSuggerimenti();
                 break;
             case CREA:
-                CompletableFuture<Boolean> composto = creaComposto();
-                // if(controlloComposti() && giocatore.getStanzaCorrente().equals("laboratorio")){
-                composto.thenAccept((esito) -> {
-                    // Esegui le operazioni desiderate utilizzando il valore booleano "esito"
-                    if (esito) {
-                        aggiuntaInInventarioComposto();
-                        jOutputTestoArea.append("Hai creato il composto \n");
+                if (giocatore.getStanzaCorrente().getNome().equals("laboratorio")) {
+                    if (controlloComposto()) { // Aggiunto parentesi per chiamare il metodo controlloComposto()
+                        CompletableFuture<Boolean> composto = creaComposto();
+                        System.out.println(controlloComposto());
+                        composto.thenAccept((esito) -> {
+                            if (esito) {
+                                aggiuntaInInventarioComposto();
+                                jOutputTestoArea.append("Hai creato il composto.\n");
+                            } else {
+                                System.out.println("Si è verificato un errore durante la creazione del composto.");
+                            }
+                        });
                     } else {
-                        System.out.println("Si è verificato un errore durante la creazione del composto.");
+                        jOutputTestoArea.append("Non hai gli oggetti necessari.\n");
                     }
-                });
-
-                //   }
+                } else {
+                    jOutputTestoArea.append("Non puoi creare nulla qui.\n");
+                }
                 break;
             default:
                 System.out.println("Tipo di comando non gestito: " + comando.getType() + "\n");
@@ -387,7 +391,7 @@ public class LogicaComandi {
     private boolean controlloInventario() {
         Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
         for (Oggetto oggetto : inventarioGiocatore) {
-            if (oggetto.getId() == 1 || oggetto.getId() == 10 || oggetto.getId() == 12) {
+            if (oggetto.getId() == 1 || oggetto.getId() == 9 || oggetto.getId() == 10) {
                 return true;
             }
         }
@@ -398,7 +402,7 @@ public class LogicaComandi {
     private boolean controlloCamice() {
         Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
         for (Oggetto oggetto : inventarioGiocatore) {
-            if (oggetto.getId() == 9) {
+            if (oggetto.getId() == 8) {
                 return true;
             }
         }
@@ -458,7 +462,7 @@ public class LogicaComandi {
             //Elimino il camice dall inventario
             Oggetto camice = giocatore.getInventario().getOggetti()
                     .stream()
-                    .filter(oggetto -> oggetto.getId() == 9)
+                    .filter(oggetto -> oggetto.getId() == 8)
                     .findFirst()
                     .orElse(null);
             giocatore.getInventario().getOggetti().remove(camice);
@@ -503,7 +507,7 @@ public class LogicaComandi {
                             inventarioFarmacista.remove(sodioCloruroOggetto);
                             // Aggiungi l'oggetto "sodioCloruro" all'inventario del giocatore
                             giocatore.aggiungiOggettoInventario(sodioCloruroOggetto);
-                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1) + "\n");
                         } else {
                             jOutputTestoArea.append("Farmacista: Non ho il sodio cloruro disponibile al momento.\n");
                         }
@@ -519,7 +523,7 @@ public class LogicaComandi {
                         if (potassioCloruroOggetto != null) {
                             inventarioFarmacista.remove(potassioCloruroOggetto);
                             giocatore.aggiungiOggettoInventario(potassioCloruroOggetto);
-                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1) + "\n");
                         } else {
                             jOutputTestoArea.append("Farmacista: Non ho il potassio cloruro disponibile al momento.\n");
                         }
@@ -536,7 +540,7 @@ public class LogicaComandi {
                         if (calcioCloruroDiidratoOggetto != null) {
                             inventarioFarmacista.remove(calcioCloruroDiidratoOggetto);
                             giocatore.aggiungiOggettoInventario(calcioCloruroDiidratoOggetto);
-                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1) + "\n");
                         } else {
                             jOutputTestoArea.append("Farmacista: Non ho il calcio cloruro diidrato disponibile al momento.\n");
                         }
@@ -553,7 +557,7 @@ public class LogicaComandi {
                         if (sodioAcetatoTriidratoOggetto != null) {
                             inventarioFarmacista.remove(sodioAcetatoTriidratoOggetto);
                             giocatore.aggiungiOggettoInventario(sodioAcetatoTriidratoOggetto);
-                            jOutputTestoArea.append(dialoghiFarmacista.get(1));
+                            jOutputTestoArea.append(dialoghiFarmacista.get(1) + "\n");
                         } else {
                             jOutputTestoArea.append("Farmacista: Non ho il sodio acetato triidrato disponibile al momento.\n");
                         }
@@ -710,6 +714,7 @@ public class LogicaComandi {
         boolean potassioCloruro = false;
         boolean calcioCloruroDiidrato = false;
         boolean sodioAcetatoTriidrato = false;
+        boolean boccetta = false;
 
         for (Oggetto oggetto : inventario) {
             int id = oggetto.getId();
@@ -726,11 +731,14 @@ public class LogicaComandi {
                 case 6:
                     sodioAcetatoTriidrato = true;
                     break;
+                case 7:
+                    boccetta = true;
+                    break;
                 default:
                     break;
             }
         }
-        return sodioCloruro && potassioCloruro && calcioCloruroDiidrato && sodioAcetatoTriidrato;
+        return sodioCloruro && potassioCloruro && calcioCloruroDiidrato && sodioAcetatoTriidrato && boccetta;
     }
 
     private static CompletableFuture<Boolean> creaComposto() {
@@ -757,8 +765,20 @@ public class LogicaComandi {
 
     private boolean controlloComposto() {
         Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        int count = 0;
+
         for (Oggetto oggetto : inventarioGiocatore) {
-            if (oggetto.getId() == 15) {
+            if (oggetto.getId() == 3 || oggetto.getId() == 4 || oggetto.getId() == 5 || oggetto.getId() == 6) {
+                count++;
+            }
+        }
+        return count == 4;
+    }
+    
+    private boolean controlloCompostoFinale(){
+        Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
+        for(Oggetto oggetto : inventarioGiocatore ){
+            if(oggetto.getId() == 15){
                 return true;
             }
         }
@@ -772,19 +792,30 @@ public class LogicaComandi {
         Oggetto ringerAcetato = new Oggetto(15, "Ringer Acetato", "Il composto che cercavi tanto. \n");
         giocatore.aggiungiOggettoInventario(ringerAcetato);
     }
-    
+
     private void lose() {
         jOutputTestoArea.setText("");
+        System.out.println("1");
         giocatore.cambioStanzaDiretto(stanze, 11, output);
+        jOutputTestoArea.setText(giocatore.getStanzaCorrente().getDescrizione());
+        jPanelParita.disattivaBottoni();
     }
-    
-    private void death(){
+
+    private void death() {
         jOutputTestoArea.setText("");
+        System.out.println("2");
+        System.out.println(giocatore.getStanzaCorrente().getNome());     
         giocatore.cambioStanzaDiretto(stanze, 10, output);
+        System.out.println(giocatore.getStanzaCorrente().getNome());
+        jOutputTestoArea.setText(giocatore.getStanzaCorrente().getDescrizione());
+        jPanelParita.disattivaBottoni();
     }
-    
-    private void win(){
+
+    private void win() {
         jOutputTestoArea.setText("");
+        System.out.println("3");
         giocatore.cambioStanzaDiretto(stanze, 12, output);
+        jOutputTestoArea.setText(giocatore.getStanzaCorrente().getDescrizione());
+        jPanelParita.disattivaBottoni();
     }
 }

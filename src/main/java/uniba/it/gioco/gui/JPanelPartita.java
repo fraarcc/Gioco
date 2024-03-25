@@ -38,7 +38,7 @@ public class JPanelPartita extends javax.swing.JPanel {
             giocatore = gameModel.getGiocatore();
             Output gestoreOutput = new Output(jAreaTesto, giocatore, jContainerImmagini);
             gestoreOutput.start();
-            gestoreInput = new Input(jInputTestoArea, jInvioButtone, giocatore,
+            gestoreInput = new Input(this,jInputTestoArea, jInvioButtone, giocatore,
                     init, jAreaTesto, gestoreOutput, stanze, gameModel);
 
             if (giocatore != null) {
@@ -49,10 +49,13 @@ public class JPanelPartita extends javax.swing.JPanel {
             } else {
                 System.out.println("Giocatore non inizializzato");
             }
+         
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         jInputTestoArea.requestFocus();
+       
     }
 
     /**
@@ -201,6 +204,13 @@ public class JPanelPartita extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jInputTestoAreaKeyPressed
+
+    public void disattivaBottoni() {
+        jInvioButtone.setEnabled(false);
+        jCancellaButton1.setEnabled(false);
+        jInputTestoArea.setEnabled(false);
+        jIndietroButton.requestFocus();            
+    }
 
     private void jCancellaButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancellaButton1ActionPerformed
         // TODO add your handling code here:
