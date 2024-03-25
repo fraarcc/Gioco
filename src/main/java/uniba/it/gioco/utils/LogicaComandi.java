@@ -708,38 +708,6 @@ public class LogicaComandi {
         return testoTradotto;
     }
 
-    private boolean controlloComposti() {
-        Set<Oggetto> inventario = giocatore.getInventario().getOggetti();
-        boolean sodioCloruro = false;
-        boolean potassioCloruro = false;
-        boolean calcioCloruroDiidrato = false;
-        boolean sodioAcetatoTriidrato = false;
-        boolean boccetta = false;
-
-        for (Oggetto oggetto : inventario) {
-            int id = oggetto.getId();
-            switch (id) {
-                case 3:
-                    sodioCloruro = true;
-                    break;
-                case 4:
-                    potassioCloruro = true;
-                    break;
-                case 5:
-                    calcioCloruroDiidrato = true;
-                    break;
-                case 6:
-                    sodioAcetatoTriidrato = true;
-                    break;
-                case 7:
-                    boccetta = true;
-                    break;
-                default:
-                    break;
-            }
-        }
-        return sodioCloruro && potassioCloruro && calcioCloruroDiidrato && sodioAcetatoTriidrato && boccetta;
-    }
 
     private static CompletableFuture<Boolean> creaComposto() {
         CompletableFuture<Boolean> esitoComposto = new CompletableFuture<>();
@@ -768,11 +736,11 @@ public class LogicaComandi {
         int count = 0;
 
         for (Oggetto oggetto : inventarioGiocatore) {
-            if (oggetto.getId() == 3 || oggetto.getId() == 4 || oggetto.getId() == 5 || oggetto.getId() == 6) {
+            if (oggetto.getId() == 2 || oggetto.getId() == 3 || oggetto.getId() == 4 || oggetto.getId() == 5 || oggetto.getId() == 6) {
                 count++;
             }
         }
-        return count == 4;
+        return count == 5;
     }
     
     private boolean controlloCompostoFinale(){
