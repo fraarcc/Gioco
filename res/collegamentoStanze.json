@@ -33,7 +33,7 @@
     },
     {
         "nome": "atrio",
-        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si\n appoggiano dei clienti serviti dal barista. ",
+        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si\n appoggiano dei clienti serviti dal barista.",
         "aperto": false,
         "connessioneStanze": {
             "EST": "farmacia",
@@ -173,8 +173,8 @@
         "oggettiPresentiStanza": [
             {
                 "id": 10,
-                "nome": "seconda meta' foglietto",
-                "descrizione": " Un foglio strappato."
+                "nome": "foglietto strappato",
+                "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
             }]
     },
     {
