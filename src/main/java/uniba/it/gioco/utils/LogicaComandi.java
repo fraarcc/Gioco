@@ -233,11 +233,7 @@ public class LogicaComandi {
         Stanza stanzaCorrente = giocatore.getStanzaCorrente();
         String descrizioneStanza = stanzaCorrente.getDescrizione();
 
-        if (!stanzaCorrente.getOggettiPresentiStanza().isEmpty()) {
-            jOutputTestoArea.append(descrizioneStanza + "\n");
-        } else {
-            jOutputTestoArea.append("In questa stanza non sono presenti oggetti.\n\n");
-        }
+        jOutputTestoArea.append(descrizioneStanza + "\n");
 
         Npc npcStanzaCorrente = stanzaCorrente.getNpc();
         if (npcStanzaCorrente != null) {
