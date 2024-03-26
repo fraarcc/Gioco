@@ -33,7 +33,7 @@
     },
     {
         "nome": "atrio",
-        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si appoggiano dei clienti.",
+        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si\n appoggiano dei clienti serviti dal barista. ",
         "aperto": false,
         "connessioneStanze": {
             "EST": "farmacia",
@@ -111,7 +111,7 @@
     },
     {
         "nome": "bagno",
-        "descrizione": "Sei entrato nel bagno. Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno!",
+        "descrizione": "Sei entrato nel bagno. \nCi sono le porte... i lavandini... il pavimento... beh, e' un bagno! \nPuoi consolarti con le aspettative che hai sulla porta con il lucchetto davanti a te.",
         "aperto": false,
         "connessioneStanze": {
             "SUD": "corridoio",
@@ -121,7 +121,7 @@
     },
     {
         "nome": "sgabuzzino",
-        "descrizione": "La vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, dei cartoni di peroni e altri oggetti. ",
+        "descrizione": "Siccome questo è un gioco noioso e non c'è nessun drago, \narciere di fuoco o senatore DC, il massimo \nche puoi trovare dietro una porta chiusa a chiave \nè uno sgabuzzino. \n\nLa vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, alcuni fogli di carta, dei \ncartoni di peroni, camici da medico e delle boccette impolverate. ",
         "aperto": false,
         "connessioneStanze": {
             "SUD": "bagno"
@@ -174,7 +174,7 @@
             {
                 "id": 10,
                 "nome": "seconda meta' foglietto",
-                "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
+                "descrizione": " Un foglio strappato."
             }]
     },
     {
