@@ -7,6 +7,7 @@ package uniba.it.gioco.utils;
 import java.awt.Image;
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -79,13 +80,32 @@ public class Output extends Thread {
         return "Descrizione stanza non disponibile";
     }
 
-    private void impostaImmagineStanzaCorrente() {
-        Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
-        if (stanzaCorrente != null) {
-            String imagePath = "./res/" + stanzaCorrente.getNome() + ".png";
-            containerImmagini.setIcon(new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
+private void impostaImmagineStanzaCorrente() {
+    Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
+    if (stanzaCorrente != null) {
+        String imageName = stanzaCorrente.getNome();
+        String imagePathPNG = "./res/" + imageName + ".png";
+        String imagePathGIF = "./res/" + imageName + ".gif";
+        
+        ImageIcon imageIcon = null;
+        if (new File(imagePathPNG).exists()) {
+            imageIcon = new ImageIcon(imagePathPNG);
+        } else if (new File(imagePathGIF).exists()) {
+            imageIcon = new ImageIcon(imagePathGIF);
         }
+        
+        if (imageIcon != null) {
+            containerImmagini.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
+        } else {
+      
+            containerImmagini.setIcon(null);
+        }
+    } else {
+ 
+        containerImmagini.setIcon(null);
     }
+}
+
 
     @Override
     public void run() {
