@@ -1,5 +1,6 @@
 package uniba.it.gioco.gui;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
@@ -13,6 +14,13 @@ public class JPanelMenu extends javax.swing.JPanel {
         this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
+        init();
+    }
+    
+    private void init(){
+ 
+        ImageIcon imageIcon = new ImageIcon("res/menu2.png");
+        jLabelMenu1.setIcon(imageIcon);
     }
 
     /**
@@ -27,6 +35,9 @@ public class JPanelMenu extends javax.swing.JPanel {
         nuovaPartita = new javax.swing.JButton();
         esci = new javax.swing.JButton();
         caricaPartita1 = new javax.swing.JButton();
+        jLabelMenu1 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nuovaPartita.setFont(new java.awt.Font("NSimSun", 1, 18)); // NOI18N
         nuovaPartita.setText("Nuova Partita");
@@ -36,6 +47,7 @@ public class JPanelMenu extends javax.swing.JPanel {
                 nuovaPartitaActionPerformed(evt);
             }
         });
+        add(nuovaPartita, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 175, 185, 72));
 
         esci.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         esci.setText("Esci");
@@ -44,6 +56,7 @@ public class JPanelMenu extends javax.swing.JPanel {
                 esciActionPerformed(evt);
             }
         });
+        add(esci, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 383, 185, 72));
 
         caricaPartita1.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         caricaPartita1.setText("Carica Partita");
@@ -52,30 +65,8 @@ public class JPanelMenu extends javax.swing.JPanel {
                 caricaPartita1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(408, 408, 408)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nuovaPartita, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(esci, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(caricaPartita1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(nuovaPartita, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(caricaPartita1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(esci, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        add(caricaPartita1, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 280, 185, 72));
+        add(jLabelMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, -90, 1360, 810));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nuovaPartitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuovaPartitaActionPerformed
@@ -101,6 +92,7 @@ public class JPanelMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton caricaPartita1;
     private javax.swing.JButton esci;
+    private javax.swing.JLabel jLabelMenu1;
     private javax.swing.JButton nuovaPartita;
     // End of variables declaration//GEN-END:variables
 }
