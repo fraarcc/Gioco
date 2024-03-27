@@ -1,7 +1,9 @@
 package uniba.it.gioco.gui;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 
@@ -17,11 +19,24 @@ public class JPanelMenu extends javax.swing.JPanel {
         init();
     }
     
-    private void init(){
- 
-        ImageIcon imageIcon = new ImageIcon("res/menu2.png");
-        jLabelMenu1.setIcon(imageIcon);
-    }
+  private void init() {
+    // Ottieni le dimensioni del frame
+    int frameWidth = getWidth();
+    int frameHeight = getHeight();
+    
+    // Carica l'icona dell'immagine
+    ImageIcon imageIcon = new ImageIcon("res/sfondomenu2.png");
+    
+    // Ridimensiona l'icona per adattarla alle dimensioni del frame
+    Image image = imageIcon.getImage().getScaledInstance(1000, 600, Image.SCALE_SMOOTH);
+    
+    // Crea un nuovo ImageIcon con l'immagine ridimensionata
+    ImageIcon scaledIcon = new ImageIcon(image);
+    
+    // Imposta l'icona nel JLabel
+    jLabel1.setIcon(scaledIcon);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +50,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         nuovaPartita = new javax.swing.JButton();
         esci = new javax.swing.JButton();
         caricaPartita1 = new javax.swing.JButton();
-        jLabelMenu1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -66,7 +81,7 @@ public class JPanelMenu extends javax.swing.JPanel {
             }
         });
         add(caricaPartita1, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 280, 185, 72));
-        add(jLabelMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, -90, 1360, 810));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nuovaPartitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuovaPartitaActionPerformed
@@ -92,7 +107,7 @@ public class JPanelMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton caricaPartita1;
     private javax.swing.JButton esci;
-    private javax.swing.JLabel jLabelMenu1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton nuovaPartita;
     // End of variables declaration//GEN-END:variables
 }
