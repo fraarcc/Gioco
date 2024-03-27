@@ -33,6 +33,7 @@ public class JFrameMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
+        setTitle("SAN DUZIANO");
     }
 
     public void gestioneUscita() {
