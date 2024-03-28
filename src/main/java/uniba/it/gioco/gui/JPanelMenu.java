@@ -16,27 +16,12 @@ public class JPanelMenu extends javax.swing.JPanel {
         this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
-        init();
+       init();
     }
-    
-  private void init() {
-    // Ottieni le dimensioni del frame
-    int frameWidth = getWidth();
-    int frameHeight = getHeight();
-    
-    // Carica l'icona dell'immagine
-    ImageIcon imageIcon = new ImageIcon("res/sfondomenu2.png");
-    
-    // Ridimensiona l'icona per adattarla alle dimensioni del frame
-    Image image = imageIcon.getImage().getScaledInstance(1000, 600, Image.SCALE_SMOOTH);
-    
-    // Crea un nuovo ImageIcon con l'immagine ridimensionata
-    ImageIcon scaledIcon = new ImageIcon(image);
-    
-    // Imposta l'icona nel JLabel
-    jLabel1.setIcon(scaledIcon);
+private void init(){
+      ImageIcon imageIcon = new ImageIcon("res/sfondomenu2.png");
+      jLabel1.setIcon(imageIcon);
 }
-
 
     /**
      * This method is called from within the constructor to initialize the form.

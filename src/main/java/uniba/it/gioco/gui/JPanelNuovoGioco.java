@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
@@ -17,6 +18,11 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         this.jframeMain = jframeMain;
         this.gameModel = gameModel;
         initComponents();
+        init();
+    }
+    private void init(){
+          ImageIcon imageIcon = new ImageIcon("res/sfondomenu2.png");
+        jLabel1.setIcon(imageIcon);
     }
 
     /**
@@ -32,6 +38,9 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
         indietro = new javax.swing.JButton();
         jNickname = new javax.swing.JTextField();
         nicknameLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         conferma.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         conferma.setText("Conferma");
@@ -40,6 +49,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 confermaActionPerformed(evt);
             }
         });
+        add(conferma, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 373, 165, 71));
 
         indietro.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         indietro.setText("Torna indietro");
@@ -48,6 +58,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 indietroActionPerformed(evt);
             }
         });
+        add(indietro, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 373, -1, 72));
 
         jNickname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,38 +70,12 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
                 jNicknameKeyPressed(evt);
             }
         });
+        add(jNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 197, 374, 51));
 
         nicknameLabel.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         nicknameLabel.setText("Inserire il nickname");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(indietro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(conferma, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nicknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(302, 302, 302))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(nicknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(conferma, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(155, Short.MAX_VALUE))
-        );
+        add(nicknameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 162, 374, 29));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
     }// </editor-fold>//GEN-END:initComponents
 
     private void indietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indietroActionPerformed
@@ -174,6 +159,7 @@ public class JPanelNuovoGioco extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton conferma;
     private javax.swing.JButton indietro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jNickname;
     private javax.swing.JLabel nicknameLabel;
     // End of variables declaration//GEN-END:variables
