@@ -1,110 +1,120 @@
 
 
 # ingresso
-Questo e' ciò che una volta disse Briatore, ed e' esattamente quello che ti contraddistingue. 
-Un uomo che per una piccola proprietà non dichiarata si ritrova ad essere emarginato dalla societa'. 
-La tua passione e dedizione per la chimica ti ha portato ad una scoperta sconvolgente: 
-un farmaco in grado di guarirti dalla iella definitivamente; 
-Hai tutti gli ingredienti necessari, tranne uno. 
-La lista con i suoi ingredienti risiede nel vicino ospedale di San Duziano, 
-dove tuo cuggino medico ha fatto il favore di scriverteli su un biglietto che ovviamente ha gia' perso. 
-Così sali sulla tua 1100 GPL dell'83 e raggiungi il suddetto ospedale. 
+Quando nella tua vita succede qualcosa che non e' positivo e hai 
+la forza di capovolgere la situazione, allora sei un vincente.
+Questo e' cio' che una volta disse Briatore, ed e' esattamente 
+quello che ti contraddistingue. 
+
+Un uomo che per una piccola proprieta' non dichiarata si ritrova ad 
+essere emarginato dalla societa'. 
+La tua passione e dedizione per la chimica ti ha portato ad una 
+scoperta sconvolgente: un farmaco in grado di guarirti dalla iella 
+definitivamente.
+
+Hai tutti gli ingredienti necessari, tranne uno, il ringer acetato. 
+La lista con i suoi ingredienti risiede nel vicino ospedale di San 
+Duziano, dove tuo cuggino medico ha fatto il favore di scriverteli su
+un biglietto che ovviamente non si ricorda dove ha messo. 
+
+Cosi' sali sulla tua 1100 GPL dell'83 e raggiungi il suddetto 
+ospedale. 
+
 Ti aspetteranno sfide incredibili, 
-inutili discussioni con i pazienti psichiatrici e avventure fuori dal normale!
+inutili discussioni con i pazienti psichiatrici e avventure fuori dal
+normale!
 
 
-Hai appena parcheggiato il tuo bolide nel parcheggio 
-antistante l'ospedale San Duziano di Ciufello sull'Arno (LU). 
-Sei ammaliato alla vista delle enormi vetrate all'ingresso, 
-ma non c'e' tempo di distrarsi: 
-- hai bisogno dell'ingrediente finale per la tua pozione magica. 
-Decidi di entrare. L'obiettivo e' non farsi scoprire
-come maniaco, tanto meno come evasore fiscale quale sei.
 
 
-Ti trovi di fronte all'ingresso dell'ospedale, due guardie presidiano l'entrata
-la brezza ti batte sul viso e senti gli uccelli,
-cinguettare(forse per l'ultima volta)
+
+Hai appena parcheggiato il tuo bolide nel parcheggio antistante 
+l'ospedale San Duziano di Ciufello sull'Arno (LU). 
+Sei ammaliato alla vista delle enormi vetrate all'ingresso, ma non 
+c'e' tempo per distrarsi: hai bisogno dell'ingrediente finale per la 
+tua pozione magica. 
+
+Decidi di entrare. L'obiettivo e' non farsi scoprire come maniaco, 
+tanto meno come evasore fiscale quale sei.
+
+Ti trovi di fronte all'ingresso dell'ospedale, due guardie presidiano 
+l'entrata. La brezza ti batte sul viso e senti gli uccelli 
+cinguettare (forse per l'ultima volta).
 
 # atrio
 
 Ti trovi all'interno dell'atrio dell'ospedale
 
+Qui vi e' un bar, con un barista disponibile per prepararti un caffe' 
+e darti informazioni.
 
-Qui vi e' un bar, con un barista disponibile per
-prepararti un caffe' e darti informazioni.
-
-In questo ospedale non sarai solo,tra le numerose persone presenti qualcuno potrebbe
-tornarti utile,qualcuno un po' meno.
-
-
+In questo ospedale non sarai solo; tra le numerose persone presenti 
+qualcuno potrebbe tornarti utile, qualcuno un po' meno.
 
 # farmacia
 
 Ti trovi all'interno della farmacia dedicata all'ospedale
 
-
-
-Di fronte a te c'e' una farmacista. 
-Qui puoi fare tutto ciò che faresti in una normale farmacia, tuttavia
-troverai prodotti particolari e specifici.
-
+Di fronte a te c'e' una farmacista. Qui puoi fare tutto ciò che 
+faresti in una normale farmacia, tuttavia troverai prodotti 
+particolari e specifici.
 
 # corridoio
 
 Ti trovi nel corridoio principale dell'ospedale 
 
-Collega i due piani della struttura e ti permette di accedere al bagno, 
-sempre che tu sappia come accedervi
+Collega i due piani della struttura e ti permette di accedere al    
+bagno, sempre che tu sappia come entrare.
 
 # bagno 
 
 Ti trovi nel bagno inferiore dell'ospedale
 
-Di solito e' pieno di oggetti dimenticati dalle persone, 
-magari tra questi potrbbe tornarti utile qualcosa
-
+Di solito e' pieno di oggetti dimenticati dalle persone; magari tra 
+questi potrbbe tornarti utile qualcosa.
 
 # sgabuzzino
 
-Ti trovi nello sgabuzzino dell'ospedale
-
-Finalmente sei riuscito ad aprire il lucchetto. 
-Siccome questo e' un gioco noioso e non c'e' nessun drago, arciere di fuoco o senatore DC, 
-il massimo che puoi trovare dietro una porta chiusa a chiave e' uno sgabuzzino. 
-
+Finalmente sei riuscito ad aprire il lucchetto, ma siccome questo e' 
+un gioco noioso e non c'e' nessun drago, arciere di fuoco o senatore 
+DC, il massimo che puoi trovare dietro una porta chiusa a chiave e' 
+uno sgabuzzino. 
 
 # sala d'attesa
 
-Ti trovi all'interno della sala d'attesa al piano superiore
+Si aprono le porte dell'ascensore e ti ritrovi nella sala d'attesa 
+del reparto di chirurgia.
 
+E' pieno di gente che si farebbe fatica a definire mentalmente 
+stabile.
 
-Si aprono le porte dell'ascensore e ti ritrovi nella sala d'attesa del reparto di chirurgia
-E' pieno di gente che si farebbe fatica a definire mentalmente stabile.
-Stanno parlando tra di loro ma non riesci a sentire bene i discorsi.
-
+Tra loro c'e' una figura distinta, che parla in modo animato 
+dicendo cose strane.
 
 # bagno superiore
 
 Ti trovi nel bagno al piano superiore
 
-E' un bagno incredibilmente simile a quello del piano di giu' (strano)
-In ogni caso, dovresti aver capito che non sei qui dentro per leggere la gazzetta.
+E' un bagno incredibilmente simile a quello del piano di giu' 
+(strano).
+In ogni caso, dovresti aver capito che non sei qui dentro per 
+leggere la gazzetta.
 
 # laboratorio
 Ti trovi nel laboratorio di analisi dell'ospedale.
  
-Al suo interno c'e' una dottoressa indaffarata con i suoi composti chimici.
-Se sei arrivato fin qui, non ti rimane molto da esplorare.
+E' una sala sterile in cui poter svolgere analisi e lavorare con 
+vari prodotti chimici.
+
+Al suo interno c'e' una dottoressa indaffarata con alcuni 
+macchinari.
 
 # spogliatoio
 
 Sei nello spogliatoio dedicato ai medici e agli infermieri.
 
-Il tuo solito vizietto ti ha portato a non bussare per assicurarti che non ci fosse nessuno dentro.
-Eviterei la prossima volta, data la tua delicata situazione penale e fiscale.
+Il tuo solito vizietto ti ha portato a non bussare per assicurarti
+che non ci fosse nessuno dentro.
+Eviterei la prossima volta, data la tua delicata situazione penale 
+e fiscale.
 
-
-	
-
-	

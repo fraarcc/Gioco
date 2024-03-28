@@ -19,8 +19,8 @@ public class Init {
 
     public Init() {
         this.objectMapper = new ObjectMapper();
-        this.stopWords = loadStopWords(".\\res\\stopwords.txt");
-        this.commands = loadCommandsFromJson(".\\res\\comandi.json");
+        this.stopWords = loadStopWords("./res/stopwords.txt");
+        this.commands = loadCommandsFromJson("./res/comandi.json");
     }
 
     private Set<String> loadStopWords(String filePath) {
@@ -61,7 +61,7 @@ public class Init {
     }
 
     public List<Stanza> inizializzaStanze() throws IOException {
-        String filePath = ".\\res\\collegamentoStanze.json";
+        String filePath = "./res/collegamentoStanze.json";
         return loadJSON(filePath, new TypeReference<List<Stanza>>() {
         });
     }
@@ -76,7 +76,7 @@ public class Init {
     }
 
     public Stanza loadStanzaFromJson(String stanzaNome) throws IOException {
-        String filePath = ".\\res\\collegamentoStanze.json";
+        String filePath = "./res/collegamentoStanze.json";
         List<Stanza> stanze = loadJSON(filePath, new TypeReference<List<Stanza>>() {
         });
         for (Stanza stanza : stanze) {
