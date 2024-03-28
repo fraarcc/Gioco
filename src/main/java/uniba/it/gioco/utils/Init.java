@@ -66,9 +66,8 @@ public class Init {
         });
     }
 
-    public Giocatore inizializzaGiocatore(int idUtente, String nickname, Stanza stanzaIniziale) {
-        // Aggiungere controllo nickname da database per adesso senza controlli
-        return new Giocatore(idUtente, nickname, stanzaIniziale, new Inventario());
+    public Giocatore inizializzaGiocatore(String nickname, Stanza stanzaIniziale) {
+        return new Giocatore(nickname, stanzaIniziale, new Inventario());
     }
 
     private <T> List<T> loadJSON(String filePath, TypeReference<List<T>> typeReference) throws IOException {

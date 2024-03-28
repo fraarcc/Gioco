@@ -60,14 +60,12 @@ public class InitDatabase {
             preparedStatement.setBytes(2, gameModelBlob);
             preparedStatement.executeUpdate();
 
-            // Ottieni l'ID generato automaticamente dalla query di inserimento
+
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int idPartita = generatedKeys.getInt(1);
                 System.out.println("Partita salvata con ID: " + idPartita);
-                // Puoi fare qualcosa con l'ID generato, se necessario
             }
-
             preparedStatement.close();
         } catch (SQLException | IOException ex) {
             ex.printStackTrace();
@@ -81,11 +79,11 @@ public class InitDatabase {
             PreparedStatement preparedStatement = connessione.prepareStatement(SELEZIONA_PARTITA);
             preparedStatement.setInt(1, idPartita);
             ResultSet resultSet = preparedStatement.executeQuery();
-            esistePartita = resultSet.next(); // Se il ResultSet ha almeno una riga, la partita esiste
+            esistePartita = resultSet.next(); 
             preparedStatement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw ex; // Rilancia l'eccezione per gestirla nell'ambito chiamante, se necessario
+            throw ex; 
         }
         return esistePartita;
     }

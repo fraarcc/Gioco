@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uniba.it.gioco.utils;
 
 import java.awt.Image;
@@ -15,10 +11,6 @@ import java.util.Map;
 import uniba.it.gioco.tipi.Giocatore;
 import uniba.it.gioco.tipi.Stanza;
 
-/**
- *
- * @author Nikita
- */
 public class Output extends Thread {
 
     private JTextArea storiaTextArea;
@@ -80,32 +72,31 @@ public class Output extends Thread {
         return "Descrizione stanza non disponibile";
     }
 
-private void impostaImmagineStanzaCorrente() {
-    Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
-    if (stanzaCorrente != null) {
-        String imageName = stanzaCorrente.getNome();
-        String imagePathPNG = "./res/" + imageName + ".png";
-        String imagePathGIF = "./res/" + imageName + ".gif";
-        
-        ImageIcon imageIcon = null;
-        if (new File(imagePathPNG).exists()) {
-            imageIcon = new ImageIcon(imagePathPNG);
-        } else if (new File(imagePathGIF).exists()) {
-            imageIcon = new ImageIcon(imagePathGIF);
-        }
-        
-        if (imageIcon != null) {
-            containerImmagini.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
+    private void impostaImmagineStanzaCorrente() {
+        Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
+        if (stanzaCorrente != null) {
+            String imageName = stanzaCorrente.getNome();
+            String imagePathPNG = "./res/" + imageName + ".png";
+            String imagePathGIF = "./res/" + imageName + ".gif";
+
+            ImageIcon imageIcon = null;
+            if (new File(imagePathPNG).exists()) {
+                imageIcon = new ImageIcon(imagePathPNG);
+            } else if (new File(imagePathGIF).exists()) {
+                imageIcon = new ImageIcon(imagePathGIF);
+            }
+
+            if (imageIcon != null) {
+                containerImmagini.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(410, 500, Image.SCALE_DEFAULT)));
+            } else {
+
+                containerImmagini.setIcon(null);
+            }
         } else {
-      
+
             containerImmagini.setIcon(null);
         }
-    } else {
- 
-        containerImmagini.setIcon(null);
     }
-}
-
 
     @Override
     public void run() {

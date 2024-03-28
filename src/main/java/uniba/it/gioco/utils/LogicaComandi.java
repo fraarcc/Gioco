@@ -161,7 +161,7 @@ public class LogicaComandi {
                         win();
                     } else if (controlloCuscino() && !controlloCompostoFinale()) {
                         lose();
-                    } else if(!controlloCuscino()) {
+                    } else if (!controlloCuscino()) {
                         death();
                     }
                 } else {
@@ -189,7 +189,7 @@ public class LogicaComandi {
                 break;
             case CREA:
                 if (giocatore.getStanzaCorrente().getNome().equals("laboratorio")) {
-                    if (controlloComposto()) { // Aggiunto parentesi per chiamare il metodo controlloComposto()
+                    if (controlloComposto()) {
                         CompletableFuture<Boolean> composto = creaComposto();
                         System.out.println(controlloComposto());
                         composto.thenAccept((esito) -> {
@@ -284,18 +284,15 @@ public class LogicaComandi {
 
     private void eseguiComandoParlaNpc(List<String> tokens, String inputTesto) {
         if (tokens.size() != 1) {
-            // La lista dei token deve contenere un solo elemento
             jOutputTestoArea.append("Inserire un nome corretto per parlare. \n\n");
             return;
         }
         String nomeNpc = tokens.get(0).toLowerCase();
-        // Verifica se l'NPC è nella stessa stanza del giocatore
         Npc npcStanza = giocatore.getStanzaCorrente().getNpc();
         if (!npcStanza.getNome().equalsIgnoreCase(nomeNpc)) {
             jOutputTestoArea.append("Non puoi parlare con " + nomeNpc + " in questa stanza. \n\n");
             return;
         }
-
         switch (nomeNpc) {
             case "farmacista":
                 if (npcStanza.getTipo() == TipoNpc.FARMACISTA) {
@@ -313,8 +310,6 @@ public class LogicaComandi {
                 if (npcStanza.getTipo() == TipoNpc.GUARDIE) {
                     if (!npcStanza.isVisitato()) {
                         logicaDialoghi.gestioneGuardie(npcStanza, jInputTestoArea, jOutputTestoArea);
-                        System.out.println("Output jInputTestoArea:" + jInputTestoArea.getText());
-
                     } else {
                         jOutputTestoArea.append("Non puoi più parlare con le guardie.\n\n");
                     }
@@ -324,7 +319,7 @@ public class LogicaComandi {
                 if (npcStanza.getTipo() == TipoNpc.PAZZO) {
                     jOutputTestoArea.append("Attraverso il labirinto della mente, il sentiero è segnato da numeri"
                             + " senza tempo. \n\n"
-                            + "L'oscurità nasconde la chiave, ma dei passi segnano il cammino: " 
+                            + "L'oscurità nasconde la chiave, ma dei passi segnano il cammino: "
                             + "1, 2, 3. \n"
                             + "Un enigma intricato, un mistero avvolto nel velo del tempo. \n\n"
                             + "Senti giovane, che hai visto mia moglie? Sono due anni che sta nella "
@@ -338,11 +333,9 @@ public class LogicaComandi {
                 break;
             case "dottoressa":
                 if (npcStanza.getTipo() == TipoNpc.DOTTORESSA) {
-                    // Logica per l'interazione con una dottoressa
-                    jOutputTestoArea.append("-Dottoressa: Non ti ho mai visto qui... sei nuovo? \n" + 
-                            "In ogni caso, se hai bisogno di creare un composto o fare delle\n"
+                    jOutputTestoArea.append("-Dottoressa: Non ti ho mai visto qui... sei nuovo? \n"
+                            + "In ogni caso, se hai bisogno di creare un composto o fare delle\n"
                             + "analisi puoi usare questo laboratorio.");
-
                 }
                 break;
             default:
@@ -368,11 +361,11 @@ public class LogicaComandi {
                                 + "La scritta sembra appena stampata. Dev'essere un biglietto \nutilizzato da qualcuno pochi minuti fa.\n\n");
                         oggettoTrovato = true;
                         break;
-                    case "foglietto": // Da testare
+                    case "foglietto":
                         jOutputTestoArea.append("Leggi queste righe scritte una sotto l'altra: \nsodio cl, potass, calcio cl, sodio ace.\n\n");
                         oggettoTrovato = true;
                         break;
-                    case "documento": // Da testare
+                    case "documento":
                         jOutputTestoArea.append("Leggi le seguenti parole scritte in colonna: \noruro, io cloruro, oruro diidrato, tato triidrato\n\n");
                         oggettoTrovato = true;
                         break;
@@ -410,29 +403,21 @@ public class LogicaComandi {
     }
 
     private void eseguiComandoRichiediChiavi(List<String> tokensOggetto) {
-        // Verifica se il giocatore si trova nell'atrio
         if (!giocatore.getStanzaCorrente().getNome().equalsIgnoreCase("atrio")) {
             jOutputTestoArea.append("Devi essere nell'atrio per poter \nrichiedere le chiavi del bagno. \n\n");
             return;
         }
-        System.out.println("Chiavi");
-        // Ottieni l'NPC barista dalla stanza
         Npc barista = giocatore.getStanzaCorrente().getNpc();
-        // Ottieni l'inventario dell'NPC barista
         Set<Oggetto> inventarioNpc = barista.getOggettiNpc();
-
-        // Verifica se le chiavi del bagno sono presenti nell'inventario dell'NPC
         boolean chiaviPresenti = false;
-        Oggetto chiaviBagno = null; // Salva un riferimento alle chiavi del bagno se trovate
+        Oggetto chiaviBagno = null;
         for (Oggetto oggetto : inventarioNpc) {
             if (oggetto.getId() == 2) {
                 chiaviPresenti = true;
-                chiaviBagno = oggetto; // Salva un riferimento alle chiavi del bagno
+                chiaviBagno = oggetto;
                 break;
             }
         }
-
-        // Verifica se tra i token è presente "chiavi bagno"
         boolean tokenChiaviPresenti = false;
         for (String token : tokensOggetto) {
             if (token.equalsIgnoreCase("chiavi") || token.equalsIgnoreCase("bagno")) {
@@ -442,36 +427,27 @@ public class LogicaComandi {
         }
 
         if (chiaviPresenti && tokenChiaviPresenti) {
-            // Rimuovi le chiavi dall'inventario dell'NPC
             inventarioNpc.remove(chiaviBagno);
-            // Aggiungi le chiavi all'inventario del giocatore
             giocatore.aggiungiOggettoInventario(chiaviBagno);
-
-            // Esegui la logica per consegnare le chiavi del bagno
             jOutputTestoArea.append("Ecco le chiavi del bagno. \n\n");
             stanze.get(4).setAperto(true);
         } else {
-            // Se le chiavi del bagno non sono presenti nell'inventario dell'NPC o non sono specificate nei token, mostra un messaggio di errore
             jOutputTestoArea.append("Le chiavi del bagno non sono disponibili. \n\n");
         }
     }
 
     private void eseguiComandoIndossa(List<String> tokens) {
-        // Verifica se la lista non è nulla, ha un solo elemento e se quel elemento è "camice"
         if (tokens != null && tokens.size() == 1 && tokens.get(0).equalsIgnoreCase("camice")) {
-            //Elimino il camice dall inventario
             Oggetto camice = giocatore.getInventario().getOggetti()
                     .stream()
                     .filter(oggetto -> oggetto.getId() == 8)
                     .findFirst()
                     .orElse(null);
             giocatore.getInventario().getOggetti().remove(camice);
-
             Oggetto camiceIndossato = new Oggetto(14, "Camice Indossato", "Un camice bianco da laboratorio, indossato.");
             giocatore.aggiungiOggettoInventario(camiceIndossato);
             jOutputTestoArea.append("Hai indossato il camice. \n\n");
         } else {
-            // Se la condizione non è soddisfatta, mostra un messaggio di errore
             jOutputTestoArea.append("Non puoi indossare questo oggetto. \n\n");
         }
     }
@@ -484,9 +460,7 @@ public class LogicaComandi {
                 .anyMatch(oggetto -> oggetto.getId() == 14);
 
         if (camiceIndossato) {
-            // Se il camice è indossato
             if (oggettiTokens.size() <= 3) {
-                // Verifica se i token corrispondono ai prodotti chimici richiesti
                 boolean sodioCloruro = oggettiTokens.contains("sodio") && oggettiTokens.contains("cloruro");
                 boolean potassioCloruro = oggettiTokens.contains("potassio") && oggettiTokens.contains("cloruro");
                 boolean calcioCloruroDiidrato = oggettiTokens.contains("calcio") && oggettiTokens.contains("cloruro") && oggettiTokens.contains("diidrato");
@@ -495,7 +469,6 @@ public class LogicaComandi {
                 if (sodioCloruro || potassioCloruro || calcioCloruroDiidrato || sodioAcetatoTriidrato) {
                     if (sodioCloruro) {
                         Oggetto sodioCloruroOggetto = null;
-                        // Cerca l'oggetto "sodioCloruro" nell'inventario del farmacista
                         for (Oggetto oggetto : inventarioFarmacista) {
                             if (oggetto.getId() == 3) {
                                 sodioCloruroOggetto = oggetto;
@@ -503,9 +476,7 @@ public class LogicaComandi {
                             }
                         }
                         if (sodioCloruroOggetto != null) {
-                            // Rimuovi l'oggetto "sodioCloruro" dall'inventario del farmacista
                             inventarioFarmacista.remove(sodioCloruroOggetto);
-                            // Aggiungi l'oggetto "sodioCloruro" all'inventario del giocatore
                             giocatore.aggiungiOggettoInventario(sodioCloruroOggetto);
                             jOutputTestoArea.append(dialoghiFarmacista.get(1) + "\n");
                         } else {
@@ -584,8 +555,6 @@ public class LogicaComandi {
 
     private static CompletableFuture<Boolean> apriLucchetto() {
         CompletableFuture<Boolean> risultato = new CompletableFuture<>();
-
-        // Avvia il frame del lucchetto in un thread separato
         Thread thread = new Thread(() -> {
             JFrameLucchetto frame = new JFrameLucchetto((statoGioco) -> {
                 risultato.complete(statoGioco);
@@ -602,11 +571,6 @@ public class LogicaComandi {
         boolean stato;
         try {
             stato = risultato.get();
-            if (stato) {
-                System.out.println("Il lucchetto è stato sbloccato!\n\n");
-            } else {
-                System.out.println("Il lucchetto non è stato sbloccato.\n\n");
-            }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             stato = false;
@@ -633,17 +597,14 @@ public class LogicaComandi {
         }
     }
 
-    //Utilizzo API AdviceSlipAPI il quale fornisce consigli casuali
     private void eseguiComandoSuggerimenti() {
         String consiglioInItaliano = null;
         try {
-            // URL dell'API Advice Slip
             URL url = new URL("https://api.adviceslip.com/advice");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            // Legge la risposta
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder response = new StringBuilder();
             String line;
@@ -652,7 +613,6 @@ public class LogicaComandi {
             }
             reader.close();
 
-            // Analizza la risposta JSON
             JSONObject jsonResponse = new JSONObject(response.toString());
             JSONObject slip = jsonResponse.getJSONObject("slip");
             String consiglio = slip.getString("advice");
@@ -680,7 +640,6 @@ public class LogicaComandi {
         jOutputTestoArea.append(formattedAdvice.toString() + "\n");
     }
 
-    //Utilizzo l'API MyMemory Translation per tradurre il cosiglio in italiano
     private static String traduciInItaliano(String testo) {
         String testoTradotto = null;
         try {
@@ -697,7 +656,6 @@ public class LogicaComandi {
             }
             reader.close();
 
-            // Analizza la risposta JSON per ottenere la traduzione
             JSONObject jsonResponse = new JSONObject(response.toString());
             JSONObject responseData = jsonResponse.getJSONObject("responseData");
             testoTradotto = responseData.getString("translatedText");
@@ -707,7 +665,6 @@ public class LogicaComandi {
         }
         return testoTradotto;
     }
-
 
     private static CompletableFuture<Boolean> creaComposto() {
         CompletableFuture<Boolean> esitoComposto = new CompletableFuture<>();
@@ -742,11 +699,11 @@ public class LogicaComandi {
         }
         return count == 5;
     }
-    
-    private boolean controlloCompostoFinale(){
+
+    private boolean controlloCompostoFinale() {
         Set<Oggetto> inventarioGiocatore = giocatore.getInventario().getOggetti();
-        for(Oggetto oggetto : inventarioGiocatore ){
-            if(oggetto.getId() == 15){
+        for (Oggetto oggetto : inventarioGiocatore) {
+            if (oggetto.getId() == 15) {
                 return true;
             }
         }
@@ -763,7 +720,6 @@ public class LogicaComandi {
 
     private void lose() {
         jOutputTestoArea.setText("");
-        System.out.println("1");
         giocatore.cambioStanzaDiretto(stanze, 11, output);
         jOutputTestoArea.setText(giocatore.getStanzaCorrente().getDescrizione());
         jPanelParita.disattivaBottoni();
@@ -771,8 +727,7 @@ public class LogicaComandi {
 
     private void death() {
         jOutputTestoArea.setText("");
-        System.out.println("2");
-        System.out.println(giocatore.getStanzaCorrente().getNome());     
+        System.out.println(giocatore.getStanzaCorrente().getNome());
         giocatore.cambioStanzaDiretto(stanze, 10, output);
         System.out.println(giocatore.getStanzaCorrente().getNome());
         jOutputTestoArea.setText(giocatore.getStanzaCorrente().getDescrizione());
@@ -781,7 +736,6 @@ public class LogicaComandi {
 
     private void win() {
         jOutputTestoArea.setText("");
-        System.out.println("3");
         giocatore.cambioStanzaDiretto(stanze, 12, output);
         jOutputTestoArea.setText(giocatore.getStanzaCorrente().getDescrizione());
         jPanelParita.disattivaBottoni();
