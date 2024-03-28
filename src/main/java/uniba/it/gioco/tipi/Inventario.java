@@ -31,10 +31,10 @@ public class Inventario implements Serializable {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Inventario:\n");
+        stringBuilder.append("Inventario:\n\n");
 
         if (oggetti.isEmpty()) {
-            stringBuilder.append("Nessun oggetto nell'inventario.\n");
+            stringBuilder.append("Nessun oggetto nell'inventario.\n\n");
         } else {
             for (Oggetto oggetto : oggetti) {
                 stringBuilder.append("- ");
@@ -47,7 +47,7 @@ public class Inventario implements Serializable {
                 while (index < descrizione.length()) {
                     stringBuilder.append("   ");
                     stringBuilder.append(descrizione.substring(index, Math.min(index + lunghezzaMassimaPerRiga, descrizione.length())));
-                    stringBuilder.append("\n");
+                    stringBuilder.append("\n\n");
                     index += lunghezzaMassimaPerRiga;
                 }
             }

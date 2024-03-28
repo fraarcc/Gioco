@@ -37,7 +37,7 @@ public class Output extends Thread {
     }
 
     public void caricaStoriaDaFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader(".\\res\\storia.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./res/storia.txt"))) {
             String linea;
             String chiaveStanza = null;
             StringBuilder descrizioneStanza = new StringBuilder();
@@ -70,7 +70,7 @@ public class Output extends Thread {
         Stanza stanzaCorrente = giocatoreCorrente.getStanzaCorrente();
         if (stanzaCorrente != null) {
             StringBuilder descrizioneCompleta = new StringBuilder();
-            descrizioneCompleta.append("Ti trovi in: ").append(stanzaCorrente.getNome()).append("\n");
+            descrizioneCompleta.append("\nTi trovi in: ").append(stanzaCorrente.getNome()).append("\n\n");
             String dialogo = storiaMap.get(stanzaCorrente.getNome());
             if (dialogo != null) {
                 descrizioneCompleta.append(dialogo);
@@ -142,10 +142,10 @@ private void impostaImmagineStanzaCorrente() {
     }
 
     public void direzioneErrataMsg() {
-        storiaTextArea.append("Non puoi andare in questa direzione" + "\n");
+        storiaTextArea.append("Non puoi andare in questa direzione \n\n");
     }
 
     public void stanzaChiusaMsg() {
-        storiaTextArea.append("La stanza e' chiusa " + "\n");
+        storiaTextArea.append("La stanza e' chiusa \n\n");
     }
 }

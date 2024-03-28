@@ -1,7 +1,7 @@
 [
     {
         "nome": "ingresso",
-        "descrizione": "Oltre all'imponenente struttura non c'è molto da osservare qui,\ntranne qualche mozzicone di sigaretta per terra e \nun ticket con il nome dell'ospedale.",
+        "descrizione": "Oltre all'imponenente struttura non c'è molto da osservare qui, \ntranne qualche mozzicone di sigaretta per terra e un ticket con \nil nome dell'ospedale.",
 
         "connessioneStanze": {
             "NORD": "atrio"
@@ -22,7 +22,7 @@
 
                         "-Guardie: Buongiorno, è qui per una visita?",
                         "-Guardie: Mi dispiace, non posso farla entrare.",
-                        "La guardia ti fa entrare, dimostrando da subito l'efficienza del sistema di sicurezza dell'ospedale."
+                        "\nLa guardia ti apre le porte, dimostrando da subito l'efficienza \ndel sistema di sicurezza dell'ospedale.\n\n"
 
                     ],
                     "indovinello": {
@@ -33,7 +33,7 @@
     },
     {
         "nome": "atrio",
-        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si\n appoggiano dei clienti serviti dal barista.",
+        "descrizione": "Sei ora nell'atrio dell'ospedale. \nE' un grande ambiente, con un bancone nel mezzo al quale si\nappoggiano dei clienti serviti dal barista.",
         "aperto": false,
         "connessioneStanze": {
             "EST": "farmacia",
@@ -48,7 +48,7 @@
                 {
                     "id": 2,
                     "nome": "chiavi del bagno",
-                    "descrizione": "hai trovato la chiave del bagno inferiore"
+                    "descrizione": "una normale chiave del bagno di giù"
                 }
             ]
             ,
@@ -60,7 +60,7 @@
     },
     {
         "nome": "farmacia",
-        "descrizione": "Ti soffermi un attimo a esaminare la farmacia,\nosservando le etichette sui flaconi e i dispositivi medici riposti sugli scaffalie.\nIn fondo una porta blindada con la scritta deposito.",
+        "descrizione": "Ti soffermi un attimo ad esaminare la farmacia, osservando le \netichette sui flaconi e i dispositivi medici riposti sugli scaffali.\nIn fondo una porta blindada con la scritta deposito.",
         "connessioneStanze": {
             "OVEST": "atrio"
         },
@@ -91,17 +91,17 @@
                 }
             ],
             "dialoghi": [
-                "Farmacista: Salve, cosa posso fare per lei?",
-                "Farmacista: Ecco a lei!",
-                "Farmacista: Mi dispiace, non possiamo dare questo prodotto a persone esterne all'ospedale.",
-                "...Sembra che vestito in quel modo non hai l'aria di essere un medico o un infermiere"
+                "-Farmacista: Salve, cosa posso fare per lei?\n",
+                "-Farmacista: Ecco a lei!",
+                "-Farmacista: Mi dispiace, non possiamo dare questo prodotto a \npersone esterne all'ospedale.\n",
+                "...Sembra che vestito in quel modo non hai l'aria di essere un medico \no un infermiere\n"
             ],
             "indovinello": null
         }
     },
     {
         "nome": "corridoio",
-        "descrizione": "Lungo la parete ci sono numerose vetrate che si affacciano sull'esterno.\nSono presenti molte panche e alla tua sinistra due ascensori ",
+        "descrizione": "Lungo la parete ci sono numerose vetrate che si affacciano \nsull'esterno.\nSono presenti molte panche e alla tua sinistra due ascensori ",
         "connessioneStanze": {
             "EST": "atrio",
             "NORD": "bagno",
@@ -111,7 +111,7 @@
     },
     {
         "nome": "bagno",
-        "descrizione": "Sei entrato nel bagno. \nCi sono le porte... i lavandini... il pavimento... beh, e' un bagno! \nPuoi consolarti con le aspettative che hai sulla porta con il lucchetto davanti a te.",
+        "descrizione": "Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno! \nPuoi consolarti con le aspettative che hai sulla porta con il lucchetto \nwwwdavanti a te.",
         "aperto": false,
         "connessioneStanze": {
             "SUD": "corridoio",
@@ -121,7 +121,7 @@
     },
     {
         "nome": "sgabuzzino",
-        "descrizione": "Siccome questo è un gioco noioso e non c'è nessun drago, \narciere di fuoco o senatore DC, il massimo \nche puoi trovare dietro una porta chiusa a chiave \nè uno sgabuzzino. \n\nLa vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, alcuni fogli di carta, dei \ncartoni di peroni, camici da medico e delle boccette impolverate. ",
+        "descrizione": "La vista e' ammaliante: ci sono un paio di scope (vecchie),\ndetersivi vari, alcuni foglietti di carta, dei cartoni di peroni, \ncamici da medico e delle boccette impolverate. ",
         "aperto": false,
         "connessioneStanze": {
             "SUD": "bagno"
@@ -135,7 +135,7 @@
             {
                 "id": 8,
                 "nome": "camice",
-                "descrizione": "Camice da medico con DUE GROSSE TASCHE"
+                "descrizione": "Camice da medico"
             },
             {
                 "id": 9,
@@ -146,7 +146,7 @@
     },
     {
         "nome": "sala d'attesa",
-        "descrizione": "Osservando attentamente la gente presente,\nnoti una figura particolarmente distinta,\nun uomo che parla in modo animato dicendo cose strane",
+        "descrizione": "E' un ambiente abbastanza ampio, con gli ascensori \nsulla sinistra e molta gente in attesa",
         "connessioneStanze": {
             "EST": "laboratorio",
             "NORD": "bagno superiore",
@@ -165,23 +165,21 @@
     },
     {
         "nome": "bagno superiore",
-        "descrizione": "Anche qui ci sono lavandini, le porte, i bagni e i cessi.\nIncastrato tra le fessure della parete c'e' un foglietto strappato,\nforse qualcuno deve averlo smarrito",
+        "descrizione": "Anche qui ci sono lavandini, le porte, i bagni e i cessi.\nIncastrato tra le fessure della parete c'e' un documento strappato,\nforse qualcuno deve averlo smarrito",
         "connessioneStanze": {
-            "SUD": "sala d'attesa",
-            "EST": "spogliatoio"
+            "SUD": "sala d'attesa"
         },
         "oggettiPresentiStanza": [
             {
                 "id": 10,
-                "nome": "foglietto strappato",
-                "descrizione": " Incastrato tra le fessure della parete c'è un foglietto; forse qualcuno deve averlo smarrito."
+                "nome": "documento",
+                "descrizione": "Un pezzo di documento strappato."
             }]
     },
     {
         "nome": "spogliatoio",
-        "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda \nc'è un grosso cuscino che (di solito) viene usato per farci stendere i pazienti e sulla parete c'è una grande finestra aperta.",
+        "descrizione": "Tra borsoni e aramdietti, appoggiato su una branda c'è un grosso \ncuscino che (di solito) viene usato per farci stendere i pazienti e sulla \nparete c'è una grande finestra aperta.",
         "connessioneStanze": {
-            "OVEST": "bagno",
             "SUD": "laboratorio"
         },
         "oggettiPresentiStanza": [
@@ -194,7 +192,7 @@
     },
     {
         "nome": "laboratorio",
-        "descrizione": "All' interno ci sono attrezzature per le analisi, contenitori di sali e maschere protettive.",
+        "descrizione": "All' interno ci sono attrezzature per le analisi, contenitori di sali e \nmaschere protettive.",
         "connessioneStanze": {
             "NORD": "spogliatoio",
             "OVEST": "sala d'attesa"
@@ -212,18 +210,18 @@
     },
     {
         "nome": "sala operatoria",
-        "descrizione": "Hai perso! \nStrano, ti sei buttato senza nulla che possa aver attutito \nil colpo senza il minimo senso logico. Puoi comunque consolarti \nper essere stato il primo uomo ad essere entrato sano\n in un ospedale ed uscirne completamente morto. (Di solito si fa il contrario, \nvorrei ricordarti). Saremo lieti di farti ricominciare tutta la partita da capo.",
+        "descrizione": "Hai perso! \nStrano, ti sei buttato senza nulla che possa aver attutito il colpo \nsenza il minimo senso logico. Puoi comunque consolarti per essere \nstato il primo uomo ad essere entrato sano in un ospedale ed uscirne \ncompletamente morto. (Di solito si fa il contrario, vorrei ricordarti). \n\nSaremo lieti di farti ricominciare tutta la partita da capo.",
         "connessioneStanze": null,
         "oggettiPresentiStanza": []
     },
      {
         "nome": "game over",
-        "descrizione": "E' arrivato il momento di farti i miei complimenti...\nsei hai finalmente trovato un modo per entrare\nnella sala operatoria. Sfortunatamente non sei riuscito\nad ottenere il tuo farmaco e date le tue condizioni e\nla struttura del gioco, non sarai in grado di uscire da\nlì. E' stato un piacere farti giocare inutilmente.\nSe proprio ci tieni, inizia una nuova partita.\nTra parentesi, hai perso."
+        "descrizione": "E' arrivato il momento di farti i miei complimenti...\nhai finalmente trovato un modo per uscire dall'ospedale. \nSfortunatamente non sei riuscito\nad ottenere il tuo farmaco e date le tue condizioni e\nla struttura del gioco, non sarai in grado di uscire dalì. \n\nE' stato un piacere farti giocare inutilmente.\nSe proprio ci tieni, inizia una nuova partita."
 
     }
     ,
      {
         "nome": "win",
-        "descrizione": "A quanto pare qualche imbecille non ha ancora capito che accendere \nla modalità aereo non significa essere in grado di volare... \ndopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza \nla tua vista si offusca e inizi rapidamente a perdere conoscenza. \nDopo pochi attimi ti ritrovi in una stanza completamente bianca \ne un signore vestito di bianco con capelli e barba bianca allunga \nuna mano verso di te... con tuo grande dispiacere egli non è l'Altissimo e tantomen\no il dottor House, \nma lo spettabilissimo Primario dott. Minchiari del reparto di chirurgia. Dopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano ancora più ferma, \na fregarti 50 euro dalla tasca. Realizzi di essere nella sala operatoria. \nIl cuscino che avevi appena rubato senza un apparente scopo dallo spogliatoio è riuscito \nad attutire l'impatto tra il tuo sedere e l'asfalto e adesso sei vivo per miracolo eucaristico.\nSiamo commossi e quasi ci dispiace abbandonarti dopo quanto abbiamo passato insieme. \nE' ora che tu vada, sei diventato un ometto. Hai vinto."
+        "descrizione": "A quanto pare qualche imbecille non ha ancora capito che accendere \nla modalità aereo non significa essere in grado di volare... \n\nDopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza \nla tua vista si offusca e inizi rapidamente a perdere conoscenza. \nDopo pochi attimi ti ritrovi in una stanza completamente bianca \ne un signore vestito di bianco con capelli e barba bianca allunga \nuna mano verso di te... con tuo grande dispiacere egli non è \nl'Altissimo e tantomeno il dottor House, ma lo spettabilissimo Primario dott. Minchiari del \nreparto di chirurgia. \n\nDopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano \nancora più ferma, a fregarti 50 euro dalla tasca. \nRealizzi di essere nella sala operatoria. Il cuscino che avevi appena rubato senza un apparente \nscopo dallo spogliatoio è riuscito ad attutire l'impatto tra il tuo sedere \ne l'asfalto e adesso sei vivo per miracolo eucaristico.\n\nSiamo commossi e quasi ci dispiace abbandonarti dopo quanto \nabbiamo passato insieme. E' ora che tu vada, sei diventato un ometto. \nHai vinto."
     }
 ]
