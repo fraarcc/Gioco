@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uniba.it.gioco.GameModel;
@@ -27,6 +28,11 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
         this.jframeMain = jframeMain;
         initComponents();
         prelievoDati();
+        init();
+    }
+    private void init(){
+          ImageIcon imageIcon = new ImageIcon("res/sfondomenu2.png");
+        jLabel1.setIcon(imageIcon);
     }
 
     private void prelievoDati() {
@@ -87,6 +93,9 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
         jButtonCarica = new javax.swing.JButton();
         jButtonIndietro = new javax.swing.JButton();
         jButtonCancella1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTablePartite.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         jTablePartite.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,6 +131,8 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
             jTablePartite.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 97, 645, 314));
+
         jButtonCarica.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         jButtonCarica.setText("Carica");
         jButtonCarica.setPreferredSize(new java.awt.Dimension(110, 32));
@@ -130,6 +141,7 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
                 jButtonCaricaActionPerformed(evt);
             }
         });
+        add(jButtonCarica, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 429, -1, -1));
 
         jButtonIndietro.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         jButtonIndietro.setText("Indietro");
@@ -139,6 +151,7 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
                 jButtonIndietroActionPerformed(evt);
             }
         });
+        add(jButtonIndietro, new org.netbeans.lib.awtextra.AbsoluteConstraints(501, 429, -1, -1));
 
         jButtonCancella1.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         jButtonCancella1.setText("Cancella");
@@ -148,35 +161,8 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
                 jButtonCancella1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(202, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonIndietro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCancella1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCarica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(157, 157, 157))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCarica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancella1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonIndietro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(147, Short.MAX_VALUE))
-        );
+        add(jButtonCancella1, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 429, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndietroActionPerformed
@@ -241,6 +227,7 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
     private javax.swing.JButton jButtonCancella1;
     private javax.swing.JButton jButtonCarica;
     private javax.swing.JButton jButtonIndietro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePartite;
     // End of variables declaration//GEN-END:variables
