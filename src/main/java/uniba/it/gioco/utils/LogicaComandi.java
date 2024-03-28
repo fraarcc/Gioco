@@ -96,7 +96,7 @@ public class LogicaComandi {
                         SwingUtilities.invokeLater(() -> {
                             if (risultato) {
                                 stanze.get(5).setAperto(true);
-                                jOutputTestoArea.append("Lo sgabuzzino è stato aperto!\nProva a proseguire.\n\n");
+                                jOutputTestoArea.append("La porta si è aperta! Prova a proseguire.\n\n");
                             } else {
                                 jOutputTestoArea.append("Non sei riuscito ad aprire il lucchetto, riprova.\n\n");
                             }
@@ -195,7 +195,7 @@ public class LogicaComandi {
                         composto.thenAccept((esito) -> {
                             if (esito) {
                                 aggiuntaInInventarioComposto();
-                                jOutputTestoArea.append("Hai creato il ringer acetato!.\n\n");
+                                jOutputTestoArea.append("\n\nHai creato il ringer acetato!\n\n");
                             } else {
                                 System.out.println("Si è verificato un errore durante la creazione del composto.\n\n");
                             }
@@ -317,14 +317,14 @@ public class LogicaComandi {
                 break;
             case "pazzo":
                 if (npcStanza.getTipo() == TipoNpc.PAZZO) {
-                    jOutputTestoArea.append("Attraverso il labirinto della mente, il sentiero è segnato da numeri"
+                    jOutputTestoArea.append("Attraverso il labirinto della mente, il sentiero è segnato da numeri\n"
                             + " senza tempo. \n\n"
-                            + "L'oscurità nasconde la chiave, ma dei passi segnano il cammino: "
+                            + "L'oscurità nasconde la chiave, ma dei passi segnano il cammino: \n"
                             + "1, 2, 3. \n"
                             + "Un enigma intricato, un mistero avvolto nel velo del tempo. \n\n"
-                            + "Senti giovane, che hai visto mia moglie? Sono due anni che sta nella "
-                            + "sala operatoria ma non esce. "
-                            + "Aveva sentito uno che per andarsene dall'ospedale era uscito dalla"
+                            + "Senti giovane, che hai visto mia moglie? Sono due anni che sta nella \n"
+                            + "sala operatoria ma non esce. \n"
+                            + "Aveva sentito uno che per andarsene dall'ospedale era uscito dalla\n"
                             + " finestra e ha deciso di prendere un po' d'aria pure lei.\n");
                 } else {
                     jOutputTestoArea.append("Non puoi parlare con il pazzo \n\n");

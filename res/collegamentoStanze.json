@@ -111,7 +111,7 @@
     },
     {
         "nome": "bagno",
-        "descrizione": "Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno! \nPuoi consolarti con le aspettative che hai sulla porta con il lucchetto \nwwwdavanti a te.",
+        "descrizione": "Ci sono le porte... i lavandini... il pavimento... beh, e' un bagno! \nPuoi consolarti con le aspettative che hai sulla porta con il lucchetto \ndavanti a te.",
         "aperto": false,
         "connessioneStanze": {
             "SUD": "corridoio",
@@ -216,12 +216,12 @@
     },
      {
         "nome": "game over",
-        "descrizione": "E' arrivato il momento di farti i miei complimenti...\nhai finalmente trovato un modo per uscire dall'ospedale. \nSfortunatamente non sei riuscito\nad ottenere il tuo farmaco e date le tue condizioni e\nla struttura del gioco, non sarai in grado di uscire dalì. \n\nE' stato un piacere farti giocare inutilmente.\nSe proprio ci tieni, inizia una nuova partita."
+        "descrizione": "E' arrivato il momento di farti i miei complimenti...\nhai finalmente trovato un modo per uscire dall'ospedale. \nSfortunatamente non sei riuscito\nad ottenere il tuo farmaco e date le tue condizioni e\nla struttura del gioco, non sarai in grado di uscire da lì. \n\nE' stato un piacere farti giocare inutilmente.\nSe proprio ci tieni, inizia una nuova partita."
 
     }
     ,
      {
         "nome": "win",
-        "descrizione": "A quanto pare qualche imbecille non ha ancora capito che accendere \nla modalità aereo non significa essere in grado di volare... \n\nDopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza \nla tua vista si offusca e inizi rapidamente a perdere conoscenza. \nDopo pochi attimi ti ritrovi in una stanza completamente bianca \ne un signore vestito di bianco con capelli e barba bianca allunga \nuna mano verso di te... con tuo grande dispiacere egli non è \nl'Altissimo e tantomeno il dottor House, ma lo spettabilissimo Primario dott. Minchiari del \nreparto di chirurgia. \n\nDopo un delicatissimo intervento è riuscito a salvarti la vita e, con mano \nancora più ferma, a fregarti 50 euro dalla tasca. \nRealizzi di essere nella sala operatoria. Il cuscino che avevi appena rubato senza un apparente \nscopo dallo spogliatoio è riuscito ad attutire l'impatto tra il tuo sedere \ne l'asfalto e adesso sei vivo per miracolo eucaristico.\n\nSiamo commossi e quasi ci dispiace abbandonarti dopo quanto \nabbiamo passato insieme. E' ora che tu vada, sei diventato un ometto. \nHai vinto."
+        "descrizione": "A quanto pare qualche imbecille non ha ancora capito che accendere \nla modalità aereo non significa essere in grado di volare... \n\nDopo questo furbissimo gesto atletico e un volo da 20 metri d'altezza \nla tua vista si offusca e inizi rapidamente a perdere conoscenza. \nDopo pochi attimi ti ritrovi in una stanza completamente bianca \ne un signore vestito di bianco con capelli e barba bianca allunga \nuna mano verso di te... con tuo grande dispiacere egli non è \nl'Altissimo e tantomeno il dottor House, ma lo spettabilissimo \nPrimario dott. Minchiari del reparto di chirurgia. \n\nDopo un delicatissimo intervento è riuscito a salvarti la vita e, con \nmano ancora più ferma, a fregarti 50 euro dalla tasca. \nSei appena stato dimesso dalla sala operatoria. Il cuscino che avevi \nappena rubato senza un apparente scopo dallo spogliatoio è riuscito ad attutire \nl'impatto tra il tuo sedere e l'asfalto e adesso sei vivo per \nmiracolo eucaristico.\n\nSiamo commossi e quasi ci dispiace abbandonarti dopo quanto \nabbiamo passato insieme. E' ora che tu vada, sei diventato un ometto. \nHai vinto."
     }
 ]
