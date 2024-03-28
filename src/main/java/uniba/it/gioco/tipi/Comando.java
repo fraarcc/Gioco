@@ -20,7 +20,6 @@ public class Comando {
     }
 
     public TipoComando getType() {
-        System.out.println("Il tipo di comando è: " + type);
         return type;
     }
 

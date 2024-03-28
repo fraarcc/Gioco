@@ -38,14 +38,12 @@ public class Parser {
     public static String getCommandType(String input) {
         List<String> tokens = parse(input);
 
-        // Controllo della lunghezza dei token
         if (tokens.size() < 1 || tokens.size() > 4) {
             return "Invalid";
         }
 
-        String token = tokens.get(0).toLowerCase(); // Converti il token in minuscolo
+        String token = tokens.get(0).toLowerCase();
 
-        // Cerca il comando basato sugli alias
         for (Comando command : commands.values()) {
             if (command.getAliases().stream().anyMatch(alias -> alias.equalsIgnoreCase(token))) {
                 return command.getType().toString();
@@ -57,10 +55,10 @@ public class Parser {
     public static boolean controlloTokenVuoti(List<String> tokens) {
         for (String token : tokens) {
             if (token == null || token.trim().isEmpty()) {
-                return true; // Se trova un elemento null o vuoto, restituisce true
+                return true;
             }
         }
-        return false; // Se non trova elementi null o vuoti, restituisce false
+        return false;
     }
 
 }

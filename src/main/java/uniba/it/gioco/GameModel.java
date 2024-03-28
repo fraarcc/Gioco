@@ -22,15 +22,14 @@ public class GameModel implements Serializable {
         try {
             stanze = init.inizializzaStanze();
             Stanza stanzaIniziale = stanze.get(0);
-            this.giocatore = init.inizializzaGiocatore(0, nickname, stanzaIniziale);
+            this.giocatore = init.inizializzaGiocatore(nickname, stanzaIniziale);
             if (this.giocatore == null) {
                 throw new IllegalStateException("Impossibile inizializzare il giocatore");
             }
-            System.out.println("Giocatore inizializzato con successo: " + this.giocatore.toString());
-            return this; // Restituisci l'istanza corrente di GameModel
+            return this;
         } catch (IOException | IndexOutOfBoundsException | IllegalStateException e) {
-            e.printStackTrace(); // Stampa lo stack trace dell'eccezione
-            return null; // Oppure gestisci l'errore restituendo null
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -59,7 +58,6 @@ public class GameModel implements Serializable {
             try {
                 stanze = init.inizializzaStanze();
             } catch (IOException e) {
-                // Se si verifica un'eccezione durante l'inizializzazione delle stanze, propagala
                 throw new IOException("Errore durante l'inizializzazione delle stanze: " + e.getMessage());
             }
         }

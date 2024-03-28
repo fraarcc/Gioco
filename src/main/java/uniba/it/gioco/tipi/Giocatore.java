@@ -8,13 +8,11 @@ import uniba.it.gioco.utils.Output;
 
 public class Giocatore implements Serializable {
 
-    private int idUtente;
     private String nickname;
     private Stanza stanzaCorrente;
     private Inventario inventario;
 
-    public Giocatore(int idUtente, String nickname, Stanza stanzaCorrente, Inventario zaino) {
-        this.idUtente = idUtente;
+    public Giocatore(String nickname, Stanza stanzaCorrente, Inventario zaino) {
         this.nickname = nickname;
         this.stanzaCorrente = stanzaCorrente;
         this.inventario = new Inventario();
@@ -22,10 +20,6 @@ public class Giocatore implements Serializable {
 
     public Giocatore() {
 
-    }
-
-    public int getIdUtente() {
-        return idUtente;
     }
 
     public String getNickname() {
@@ -51,47 +45,33 @@ public class Giocatore implements Serializable {
     public void spostaGiocatore(Init init, Direzione direzione, Output output, List<Stanza> stanze) {
         Stanza stanzaAttuale = getStanzaCorrente();
         Map<Direzione, Stanza> connessioneStanze = stanzaAttuale.getConnessioneStanze();
-
-        // Verifica se esiste una connessione nella direzione specificata
         if (connessioneStanze.containsKey(direzione)) {
             Stanza nuovaStanza = connessioneStanze.get(direzione);
-
-            // Cerca la nuova stanza nella lista delle stanze
             for (Stanza s : stanze) {
                 if (s.getNome().equals(nuovaStanza.getNome())) {
                     nuovaStanza = s;
                     break;
                 }
             }
-
             if (nuovaStanza.isAperto()) {
-                // Imposta la nuova stanza corrente
                 setStanzaCorrente(nuovaStanza);
-                System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
-                System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
                 output.cambioStanza();
             } else {
                 output.stanzaChiusaMsg();
             }
-
-            // Aggiorna l'inventario del giocatore, ecc. se necessario
         } else {
             output.direzioneErrataMsg();
         }
     }
-    
-    public void cambioStanzaDiretto(List<Stanza> stanze,int posStanza,Output output){
+
+    public void cambioStanzaDiretto(List<Stanza> stanze, int posStanza, Output output) {
         setStanzaCorrente(stanze.get(posStanza));
         output.cambioStanza();
     }
 
     @Override
     public String toString() {
-        return "Giocatore{"
-                + "id=" + idUtente
-                + ", nome='" + nickname + '\''
-                + ", stanzaAttuale=" + stanzaCorrente
-                + ", inventario=" + inventario
-                + '}';
+        return "Giocatore{" + "nickname=" + nickname + ", stanzaCorrente=" + stanzaCorrente + ", inventario=" + inventario + '}';
     }
+
 }
