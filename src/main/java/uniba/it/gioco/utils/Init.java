@@ -67,7 +67,6 @@ public class Init {
     }
 
     public Giocatore inizializzaGiocatore(int idUtente, String nickname, Stanza stanzaIniziale) {
-        // Aggiungere controllo nickname da database per adesso senza controlli
         return new Giocatore(idUtente, nickname, stanzaIniziale, new Inventario());
     }
 

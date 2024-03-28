@@ -8,7 +8,6 @@ import uniba.it.gioco.utils.Init;
 import uniba.it.gioco.tipi.Comando;
 
 public class Parser {
-
     private static final Set<String> stopWords;
     private static final Map<String, Comando> commands;
 

@@ -25,25 +25,19 @@ import uniba.it.gioco.tipi.Stanza;
 public class LogicaDialoghi {
 
     private JTextField jInputTestoArea;
-    private JTextArea jOutputTestoArea;
     private JButton jBottoneInvio;
-    private Giocatore giocatore;
     private List<Stanza> stanze;
-    private LogicaComandi logicaComandi;
-    private ActionListener inputListener; // Variabile di istanza per l'ActionListener aggiunto al bottone di invio
+    private ActionListener inputListener; 
     private KeyListener[] keyListeners;
     private ActionListener[] actionListeners;
 
     public LogicaDialoghi(JTextField jInputTestoArea, JTextArea jOutputTestoArea, JButton jBottoneInvio, Giocatore giocatore, List<Stanza> stanze) {
         this.jInputTestoArea = jInputTestoArea;
-        this.jOutputTestoArea = jOutputTestoArea;
         this.jBottoneInvio = jBottoneInvio;
-        this.giocatore = giocatore;
         this.stanze = stanze;
     }
 
     public void setLogicaComandi(LogicaComandi logicaComandi) {
-        this.logicaComandi = logicaComandi;
     }
 
     public void gestioneGuardie(Npc guardie, JTextField jInputTestoArea, JTextArea jOutputTestoArea) {

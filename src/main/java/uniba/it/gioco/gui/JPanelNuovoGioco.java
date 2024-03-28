@@ -9,7 +9,6 @@ import uniba.it.gioco.GameModel;
 import uniba.it.gioco.database.InitDatabase;
 
 public class JPanelNuovoGioco extends javax.swing.JPanel {
-
     private JFrameMain jframeMain;
     private GameModel gameModel;
 

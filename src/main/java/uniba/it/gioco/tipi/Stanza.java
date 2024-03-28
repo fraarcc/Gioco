@@ -100,7 +100,7 @@ public class Stanza implements Serializable {
             for (Map.Entry<Direzione, Stanza> entry : connessioneStanze.entrySet()) {
                 sb.append(entry.getKey()).append(": ").append(entry.getValue().getNome()).append(", ");
             }
-            sb.delete(sb.length() - 2, sb.length()); // Rimuovi l'ultima virgola e lo spazio
+            sb.delete(sb.length() - 2, sb.length()); 
         }
         if (npc != null) {
             sb.append(", npc=").append(npc);

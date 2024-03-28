@@ -5,12 +5,9 @@ import javax.swing.JOptionPane;
 import uniba.it.gioco.GameModel;
 
 public class JPanelMenu extends javax.swing.JPanel {
-
     private JFrameMain jframeMain;
-    private GameModel gameModel;
 
     public JPanelMenu(JFrameMain jframeMain, GameModel gameModel) {
-        this.gameModel = gameModel;
         this.jframeMain = jframeMain;
         initComponents();
     }

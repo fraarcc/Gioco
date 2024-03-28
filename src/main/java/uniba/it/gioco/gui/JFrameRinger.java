@@ -1,6 +1,6 @@
 package uniba.it.gioco.gui;
 
-import static java.awt.Color.white;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;

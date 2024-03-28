@@ -67,20 +67,16 @@ public class Giocatore implements Serializable {
             if (nuovaStanza.isAperto()) {
                 // Imposta la nuova stanza corrente
                 setStanzaCorrente(nuovaStanza);
-                System.out.println("Ti sei spostato nella stanza: " + nuovaStanza.getNome());
-                System.out.println("Descrizione: " + nuovaStanza.getDescrizione());
                 output.cambioStanza();
             } else {
                 output.stanzaChiusaMsg();
             }
-
-            // Aggiorna l'inventario del giocatore, ecc. se necessario
         } else {
             output.direzioneErrataMsg();
         }
     }
-    
-    public void cambioStanzaDiretto(List<Stanza> stanze,int posStanza,Output output){
+
+    public void cambioStanzaDiretto(List<Stanza> stanze, int posStanza, Output output) {
         setStanzaCorrente(stanze.get(posStanza));
         output.cambioStanza();
     }
