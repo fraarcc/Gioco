@@ -40,17 +40,60 @@ Tra i comandi principali figura sicuramente "osserva", che permette di analizzar
 
 ## **2 Diagramma delle classi**
     
-![test SVG](Output.svg)
+![test SVG](./immaginiDoc/Output.svg)
  <br>
 La classe *Output* è progettata per gestire principalmente la visualizzazione della storia del gioco, delle immagini associate alle varie stanze del gioco stesso e dell'output in generale.
 Dopo la creazione dell'istanza di *Output*, il metodo `run` viene eseguito all'interno di un thread dedicato che rimane in attesa  grazie al metodo `aspettaCambioStanza` finchè non viene notificato un cambio di stanza, in questo modo il thread si occupa di aggiornare la storia.
 Per quanto riguarda le immagini relative alla stanza corrente, la classe si avvale di un metodo `impostaImmagineStanzaCorrente` per cercare i file di immagine PNG o GIF corrispondenti e mostrarli a video.
 
-![test SVG](GameModel.svg)
+![test SVG](./immaginiDoc/GameModel.svg)
 
-Questo diagramma UML raffigura la classe `GameModel`
+Questo diagramma UML raffigura la classe `GameModel` che rappresenta il cuore del modello di gioco della nostra applicazione, infatti è responsabile delle informazioni relative ad essa, compresi i _giocatori_, le _stanze_ e le operazioni di _inizializzazione_.<br>
+Funge dunque da contenitore centrale per le informazioni di base del gioco e fornisce diversi metodi per gestire queste operazioni. 
+Il costruttore della classe `GameModel()` si occupa di creare un nuovo ogetto `Init` e un nuovo oggetto `Giocatore`, il metodo `inizializzaGioco` si occupa di inizializzare il gioco con il _nickname_ fornito come parametro e carica le stanze del gioco e istanzia il giocatore iniziale, restituendo l'istanza corrente di `GameModel`. Infine vi sono vari metodi `set` e `get` che consentono di ottenere informazioni utili relative allo stato del gioco.
 
 ## **3 Specifica algebrica**
+
+La struttura dati scelta per la specifica algebrica è `Inventario`, che rappresenta l'inventario di gioco dell'utente durante la partita e contiene appunto gli oggetti raccolti durante essa.
+Per quanto riguarda l'implementazione, l'invetario contiene un insieme (`Set`) di oggetti di tipo `oggetto`. Più precisamente facciamo riferimento ad una implementazione particolare di `Set` ovvero `HashSet` ovvero un _set_ implementato da una tabella _hash_ .
+
+### **Specifica Sintattica**
+`Tipi: ` Inventario, oggetti, boolean
+
+`Operazioni:`
+* creaInventario() -> Inventario
+
+* aggiungiOggetto(Inventario, Oggetto) ->  Inventario
+
+* rimuoviOggetto(Inventario, Oggetto) ->  Inventario
+
+* contieneOggetto(Inventario, Oggetto) -> Boolean
+
+* getOggetti(Inventario) -> Inventario
+
+### **Specifica Semantica**
+`Declare:` inv: Inventario, inv': Inventario ogg: Oggetto 
+
+contieneOggetti(creaInventario(), ogg) = false
+
+contieneOggetti(aggiungiOggetto(inv, ogg), ogg) = true
+
+getOggetti(creaInventario()) = inv
+
+getOggetti(aggiungiOggetto(inv, ogg)) = inv'
+
+rimuoviOggetto(aggiungiOggetto(inv, ogg), ogg) = If isEmpty(inv) then creaInventario else inv
+
+`Restrizione` :
+
+rimuoviOggetto(creaInventario()) = error
+
+### **Specifica di Restrizione**
+
+![alt text](./immaginiDoc/specificaALG.png)
+
+
+
 
 ## **4 Argomenti del corso** 
 
@@ -98,20 +141,20 @@ _**LIST**_
 
  All'interno di questo progetto, è emerso un ampio ricorso alle eccezioni questo poichè le eccezioni, fondamentali nella gestione degli errori, vengono utilizzate in molti metodi per gestire situazioni impreviste o errori di esecuzione. In seguito verranno mostrate alcune delle principali eccezioni.
 
- ![alt text](image.png)
+ ![alt text](./immaginiDoc/image.png)
 
  I metodi `loadStopWords` e `loadCommandsFromJson` mostrati in questa immagine sono rispettivamente utili per caricare le `StopWords` e il `comandi` da file. Il blocco try-catch permette di controllare e gestire situazioni anomale, in questo caso si tratta di una eccezzione _IOException_ che indica un errore durante l'operazione di input/output, che può verificarsi quando si tenta di leggere o scrivere da un file.
 
- ![alt text](image-1.png)
+ ![alt text](./immaginiDoc/image-1.png)
  
  In questo caso invece, oltre l'eccezione _IOException_ vi è anche un'altra eccezione ovvero : `UnsupportedLookAndFeelException` , poichè all'interno del nostro programma abbiamo utilizzato un Look & Feel per personalizzare la grafica,gestiamo questa eccezione quando si tenta di impostare un Look and Feel non supportato nell'interfaccia utente Swing.
 
- ![alt text](image-2.png)
+ ![alt text](./immaginiDoc/image-2.png)
 
  L'eccezione gestita in questo metodo `prelievoDati`, all'interno della classe `JPanelMostraPartite` che si occupa di mostrare una tabella con le relative partite salvate, viene sollevata quando si verifica un errore durante l'accesso o la manipolazione di un database SQL.
 Il blocco try-catch quindi viene utilizzato per gestire questo nuovo tipo di eccezione che qualora dovesse verificarsi informa l'utente mostrando un messaggio di errore
 
-![alt text](image-3.png)
+![alt text](./immaginiDoc/image-3.png)
 
 Le eccezioni che vengono gestite all'interno del metodo `eseguiComandoApri`, sono: _InterruptedException_ e _ExecutionException_ , entrambe vengono gestite nello stesso modo nel blocco catch , e fanno rispettivamente riferimento ad eccezioni sollevate quando:  un thread viene interrotto mentre è in stato di attesa e quando un'eccezione viene sollevata durante l'esecuzione di un'operazione.
 
@@ -122,7 +165,7 @@ Le eccezioni che vengono gestite all'interno del metodo `eseguiComandoApri`, son
 L'utilizzo e la gestione dei `File` all'interno del nostro programma svolge un ruolo fondamentale per quanto riguarda il funzionamento complessivo del sistema e della gestione della logica del gioco.
 Sono stati adottati per svariate funzioni come l'inizializzazione degli attributi principali della varie classi, infatti sono stati utilizzati per memorizzare e caricare le principali informazioni relative al gioco. Dal punto di vista grafico, ci hanno permesso di ricostruire il filePath delle immagini in modo tale da poter essere caricate dinamicamente.
 
-![alt text](image-4.png)
+![alt text](./immaginiDoc/image-4.png)
 
 Il metodo `caricaStoriaDaFile` si occupa di caricare la storia dell'avventura testuale da un file di testo presente nella cartella _res_ chiamato `Storia.txt`
 Per il caricamento della storia si potevano utilizzare diversi approcci; 
@@ -133,14 +176,14 @@ La lettura del file avviene riga per riga verificando che ci sia il placeholder,
 In questo modo fin quando non si incontrerà un nuovo `#` , verrà costruita la descrizione relativa a quella chiave e di conseguenza alla stanza in questione. 
 Per la costruzione della descrizione viene utilizzato uno `_StringBuilder_` che serve per eseguire il metodo `_append_` per le varie righe fin quando non si incontrerà un nuovo placheholder. In conclusione quando viene incontrato un nuovo `_#_` , si raccoglie il contenuto e lo si inserisce all'interno della Map. 
 
-![alt text](image-8.png)
+![alt text](./immaginiDoc/image-8.png)
 Un'altra applicazione dei `File`, son stati i `file JSON` infatti: <br>
 Abbiamo creato un metodo in questo caso `loadJSON` che restituisce una lista di oggetti di tipo T, dove T è un tipo generico, in questo modo richiamiamo questo metodo specificando il filepath e il tipo desiderato, permettendo di caricare le istanze dal file `Json` . <br>
 Nel nostro progetto questo sarà molto utile per caricare le istanze della classe _Stanza_ e utilizzando il metodo citato prima avremo la possibilità di ottenere queste istanze in una Lista di Stanze.
 Durante la partita, i progressi di gioco inclusi i vari campi ed attributi delle stanze, saranno modificati su questa lista.
 
 
-![alt text](image-9.png)
+![alt text](./immaginiDoc/image-9.png)
 
 Tramite questo metodo utilizziamo `loadJSON` per ottenere le istanze delle stanze sotto forma di Lista, la quale sarà poi una variabile globale nelle varie classi in cui sarà necessaria la modifica delle stanze.<br>
 In conclusione questi rappresentano solo alcune della varie applicazioni implementate all'interno dell'avventura testuale dato che vi sono varie rappresentazioni.
@@ -152,12 +195,16 @@ In conclusione questi rappresentano solo alcune della varie applicazioni impleme
 
 All'interno del nostro progetto, abbiamo integrato un database H2 che ci ha consentito di memorizzare e salvare i progressi di una partita dunque garantire il salvataggio dei dati di gioco.
 Queste funzionalità sono state implementate all'interno delle due classi  `InitDatabase` e `DatabaseUtil` che gestiscono le operazioni di acesso e manipolazione del database.
-![alt text](image-14.png)
+![alt text](./immaginiDoc/image-14.png)
 In particolare la classe `initDatabase` come prima cosa attraverso il metodo `creaConnessione` stabilisce la connessione al databse H2 utilizzando la stringa di connessione specificata, successivamente si occupa di creare la tabella delle partite e in seguito implementa i vari metodi: `salvaPartita` `caricaPartita` ed `eliminaPartita` che si occupano rispettivamente di salvare una partita sul database, caricare una partita dal database utilizzando l'ID della partita ed infine eliminarne una. <br>
-![alt text](image-15.png)
-![alt text](image-16.png)
+![alt text](./immaginiDoc/image-15.png)
+In questo modo abbiamo implementato il salvataggio di una partita da parte dell'utente che al comando `salva` potrà correttamente salvare lo stato del gioco fino a quel momento per poi riprendere l'esecuzione in un altro momento. <br>
+Come prima cosa viene chiamato il metodo `creaConnessione` per creare una connessione al database, viene poi preparata una query di inserimento chiamata _INSERISCI_PARTITA_ utilizzando un oggetto `PreparedStatement` . Viene impostato il primo parametro della query e viene serializzato l'oggetto `GameModel` in un array di byte, utilizzando un `ObjectOutputStream` e un `ByteArrayOutputStream`. Questo è necessario poichè il database può salvare solo dati primitivi o oggetti serializzabili quindi l'oggetto `GameModel` necessita prima di essere serializzato ovvero convertito in un array di byte.<br>
+Successivamente viene eseguita la query di inserimento utilizzando il metodo `executeUpdate` e viene recuperato l'ID generato automaticamente dalla query di inserimento.
+Infine viene chiuso l'oggetto `PreparedStatement` per rilasciare le risorse associate.
+![alt text](./immaginiDoc/image-16.png)
 Infine vi è anche il metodo sottostante: che si occupa invece di mostrare quelle che sono tutte le partite salvate riportando : `ID PARTITA`, `Nickname`, `Timestamp`.
-![alt text](image-17.png)
+![alt text](./immaginiDoc/image-17.png)
 
 
 
@@ -172,14 +219,14 @@ L'implementazione dei Thread all'interno del nostro progetto è stata utile per 
 
 
 
-![alt text](image-10.png)
+![alt text](./immaginiDoc/image-10.png)
 
 I thread nel nostro progetto svolgono un ruolo fondamentale nell'aggiornamento dinamico della storia del gioco quando il giocatore cambia stanza. Questo avviene attraverso i metodi presenti nella classe Output, che estende la classe Thread. Ecco come i principali metodi si relazionano al funzionamento dei thread:
 
 Il meotodo `caricaStoriaDaFile` legge la storia del gioco da un file di testo e la carica in memoria. Viene chiamato all'avvio dell'applicazione o quando è necessario ricaricare la storia da file. Il metodo `aggiornaStoria` viene chiamato quando il giocatore cambia stanza e si occupa di aggiornare l'interfaccia utente con la descrizione della nuova stanza. Questo aggiornamento avviene all'interno del thread gestito dalla classe _Output_ .
 Il metodo `aspettaCambioStanza` mette il thread in attesa finché non viene notificato un cambio di stanza, mentre il seguente metodo `cambioStanza` segnala al thread che è necessario aggiornare la storia in seguito ad un cambio di stanza rilevato.
 
-![alt text](image-12.png)
+![alt text](./immaginiDoc/image-12.png)
 
 In questo caso invece, quando viene eseguito il comando `Apri`, viene controllato se il giocatore si trova nella stanza _bagno_ e se lo _sgabuzzino_ non è ancora aperto; <br> Qualora queste condizioni siano soddisfatte viene creato un nuovo thread per mostrare un minigioco che simula lo sblocco di un lucchetto in maniera grafica e dinamica. <br> In questo quando il thread viene avviato chiamando il metodo `start`, il suo codice viene eseguito in parallelo rispetto al thread principale del programma, consentendo all'interfaccia utente di rimanere reattiva mentre vengono eseguite operazioni che richiedono tempo nel backgorund.
 
@@ -191,8 +238,8 @@ Le API RESTful consentono di accedere e manipolare delle risorse tramite URL, se
 Nel nostro caso abbiamo utilizzato 2 differnti API `API Advice Slip` `API MyMemory Translation`, la prima fornisce consigli casuali in lingua inglese, quindi permette di ottenere consigli in lingua inglese, che vengono successivamente tradotti in italiano dalla seconda `API`.<br>
 Nello specifico prende in input il testo in lingua inglese e restituisce la traduzione in italiano.
 Non vi è una reale correlazione con quello che è l'ambiente e il contesto di gioco sviluppato nel progetto, tuttavia per implementare comunque questi strumenti abbiamo ritenuto, tra le varie API gratis disponibili, che questa fosse quella migliore.
-![alt text](image-18.png)
-![alt text](image-19.png)
+![alt text](./immaginiDoc/image-18.png)
+![alt text](./immaginiDoc/image-19.png)
 
 Come prima cosa viene creato un oggetto `URL` che punta all'endpoint dell'API Advice Slip, viene aperta una connessione HTTP utilizzando `HttpURLConnection` e viene impostato il metodo di richiesta su `GET`.<br>
 In seguito viene letta la risposta dall' _API_ e memorizzata all'interno di un oggetto `StringBuilder` e viene analizzata per estrarre il consiglio casuale utilizzando la libreria `JSONObject`. Infine il consiglio in lingua inglese viene formattato e tradotto in italiano utilizzando il metodo `traduciInItaliano`.
@@ -201,13 +248,34 @@ In seguito viene letta la risposta dall' _API_ e memorizzata all'interno di un o
 ##
 ### **4.7 Swing**
 
+All'interno del nostro progetto, per quanto riguarda le scelte stilistiche abbiamo utilizzato Java Swing, nonchè una libreria grafica per la creazione di UI (User Interface).
+La nostra applicazione è totalmente realizzata con interfacce grafiche, pertanto abbiamo inserito tutti i file relativi alle interfacce swing all'interno di un package dedicato chiamato `Gui`.
+Abbiamo strutturato la nostra interfaccia grafica intorno ad un unico frame principale, tralasciando quelli relativi ai minigiochi. <br>
+Il frame principale funge da contenitore per tutti gli altri componenti grafici, infatti abbiamo scelto di utilizzare CardLayout per la gestione delle schermatE.<br>
+Questo ci ha permesso di organizzare le diverse schermate come "carte" sovrapposte all'interno di un unico contenitore, consentendo all'utente di passare agevolmente da una schermata all'altra tramite pulsanti o azioni specifiche.
+Abbiamo integrato dunque bottoni all'interno dei nostri pannelli per consentire agli utenti di interagire con l'applicazione.
+![alt text](./immaginiDoc/image-20.png)
+
+Questa è la schermata che appare all'avvio dell'applicazione, si tratta di un pannnello che prende il nome di `JPanelMenu` e contiene al suo interno diversi componenti grafici come _"Nuova Partita"_, _"Carica Partita"_ e _"Esci"_.
+Qui l'utente potrà decidere se avviare una nuova partita , caricarne una, se esistente, o uscire dall'applicazione.
+![alt text](./immaginiDoc/CaricaPartite.png)
+
+Una volta cliccato il bottone per caricare una nuova parita viene cambiata dinamicamente schermata, grazie all'utilizzo del sistema CardLayout, che così come in questo caso si occuperà di gestire le varie schermate anche in seguito.<br>
+Qui viene mostrato il `JPanelMostraPartite` che è stato progettato per visualizzare le partite disponibili relative a salvataggi di gioco e fornisce dunque all'utente le opzioni per caricare o cancellare una partita.
+Per quanto riguarda l'immagine di sfondo nel metodo `init`, viene impostata un'icona di sfondo per il pannello utilizzando un'immagine che viene caricata grazie al path relativo.
+
+![alt text](./immaginiDoc/lucchetto.png)
+
+Questo frame chiamato `JFrameLucchetto`, fornisce una interfaccia semplice ed intuitiva, ovvero un enigma presente all'interno del gioco che simula lo sblocco di un luccheto. <br>
+Esso contiene 3 `JSpinner` che consentono di selezionare i numeri desiderati per tentare di sbloccare il lucchetto e tramite il pulsante `sblocca` l'utente potrà confermare la combinazione scelta.
+
 
 
 ##
 ### **4.8 Lambda Expressions**
 Le lambda expressions costituiscono un concetto essenziale all'interno della programmazione moderna, consentendo una maggiore flessibilita' nella definizione e nel passaggio di funzionalita' all'interno del codice. Simili al concetto di funzioni anonime, le lambda expressions offrono la possibilita' di definire implementazioni di operazioni in modo compatto. La sintassi delle espressioni lambda comprende parametri, rappresentati dalle parentesi, una freccia -> e successivamente il corpo dell'espressione; quest'ultimo può essere costituito da una singola istruzione o da un blocco di istruzioni racchiuso tra parentesi graffe. Questa sintassi "compatta" rende le espressioni lambda ideali per passare comportamenti in modo leggibile e conciso. Un esempio comune di utilizzo delle espressioni lambda e' nei contesti in cui si operano su collezioni di dati, come ad esempio le operazioni sugli stream. Queste espressioni consentono di specificare operazioni come il filtraggio, la trasformazione e l'elaborazione dei dati in modo più diretto.
 
-![alt text](image-11.png)
+![alt text](./immaginiDoc/image-11.png)
 
 Nel nostro caso la Lambda Expression presente nel metodo main della clase `Engine` viene utilizzata per eseguire un'azione in un thread separato responsabile dell'interfaccia utente. Questo viene realizzato per garantire che il thread principale rimanga reattivo durante l'esecuzione delle operazioni di inizializzazione. Il metodo 
  `java.awt.EventQueue.invokeLater(() -> { ... }) `
@@ -215,9 +283,16 @@ Nel nostro caso la Lambda Expression presente nel metodo main della clase `Engin
  Questa Lamda Expressions è composta da due parti: le parentesi vuote indicano che non accetta nessun argomento, mentre la seconda parte è rappresentata dal corpo che contiene le istruzioni da eseguire. <br>
  Più precisamente in questo caso rappresenta il corpo consiste nel codice che inizializza il  `Look&Feel ` dell'interfaccia utente, crea l'istanza di  `GameModel ` e di  `JFrameMain `, rendendolo visibile. 
 
+![alt text](./immaginiDoc/menufoto.png)
 
-
-
+Questa schermata rappresenta una componente chiave dell'interfaccia utente del gioco, infatti la classe `JPanelPartita`, rappresenta l'interfaccia principale di gioco per l'utente. Essa offre un ambiente interattivo attraverso il quale il giocatore può esplorare le varie stanze, interagire con gli elementi del gioco e progredire nella trama.<br> 
+Questa classe permette al giocatore di inserire comandi e visualizzare risposte tramite un'area di testo, e di navigare tra le diverse opzioni disponibili attraverso pulsanti e input da tastiera. Inoltre, vengono fornite funzionalità per la gestione dell'input del giocatore, la visualizzazione delle immagini relative al gioco e la possibilità di tornare al menu principale in qualsiasi momento. <br>
+Nel costruttore `JPanelPartita` , vengono inizializzati i componenti grafici come l'area di testo, i pulsanti e le immagini. Questo avviene tramite il metodo `initComponents().`<br>
+Il metodo `initInfoInGame()` viene chiamato nel costruttore per inizializzare le informazioni di gioco, come le stanze, il giocatore e altri dati relativi al gioco.
+La classe gestisce l'input del giocatore attraverso l'area di testo `jInputTestoArea`. <br> 
+Quando il giocatore preme il pulsante "Conferma" o preme invio dopo aver inserito un comando, il metodo `jInvioButtoneActionPerformed()` viene chiamato per inviare il comando al gestore dell'input.<br>
+La classe include metodi per gestire gli eventi di input del giocatore, come premere il tasto Invio nell'area di testo `jInputTestoArea`, dunque questi metodi controllano quando e come inviare il comando inserito dall'utente.
+Infine l'interfaccia grafica viene aggiornata di conseguenza per riflettere lo stato attuale del gioco.
 
 
 
