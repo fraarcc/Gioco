@@ -38,9 +38,7 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
             ResultSet resultSet = InitDatabase.stampaPartiteDisponibiliResultSet();
             if (!resultSet.next()) {
             } else {
-                String nickname = resultSet.getString("nickname");
                 inserimentoTabella(resultSet);
-                System.out.println(nickname);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -175,11 +173,9 @@ public class JPanelMostraPartite extends javax.swing.JPanel {
                 int idPartita = (int) jTablePartite.getModel().getValueAt(rigaSelezionata, 0);
                 String nomeUtente = (String) jTablePartite.getModel().getValueAt(rigaSelezionata, 1);
                 if (nomeUtente != null) {
-                    System.out.println(nomeUtente);
                     Init init = gameModel.getInit();
                     gameModel = InitDatabase.caricaPartita(idPartita);
                     gameModel.setInit(init);
-                    System.out.println(gameModel.getGiocatore().getNickname());
                     jframeMain.updateCards(gameModel);
                     jframeMain.showCard("inGame");
                 } else {
