@@ -90,7 +90,7 @@ rimuoviOggetto(creaInventario()) = error
 
 ### **Specifica di Restrizione**
 
-![alt text](./immaginiDoc/specificaAlg.png)
+![alt text](./immaginiDoc/specificaALG.png)
 
 
 
@@ -104,14 +104,14 @@ rimuoviOggetto(creaInventario()) = error
 _**LIST**_
 
 * La classe `GameModel` ha una lista di oggetti di tipo `Stanza`, e questa lista viene utilizzata per inizializzare quest'ultime quando viene avviata una partita.
-  Questa lista viene mantenuta nelle classi più importanti e rappresenta le varie modifiche apportate alle varie stanze durante la partita.
 
-* La classe `LogicaComandi` è un esempio dove la lisa di oggetti di tipo `Stanza` viene utilizzata maggiormente, proprio perchè in questa classe vengono gestiti tutti i comandi e di conseguenza le modifiche delle varie stanze e dei progressi di gioco.
+* La classe `LogicaComandi` ha una lista di oggetti di tipo `Stanza` che viene utilizzata per mantenere un elenco delle stanze disponibili nel gioco, in seguito alla logica dei comandi dietro l'avventura risulta necessario accedere alle stanze.
 
-* La classe `NPC` ha una List di tipo `String`, contenente una serie di dialoghi relativi agli NPC
+* La classe `NPC` ha una List di tipo `String`, contente una serie di dialoghi relativi agli NPC
 
-* La classe JFrameRinger utilizza un `ArrayList` denominato sequenza che utilizzata viene per memorizzare la sequenza di composti selezionati dall'utente.
+* La classe JFrameRinger utilizza un `ArrayList` denominato sequenza che viene per memorizzare la sequenza di composti selezionati dall'utente.
 
+* La classe JPanelPartita utilizza una List di oggetti di tipo `Stanza` che serve per memorizzare un elenco di stanze che fanno parte del gioco.
 
 
  _**SET**_
@@ -129,7 +129,7 @@ _**LIST**_
  _**MAP**_
 
  * La classe `Output` si avvale di una struttura dati MAP per memorizzare le descrizioni delle stanze del gioco. Ogni stanza è associata ad una descrizione, dove la chiave della mappa è il nome della stanza ed il valore è la descrizione corrispondente.
- Metodi presenti nella classe utilizzano questa MAP come ad esempio il metodo `caricaStoriaDaFile` che legge le descrizioni delle stanze da un file e le carica nella mappa, utilizzando il nome della stanza come chiave e la descrizione come valore.
+ Metodi presenti nella classe utilizzano questa MAP come ad esempio il metodo `caricaStoriaDaFile` che legge le descrizioni delle stanze da un file e le carica nella mappa, utilizzando il nome della stanza come chiave e la descrizione come valore
 
  * La classe `Init` utilizza la struttura dati per memorizzare i comandi del gioco
 
@@ -197,7 +197,7 @@ All'interno del nostro progetto, abbiamo integrato un database H2 che ci ha cons
 Queste funzionalità sono state implementate all'interno delle due classi  `InitDatabase` e `DatabaseUtil` che gestiscono le operazioni di acesso e manipolazione del database.
 ![alt text](./immaginiDoc/image-14.png)
 In particolare la classe `initDatabase` come prima cosa attraverso il metodo `creaConnessione` stabilisce la connessione al databse H2 utilizzando la stringa di connessione specificata, successivamente si occupa di creare la tabella delle partite e in seguito implementa i vari metodi: `salvaPartita` `caricaPartita` ed `eliminaPartita` che si occupano rispettivamente di salvare una partita sul database, caricare una partita dal database utilizzando l'ID della partita ed infine eliminarne una. <br>
-![alt text](./immaginiDoc/image-15.png)
+![alt text](./immaginiDoc/salvaPartita.png)
 In questo modo abbiamo implementato il salvataggio di una partita da parte dell'utente che al comando `salva` potrà correttamente salvare lo stato del gioco fino a quel momento per poi riprendere l'esecuzione in un altro momento. <br>
 Come prima cosa viene chiamato il metodo `creaConnessione` per creare una connessione al database, viene poi preparata una query di inserimento chiamata _INSERISCI_PARTITA_ utilizzando un oggetto `PreparedStatement` . Viene impostato il primo parametro della query e viene serializzato l'oggetto `GameModel` in un array di byte, utilizzando un `ObjectOutputStream` e un `ByteArrayOutputStream`. Questo è necessario poichè il database può salvare solo dati primitivi o oggetti serializzabili quindi l'oggetto `GameModel` necessita prima di essere serializzato ovvero convertito in un array di byte.<br>
 Successivamente viene eseguita la query di inserimento utilizzando il metodo `executeUpdate` e viene recuperato l'ID generato automaticamente dalla query di inserimento.
@@ -237,7 +237,7 @@ Le API RESTful consentono di accedere e manipolare delle risorse tramite URL, se
 
 Nel nostro caso abbiamo utilizzato 2 differnti API `API Advice Slip` `API MyMemory Translation`, la prima fornisce consigli casuali in lingua inglese, quindi permette di ottenere consigli in lingua inglese, che vengono successivamente tradotti in italiano dalla seconda `API`.<br>
 Nello specifico prende in input il testo in lingua inglese e restituisce la traduzione in italiano.
-Non vi è una reale correlazione con quello che è l'ambiente e il contesto di gioco sviluppato nel progetto, tuttavia per implementare comunque questi strumenti abbiamo ritenuto, tra le varie API disponibili, che questa fosse quella migliore.
+Non vi è una reale correlazione con quello che è l'ambiente e il contesto di gioco sviluppato nel progetto, tuttavia per implementare comunque questi strumenti abbiamo ritenuto, tra le varie API gratis disponibili, che questa fosse quella migliore.
 ![alt text](./immaginiDoc/image-18.png)
 ![alt text](./immaginiDoc/image-19.png)
 
@@ -251,7 +251,7 @@ In seguito viene letta la risposta dall' _API_ e memorizzata all'interno di un o
 All'interno del nostro progetto, per quanto riguarda le scelte stilistiche abbiamo utilizzato Java Swing, nonchè una libreria grafica per la creazione di UI (User Interface).
 La nostra applicazione è totalmente realizzata con interfacce grafiche, pertanto abbiamo inserito tutti i file relativi alle interfacce swing all'interno di un package dedicato chiamato `Gui`.
 Abbiamo strutturato la nostra interfaccia grafica intorno ad un unico frame principale, tralasciando quelli relativi ai minigiochi. <br>
-Il frame principale funge da contenitore per tutti gli altri componenti grafici, infatti abbiamo scelto di utilizzare CardLayout per la gestione delle schermate.<br>
+Il frame principale funge da contenitore per tutti gli altri componenti grafici, infatti abbiamo scelto di utilizzare CardLayout per la gestione delle schermatE.<br>
 Questo ci ha permesso di organizzare le diverse schermate come "carte" sovrapposte all'interno di un unico contenitore, consentendo all'utente di passare agevolmente da una schermata all'altra tramite pulsanti o azioni specifiche.
 Abbiamo integrato dunque bottoni all'interno dei nostri pannelli per consentire agli utenti di interagire con l'applicazione.
 ![alt text](./immaginiDoc/image-20.png)
@@ -269,6 +269,20 @@ Per quanto riguarda l'immagine di sfondo nel metodo `init`, viene impostata un'i
 Questo frame chiamato `JFrameLucchetto`, fornisce una interfaccia semplice ed intuitiva, ovvero un enigma presente all'interno del gioco che simula lo sblocco di un luccheto. <br>
 Esso contiene 3 `JSpinner` che consentono di selezionare i numeri desiderati per tentare di sbloccare il lucchetto e tramite il pulsante `sblocca` l'utente potrà confermare la combinazione scelta.
 
+
+
+##
+### **4.8 Lambda Expressions**
+Le lambda expressions costituiscono un concetto essenziale all'interno della programmazione moderna, consentendo una maggiore flessibilita' nella definizione e nel passaggio di funzionalita' all'interno del codice. Simili al concetto di funzioni anonime, le lambda expressions offrono la possibilita' di definire implementazioni di operazioni in modo compatto. La sintassi delle espressioni lambda comprende parametri, rappresentati dalle parentesi, una freccia -> e successivamente il corpo dell'espressione; quest'ultimo può essere costituito da una singola istruzione o da un blocco di istruzioni racchiuso tra parentesi graffe. Questa sintassi "compatta" rende le espressioni lambda ideali per passare comportamenti in modo leggibile e conciso. Un esempio comune di utilizzo delle espressioni lambda e' nei contesti in cui si operano su collezioni di dati, come ad esempio le operazioni sugli stream. Queste espressioni consentono di specificare operazioni come il filtraggio, la trasformazione e l'elaborazione dei dati in modo più diretto.
+
+![alt text](./immaginiDoc/image-11.png)
+
+Nel nostro caso la Lambda Expression presente nel metodo main della clase `Engine` viene utilizzata per eseguire un'azione in un thread separato responsabile dell'interfaccia utente. Questo viene realizzato per garantire che il thread principale rimanga reattivo durante l'esecuzione delle operazioni di inizializzazione. Il metodo 
+ `java.awt.EventQueue.invokeLater(() -> { ... }) `
+ accetta un'istanza di  ` Runnable` e la esegue nel thread dell'evento AWT (Abstract Window Toolkit); L'invokeLater viene utilizzato per assicurarsi che il codice all'interno della lambda expression venga eseguito in modo asincrono come detto prima.
+ Questa Lamda Expressions è composta da due parti: le parentesi vuote indicano che non accetta nessun argomento, mentre la seconda parte è rappresentata dal corpo che contiene le istruzioni da eseguire. <br>
+ Più precisamente in questo caso rappresenta il corpo consiste nel codice che inizializza il  `Look&Feel ` dell'interfaccia utente, crea l'istanza di  `GameModel ` e di  `JFrameMain `, rendendolo visibile. 
+
 ![alt text](./immaginiDoc/menufoto.png)
 
 Questa schermata rappresenta una componente chiave dell'interfaccia utente del gioco, infatti la classe `JPanelPartita`, rappresenta l'interfaccia principale di gioco per l'utente. Essa offre un ambiente interattivo attraverso il quale il giocatore può esplorare le varie stanze, interagire con gli elementi del gioco e progredire nella trama.<br> 
@@ -279,21 +293,6 @@ La classe gestisce l'input del giocatore attraverso l'area di testo `jInputTesto
 Quando il giocatore preme il pulsante "Conferma" o preme invio dopo aver inserito un comando, il metodo `jInvioButtoneActionPerformed()` viene chiamato per inviare il comando al gestore dell'input.<br>
 La classe include metodi per gestire gli eventi di input del giocatore, come premere il tasto Invio nell'area di testo `jInputTestoArea`, dunque questi metodi controllano quando e come inviare il comando inserito dall'utente.
 Infine l'interfaccia grafica viene aggiornata di conseguenza per riflettere lo stato attuale del gioco.
-
-
-
-##
-### **4.8 Lambda Expressions**
-Le lambda expressions costituiscono un concetto essenziale all'interno della programmazione moderna, consentendo una maggiore flessibilita' nella definizione e nel passaggio di funzionalita' all'interno del codice.Le lambda expressions offrono la possibilita' di definire implementazioni di operazioni in modo compatto. La sintassi delle espressioni lambda comprende parametri, rappresentati dalle parentesi, una freccia -> e successivamente il corpo dell'espressione; quest'ultimo può essere costituito da una singola istruzione o da un blocco di istruzioni racchiuso tra parentesi graffe. Questa sintassi "compatta" rende le espressioni lambda ideali per passare comportamenti in modo leggibile e conciso. Un esempio comune di utilizzo delle espressioni lambda e' nei contesti in cui si operano su collezioni di dati, come ad esempio le operazioni sugli stream. Queste espressioni consentono di specificare operazioni come il filtraggio, la trasformazione e l'elaborazione dei dati in modo più diretto.
-
-![alt text](./immaginiDoc/image-11.png)
-
-Nel nostro caso la Lambda Expression presente nel metodo main della clase `Engine` viene utilizzata per eseguire un'azione in un thread separato responsabile dell'interfaccia utente. Questo viene realizzato per garantire che il thread principale rimanga reattivo durante l'esecuzione delle operazioni di inizializzazione. Il metodo 
- `java.awt.EventQueue.invokeLater(() -> { ... }) `
- accetta un'istanza di  ` Runnable` e la esegue nel thread dell'evento AWT (Abstract Window Toolkit); L'invokeLater viene utilizzato per assicurarsi che il codice all'interno della lambda expression venga eseguito in modo asincrono come detto prima.
- Questa Lamda Expressions è composta da due parti: le parentesi vuote indicano che non accetta nessun argomento, mentre la seconda parte è rappresentata dal corpo che contiene le istruzioni da eseguire. <br>
- Più precisamente in questo caso rappresenta il corpo consiste nel codice che inizializza il  `Look&Feel ` dell'interfaccia utente, crea l'istanza di  `GameModel ` e di  `JFrameMain `, rendendolo visibile. 
-
 
 
 
