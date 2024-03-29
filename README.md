@@ -269,6 +269,17 @@ Per quanto riguarda l'immagine di sfondo nel metodo `init`, viene impostata un'i
 Questo frame chiamato `JFrameLucchetto`, fornisce una interfaccia semplice ed intuitiva, ovvero un enigma presente all'interno del gioco che simula lo sblocco di un luccheto. <br>
 Esso contiene 3 `JSpinner` che consentono di selezionare i numeri desiderati per tentare di sbloccare il lucchetto e tramite il pulsante `sblocca` l'utente potrà confermare la combinazione scelta.
 
+![alt text](./immaginiDoc/menufoto.png)
+
+Questa schermata rappresenta una componente chiave dell'interfaccia utente del gioco, infatti la classe `JPanelPartita`, rappresenta l'interfaccia principale di gioco per l'utente. Essa offre un ambiente interattivo attraverso il quale il giocatore può esplorare le varie stanze, interagire con gli elementi del gioco e progredire nella trama.<br> 
+Questa classe permette al giocatore di inserire comandi e visualizzare risposte tramite un'area di testo, e di navigare tra le diverse opzioni disponibili attraverso pulsanti e input da tastiera. Inoltre, vengono fornite funzionalità per la gestione dell'input del giocatore, la visualizzazione delle immagini relative al gioco e la possibilità di tornare al menu principale in qualsiasi momento. <br>
+Nel costruttore `JPanelPartita` , vengono inizializzati i componenti grafici come l'area di testo, i pulsanti e le immagini. Questo avviene tramite il metodo `initComponents().`<br>
+Il metodo `initInfoInGame()` viene chiamato nel costruttore per inizializzare le informazioni di gioco, come le stanze, il giocatore e altri dati relativi al gioco.
+La classe gestisce l'input del giocatore attraverso l'area di testo `jInputTestoArea`. <br> 
+Quando il giocatore preme il pulsante "Conferma" o preme invio dopo aver inserito un comando, il metodo `jInvioButtoneActionPerformed()` viene chiamato per inviare il comando al gestore dell'input.<br>
+La classe include metodi per gestire gli eventi di input del giocatore, come premere il tasto Invio nell'area di testo `jInputTestoArea`, dunque questi metodi controllano quando e come inviare il comando inserito dall'utente.
+Infine l'interfaccia grafica viene aggiornata di conseguenza per riflettere lo stato attuale del gioco.
+
 
 
 ##
@@ -283,16 +294,6 @@ Nel nostro caso la Lambda Expression presente nel metodo main della clase `Engin
  Questa Lamda Expressions è composta da due parti: le parentesi vuote indicano che non accetta nessun argomento, mentre la seconda parte è rappresentata dal corpo che contiene le istruzioni da eseguire. <br>
  Più precisamente in questo caso rappresenta il corpo consiste nel codice che inizializza il  `Look&Feel ` dell'interfaccia utente, crea l'istanza di  `GameModel ` e di  `JFrameMain `, rendendolo visibile. 
 
-![alt text](./immaginiDoc/menufoto.png)
-
-Questa schermata rappresenta una componente chiave dell'interfaccia utente del gioco, infatti la classe `JPanelPartita`, rappresenta l'interfaccia principale di gioco per l'utente. Essa offre un ambiente interattivo attraverso il quale il giocatore può esplorare le varie stanze, interagire con gli elementi del gioco e progredire nella trama.<br> 
-Questa classe permette al giocatore di inserire comandi e visualizzare risposte tramite un'area di testo, e di navigare tra le diverse opzioni disponibili attraverso pulsanti e input da tastiera. Inoltre, vengono fornite funzionalità per la gestione dell'input del giocatore, la visualizzazione delle immagini relative al gioco e la possibilità di tornare al menu principale in qualsiasi momento. <br>
-Nel costruttore `JPanelPartita` , vengono inizializzati i componenti grafici come l'area di testo, i pulsanti e le immagini. Questo avviene tramite il metodo `initComponents().`<br>
-Il metodo `initInfoInGame()` viene chiamato nel costruttore per inizializzare le informazioni di gioco, come le stanze, il giocatore e altri dati relativi al gioco.
-La classe gestisce l'input del giocatore attraverso l'area di testo `jInputTestoArea`. <br> 
-Quando il giocatore preme il pulsante "Conferma" o preme invio dopo aver inserito un comando, il metodo `jInvioButtoneActionPerformed()` viene chiamato per inviare il comando al gestore dell'input.<br>
-La classe include metodi per gestire gli eventi di input del giocatore, come premere il tasto Invio nell'area di testo `jInputTestoArea`, dunque questi metodi controllano quando e come inviare il comando inserito dall'utente.
-Infine l'interfaccia grafica viene aggiornata di conseguenza per riflettere lo stato attuale del gioco.
 
 
 
