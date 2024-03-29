@@ -104,14 +104,14 @@ rimuoviOggetto(creaInventario()) = error
 _**LIST**_
 
 * La classe `GameModel` ha una lista di oggetti di tipo `Stanza`, e questa lista viene utilizzata per inizializzare quest'ultime quando viene avviata una partita.
+  Questa lista viene mantenuta nelle classi più importanti e rappresenta le varie modifiche apportate alle varie stanze durante la partita.
 
-* La classe `LogicaComandi` ha una lista di oggetti di tipo `Stanza` che viene utilizzata per mantenere un elenco delle stanze disponibili nel gioco, in seguito alla logica dei comandi dietro l'avventura risulta necessario accedere alle stanze.
+* La classe `LogicaComandi` è un esempio dove la lisa di oggetti di tipo `Stanza` viene utilizzata maggiormente, proprio perchè in questa classe vengono gestiti tutti i comandi e di conseguenza le modifiche delle varie stanze e dei progressi di gioco.
 
-* La classe `NPC` ha una List di tipo `String`, contente una serie di dialoghi relativi agli NPC
+* La classe `NPC` ha una List di tipo `String`, contenente una serie di dialoghi relativi agli NPC
 
-* La classe JFrameRinger utilizza un `ArrayList` denominato sequenza che viene per memorizzare la sequenza di composti selezionati dall'utente.
+* La classe JFrameRinger utilizza un `ArrayList` denominato sequenza che utilizzata viene per memorizzare la sequenza di composti selezionati dall'utente.
 
-* La classe JPanelPartita utilizza una List di oggetti di tipo `Stanza` che serve per memorizzare un elenco di stanze che fanno parte del gioco.
 
 
  _**SET**_
@@ -129,7 +129,7 @@ _**LIST**_
  _**MAP**_
 
  * La classe `Output` si avvale di una struttura dati MAP per memorizzare le descrizioni delle stanze del gioco. Ogni stanza è associata ad una descrizione, dove la chiave della mappa è il nome della stanza ed il valore è la descrizione corrispondente.
- Metodi presenti nella classe utilizzano questa MAP come ad esempio il metodo `caricaStoriaDaFile` che legge le descrizioni delle stanze da un file e le carica nella mappa, utilizzando il nome della stanza come chiave e la descrizione come valore
+ Metodi presenti nella classe utilizzano questa MAP come ad esempio il metodo `caricaStoriaDaFile` che legge le descrizioni delle stanze da un file e le carica nella mappa, utilizzando il nome della stanza come chiave e la descrizione come valore.
 
  * La classe `Init` utilizza la struttura dati per memorizzare i comandi del gioco
 
@@ -237,7 +237,7 @@ Le API RESTful consentono di accedere e manipolare delle risorse tramite URL, se
 
 Nel nostro caso abbiamo utilizzato 2 differnti API `API Advice Slip` `API MyMemory Translation`, la prima fornisce consigli casuali in lingua inglese, quindi permette di ottenere consigli in lingua inglese, che vengono successivamente tradotti in italiano dalla seconda `API`.<br>
 Nello specifico prende in input il testo in lingua inglese e restituisce la traduzione in italiano.
-Non vi è una reale correlazione con quello che è l'ambiente e il contesto di gioco sviluppato nel progetto, tuttavia per implementare comunque questi strumenti abbiamo ritenuto, tra le varie API gratis disponibili, che questa fosse quella migliore.
+Non vi è una reale correlazione con quello che è l'ambiente e il contesto di gioco sviluppato nel progetto, tuttavia per implementare comunque questi strumenti abbiamo ritenuto, tra le varie API disponibili, che questa fosse quella migliore.
 ![alt text](./immaginiDoc/image-18.png)
 ![alt text](./immaginiDoc/image-19.png)
 
@@ -251,7 +251,7 @@ In seguito viene letta la risposta dall' _API_ e memorizzata all'interno di un o
 All'interno del nostro progetto, per quanto riguarda le scelte stilistiche abbiamo utilizzato Java Swing, nonchè una libreria grafica per la creazione di UI (User Interface).
 La nostra applicazione è totalmente realizzata con interfacce grafiche, pertanto abbiamo inserito tutti i file relativi alle interfacce swing all'interno di un package dedicato chiamato `Gui`.
 Abbiamo strutturato la nostra interfaccia grafica intorno ad un unico frame principale, tralasciando quelli relativi ai minigiochi. <br>
-Il frame principale funge da contenitore per tutti gli altri componenti grafici, infatti abbiamo scelto di utilizzare CardLayout per la gestione delle schermatE.<br>
+Il frame principale funge da contenitore per tutti gli altri componenti grafici, infatti abbiamo scelto di utilizzare CardLayout per la gestione delle schermate.<br>
 Questo ci ha permesso di organizzare le diverse schermate come "carte" sovrapposte all'interno di un unico contenitore, consentendo all'utente di passare agevolmente da una schermata all'altra tramite pulsanti o azioni specifiche.
 Abbiamo integrato dunque bottoni all'interno dei nostri pannelli per consentire agli utenti di interagire con l'applicazione.
 ![alt text](./immaginiDoc/image-20.png)
@@ -284,7 +284,7 @@ Infine l'interfaccia grafica viene aggiornata di conseguenza per riflettere lo s
 
 ##
 ### **4.8 Lambda Expressions**
-Le lambda expressions costituiscono un concetto essenziale all'interno della programmazione moderna, consentendo una maggiore flessibilita' nella definizione e nel passaggio di funzionalita' all'interno del codice. Simili al concetto di funzioni anonime, le lambda expressions offrono la possibilita' di definire implementazioni di operazioni in modo compatto. La sintassi delle espressioni lambda comprende parametri, rappresentati dalle parentesi, una freccia -> e successivamente il corpo dell'espressione; quest'ultimo può essere costituito da una singola istruzione o da un blocco di istruzioni racchiuso tra parentesi graffe. Questa sintassi "compatta" rende le espressioni lambda ideali per passare comportamenti in modo leggibile e conciso. Un esempio comune di utilizzo delle espressioni lambda e' nei contesti in cui si operano su collezioni di dati, come ad esempio le operazioni sugli stream. Queste espressioni consentono di specificare operazioni come il filtraggio, la trasformazione e l'elaborazione dei dati in modo più diretto.
+Le lambda expressions costituiscono un concetto essenziale all'interno della programmazione moderna, consentendo una maggiore flessibilita' nella definizione e nel passaggio di funzionalita' all'interno del codice.Le lambda expressions offrono la possibilita' di definire implementazioni di operazioni in modo compatto. La sintassi delle espressioni lambda comprende parametri, rappresentati dalle parentesi, una freccia -> e successivamente il corpo dell'espressione; quest'ultimo può essere costituito da una singola istruzione o da un blocco di istruzioni racchiuso tra parentesi graffe. Questa sintassi "compatta" rende le espressioni lambda ideali per passare comportamenti in modo leggibile e conciso. Un esempio comune di utilizzo delle espressioni lambda e' nei contesti in cui si operano su collezioni di dati, come ad esempio le operazioni sugli stream. Queste espressioni consentono di specificare operazioni come il filtraggio, la trasformazione e l'elaborazione dei dati in modo più diretto.
 
 ![alt text](./immaginiDoc/image-11.png)
 
