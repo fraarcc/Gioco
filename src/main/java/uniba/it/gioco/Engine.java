@@ -1,4 +1,10 @@
 package uniba.it.gioco;
+/**
+ * @author
+ *  Nikita
+ *  Francesco  
+ *  Angelo
+ */
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.io.IOException;
