@@ -90,7 +90,7 @@ rimuoviOggetto(creaInventario()) = error
 
 ### **Specifica di Restrizione**
 
-![alt text](./immaginiDoc/specificaAlgpng)
+![alt text](./immaginiDoc/specificaAlg.png)
 
 
 
